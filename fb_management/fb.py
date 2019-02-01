@@ -1,0 +1,39 @@
+import threading
+import logging
+from fb_management import fb_interface
+
+
+class FB(threading.Thread, fb_interface.FBInterface):
+
+    def __init__(self, fb_name, fb_type, fb_exe, fb_xml):
+        threading.Thread.__init__(self, name=fb_name)
+        fb_interface.FBInterface.__init__(self, fb_xml)
+
+        self.fb_name = fb_name
+        self.fb_type = fb_type
+        self.fb_exe = fb_exe
+
+        self.kill_event = threading.Event()
+
+    def run(self):
+        logging.info('fb {0} started.'.format(self.fb_name))
+
+        while not self.kill_event.is_set():
+
+            self.wait_event()
+
+            if self.kill_event.is_set():
+                break
+
+            inputs = self.read_inputs()
+
+            logging.info('running fb...')
+            outputs = self.fb_exe(*inputs)
+
+            self.update_outputs(outputs)
+
+    def stop(self):
+        self.kill_event.set()
+        self.new_event.set()
+
+        logging.info('fb {0} stopped.'.format(self.fb_name))
