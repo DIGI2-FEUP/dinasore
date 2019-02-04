@@ -1,11 +1,16 @@
 import threading
 from collections import OrderedDict
+from xml.etree import ElementTree as ETree
 import logging
+import time
 
 
 class FBInterface:
 
-    def __init__(self, xml_root):
+    def __init__(self, fb_name, fb_type, xml_root):
+        self.fb_name = fb_name
+        self.fb_type = fb_type
+
         self.input_events = OrderedDict()
         self.output_events = OrderedDict()
         self.input_vars = OrderedDict()
@@ -221,8 +226,36 @@ class FBInterface:
         # Clears new_event to wait for new events
         self.new_event.clear()
 
-    def read_watches(self):
-        pass
+    def read_watches(self, start_time):
+        # Creates the xml root element
+        fb_root = ETree.Element('FB', {'name': self.fb_name})
+
+        # Mixes the vars in 1 dictionary
+        var_mix = {**self.input_vars, **self.output_vars}
+        # Iterates over the mix dictionary
+        for index, var_name in enumerate(var_mix):
+            v_type, value, is_watch = self.read_attr(var_name)
+            if is_watch and (value is not None):
+                port = ETree.Element('Port', {'name': var_name})
+                ETree.SubElement(port, 'Data', {'value': str(value),
+                                                'forced': 'false'})
+                fb_root.append(port)
+
+        # Mixes the vars in 1 dictionary
+        event_mix = {**self.input_events, **self.output_events}
+        # Iterates over the mix dictionary
+        for index, event_name in enumerate(event_mix):
+            v_type, value, is_watch = self.read_attr(event_name)
+            if is_watch and (value is not None):
+                port = ETree.Element('Port', {'name': event_name})
+                ETree.SubElement(port, 'Data', {'value': str(value),
+                                                'time': str(int((time.time()*1000) - start_time))})
+                fb_root.append(port)
+
+        # Gets the number of watches
+        watches_len = len(fb_root.findall('Port'))
+
+        return fb_root, watches_len
 
 
 class Connection:

@@ -25,4 +25,4 @@ class TestResources(unittest.TestCase):
         result = fb_exe(23, None)
         tag = element.tag
         self.assertEqual('FBType', tag)
-        self.assertEqual(23, result[0])
+        self.assertEqual(24, result[0])

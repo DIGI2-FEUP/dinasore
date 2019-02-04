@@ -49,13 +49,13 @@ class TestFB(unittest.TestCase):
         self.conf.start_work()
 
         fb = self.conf.fb_dictionary['E_SWITCH_1']
-        fb.push_event('EI', True)
+        fb.push_event('EI', 1)
 
         time.sleep(0.01)
 
         # Validate the inputs
         event_type, value, is_watch = fb.input_events['EI']
-        self.assertEqual(True, value)
+        self.assertEqual(1, value)
         self.assertEqual('Event', event_type)
         var_type, value, is_watch = fb.input_vars['G']
         self.assertEqual(None, value)
@@ -63,7 +63,7 @@ class TestFB(unittest.TestCase):
 
         # Validate the outputs
         event_type, value, is_watch = fb.output_events['EO0']
-        self.assertEqual(True, value)
+        self.assertEqual(2, value)
         self.assertEqual('Event', event_type)
         event_type, value, is_watch = fb.output_events['EO1']
         self.assertEqual(None, value)
@@ -78,7 +78,7 @@ class TestFB(unittest.TestCase):
         self.conf.start_work()
 
         fb = self.conf.fb_dictionary['E_SWITCH_1']
-        fb.push_event('EI', True)
+        fb.push_event('EI', 1)
 
         time.sleep(0.01)
 
@@ -86,7 +86,7 @@ class TestFB(unittest.TestCase):
 
         # Validate the inputs
         event_type, value, is_watch = fb_2.input_events['EI']
-        self.assertEqual(True, value)
+        self.assertEqual(2, value)
         self.assertEqual('Event', event_type)
         var_type, value, is_watch = fb_2.input_vars['G']
         self.assertEqual(None, value)
@@ -94,7 +94,7 @@ class TestFB(unittest.TestCase):
 
         # Validate the outputs
         event_type, value, is_watch = fb_2.output_events['EO0']
-        self.assertEqual(True, value)
+        self.assertEqual(3, value)
         self.assertEqual('Event', event_type)
         event_type, value, is_watch = fb_2.output_events['EO1']
         self.assertEqual(None, value)

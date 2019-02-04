@@ -16,6 +16,9 @@ class Handler:
         server_address = (ip, port)
         logging.info('starting up on %s port %s' % server_address)
 
+        # Reuse the socket address
+        self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
         try:
             self.sock.bind(server_address)
         except socket.error as msg:

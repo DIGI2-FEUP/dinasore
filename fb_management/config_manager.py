@@ -1,10 +1,13 @@
 from fb_management import configuration
 from xml.etree import ElementTree as ETree
+import time
+import struct
 
 
 class ConfigManager:
 
     def __init__(self):
+        self.start_time = time.time()*1000
         self.config_dictionary = dict()
 
     def create_configuration(self, config_id, config_type):
@@ -31,6 +34,24 @@ class ConfigManager:
 
         elif action == 'QUERY':
             pass
+
+        elif action == 'READ':
+            # Iterate over the list of children
+            for child in element:
+                # Reads values from a watch
+                if child.tag == 'Watches':
+                    xml = ETree.Element('Watches')
+                    # Gets all the watches from all the resources
+                    for config_id, config in self.config_dictionary.items():
+                        resource_xml, resource_len = config.read_watches(self.start_time)
+                        # Appends only if has anything
+                        if resource_len > 0:
+                            xml.append(resource_xml)
+
+                    resources_len = len(xml.findall('Resource'))
+                    # If doesn't have any resource
+                    if resources_len < 0:
+                        xml = None
 
         response = self.build_response(request_id, xml)
         return response
@@ -90,20 +111,27 @@ class ConfigManager:
             for child in element:
                 # Reads values from a watch
                 if child.tag == 'Watches':
-                    xml = self.config_dictionary[config_id].read_watches()
+                    resource_xml, resource_len = self.config_dictionary[config_id].read_watches(self.start_time)
+                    if resource_len > 0:
+                        xml = ETree.Element('Watches')
+                        xml.append(resource_xml)
 
         response = self.build_response(request_id, xml)
         return response
 
     @staticmethod
-    def build_response(request_id, xml):
+    def build_response(request_id, xml_response):
+        xml = ETree.Element('Response', {'ID': request_id})
         # Verifies if is a default response
-        if xml is None:
-            xml = ETree.Element('Response', {'ID': request_id})
+        if xml_response is not None:
+            xml.append(xml_response)
 
         response_xml = ETree.tostring(xml)
         hex_input = '{:04x}'.format(len(response_xml))
         second_byte = int(hex_input[0:2], 16)
         third_byte = int(hex_input[2:4], 16)
-        response = '\x50{0}{1}{2}'.format(chr(second_byte), chr(third_byte), response_xml.decode(encoding='utf-8'))
-        return response.encode(encoding='utf-8')
+        response_len = struct.pack('BB', second_byte, third_byte)
+        response_header = b''.join([b'\x50', response_len])
+
+        response = b''.join([response_header, response_xml])
+        return response

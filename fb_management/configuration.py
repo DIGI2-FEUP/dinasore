@@ -1,6 +1,7 @@
 from fb_management import fb_resources
 from fb_management import fb
 from fb_management import fb_interface
+from xml.etree import ElementTree as ETree
 import logging
 
 
@@ -53,7 +54,7 @@ class Configuration:
         source_fb = self.fb_dictionary[source_attr[0]]
         source_name = source_attr[1]
 
-        source_fb.set_attr(source_name, is_watch=True)
+        source_fb.set_attr(source_name, set_watch=True)
 
         logging.info('watch created between {0} and {1}'.format(source, destination))
 
@@ -64,7 +65,7 @@ class Configuration:
         source_fb = self.fb_dictionary[source_attr[0]]
         source_name = source_attr[1]
 
-        source_fb.set_attr(source_name, is_watch=False)
+        source_fb.set_attr(source_name, set_watch=False)
 
         logging.info('watch deleted between {0} and {1}'.format(source, destination))
 
@@ -79,8 +80,19 @@ class Configuration:
 
         logging.info('connection ({0}) configured with the value {1}'.format(destination, source_value))
 
-    def read_watches(self):
-        pass
+    def read_watches(self, start_time):
+        logging.info('reading watches...')
+
+        resources_xml = ETree.Element('Resource', {'name': self.config_id})
+
+        for fb_name, fb_element in self.fb_dictionary.items():
+            fb_xml, watches_len = fb_element.read_watches(start_time)
+
+            if watches_len > 0:
+                resources_xml.append(fb_xml)
+
+        fb_watches_len = len(resources_xml.findall('FB'))
+        return resources_xml, fb_watches_len
 
     def start_work(self):
         logging.info('starting the fb flow...')

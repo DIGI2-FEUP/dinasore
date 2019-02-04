@@ -7,12 +7,9 @@ class FB(threading.Thread, fb_interface.FBInterface):
 
     def __init__(self, fb_name, fb_type, fb_exe, fb_xml):
         threading.Thread.__init__(self, name=fb_name)
-        fb_interface.FBInterface.__init__(self, fb_xml)
+        fb_interface.FBInterface.__init__(self, fb_name, fb_type, fb_xml)
 
-        self.fb_name = fb_name
-        self.fb_type = fb_type
         self.fb_exe = fb_exe
-
         self.kill_event = threading.Event()
 
     def run(self):
