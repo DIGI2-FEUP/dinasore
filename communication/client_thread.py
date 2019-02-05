@@ -40,9 +40,9 @@ class ClientThread(threading.Thread):
         config_id_size = int(data[1:3].hex(), 16)
 
         if config_id_size == 0:
-            response = self.config_m.parse_configuration(xml_data)
+            response = self.config_m.parse_general(xml_data)
         else:
             config_id = request_header[3: config_id_size + 3]
-            response = self.config_m.parse_payload(xml_data, config_id)
+            response = self.config_m.parse_configuration(xml_data, config_id)
 
         return response

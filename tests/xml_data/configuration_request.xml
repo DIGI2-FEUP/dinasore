@@ -1,0 +1,4 @@
+<!-- 127.0.0.1:61500 -->
+<Request Action="CREATE" ID="1">
+  <FB Name="EMB_RES" Type="EMB_RES"/>
+</Request>

@@ -1,0 +1,2 @@
+<!-- Force a event -->
+<Request ID="4" Action="WRITE"><Connection Source="$e" Destination="E_EXAMPLE_1.EO0" /></Request>

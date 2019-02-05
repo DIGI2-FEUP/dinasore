@@ -4,7 +4,7 @@ import time
 import struct
 
 
-class ConfigManager:
+class Manager:
 
     def __init__(self):
         self.start_time = time.time()*1000
@@ -16,7 +16,7 @@ class ConfigManager:
             config = configuration.Configuration(config_id, config_type)
             self.config_dictionary[config_id] = config
 
-    def parse_configuration(self, xml_data):
+    def parse_general(self, xml_data):
         # Parses the xml
         element = ETree.fromstring(xml_data)
         action = element.attrib['Action']
@@ -41,7 +41,7 @@ class ConfigManager:
                 # Reads values from a watch
                 if child.tag == 'Watches':
                     xml = ETree.Element('Watches')
-                    # Gets all the watches from all the resources
+                    # Gets all the watches from all the xml_data
                     for config_id, config in self.config_dictionary.items():
                         resource_xml, resource_len = config.read_watches(self.start_time)
                         # Appends only if has anything
@@ -56,7 +56,7 @@ class ConfigManager:
         response = self.build_response(request_id, xml)
         return response
 
-    def parse_payload(self, xml_data, config_id):
+    def parse_configuration(self, xml_data, config_id):
         # Parses the xml
         element = ETree.fromstring(xml_data)
         action = element.attrib['Action']

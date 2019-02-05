@@ -1,7 +1,11 @@
+import logging
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
+
 from communication import tcp_server
 from core import manager
-import logging
-import sys
 
 
 if __name__ == "__main__":
@@ -12,7 +16,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
 
-    config_m = manager.ConfigManager()
+    config_m = manager.Manager()
     hand = tcp_server.Handler(ip, port, 10, config_m)
 
     try:
@@ -21,4 +25,3 @@ if __name__ == "__main__":
         logging.info('interrupted server')
         hand.stop_server()
         sys.exit(0)
-
