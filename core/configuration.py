@@ -1,6 +1,6 @@
-from fb_management import fb_resources
-from fb_management import fb
-from fb_management import fb_interface
+from core import fb_resources
+from core import fb
+from core import fb_interface
 from xml.etree import ElementTree as ETree
 import logging
 
@@ -75,8 +75,21 @@ class Configuration:
         destination_fb = self.fb_dictionary[destination_attr[0]]
         destination_name = destination_attr[1]
 
-        fb_element = self.fb_dictionary[destination_fb]
-        fb_element.set_attr(destination_name, source_value)
+        # Verifies if is to write an event
+        if source_value == '$e':
+            logging.info('writing an event...')
+            v_type, value, is_watch = destination_fb.read_attr(destination_name)
+            if value is not None:
+                # If the value is not None increment
+                destination_fb.push_event(destination_name, value + 1)
+            else:
+                # If the value is None push 1
+                destination_fb.push_event(destination_name, 1)
+
+        # Writes a hardcoded value
+        else:
+            logging.info('writing a hardcoded value...')
+            destination_fb.set_attr(destination_name, source_value)
 
         logging.info('connection ({0}) configured with the value {1}'.format(destination, source_value))
 

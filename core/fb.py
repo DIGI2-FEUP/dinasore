@@ -1,6 +1,6 @@
 import threading
 import logging
-from fb_management import fb_interface
+from core import fb_interface
 
 
 class FB(threading.Thread, fb_interface.FBInterface):

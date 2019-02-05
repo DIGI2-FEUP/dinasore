@@ -1,4 +1,4 @@
-from fb_management import configuration
+from core import configuration
 from xml.etree import ElementTree as ETree
 import time
 import struct
@@ -104,7 +104,7 @@ class ConfigManager:
                 if child.tag == 'Connection':
                     connection_source = child.attrib['Source']
                     connection_destination = child.attrib['Destination']
-                    self.config_dictionary[config_id].create_connection(connection_source, connection_destination)
+                    self.config_dictionary[config_id].write_connection(connection_source, connection_destination)
 
         elif action == 'READ':
             # Iterate over the list of children
