@@ -1,11 +1,16 @@
 import unittest
 from core import configuration
 import time
+import logging
 
 
 class TestFB(unittest.TestCase):
 
     def setUp(self):
+        # Configure the logging output
+        logging.basicConfig(level=logging.INFO,
+                            format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
+
         self.conf = configuration.Configuration('config_1', 'EMB_RES')
 
     def test_fb_creation(self):
@@ -29,10 +34,10 @@ class TestFB(unittest.TestCase):
 
         self.conf.create_connection('E_EXAMPLE_1.EO0', 'E_EXAMPLE_2.EI')
 
-        fb_1 = self.conf.fb_dictionary['E_EXAMPLE_1']
+        fb_1 = self.conf.get_fb('E_EXAMPLE_1')
         self.assertEqual(1, len(fb_1.output_connections))
 
-        fb_2 = self.conf.fb_dictionary['E_EXAMPLE_2']
+        fb_2 = self.conf.get_fb('E_EXAMPLE_2')
         self.assertEqual(0, len(fb_2.output_connections))
 
         connection = fb_1.output_connections['EO0'][0]
@@ -43,7 +48,7 @@ class TestFB(unittest.TestCase):
         self.conf.create_fb('E_EXAMPLE_1', 'E_EXAMPLE')
         self.conf.start_work()
 
-        fb = self.conf.fb_dictionary['E_EXAMPLE_1']
+        fb = self.conf.get_fb('E_EXAMPLE_1')
         fb.push_event('EI', 1)
 
         time.sleep(0.01)
@@ -72,12 +77,12 @@ class TestFB(unittest.TestCase):
         self.conf.create_connection('E_EXAMPLE_1.EO0', 'E_EXAMPLE_2.EI')
         self.conf.start_work()
 
-        fb = self.conf.fb_dictionary['E_EXAMPLE_1']
+        fb = self.conf.get_fb('E_EXAMPLE_1')
         fb.push_event('EI', 1)
 
         time.sleep(0.01)
 
-        fb_2 = self.conf.fb_dictionary['E_EXAMPLE_2']
+        fb_2 = self.conf.get_fb('E_EXAMPLE_2')
 
         # Validate the inputs
         event_type, value, is_watch = fb_2.input_events['EI']

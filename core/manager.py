@@ -2,6 +2,7 @@ from core import configuration
 from xml.etree import ElementTree as ETree
 import time
 import struct
+import logging
 
 
 class Manager:
@@ -10,11 +11,24 @@ class Manager:
         self.start_time = time.time()*1000
         self.config_dictionary = dict()
 
+    def get_config(self, config_id):
+        fb_element = None
+        try:
+            fb_element = self.config_dictionary[config_id]
+        except KeyError as error:
+            logging.error('can not find that configuration (4diac resource)')
+            logging.error(error)
+
+        return fb_element
+
+    def set_config(self, config_id, config_element):
+        self.config_dictionary[config_id] = config_element
+
     def create_configuration(self, config_id, config_type):
         # Checks if exists the configuration
         if config_id not in self.config_dictionary:
             config = configuration.Configuration(config_id, config_type)
-            self.config_dictionary[config_id] = config
+            self.set_config(config_id, config)
 
     def parse_general(self, xml_data):
         # Parses the xml
@@ -70,19 +84,19 @@ class Manager:
                 if child.tag == 'FB':
                     fb_name = child.attrib['Name']
                     fb_type = child.attrib['Type']
-                    self.config_dictionary[config_id].create_fb(fb_name, fb_type)
+                    self.get_config(config_id).create_fb(fb_name, fb_type)
 
                 # Create connection
                 elif child.tag == 'Connection':
                     connection_source = child.attrib['Source']
                     connection_destination = child.attrib['Destination']
-                    self.config_dictionary[config_id].create_connection(connection_source, connection_destination)
+                    self.get_config(config_id).create_connection(connection_source, connection_destination)
 
                 # Create watch
                 elif child.tag == 'Watch':
                     watch_source = child.attrib['Source']
                     watch_destination = child.attrib['Destination']
-                    self.config_dictionary[config_id].create_watch(watch_source, watch_destination)
+                    self.get_config(config_id).create_watch(watch_source, watch_destination)
 
         elif action == 'DELETE':
             # Iterate over the list of children
@@ -91,11 +105,11 @@ class Manager:
                 if child.tag == 'Watch':
                     watch_source = child.attrib['Source']
                     watch_destination = child.attrib['Destination']
-                    self.config_dictionary[config_id].delete_watch(watch_source, watch_destination)
+                    self.get_config(config_id).delete_watch(watch_source, watch_destination)
 
         elif action == 'START':
             # Starts the configuration
-            self.config_dictionary[config_id].start_work()
+            self.get_config(config_id).start_work()
 
         elif action == 'WRITE':
             # Iterate over the list of children
@@ -104,17 +118,7 @@ class Manager:
                 if child.tag == 'Connection':
                     connection_source = child.attrib['Source']
                     connection_destination = child.attrib['Destination']
-                    self.config_dictionary[config_id].write_connection(connection_source, connection_destination)
-
-        elif action == 'READ':
-            # Iterate over the list of children
-            for child in element:
-                # Reads values from a watch
-                if child.tag == 'Watches':
-                    resource_xml, resource_len = self.config_dictionary[config_id].read_watches(self.start_time)
-                    if resource_len > 0:
-                        xml = ETree.Element('Watches')
-                        xml.append(resource_xml)
+                    self.get_config(config_id).write_connection(connection_source, connection_destination)
 
         response = self.build_response(request_id, xml)
         return response

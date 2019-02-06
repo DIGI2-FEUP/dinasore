@@ -24,21 +24,39 @@ class FBResources:
 
     def import_fb(self):
         logging.info('importing fb python file and definition file...')
+        root = None
+        fb_exe = None
 
-        # Import method from python file
-        py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
-        # Reloads the module if it was changed
-        importlib.reload(py_fb)
-        # Gets the running fb method
-        fb_exe = getattr(py_fb, self.fb_type)
+        try:
+            # Import method from python file
+            py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
+            # Reloads the module if it was changed
+            importlib.reload(py_fb)
+            # Gets the running fb method
+            fb_exe = getattr(py_fb, self.fb_type)
+            # Reads the xml
+            tree = ETree.parse(self.fbt_path)
+            # Gets the root element
+            root = tree.getroot()
 
-        # Reads the xml
-        tree = ETree.parse(self.fbt_path)
-        # Gets the root element
-        root = tree.getroot()
+        except ModuleNotFoundError as error:
+            logging.error('can not import the module (check fb_type.py nomenclature)')
+            logging.error(error)
 
-        logging.info('fb definition (xml) imported from: {0}'.format(self.fbt_path))
-        logging.info('python file imported from: {0}'.format(self.py_path))
+        except AttributeError as error:
+            logging.error('can not find the fb method declaration (check if fb_type.py = def fb_type(...):)')
+            logging.error(error)
+
+        except FileNotFoundError as error:
+            logging.error('can not find the .fbt file (check .fbt name = fb_type.fbt)')
+            logging.error(error)
+
+        except Exception as ex:
+            logging.error(ex)
+
+        else:
+            logging.info('fb definition (xml) imported from: {0}'.format(self.fbt_path))
+            logging.info('python file imported from: {0}'.format(self.py_path))
 
         return root, fb_exe
 

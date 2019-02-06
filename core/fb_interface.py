@@ -57,6 +57,10 @@ class FBInterface:
                             var_type = var.attrib['Type']
                             self.output_vars[var_name] = (var_type, None, False)
 
+                    # Doesn't expected interface
+                    else:
+                        logging.error("doesn't expected interface (check interface name in .fbt file)")
+
         logging.info('parsing successful with:')
         logging.info('input events: {0}'.format(self.input_events))
         logging.info('output events: {0}'.format(self.output_events))
@@ -141,6 +145,11 @@ class FBInterface:
             # OUTPUT EVENT
             elif name in self.output_events:
                 v_type, value, is_watch = self.output_events[name]
+
+        except KeyError as error:
+            logging.error('can not find that fb attribute')
+            logging.error(error)
+
         finally:
             # Unlocks the dictionary usage
             self.lock.release()

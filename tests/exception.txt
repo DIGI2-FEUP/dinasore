@@ -1,6 +1,0 @@
-ModuleNotFoundError: No module named 'resources.function_blocks.E_EXAMPLE_1'
-
-key not found
-
-to much arguments
-

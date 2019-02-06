@@ -14,6 +14,19 @@ class Configuration:
 
         self.create_fb('START', config_type)
 
+    def get_fb(self, fb_name):
+        fb_element = None
+        try:
+            fb_element = self.fb_dictionary[fb_name]
+        except KeyError as error:
+            logging.error('can not find that fb')
+            logging.error(error)
+
+        return fb_element
+
+    def set_fb(self, fb_name, fb_element):
+        self.fb_dictionary[fb_name] = fb_element
+
     def create_fb(self, fb_name, fb_type):
         logging.info('creating a new fb...')
 
@@ -26,10 +39,15 @@ class Configuration:
             fb_res.download_fb()
 
         fb_definition, fb_exe = fb_res.import_fb()
-        fb_element = fb.FB(fb_name, fb_type, fb_exe, fb_definition)
-        self.fb_dictionary[fb_name] = fb_element
 
-        logging.info('created fb type: {0}, instance: {1}'.format(fb_type, fb_name))
+        # check if if happened any importing error
+        if fb_definition is not None:
+            fb_element = fb.FB(fb_name, fb_type, fb_exe, fb_definition)
+            self.set_fb(fb_name, fb_element)
+            logging.info('created fb type: {0}, instance: {1}'.format(fb_type, fb_name))
+
+        else:
+            logging.error('can not create the fb type: {0}, instance: {1}'.format(fb_type, fb_name))
 
     def create_connection(self, source, destination):
         logging.info('creating a new connection...')
@@ -37,9 +55,9 @@ class Configuration:
         source_attr = source.split(sep='.')
         destination_attr = destination.split(sep='.')
 
-        source_fb = self.fb_dictionary[source_attr[0]]
+        source_fb = self.get_fb(source_attr[0])
         source_name = source_attr[1]
-        destination_fb = self.fb_dictionary[destination_attr[0]]
+        destination_fb = self.get_fb(destination_attr[0])
         destination_name = destination_attr[1]
 
         connection = fb_interface.Connection(destination_fb, destination_name)
@@ -51,7 +69,7 @@ class Configuration:
         logging.info('creating a new watch...')
 
         source_attr = source.split(sep='.')
-        source_fb = self.fb_dictionary[source_attr[0]]
+        source_fb = self.get_fb(source_attr[0])
         source_name = source_attr[1]
 
         source_fb.set_attr(source_name, set_watch=True)
@@ -62,7 +80,7 @@ class Configuration:
         logging.info('deleting a new watch...')
 
         source_attr = source.split(sep='.')
-        source_fb = self.fb_dictionary[source_attr[0]]
+        source_fb = self.get_fb(source_attr[0])
         source_name = source_attr[1]
 
         source_fb.set_attr(source_name, set_watch=False)
@@ -72,7 +90,7 @@ class Configuration:
     def write_connection(self, source_value, destination):
         logging.info('writing a connection...')
         destination_attr = destination.split(sep='.')
-        destination_fb = self.fb_dictionary[destination_attr[0]]
+        destination_fb = self.get_fb(destination_attr[0])
         destination_name = destination_attr[1]
 
         # Verifies if is to write an event
@@ -113,8 +131,8 @@ class Configuration:
             if fb_name != 'START':
                 fb_element.start()
 
-        outputs = self.fb_dictionary['START'].fb_exe()
-        self.fb_dictionary['START'].update_outputs(outputs)
+        outputs = self.get_fb('START').fb_exe()
+        self.get_fb('START').update_outputs(outputs)
 
     def stop_work(self):
         logging.info('stopping the fb flow...')

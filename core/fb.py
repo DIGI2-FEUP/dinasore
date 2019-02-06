@@ -25,9 +25,25 @@ class FB(threading.Thread, fb_interface.FBInterface):
             inputs = self.read_inputs()
 
             logging.info('running fb...')
-            outputs = self.fb_exe(*inputs)
 
-            self.update_outputs(outputs)
+            try:
+                outputs = self.fb_exe(*inputs)
+
+            except TypeError as error:
+                logging.error('invalid number of arguments (check if fb method args are in fb_type.fbt)')
+                logging.error(error)
+                # Stops the thread
+                logging.info('stopping the fb work...')
+                break
+
+            except Exception as ex:
+                logging.error(ex)
+                # Stops the thread
+                logging.info('stopping the fb work...')
+                break
+
+            else:
+                self.update_outputs(outputs)
 
     def stop(self):
         self.kill_event.set()
