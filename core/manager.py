@@ -17,7 +17,7 @@ class Manager:
         try:
             fb_element = self.config_dictionary[config_id]
         except KeyError as error:
-            logging.error('can not find that configuration (4diac resource)')
+            logging.error('can not find that configuration (4DIAC resource)')
             logging.error(error)
 
         return fb_element

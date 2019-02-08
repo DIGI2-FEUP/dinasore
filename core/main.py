@@ -33,7 +33,7 @@ if __name__ == "__main__":
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
 
     config_m = manager.Manager()
-    hand = tcp_server.Handler(address, port, 10, config_m)
+    hand = tcp_server.TcpServer(address, port, 10, config_m)
 
     try:
         hand.handler()

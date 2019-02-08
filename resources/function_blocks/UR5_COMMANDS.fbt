@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Peroidic event generator" Name="E_CYCLE">
+  <Identification Description="Copyright (c) 2017 fortiss GmbH&#13;&#10; &#13;&#10;This program and the accompanying materials are made&#13;&#10;available under the terms of the Eclipse Public License 2.0&#13;&#10;which is available at https://www.eclipse.org/legal/epl-2.0/&#13;&#10;&#13;&#10;SPDX-License-Identifier: EPL-2.0" Standard="61499-1 Annex A"/>
+  <VersionInfo Author="Alois Zoitl" Date="2017-09-21" Organization="fortiss GmbH" Remarks="initial API and implementation and/or initial documentation" Version="1.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="Move request" Name="REQ" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="Move request output" Name="REQO" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="X value" Name="X" Type="REAL"/>
+      <VarDeclaration Comment="Y value" Name="Y" Type="REAL"/>
+      <VarDeclaration Comment="Z value" Name="Z" Type="REAL"/>
+      <VarDeclaration Comment="RX value" Name="RX" Type="REAL"/>
+      <VarDeclaration Comment="RY value" Name="RY" Type="REAL"/>
+      <VarDeclaration Comment="RZ value" Name="RZ" Type="REAL"/>
+    </InputVars>
+    <OutputVars/>
+  </InterfaceList>
+</FBType>

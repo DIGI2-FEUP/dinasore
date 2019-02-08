@@ -4,7 +4,7 @@ import sys
 from communication import client_thread
 
 
-class Handler:
+class TcpServer:
 
     def __init__(self, ip, port, limit_connections, config_m):
         self.config_m = config_m
@@ -22,7 +22,8 @@ class Handler:
         try:
             self.sock.bind(server_address)
         except socket.error as msg:
-            logging.info('bind failed. error code : ' + str(msg[0]) + ' message: ' + msg[1])
+            logging.error('bind failed.')
+            logging.error(msg)
             sys.exit()
 
         # Listen for incoming connections
@@ -39,5 +40,3 @@ class Handler:
 
     def stop_server(self):
         self.sock.close()
-
-

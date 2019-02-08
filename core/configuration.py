@@ -163,4 +163,7 @@ class Configuration:
         elif value_type == 'UINT' or value_type == 'Event' or value_type == 'INT':
             converted_value = int(value)
 
+        elif value_type == 'REAL':
+            converted_value = float(value)
+
         return converted_value
