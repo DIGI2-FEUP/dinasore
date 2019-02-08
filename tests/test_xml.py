@@ -43,6 +43,21 @@ class TestParse(unittest.TestCase):
         tree = ETree.parse(path)
         self.connection_request = ETree.tostring(tree.getroot(), encoding='utf-8')
 
+        # Gets the file path to the start request (xml) file
+        path = os.path.join(os.path.dirname(sys.path[0]), 'tests', 'xml_data', 'start_request.xml')
+        tree = ETree.parse(path)
+        self.start_request = ETree.tostring(tree.getroot(), encoding='utf-8')
+
+        # Gets the file path to the kill resource request (xml) file
+        path = os.path.join(os.path.dirname(sys.path[0]), 'tests', 'xml_data', 'kill_request.xml')
+        tree = ETree.parse(path)
+        self.kill_request = ETree.tostring(tree.getroot(), encoding='utf-8')
+
+        # Gets the file path to the delete resource request (xml) file
+        path = os.path.join(os.path.dirname(sys.path[0]), 'tests', 'xml_data', 'delete_request.xml')
+        tree = ETree.parse(path)
+        self.delete_request = ETree.tostring(tree.getroot(), encoding='utf-8')
+
         self.manager_instance = manager.Manager()
 
     def test_configuration(self):
@@ -115,7 +130,21 @@ class TestParse(unittest.TestCase):
         fb = self.manager_instance.config_dictionary['EMB_RES'].fb_dictionary['E_EXAMPLE_1']
         self.assertEqual(1, len(fb.output_connections))
 
+    def test_start(self):
+        self.manager_instance.parse_general(self.config_request)
+        self.manager_instance.parse_configuration(self.fb_request, 'EMB_RES')
+        response = self.manager_instance.parse_configuration(self.start_request, 'EMB_RES')
 
+        self.assertEqual(b'P\x00\x13<Response ID="8" />', response)
 
+        response = self.manager_instance.parse_general(self.kill_request)
+        self.assertEqual(b'P\x00\x13<Response ID="9" />', response)
 
+        self.assertEqual(1, len(self.manager_instance.config_dictionary))
+        self.assertEqual(2, len(self.manager_instance.config_dictionary['EMB_RES'].fb_dictionary))
+
+        response = self.manager_instance.parse_general(self.delete_request)
+        self.assertEqual(b'P\x00\x14<Response ID="10" />', response)
+
+        self.assertEqual(0, len(self.manager_instance.config_dictionary))
 

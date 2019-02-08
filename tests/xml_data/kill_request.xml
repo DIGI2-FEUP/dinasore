@@ -1,0 +1,2 @@
+<!-- kills a resource (no header) -->
+<Request ID="9" Action="KILL"><FB Name="EMB_RES" Type=""/></Request>

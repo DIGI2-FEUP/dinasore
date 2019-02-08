@@ -3,6 +3,7 @@ from xml.etree import ElementTree as ETree
 import time
 import struct
 import logging
+import gc
 
 
 class Manager:
@@ -24,12 +25,6 @@ class Manager:
     def set_config(self, config_id, config_element):
         self.config_dictionary[config_id] = config_element
 
-    def create_configuration(self, config_id, config_type):
-        # Checks if exists the configuration
-        if config_id not in self.config_dictionary:
-            config = configuration.Configuration(config_id, config_type)
-            self.set_config(config_id, config)
-
     def parse_general(self, xml_data):
         # Parses the xml
         element = ETree.fromstring(xml_data)
@@ -40,11 +35,15 @@ class Manager:
         if action == 'CREATE':
             # Iterate over the list of children
             for child in element:
-                # Create function block
+                # Create configuration (function block)
                 if child.tag == 'FB':
-                    fb_name = child.attrib['Name']
-                    fb_type = child.attrib['Type']
-                    self.create_configuration(fb_name, fb_type)
+                    conf_name = child.attrib['Name']
+                    conf_type = child.attrib['Type']
+                    # Checks if not exists the configuration
+                    if conf_name not in self.config_dictionary:
+                        # Creates the configuration
+                        config = configuration.Configuration(conf_name, conf_type)
+                        self.set_config(conf_name, config)
 
         elif action == 'QUERY':
             pass
@@ -66,6 +65,33 @@ class Manager:
                     # If doesn't have any resource
                     if resources_len < 0:
                         xml = None
+
+        elif action == 'KILL':
+            # Iterate over the list of children
+            for child in element:
+                # Kill a configuration (could be a fb)
+                if child.tag == 'FB':
+                    fb_name = child.attrib['Name']
+                    # Checks if exists the configuration
+                    if fb_name in self.config_dictionary:
+                        # Stops the configuration
+                        config = self.get_config(fb_name)
+                        config.stop_work()
+                        # Release memory
+                        gc.collect()
+
+        elif action == 'DELETE':
+            # Iterate over the list of children
+            for child in element:
+                # Deletes a configuration (could be a fb)
+                if child.tag == 'FB':
+                    conf_name = child.attrib['Name']
+                    # Checks if exists the configuration
+                    if conf_name in self.config_dictionary:
+                        # Deletes the configuration
+                        self.config_dictionary.pop(conf_name)
+                        # Release memory
+                        gc.collect()
 
         response = self.build_response(request_id, xml)
         return response

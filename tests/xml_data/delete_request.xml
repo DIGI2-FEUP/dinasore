@@ -1,0 +1,2 @@
+<!-- delete resource (no header) -->
+<Request ID="10" Action="DELETE"><FB Name="EMB_RES" Type=""/></Request>
