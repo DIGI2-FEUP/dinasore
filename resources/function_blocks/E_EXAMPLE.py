@@ -1,6 +1,12 @@
 
 
-def E_EXAMPLE(EI, G):
-    EO0 = EI + 1
-    EO1 = None
-    return [EO0, EO1]
+class E_EXAMPLE:
+
+    def __init__(self):
+        self.G_EI = 0
+
+    def schedule(self, event_name, event_value, G):
+        if event_name == 'EI':
+            self.G_EI = event_value + 1
+            EO1 = None
+            return [self.G_EI, EO1]

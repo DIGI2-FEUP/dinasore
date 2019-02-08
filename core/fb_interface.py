@@ -168,11 +168,12 @@ class FBInterface:
             self.output_connections[value_name] = conns
 
     def push_event(self, event_name, event_value):
-        # Updates the event value
-        self.set_attr(event_name, new_value=event_value)
-        # Sets the new event
-        self.new_event_name = event_name
-        self.new_event.set()
+        if event_value is not None:
+                # Updates the event value
+                self.set_attr(event_name, new_value=event_value)
+                # Sets the new event
+                self.new_event_name = event_name
+                self.new_event.set()
 
     def wait_event(self):
         if len(self.input_events) != 0:
@@ -187,11 +188,9 @@ class FBInterface:
 
         # First convert the vars dictionary to a list
         events_list = []
-        logging.info('input events: {0}'.format(self.input_events))
-        # Get all the events
-        for index, event_name in enumerate(self.input_events):
-            v_type, value, is_watch = self.read_attr(event_name)
-            events_list.append(value)
+        v_type, value, is_watch = self.read_attr(self.new_event_name)
+        events_list.append(self.new_event_name)
+        events_list.append(value)
 
         # Second converts the event dictionary to a list
         vars_list = []

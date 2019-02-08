@@ -93,10 +93,11 @@ class Configuration:
         destination_fb = self.get_fb(destination_attr[0])
         destination_name = destination_attr[1]
 
+        v_type, value, is_watch = destination_fb.read_attr(destination_name)
+
         # Verifies if is to write an event
         if source_value == '$e':
             logging.info('writing an event...')
-            v_type, value, is_watch = destination_fb.read_attr(destination_name)
             if value is not None:
                 # If the value is not None increment
                 destination_fb.push_event(destination_name, value + 1)
@@ -107,7 +108,8 @@ class Configuration:
         # Writes a hardcoded value
         else:
             logging.info('writing a hardcoded value...')
-            destination_fb.set_attr(destination_name, source_value)
+            value_to_set = self.convert_type(source_value, v_type)
+            destination_fb.set_attr(destination_name, value_to_set)
 
         logging.info('connection ({0}) configured with the value {1}'.format(destination, source_value))
 
@@ -139,3 +141,26 @@ class Configuration:
         for fb_name, fb_element in self.fb_dictionary.items():
             if fb_name != 'START':
                 fb_element.stop()
+
+    @staticmethod
+    def convert_type(value, value_type):
+        converted_value = None
+
+        # String variable
+        if value_type == 'WSTRING' or value_type == 'STRING' or value_type == 'ANY' or value_type == 'TIME':
+            converted_value = value
+
+        # Boolean variable
+        elif value_type == 'BOOL':
+            # Checks if is true
+            if value == '1' or value == 'true' or value == 'True' or value == 'TRUE' or value == 't':
+                converted_value = True
+            # Checks if is false
+            elif value == '0' or value == 'false' or value == 'False' or value == 'FALSE' or value == 'f':
+                converted_value = False
+
+        # Integer variable
+        elif value_type == 'UINT' or value_type == 'Event' or value_type == 'INT':
+            converted_value = int(value)
+
+        return converted_value

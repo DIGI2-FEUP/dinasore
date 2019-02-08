@@ -31,6 +31,7 @@ class FB(threading.Thread, fb_interface.FBInterface):
 
             except TypeError as error:
                 logging.error('invalid number of arguments (check if fb method args are in fb_type.fbt)')
+                logging.exception(error)
                 logging.error(error)
                 # Stops the thread
                 logging.info('stopping the fb work...')
@@ -38,6 +39,7 @@ class FB(threading.Thread, fb_interface.FBInterface):
 
             except Exception as ex:
                 logging.error(ex)
+                logging.exception(ex)
                 # Stops the thread
                 logging.info('stopping the fb work...')
                 break

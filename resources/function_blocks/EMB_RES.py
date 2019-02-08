@@ -1,3 +1,7 @@
 
-def EMB_RES():
-    return [1, 0, 0]
+
+class EMB_RES:
+
+    def schedule(self):
+        return [1, 0, 0]
+

@@ -103,7 +103,7 @@ class TestParse(unittest.TestCase):
 
         fb = self.manager_instance.config_dictionary['EMB_RES'].fb_dictionary['E_EXAMPLE_1']
         v_type, value, is_watch = fb.read_attr('G')
-        self.assertEqual('true', value)
+        self.assertEqual(True, value)
 
     def test_connection(self):
         self.manager_instance.parse_general(self.config_request)

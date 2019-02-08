@@ -33,7 +33,11 @@ class FBResources:
             # Reloads the module if it was changed
             importlib.reload(py_fb)
             # Gets the running fb method
-            fb_exe = getattr(py_fb, self.fb_type)
+            fb_class = getattr(py_fb, self.fb_type)
+            # Instance the fb class
+            instance = fb_class()
+            # Gets the fb schedule method
+            fb_exe = instance.schedule
             # Reads the xml
             tree = ETree.parse(self.fbt_path)
             # Gets the root element

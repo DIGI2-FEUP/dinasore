@@ -1,6 +1,7 @@
 import logging
 import os
 import sys
+import getopt
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
 
@@ -9,15 +10,30 @@ from core import manager
 
 
 if __name__ == "__main__":
-    ip = 'localhost'
+
+    address = 'localhost'
     port = 61500
+
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "ha:p:l:", ["address=", "port="])
+    except getopt.GetoptError:
+        print('reconfiguration/main.py -a <address> -p <port> -l <logging_level>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print('core/main.py -a <address> -p <port> -l <logging_level>')
+            sys.exit()
+        elif opt in ("-a", "--address"):
+            address = arg
+        elif opt in ("-p", "--port"):
+            port = int(arg)
 
     # Configure the logging output
     logging.basicConfig(level=logging.INFO,
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
 
     config_m = manager.Manager()
-    hand = tcp_server.Handler(ip, port, 10, config_m)
+    hand = tcp_server.Handler(address, port, 10, config_m)
 
     try:
         hand.handler()
