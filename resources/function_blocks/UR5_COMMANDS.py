@@ -1,24 +1,4 @@
 
-class SharedResources:
-
-    def __init__(self):
-        # self.ss = send_UR()
-        self.i = 0
-
-
-class UR5_COMMANDS:
-    resources = SharedResources()
-
-    def schedule(self, event_name, event_value, X, Y, Z, RX, RY, RZ):
-        if event_name == 'REQ':
-            return self.request(event_value, X, Y, Z, RX, RY, RZ)
-
-    def request(self, event_value, X, Y, Z, RX, RY, RZ):
-        # self.resources.ss.movej([X, Y, Z, RX, RY, RZ])
-        print('{0}:{1}:{2}:{3}:{4}:{5}'.format(X, Y, Z, RX, RY, RZ))
-        return [event_value]
-
-
 """
 this file allows to parse the data received and send commands via Secondary client communications interface (port 30002)
 data described in Excel document "Client_Interface_V3.5" in the "DataStreamFromURController" tab
@@ -500,7 +480,7 @@ class send_UR:
         tpose.append(radius)
         return "{}({}[{},{},{},{},{},{}], a={}, v={}, r={})".format(comm, prefix, *tpose)
 
-    def send_move(self, comm, pose, acc=0.7, vel=1.3, wait=True, threshold=None):
+    def send_move(self, comm, pose, acc=0.2, vel=0.5, wait=True, threshold=None):
         """
         Send a move command to the robot.
         comm  - "movel", "movep", "servoc"... "movej" ONLY if with pose
@@ -512,7 +492,7 @@ class send_UR:
             self.wait_for_move(pose[:6], threshold=threshold)
             return self.get_tcp_pos()
 
-    def movej(self, joints, acc=0.6, vel=0.9, wait=False, threshold=None):
+    def movej(self, joints, acc=0.2, vel=0.5, wait=False, threshold=None):
         """
         send movej command, joints in type list in pose(p[_,_,_,_,_,_])or joint positions([_,_,_,_,_,_])
         acc in rad/sec^2
@@ -563,3 +543,18 @@ class send_UR:
 
     def stopj(self, acc=1.5):
         self.send_command("stopj(%s)" % acc)
+
+
+
+
+class UR5_COMMANDS:
+    ss = send_UR()
+
+    def schedule(self, event_name, event_value, X, Y, Z, RX, RY, RZ):
+        if event_name == 'REQ':
+            return self.request(event_value, X, Y, Z, RX, RY, RZ)
+
+    def request(self, event_value, X, Y, Z, RX, RY, RZ):
+        self.ss.send_move('movel', [X, Y, Z, RX, RY, RZ], wait=True)
+        print('{0}:{1}:{2}:{3}:{4}:{5}'.format(X, Y, Z, RX, RY, RZ))
+        return [event_value]

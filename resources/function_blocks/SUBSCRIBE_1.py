@@ -14,7 +14,7 @@ class SUBSCRIBE_1:
             return self.init(ID, event_value)
 
         elif event_name == 'RSP':
-            return self.response(event_value)
+            return self.response()
 
     def init(self, ID, event_value):
         pair = ID.split(':')
@@ -25,8 +25,9 @@ class SUBSCRIBE_1:
 
         return [event_value, None, self.QO, None, None]
 
-    def response(self, event_value):
+    def response(self):
         data, address = self.sock.recvfrom(1024)
-        # value = int(data.decode(encoding='utf-8'))
-        value = 1
-        return [None, event_value, self.QO, None, value]
+        data_str = data.decode(encoding='utf-8').split(':')
+        event = int(data_str[0])
+        value = int(data_str[1])
+        return [None, event, self.QO, None, value]

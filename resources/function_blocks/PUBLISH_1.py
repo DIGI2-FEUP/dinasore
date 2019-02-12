@@ -32,7 +32,7 @@ class PUBLISH_1:
         return [event_value, None, self.QO, None]
 
     def request(self, event_value, SD_1):
-        message = str(1).encode(encoding='utf-8')
+        message = (str(event_value) + ':' + str(1)).encode(encoding='utf-8')
         self.sock.sendto(message, (self.pair[0], int(self.pair[1])))
 
         return [None, event_value, self.QO, None]

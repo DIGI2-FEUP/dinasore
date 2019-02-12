@@ -1,6 +1,6 @@
-![logo](resources/images/logo.png)
+# DINASORE
 
-DAINAMO (Dynamic Architecture for Modular Reconfiguration) consists...
+DINASORE (Dynamic INtelligent Architecture for Software and mOdular REconfiguration)
 
 ## Architecture
 

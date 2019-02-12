@@ -30,8 +30,6 @@ class FBResources:
         try:
             # Import method from python file
             py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
-            # Reloads the module if it was changed
-            importlib.reload(py_fb)
             # Gets the running fb method
             fb_class = getattr(py_fb, self.fb_type)
             # Instance the fb class
