@@ -372,6 +372,7 @@ class send_UR:
 
     def get_lin_dist(self, target):
         pose = self.get_tcp_pos()
+        print(pose)
         dist = 0
         for i in range(3):
             dist += (target[i] - pose[i]) ** 2
@@ -480,7 +481,7 @@ class send_UR:
         tpose.append(radius)
         return "{}({}[{},{},{},{},{},{}], a={}, v={}, r={})".format(comm, prefix, *tpose)
 
-    def send_move(self, comm, pose, acc=0.2, vel=0.5, wait=True, threshold=None):
+    def send_move(self, comm, pose, acc=0.1, vel=0.1, wait=True, threshold=None):
         """
         Send a move command to the robot.
         comm  - "movel", "movep", "servoc"... "movej" ONLY if with pose
@@ -537,14 +538,12 @@ class send_UR:
         program += "end\n"
         self.send_command(program)
         if wait:
-            print (list_poses[-1])
+            print(list_poses[-1])
             self.wait_for_move(target=list_poses[-1], threshold=threshold)
             return self.get_tcp_pos()
 
     def stopj(self, acc=1.5):
         self.send_command("stopj(%s)" % acc)
-
-
 
 
 class UR5_COMMANDS:

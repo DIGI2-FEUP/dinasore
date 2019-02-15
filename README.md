@@ -1,4 +1,4 @@
-# DINASORE
+![distribution](resources/images/logo.png)
 
 DINASORE (Dynamic INtelligent Architecture for Software and mOdular REconfiguration)
 

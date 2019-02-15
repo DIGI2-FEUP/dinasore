@@ -7,7 +7,7 @@ class SharedResources:
     def __init__(self):
         pin = 7
         freq = 50  # 50 Hz
-        pos = 11  # initial duty cycle, position maximum open
+        pos = 4  # initial duty cycle, position maximum open
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(pin, GPIO.OUT)
         self.p = GPIO.PWM(pin, freq)
@@ -16,13 +16,18 @@ class SharedResources:
 
     def open_gripper(self):
         print("start open")
-        dc_open = 5  # duty cycle for gripper totally open
+        dc_open = 4  # duty cycle for gripper totally open
         self.p.ChangeDutyCycle(dc_open)
         time.sleep(1)
 
     def close_gripper(self):
         print("start close")
-        dc_close = 11  # duty cycle for gripper totally closed
+        dc_close = 6  # duty cycle for gripper totally closed
+        self.p.ChangeDutyCycle(dc_close)
+        time.sleep(1)
+
+    def close_totally(self):
+        dc_close = 9  # duty cycle for gripper totally closed
         self.p.ChangeDutyCycle(dc_close)
         time.sleep(1)
 
@@ -41,6 +46,8 @@ class GRIPPER:
             elif OPE == 2:
                 self.resources.close_gripper()
             elif OPE == 3:
+                self.resources.close_totally()
+            elif OPE == 4:
                 self.resources.reset_gripper()
 
             return [event_value]
