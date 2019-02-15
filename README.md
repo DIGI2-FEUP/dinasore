@@ -12,6 +12,15 @@ Dynamic INtelligent Architecture for Software and mOdular REconfiguration (DINAS
 
 ### Function Blocks Development
 
+In this section, we gone show how the process to develop a new function block that is compatible with the 4DIAC-IDE and the DINASORE node. 
+
+To develop a new function block first we need define the interface attributes that the function block uses. 
+That interface is composed by events and variables, both of them can be inputs or outputs. 
+The difference between an event and a variable is that the event triggers the execution of a certain functionality.
+
+The following code show the definition in xml of a function block with 2 input events, 2 output events, 2 input variables and 2 output variables. 
+This kind of file is a .fbt file with represents the function block terminology.
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType>
@@ -35,8 +44,10 @@ Dynamic INtelligent Architecture for Software and mOdular REconfiguration (DINAS
     </OutputVars>
   </InterfaceList>
 </FBType>
-
 ```
+
+If we upload the previous file to the 4DIAC-IDE, we will see the following image as result. 
+In that image we see the graphic representation of the function block, with all the interface attributes that characterise it. 
 
 ![fb](resources/images/fb.png) 
 
