@@ -9,4 +9,6 @@ ADD core ./core
 ADD resources ./resources
 ADD tests ./tests
 
-ENTRYPOINT [ "python" ]
+RUN python tests/__init__.py
+
+ENTRYPOINT [ "python", "core/main.py" ]
