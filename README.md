@@ -1,25 +1,34 @@
 ![logo](resources/images/logo.png)
 
-Dynamic INtelligent Architecture for Software and mOdular REconfiguration (DINASORE) is a platform...
+Dynamic INtelligent Architecture for Software and mOdular REconfiguration (DINASORE) is an distributed platform that runs at the
+fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside function blocks. 
 
 ## Architecture
 
 ![distribution](resources/images/iec61499Disitribution.png)
 
-* Communication with 4DIAC-IDE using tcp/ip with xml structured files.
+## Features
+
+- [x] Communication between the DINASORE and the 4DIAC-IDE 
+- [x] Encapsulation of a function block inside the DINASORE
+- [x] Execution of multiple function blocks inside the DINASORE
+- [x] Distributed execution of a configuration (with multiple function blocks) on multiple machines across the network
 
 ## Usage
 
+In this section we gonna show how you develop a new function block and after that how you develop a new configuration integrating
+all the functions blocks using the 4DIAC-IDE.
+
 ### Function Blocks Development
 
-In this section, we gone show how the process to develop a new function block that is compatible with the 4DIAC-IDE and the DINASORE node. 
+Here we gonna show how the process to develop a new function block that is compatible with the 4DIAC-IDE and the DINASORE. 
 
 To develop a new function block first we need define the interface attributes that the function block uses. 
 That interface is composed by events and variables, both of them can be inputs or outputs. 
 The difference between an event and a variable is that the event triggers the execution of a certain functionality.
 
 The following code show the definition in xml of a function block with 2 input events, 2 output events, 2 input variables and 2 output variables. 
-This kind of file is a .fbt file with represents the function block terminology.
+This kind of file is a .fbt file witch represents the function block terminology.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -51,6 +60,14 @@ In that image we see the graphic representation of the function block, with all 
 
 ![fb](resources/images/fb.png) 
 
+The second step to make a function block is encapsulate the code that you develop, inside the following the class.
+* First you must replace the class name (FB_NAME) by your new function block type.
+* Implement the state machine (inside schedule method) that checks what event was received and them execute the respective method.
+* Specify the returned attributes (output_events and output_variables) according to the order specified in the definition file.
+* Integrate the developed methods (if the method is shared between the function block instances put it inside the shared resources class,
+otherwise put it inside the function block class).
+
+
 ```python
 # This class contains the shared resources 
 # between all the function blocks instances
@@ -74,20 +91,16 @@ class FB_EXAMPLE:
         # Initialize the output events
         EVENT_OUTPUT_1 = None
         EVENT_OUTPUT_2 = None
-    
         # Initialize the output variables
         VARIABLE_OUTPUT_1 = 0
         VARIABLE_OUTPUT_2 = 0
-        
         # Checks what events receive
         if event_input_name == 'EVENT_INPUT_1':
             VARIABLE_OUTPUT_1 = self.resources.shared_method()
             EVENT_OUTPUT_1 = event_input_value
-            
         elif event_input_name == 'EVENT_INPUT_2':
             VARIABLE_OUTPUT_2 = self.intern_method(VARIABLE_INPUT_1, VARIABLE_INPUT_2)
             EVENT_OUTPUT_2 = event_input_value
-
         # Returns all the events values and all the variable values
         # The order most be the same like the xml events/variables order
         return [EVENT_OUTPUT_1, EVENT_OUTPUT_2, VARIABLE_OUTPUT_1, VARIABLE_OUTPUT_2]
@@ -100,8 +113,6 @@ class FB_EXAMPLE:
 ### Configuration Modeling (4DIAC)
 
 
-
-## References
-
-
 ## Contributions
+
+
