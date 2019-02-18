@@ -5,8 +5,6 @@ fog computing level, enabling the pre-processing of data using algorithms, that 
 
 ## Architecture
 
-![distribution](resources/images/iec61499Disitribution.png)
-
 ## Features
 
 - [x] Communication between the DINASORE and the 4DIAC-IDE 
@@ -15,6 +13,24 @@ fog computing level, enabling the pre-processing of data using algorithms, that 
 - [x] Distributed execution of a configuration (with multiple function blocks) on multiple machines across the network
 - [x] Monitoring of all function blocks using the watch option at the 4DIAC-IDE
 - [x] Remote stop of a configuration that is running
+- [x] Docker integration
+
+## Installation
+
+### Docker
+
+If you want to install the DINASORE using docker, you must use the following commands.
+
+```dockerfile
+docker run --network="host" systecfof/dinasore-(processor_architecture):(version) -a (ip_address) -p (port)
+```
+
+You must replace the (processor_architecture), (version), (ip_address) and (port), by the respectively values.
+The processor_architecture cloud be 64bit or arm. The next example shows the usage:
+
+```dockerfile.
+docker run --network="host" systecfof/dinasore-64bit:0.1 -a 127.0.0.1 -p 61499
+```
 
 ## Usage
 
@@ -114,21 +130,6 @@ class FB_EXAMPLE:
 
 ### Configuration Modeling (4DIAC-IDE)
 
-
-### Installation
-
-If you want to install the DINASORE using docker, you must use the following commands.
-
-```dockerfile
-docker run --network="host" systecfof/dinasore-(processor_architecture):(version) -a (ip_address) -p (port)
-```
-
-You must replace the (processor_architecture), (version), (ip_address) and (port), by the respectively values.
-The processor_architecture cloud be 64bit or arm. The next example shows the usage:
-
-```dockerfile.
-docker run --network="host" systecfof/dinasore-64bit:0.1 -a 127.0.0.1 -p 61499
-```
 
 ## Contributions
 
