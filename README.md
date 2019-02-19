@@ -28,7 +28,7 @@ docker run --network="host" systecfof/dinasore-(processor_architecture):(version
 You must replace the (processor_architecture), (version), (ip_address) and (port), by the respectively values.
 The processor_architecture cloud be 64bit or arm. The next example shows the usage:
 
-```dockerfile.
+```dockerfile
 docker run --network="host" systecfof/dinasore-64bit:0.1 -a 127.0.0.1 -p 61499
 ```
 

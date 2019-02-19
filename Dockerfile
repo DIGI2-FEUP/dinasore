@@ -11,4 +11,6 @@ ADD tests ./tests
 
 RUN python tests/__init__.py
 
+ENTRYPOINT [ "python", "tests/__init__.py" ]
+
 ENTRYPOINT [ "python", "core/main.py" ]

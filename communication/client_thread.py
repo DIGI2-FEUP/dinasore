@@ -34,15 +34,14 @@ class ClientThread(threading.Thread):
             self.connection.close()
 
     def parse_request(self, data):
-        data_str = data.decode('utf-8')
-        xml_data = data_str[data_str.find('<Request'):]
-        request_header = data_str[:data_str.find('<Request')]
         config_id_size = int(data[1:3].hex(), 16)
 
         if config_id_size == 0:
-            response = self.config_m.parse_general(xml_data)
+            data_str = data[6:].decode('utf-8')
+            response = self.config_m.parse_general(data_str)
         else:
-            config_id = request_header[3: config_id_size + 3]
-            response = self.config_m.parse_configuration(xml_data, config_id)
+            config_id = data[3: config_id_size + 3].decode('utf-8')
+            data_str = data[config_id_size + 3 + 3:].decode('utf-8')
+            response = self.config_m.parse_configuration(data_str, config_id)
 
         return response
