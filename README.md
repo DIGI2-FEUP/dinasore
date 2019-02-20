@@ -135,11 +135,13 @@ class FB_EXAMPLE:
 
 #### Integrating the function block with the 4DIAC-IDE
 
-To integrate the new function block with the 4DIAC-IDE you must copy the .fbt file to the library folder
-(.../4diac-ide/typelibrary/new_folder_for_python_fb). 
+To integrate the new function block with the 4DIAC-IDE you must copy the .fbt file to the library folder:
 
-If you have a started project you must copy to the project library 
-(.../4diac-ide/workspace/project_name/new_folder_for_python_fb).
+.../4diac-ide/typelibrary/new_folder_for_python_fb 
+
+If you have a started project you must copy to the project library:
+
+.../4diac-ide/workspace/project_name/new_folder_for_python_fb
 
 
 ### Configuration Modeling (4DIAC-IDE)
