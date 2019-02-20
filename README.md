@@ -23,12 +23,12 @@ If you want to install the DINASORE using docker, you must use the following com
 The first to pull the image from the docker hub and the second to run the container.
 
 ```dockerfile
-docker pull systecfof/dinasore:(processor_architecture and version)
+docker pull systecfof/dinasore:<processor_architecture>-<version>
 
-docker run --network="host" systecfof/dinasore:(processor_architecture and version) -a (ip_address) -p (port)
+docker run --network="host" systecfof/dinasore:<processor_architecture>-<version> -a <ip_address> -p <port>
 ```
 
-You must replace the (processor_architecture and version), (ip_address) and (port) by the respectively values.
+You must replace the <processor_architecture>, <version>, <ip_address> and <port> by the respectively values.
 The processor_architecture cloud be amd64 or arm. The next example shows the commands with examples of replaced values:
 
 ```dockerfile
