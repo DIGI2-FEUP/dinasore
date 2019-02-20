@@ -1,6 +1,6 @@
 ![logo](resources/images/logo.png)
 
-Dynamic INtelligent Architecture for Software and mOdular REconfiguration (DINASORE) is a distributed platform that runs at the
+**D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that runs at the
 fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside function blocks. 
 
 ## Architecture
@@ -20,16 +20,21 @@ fog computing level, enabling the pre-processing of data using algorithms, that 
 ### Docker
 
 If you want to install the DINASORE using docker, you must use the following commands.
+The first to pull the image from the docker hub and the second to run the container.
 
 ```dockerfile
-docker run --network="host" systecfof/dinasore-(processor_architecture):(version) -a (ip_address) -p (port)
+docker pull systecfof/dinasore:(processor_architecture and version)
+
+docker run --network="host" systecfof/dinasore:(processor_architecture and version) -a (ip_address) -p (port)
 ```
 
-You must replace the (processor_architecture), (version), (ip_address) and (port), by the respectively values.
-The processor_architecture cloud be 64bit or arm. The next example shows the usage:
+You must replace the (processor_architecture and version), (ip_address) and (port) by the respectively values.
+The processor_architecture cloud be amd64 or arm. The next example shows the commands with examples of replaced values:
 
 ```dockerfile
-docker run --network="host" systecfof/dinasore-64bit:0.1 -a 127.0.0.1 -p 61499
+docker pull systecfof/dinasore:amd64-0.1
+
+docker run --network="host" systecfof/dinasore:amd64-0.1 -a 127.0.0.1 -p 61499
 ```
 
 ## Usage
@@ -128,8 +133,27 @@ class FB_EXAMPLE:
         return  VARIABLE_INPUT_1 + VARIABLE_INPUT_2
 ```
 
+#### Integrating the function block with the 4DIAC-IDE
+
+To integrate the new function block with the 4DIAC-IDE you must copy the .fbt file to the library folder
+(.../4diac-ide/typelibrary/new_folder_for_python_fb). 
+
+If you have a started project you must copy to the project library 
+(.../4diac-ide/workspace/project_name/new_folder_for_python_fb).
+
+
 ### Configuration Modeling (4DIAC-IDE)
 
+The usage of 4DIAC-IDE is shown at the following tutorials:
+
+* [Simple Local Configuration](https://www.eclipse.org/4diac/en_help.php?helppage=html/4diacIDE/use4diacLocally.html) - 
+in this page we find a simple tutorial, in this tutorial we see how to create configuration using function blocks.
+
+* [Distributed Configuration](https://www.eclipse.org/4diac/en_help.php?helppage=html/4diacIDE/distribute4diac.html) - 
+that tutorial is the continuation of the previous, in this case we use a distributed architecture.
+
+**NOTE:** You must only use the python function blocks (inside .../4diac-ide/typelibrary/new_folder_for_python_fb and 
+.../4diac-ide/workspace/project_name/new_folder_for_python_fb folders).
 
 ## Contributions
 

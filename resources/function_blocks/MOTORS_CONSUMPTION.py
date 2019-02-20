@@ -1,5 +1,4 @@
 import serial
-import time
 
 
 class MOTORS_CONSUMPTION:
@@ -39,11 +38,3 @@ class MOTORS_CONSUMPTION:
 
         return split_str
 
-
-"""mc = MOTORS_CONSUMPTION()
-mc.schedule('OPEN', 1, '/dev/ttyACM0')
-while True:
-    values = mc.schedule('READ', 1, '/dev/ttyACM0')
-    print(values[1:])
-    time.sleep(1)
-"""
