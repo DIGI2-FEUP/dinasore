@@ -273,7 +273,7 @@ class Connection:
         self.value_name = value_name
 
     def update_var(self, value):
-        self.destination_fb.set_input_var(self.value_name, value)
+        self.destination_fb.set_attr(self.value_name, new_value=value)
 
     def send_event(self, value):
         self.destination_fb.push_event(self.value_name, value)

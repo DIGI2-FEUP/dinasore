@@ -17,11 +17,11 @@ if __name__ == "__main__":
     try:
         opts, args = getopt.getopt(sys.argv[1:], "ha:p:l:", ["address=", "port="])
     except getopt.GetoptError:
-        print('python3 reconfiguration/main.py -a <address> -p <port> -l <logging_level>')
+        print('python3 core/main.py -a <address> -p <port>')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print('python3 core/main.py -a <address> -p <port> -l <logging_level>')
+            print('python3 core/main.py -a <address> -p <port>')
             sys.exit()
         elif opt in ("-a", "--address"):
             address = arg
