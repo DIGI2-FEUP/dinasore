@@ -28,9 +28,11 @@ if __name__ == "__main__":
             port = int(arg)
 
     # Configure the logging output
-    log_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'execution.log')
+    log_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'error_list.log')
+    if os.path.isfile(log_path):
+        os.remove(log_path)
     logging.basicConfig(filename=log_path,
-                        level=logging.INFO,
+                        level=logging.ERROR,
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
 
     config_m = manager.Manager()
