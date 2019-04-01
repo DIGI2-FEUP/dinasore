@@ -8,7 +8,6 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
 from communication import tcp_server
 from core import manager
 
-
 if __name__ == "__main__":
 
     address = 'localhost'
@@ -29,7 +28,9 @@ if __name__ == "__main__":
             port = int(arg)
 
     # Configure the logging output
-    logging.basicConfig(level=logging.INFO,
+    log_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'execution.log')
+    logging.basicConfig(filename=log_path,
+                        level=logging.INFO,
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
 
     config_m = manager.Manager()
