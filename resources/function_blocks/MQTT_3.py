@@ -1,4 +1,3 @@
-from paho.mqtt.client import Client
 from threading import Event
 from threading import Thread
 
@@ -18,6 +17,7 @@ class MQTT_3:
             return self.read_measures(event_value)
 
     def connect_client(self, event_value, topic_0, topic_1, topic_2, host, port):
+        from paho.mqtt.client import Client
 
         class MQTTClient(Thread):
 
@@ -63,10 +63,10 @@ class MQTT_3:
         return [None, event_value, value_0, value_1, value_2]
 
 
-c = MQTT_3()
-c.connect_client(1, '/t_0', '/t_1', '/t_2', 'localhost', 1883)
-v = c.read_measures(1)
-print(v)
-v = c.read_measures(1)
-print(v)
+# c = MQTT_3()
+# c.connect_client(1, '/t_0', '/t_1', '/t_2', 'localhost', 1883)
+# v = c.read_measures(1)
+# print(v)
+# v = c.read_measures(1)
+# print(v)
 # client.send_measure(1, 0.0)

@@ -40,8 +40,8 @@ class INFLUX_CLIENT_AMB:
         return [None, event_value]
 
 
-client = INFLUX_CLIENT_AMB()
-client.connect_client(1, '192.168.0.102', 8086, 'fucoli', 'humidity', 'fucolidb')
+# client = INFLUX_CLIENT_AMB()
+# client.connect_client(1, '192.168.0.102', 8086, 'fucoli', 'humidity', 'fucolidb')
 # client.send_measure(1, 0.0)
 
 # client1 = INFLUX_CLIENT()
