@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Comment="Peroidic event generator" Name="MQTT_3">
+<FBType Comment="Peroidic event generator" Name="MQTT_SHARED">
   <Identification Description="Copyright (c) 2017 fortiss GmbH&#13;&#10; &#13;&#10;This program and the accompanying materials are made&#13;&#10;available under the terms of the Eclipse Public License 2.0&#13;&#10;which is available at https://www.eclipse.org/legal/epl-2.0/&#13;&#10;&#13;&#10;SPDX-License-Identifier: EPL-2.0" Standard="61499-1 Annex A"/>
   <VersionInfo Author="Alois Zoitl" Date="2017-09-21" Organization="fortiss GmbH" Remarks="initial API and implementation and/or initial documentation" Version="1.0"/>
   <InterfaceList>
     <EventInputs>
-      <Event Name="INIT" Type="Event">
-      </Event>
-      <Event Name="REQ" Type="Event">
-      </Event>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="SUBS" Type="Event"/>
+      <Event Name="READ" Type="Event"/>
+      <Event Name="STOP" Type="Event"/>
     </EventInputs>
     <EventOutputs>
-      <Event Name="INITO" Type="Event"/>
-      <Event Name="REQO" Type="Event">
-        <With Var="VALUE_0"/>
-        <With Var="VALUE_1"/>
-        <With Var="VALUE_2"/>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="SUBS_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event">
+        <With Var="HUMIDITY"/>
+        <With Var="TEMPERATURE"/>
       </Event>
+      <Event Name="STOP_O" Type="Event"/>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="TOPIC_0" Type="STRING"/>
-      <VarDeclaration Name="TOPIC_1" Type="STRING"/>
-      <VarDeclaration Name="TOPIC_2" Type="STRING"/>
+      <VarDeclaration Name="TOPIC" Type="STRING"/>
       <VarDeclaration Name="HOST" Type="STRING"/>
       <VarDeclaration Name="PORT" Type="UINT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration Name="VALUE_0" Type="REAL"/>
-      <VarDeclaration Name="VALUE_1" Type="REAL"/>
-      <VarDeclaration Name="VALUE_2" Type="REAL"/>
+      <VarDeclaration Name="HUMIDITY" Type="REAL"/>
+      <VarDeclaration Name="TEMPERATURE" Type="REAL"/>
     </OutputVars>
   </InterfaceList>
 </FBType>

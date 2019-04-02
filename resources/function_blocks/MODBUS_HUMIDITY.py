@@ -2,6 +2,7 @@ from modbus_tk.modbus_rtu import RtuMaster
 import modbus_tk.defines as cts
 from modbus_tk.modbus import ModbusError
 import serial
+import time
 
 
 class SharedResources:
@@ -38,6 +39,8 @@ class MODBUS_HUMIDITY:
         try:
             response = self.resources.master.execute(1, cts.READ_HOLDING_REGISTERS, 1000, 125)
             humidity = float(response[34]) / 1000
+            # humidity = 0.0
+            # time.sleep(0.3)
         except ModbusError as exc:
             print(exc)
             print(exc.get_exception_code())

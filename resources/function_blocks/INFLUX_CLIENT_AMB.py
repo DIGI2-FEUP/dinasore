@@ -7,12 +7,12 @@ class INFLUX_CLIENT_AMB:
     def __init__(self):
         self.client = None
 
-    def schedule(self, event_name, event_value, value_0, value_1, value_2, host, port, user, password, db_name):
+    def schedule(self, event_name, event_value, humidity, temperature, host, port, user, password, db_name):
         if event_name == 'INIT':
             return self.connect_client(event_value, host, port, user, password, db_name)
 
-        elif event_name == 'REQ':
-            return self.send_measure(event_value, value_0, value_1, value_2)
+        elif event_name == 'WRITE':
+            return self.send_measure(event_value, humidity, temperature)
 
     def connect_client(self, event_value, host, port, user, password, db_name):
         self.client = InfluxDBClient(host=host,
@@ -22,17 +22,16 @@ class INFLUX_CLIENT_AMB:
                                      database=db_name)
         return [event_value, None]
 
-    def send_measure(self, event_value, value_0, value_1, value_2):
+    def send_measure(self, event_value, humidity, temperature):
         date = datetime.datetime.now()
         json_body = [
             {
-                "measurement": "humidity_ambient",
+                "measurement": "ambient",
                 "tags": {},
                 "time": date,
                 "fields": {
-                    "sensor_0": value_0,
-                    "sensor_1": value_1,
-                    "sensor_2": value_2
+                    "humidity_0": humidity,
+                    "temperature_0": temperature
                 }
             }
         ]

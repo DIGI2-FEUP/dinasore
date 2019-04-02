@@ -7,20 +7,18 @@
     <EventInputs>
       <Event Name="INIT" Type="Event">
       </Event>
-      <Event Name="REQ" Type="Event">
-        <With Var="VALUE_0"/>
-        <With Var="VALUE_1"/>
-        <With Var="VALUE_2"/>
+      <Event Name="WRITE" Type="Event">
+        <With Var="HUMIDITY"/>
+        <With Var="TEMPERATURE"/>
       </Event>
     </EventInputs>
     <EventOutputs>
-      <Event Name="INITO" Type="Event"/>
-      <Event Name="REQO" Type="Event"/>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="WRITE_O" Type="Event"/>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="VALUE_0" Type="REAL"/>
-      <VarDeclaration Name="VALUE_1" Type="REAL"/>
-      <VarDeclaration Name="VALUE_2" Type="REAL"/>
+      <VarDeclaration Name="HUMIDITY" Type="REAL"/>
+      <VarDeclaration Name="TEMPERATURE" Type="REAL"/>
       <VarDeclaration Name="HOST" Type="STRING"/>
       <VarDeclaration Name="PORT" Type="UINT"/>
       <VarDeclaration Name="USER" Type="STRING"/>
