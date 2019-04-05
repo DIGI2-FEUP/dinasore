@@ -25,7 +25,7 @@ class FBResources:
     def import_fb(self):
         logging.info('importing fb python file and definition file...')
         root = None
-        fb_exe = None
+        fb_obj = None
 
         try:
             # Import method from python file
@@ -33,9 +33,7 @@ class FBResources:
             # Gets the running fb method
             fb_class = getattr(py_fb, self.fb_type)
             # Instance the fb class
-            instance = fb_class()
-            # Gets the fb schedule method
-            fb_exe = instance.schedule
+            fb_obj = fb_class()
             # Reads the xml
             tree = ETree.parse(self.fbt_path)
             # Gets the root element
@@ -60,7 +58,7 @@ class FBResources:
             logging.info('fb definition (xml) imported from: {0}'.format(self.fbt_path))
             logging.info('python file imported from: {0}'.format(self.py_path))
 
-        return root, fb_exe
+        return root, fb_obj
 
     def exists_fb(self):
         # Verifies if exists the python file

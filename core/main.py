@@ -11,16 +11,16 @@ from core import manager
 if __name__ == "__main__":
 
     address = 'localhost'
-    port = 61500
+    port = 61499
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "ha:p:l:", ["address=", "port="])
     except getopt.GetoptError:
-        print('python3 core/main.py -a <address> -p <port>')
+        print('python3.6 core/main.py -a <address> -p <port>')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print('python3 core/main.py -a <address> -p <port>')
+            print('python3.6 core/main.py -a <address> -p <port>')
             sys.exit()
         elif opt in ("-a", "--address"):
             address = arg

@@ -6,12 +6,13 @@ import json
 class SharedResources:
 
     def __init__(self):
-        self.client = Client()
+        self.client = None
         self.topic = None
         self.message_payload = None
         self.new_message = Event()
 
     def connect(self, host, port):
+        self.client = Client()
 
         def on_message(client, userdata, message):
             # print('new message: {0}\ntopic: {1}'.format(message.payload, message.topic))
@@ -27,6 +28,10 @@ class SharedResources:
 class MQTT_SHARED:
     resources = SharedResources()
 
+    def __init__(self):
+        self.stop = False
+        self.resources.new_message.clear()
+
     def schedule(self, event_name, event_value, topic, host, port):
         if event_name == 'INIT':
             self.resources.connect(host, port)
@@ -37,21 +42,25 @@ class MQTT_SHARED:
             return [None, event_value, None, None, 0.0, 0.0]
 
         elif event_name == 'READ':
-            self.resources.new_message.wait()
+            while (self.resources.topic != topic) and (self.stop is False):
+                self.resources.new_message.wait(timeout=5)
 
             if self.resources.topic == topic:
                 msg = self.resources.message_payload.decode('utf-8')
                 payload_json = json.loads(msg)
                 self.resources.new_message.clear()
-                humidity = payload_json['S1TH']['Humidity']
-                temperature = payload_json['S1TH']['Temperature']
+                humidity = payload_json['AM2301']['Humidity']
+                temperature = payload_json['AM2301']['Temperature']
                 return [None, None, event_value, None, humidity, temperature]
-            else:
-                self.schedule('READ', event_value, topic, host, port)
 
         elif event_name == 'STOP':
             self.resources.client.disconnect()
             return [None, None, None, event_value, 0.0, 0.0]
+
+    def __del__(self):
+        self.stop = True
+        self.resources.new_message.set()
+        self.resources.client.disconnect()
 
 
 # c = MQTT_SHARED()
@@ -61,4 +70,4 @@ class MQTT_SHARED:
 # print(v)
 # v = c.schedule('READ', 1, 'Fucoli/ISQsensor1/sensor', 'localhost', 1883)
 # print(v)
-# {"Time":"2019-04-01T17:46:26", "S1TH":{"Temperature":20.7, "Humidity":53.8},"TempUnit":"C"}
+# {"Time":"2019-04-01T17:46:26", "AM2301":{"Temperature":20.7, "Humidity":53.8},"TempUnit":"C"}

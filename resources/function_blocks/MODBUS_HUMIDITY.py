@@ -12,9 +12,10 @@ class SharedResources:
 
     def open(self, port):
         if self.master is None:
-            ser = serial.Serial(port=port, baudrate=9600, bytesize=8, parity='E', stopbits=1)
-            self.master = RtuMaster(ser)
-            self.master.set_timeout(1)
+            # ser = serial.Serial(port=port, baudrate=9600, bytesize=8, parity='E', stopbits=1)
+            # self.master = RtuMaster(ser)
+            # self.master.set_timeout(1)
+            pass
 
 
 class MODBUS_HUMIDITY:
@@ -37,10 +38,10 @@ class MODBUS_HUMIDITY:
     def read_value(self, event_value):
         humidity = 0.0
         try:
-            response = self.resources.master.execute(1, cts.READ_HOLDING_REGISTERS, 1000, 125)
-            humidity = float(response[34]) / 1000
-            # humidity = 0.0
-            # time.sleep(0.3)
+            # response = self.resources.master.execute(1, cts.READ_HOLDING_REGISTERS, 1000, 125)
+            # humidity = float(response[34]) / 1000
+            humidity = 0.0
+            time.sleep(0.3)
         except ModbusError as exc:
             print(exc)
             print(exc.get_exception_code())

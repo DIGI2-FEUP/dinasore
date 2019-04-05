@@ -15,8 +15,8 @@ class TestResources(unittest.TestCase):
 
     def test_import_fb(self):
         fb_res = fb_resources.FBResources('E_EXAMPLE')
-        element, fb_exe = fb_res.import_fb()
-        result = fb_exe('EI', 23, None)
+        element, fb_obj = fb_res.import_fb()
+        result = fb_obj.schedule('EI', 23, None)
         tag = element.tag
         self.assertEqual('FBType', tag)
         self.assertEqual(24, result[0])

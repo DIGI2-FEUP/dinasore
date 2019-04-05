@@ -79,6 +79,9 @@ class Manager:
                         config.stop_work()
                         # Release memory
                         gc.collect()
+            # If we want to kill the device
+            if len(element) == 0:
+                pass
 
         elif action == 'DELETE':
             # Iterate over the list of children

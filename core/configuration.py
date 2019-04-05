@@ -38,11 +38,11 @@ class Configuration:
             logging.info('fb doesnt exists, needs to be downloaded ...')
             fb_res.download_fb()
 
-        fb_definition, fb_exe = fb_res.import_fb()
+        fb_definition, fb_obj = fb_res.import_fb()
 
         # check if if happened any importing error
         if fb_definition is not None:
-            fb_element = fb.FB(fb_name, fb_type, fb_exe, fb_definition)
+            fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition)
             self.set_fb(fb_name, fb_element)
             logging.info('created fb type: {0}, instance: {1}'.format(fb_type, fb_name))
 
@@ -133,7 +133,7 @@ class Configuration:
             if fb_name != 'START':
                 fb_element.start()
 
-        outputs = self.get_fb('START').fb_exe()
+        outputs = self.get_fb('START').fb_obj.schedule()
         self.get_fb('START').update_outputs(outputs)
 
     def stop_work(self):
@@ -163,6 +163,7 @@ class Configuration:
         elif value_type == 'UINT' or value_type == 'Event' or value_type == 'INT':
             converted_value = int(value)
 
+        # Float variable
         elif value_type == 'REAL' or value_type == 'LREAL':
             converted_value = float(value)
 
