@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Peroidic event generator" Name="INTERFACE_HTTP">
+  <Identification Description="Copyright (c) 2017 fortiss GmbH&#13;&#10; &#13;&#10;This program and the accompanying materials are made&#13;&#10;available under the terms of the Eclipse Public License 2.0&#13;&#10;which is available at https://www.eclipse.org/legal/epl-2.0/&#13;&#10;&#13;&#10;SPDX-License-Identifier: EPL-2.0" Standard="61499-1 Annex A"/>
+  <VersionInfo Author="Alois Zoitl" Date="2017-09-21" Organization="fortiss GmbH" Remarks="initial API and implementation and/or initial documentation" Version="1.0"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="ASB" Type="Event">
+        <With Var="P_ID"/>
+        <With Var="TIME"/>
+      </Event>
+      <Event Name="INS" Type="Event">
+        <With Var="VS_OUT"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_PROCESS" Type="Event"/>
+      <Event Name="ASB_END" Type="Event"/>
+      <Event Name="NEW_PRODUCT" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="P_ID" Type="UINT"/>
+      <VarDeclaration Name="TIME" Type="UINT"/>
+      <VarDeclaration Name="VS_OUT" Type="UINT"/>
+      <VarDeclaration Name="IP_ADDRESS" Type="STRING"/>
+      <VarDeclaration Name="PORT" Type="UINT"/>
+    </InputVars>
+    <OutputVars>
+    </OutputVars>
+  </InterfaceList>
+</FBType>
+

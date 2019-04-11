@@ -11,6 +11,8 @@ class FBInterface:
         self.fb_name = fb_name
         self.fb_type = fb_type
 
+        self.event_queue = []
+
         self.input_events = OrderedDict()
         self.output_events = OrderedDict()
         self.input_vars = OrderedDict()
@@ -70,7 +72,6 @@ class FBInterface:
         self.output_connections = dict()
 
         self.new_event = threading.Event()
-        self.new_event_name = None
 
         self.lock = threading.Lock()
 
@@ -169,28 +170,29 @@ class FBInterface:
 
     def push_event(self, event_name, event_value):
         if event_value is not None:
-                # Updates the event value
-                self.set_attr(event_name, new_value=event_value)
-                # Sets the new event
-                self.new_event_name = event_name
-                self.new_event.set()
+            self.event_queue.append((event_name, event_value))
+            # Updates the event value
+            self.set_attr(event_name, new_value=event_value)
+            # Sets the new event
+            self.new_event.set()
+
+    def pop_event(self):
+        if len(self.event_queue) > 0:
+            return self.event_queue.pop()
 
     def wait_event(self):
-        if len(self.input_events) != 0:
-            # Verify if stays in a start event
-            if self.new_event_name == 'START':
-                pass
-            else:
-                self.new_event.wait()
+        if len(self.input_events) != 0 and len(self.event_queue) == 0:
+            self.new_event.wait()
 
     def read_inputs(self):
         logging.info('reading fb inputs...')
 
         # First convert the vars dictionary to a list
         events_list = []
-        v_type, value, is_watch = self.read_attr(self.new_event_name)
-        events_list.append(self.new_event_name)
-        events_list.append(value)
+        event_name, event_value = self.pop_event()
+        self.set_attr(event_name, new_value=event_value)
+        events_list.append(event_name)
+        events_list.append(event_value)
 
         # Second converts the event dictionary to a list
         vars_list = []
@@ -257,7 +259,7 @@ class FBInterface:
             if is_watch and (value is not None):
                 port = ETree.Element('Port', {'name': event_name})
                 ETree.SubElement(port, 'Data', {'value': str(value),
-                                                'time': str(int((time.time()*1000) - start_time))})
+                                                'time': str(int((time.time() * 1000) - start_time))})
                 fb_root.append(port)
 
         # Gets the number of watches

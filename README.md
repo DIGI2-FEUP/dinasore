@@ -46,7 +46,7 @@ all the functions blocks using the 4DIAC-IDE.
 
 Here we gonna show how the process to develop a new function block that is compatible with the 4DIAC-IDE and the DINASORE. 
 
-To develop a new function block first we need define the interface attributes that the function block uses. 
+To develop a new function block first we need to define the interface attributes that the function block uses. 
 That interface is composed by events and variables, both of them can be inputs or outputs. 
 The difference between an event and a variable is that the event triggers the execution of a certain functionality.
 
@@ -81,7 +81,7 @@ This kind of file is a .fbt file witch represents the function block terminology
 If we upload the previous file to the 4DIAC-IDE, we will see the following image as result. 
 In that image we see the graphic representation of the function block, with all the interface attributes that characterise it. 
 
-![fb](resources/images/fb.png) 
+![fb](resources/images/fb.png)
 
 The second step to make a function block is encapsulate the code that you develop, inside the following the class.
 * First you must replace the class name (FB_NAME) by your new function block type.

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Comment="Peroidic event generator" Name="MOTORS_CONSUMPTION">
+<FBType Comment="Peroidic event generator" Name="COLLAB_FOREST">
   <Identification Description="Copyright (c) 2017 fortiss GmbH&#13;&#10; &#13;&#10;This program and the accompanying materials are made&#13;&#10;available under the terms of the Eclipse Public License 2.0&#13;&#10;which is available at https://www.eclipse.org/legal/epl-2.0/&#13;&#10;&#13;&#10;SPDX-License-Identifier: EPL-2.0" Standard="61499-1 Annex A"/>
   <VersionInfo Author="Alois Zoitl" Date="2017-09-21" Organization="fortiss GmbH" Remarks="initial API and implementation and/or initial documentation" Version="1.0"/>
   <InterfaceList>
     <EventInputs>
-      <Event Name="OPEN" Type="Event"/>
-      <Event Name="READ" Type="Event"/>
-    </EventInputs>
-    <EventOutputs>
-      <Event Name="INIT_O" Type="Event"/>
-      <Event Name="REQ_O" Type="Event">
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="PREDICT" Type="Event">
         <With Var="S_VOLT"/>
         <With Var="S_CURR"/>
         <With Var="S_R_PWR"/>
@@ -20,11 +16,13 @@
         <With Var="B_R_PWR"/>
         <With Var="B_A_PWR"/>
       </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="PREDICT_O" Type="Event"/>
+      <Event Name="STOP" Type="Event"/>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Name="PORT" Type="STRING"/>
-    </InputVars>
-    <OutputVars>
       <VarDeclaration Name="S_VOLT" Type="REAL"/>
       <VarDeclaration Name="S_CURR" Type="REAL"/>
       <VarDeclaration Name="S_R_PWR" Type="REAL"/>
@@ -33,6 +31,8 @@
       <VarDeclaration Name="B_CURR" Type="REAL"/>
       <VarDeclaration Name="B_R_PWR" Type="REAL"/>
       <VarDeclaration Name="B_A_PWR" Type="REAL"/>
+    </InputVars>
+    <OutputVars>
     </OutputVars>
   </InterfaceList>
 </FBType>
