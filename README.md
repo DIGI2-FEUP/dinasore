@@ -17,12 +17,30 @@ fog computing level, enabling the pre-processing of data using algorithms, that 
 
 ## Installation
 
+For the normal installation process you need to first to install the Python3.6, after that you must clone the repository.
+
+```bash
+git clone https://github.com/eliseu31/dinasore.git
+```
+
+After cloning the repository you must change to the dinasore folder:
+
+```bash
+cd dinasore/
+```
+
+And then you could run the DINASORE node with the following instruction, where the flag -a corresponds to the ip address and the flag -p corresponds to the port.
+
+```bash
+python3.6 core/main.py -a localhost -p 61499
+```
+
 ### Docker
 
 If you want to install the DINASORE using docker, you must use the following commands.
 The first to pull the image from the docker hub and the second to run the container.
 
-```dockerfile
+```bash
 docker pull systecfof/dinasore:<processor_architecture>-<_release>
 
 docker run --network="host" systecfof/dinasore:<processor_architecture>-<_release> -a <ip_address> -p <_port>
@@ -31,7 +49,7 @@ docker run --network="host" systecfof/dinasore:<processor_architecture>-<_releas
 You must replace the <processor_architecture>, <_release>, <ip_address> and <_port> by the respectively values.
 The processor_architecture cloud be amd64 or arm. The next example shows the commands with examples of replaced values:
 
-```dockerfile
+```bash
 docker pull systecfof/dinasore:amd64-0.1
 
 docker run --network="host" systecfof/dinasore:amd64-0.1 -a 127.0.0.1 -p 61499
@@ -68,7 +86,7 @@ This kind of file is a .fbt file witch represents the function block terminology
     </EventOutputs>
     <InputVars>
       <VarDeclaration Comment="" Name="VAR_IN1" Type="INT"/>
-      <VarDeclaration Comment="" Name="VAR_IN_2" Type="INT"/>
+      <VarDeclaration Comment="" Name="VAR_IN2" Type="INT"/>
     </InputVars>
     <OutputVars>
       <VarDeclaration Comment="" Name="VAR_OUT1" Type="INT"/>
@@ -117,13 +135,13 @@ class FB_EXAMPLE:
     # Receives as method arguments the event name, the event value and all the variables values
     def schedule(self, event_input_name, event_input_value, VAR_IN1, VAR_IN2):
         # Checks what events receive
-        if event_input_name == 'EVENT_INPUT_1':
+        if event_input_name == 'E_IN1':
             self.VAR_OUT1 = self.resources.shared_method()
             # Returns all the events values and all the variable values
             # The order most be the same like the xml events/variables order
             return [event_input_value, None, self.VAR_OUT1, self.VAR_OUT2]
             
-        elif event_input_name == 'EVENT_INPUT_2':
+        elif event_input_name == 'E_IN2':
             self.VAR_OUT2 = self.intern_method(VAR_IN1, VAR_IN2)
             # Returns all the events values and all the variable values
             # The order most be the same like the xml events/variables order
@@ -157,7 +175,5 @@ that tutorial is the continuation of the previous, in this case we use a distrib
 
 **NOTE:** You must only use the python function blocks (inside .../4diac-ide/typelibrary/new_folder_for_python_fb and 
 .../4diac-ide/workspace/project_name/new_folder_for_python_fb folders).
-
-## Contributions
 
 
