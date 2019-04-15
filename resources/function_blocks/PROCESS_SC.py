@@ -3,9 +3,9 @@
 class PROCESS_SC:
 
     def __init__(self):
-        self.products_time = {'A': 10000,
-                              'B': 15000,
-                              'C': 20000}
+        self.products_time = {'1': 10000,
+                              '2': 15000,
+                              '3': 20000}
         self.execution_index = 0
         self.product_list = None
 

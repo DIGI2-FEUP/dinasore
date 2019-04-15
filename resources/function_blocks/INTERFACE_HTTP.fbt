@@ -13,20 +13,26 @@
       <Event Name="INS" Type="Event">
         <With Var="VS_OUT"/>
       </Event>
+      <Event Name="WAIT" Type="Event"/>
     </EventInputs>
     <EventOutputs>
       <Event Name="INIT_PROCESS" Type="Event"/>
       <Event Name="ASB_END" Type="Event"/>
       <Event Name="NEW_PRODUCT" Type="Event"/>
+      <Event Name="STOP" Type="Event"/>
+      <Event Name="RESUME" Type="Event">
+        <With Var="SELECT"/>
+      </Event>
     </EventOutputs>
     <InputVars>
       <VarDeclaration Name="P_ID" Type="UINT"/>
       <VarDeclaration Name="TIME" Type="UINT"/>
-      <VarDeclaration Name="VS_OUT" Type="UINT"/>
+      <VarDeclaration Name="VS_OUT" Type="STRING"/>
       <VarDeclaration Name="IP_ADDRESS" Type="STRING"/>
       <VarDeclaration Name="PORT" Type="UINT"/>
     </InputVars>
     <OutputVars>
+      <VarDeclaration Name="SELECT" Type="UINT"/>
     </OutputVars>
   </InterfaceList>
 </FBType>
