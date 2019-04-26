@@ -2,7 +2,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from threading import Thread
 from threading import Event
 import json
-import time
 
 
 class HttpHandler(BaseHTTPRequestHandler):
@@ -97,7 +96,6 @@ class INTERFACE_HTTP:
         self.assembly_end = Event()
         self.stop = Event()
         self.resume = Event()
-        self.move_index = 0
 
     def __del__(self):
         self.server_http.disconnect()
@@ -132,7 +130,7 @@ class INTERFACE_HTTP:
 
             self.init_event.wait()
             self.init_event.clear()
-            return [event_value, None, None, None, None, self.move_index]
+            return [event_value, None, None, None]
 
         # ASB - starts the assembly
         elif event_name == 'ASB':
@@ -147,63 +145,24 @@ class INTERFACE_HTTP:
 
             self.assembly_end.clear()
             # ends the assembly process
-            return [None, event_value, None, None, None, self.move_index]
+            return [None, event_value, None, None]
 
         # INS - sends the inspection result
         elif event_name == 'INS':
             self.payload[2] = vs_out
             # processes a new product
-            return [None, None, event_value, None, None, self.move_index]
+            return [None, None, event_value, None]
 
         elif event_name == 'WAIT':
-            if self.stop.is_set() or self.stop_sent:
+            if self.stop.is_set():
+                # waits the resume
                 self.resume.wait()
                 self.stop.clear()
                 self.resume.clear()
-                self.stop_sent = False
-                return [None, None, None, None, event_value, self.move_index]
-
-            else:
-                if self.move_index == 3:
-                    self.move_index = 0
-                self.move_index += 1
-
-                # waits for the end of movement or the stop event
-                print('waiting')
-                self.stop.wait(5)
-                print('end_wait')
-
-                if self.stop.is_set():
-                    # stop the movement
-                    self.stop_sent = True
-                    return [None, None, None, event_value, None, self.move_index]
-                else:
-                    # continues the movement
-                    return [None, None, None, None, event_value, self.move_index]
+            # continues the movement
+            return [None, None, None, event_value]
 
 
 # http_interface = INTERFACE_HTTP()
 # http_interface.schedule('INIT', 1, 1, 1000, 20, '127.0.0.1', 8081)
 # del http_interface
-
-topic = "AST/AGV_ID"
-message = {
-    "battery_level": 12,
-    "total_odometry": 120,  # km
-    "partial_odometry": 11,  # cm
-    "zone": "zone_id",  # zone identifier or value
-    "actual_velocity": 1.3,
-    "actual_state": "state_id",
-    "target_state": "state_id",
-    "load_state": "state_id",
-    "actual_route": "route_id",
-    "target_route": "route_id",
-    "actual_tag": "tag_id",
-    "next_tag": "tag_id",
-    "direction": "direction_id",  # direction identifier or value
-    "hydraulic_state": "state_id",
-    "magnetic_band_front": True,  # true if magnetic band are detected by the front sensor
-    "magnetic_band_back": False,  # true if magnetic band are detected by the back sensor
-    "brakes_state": "state_id",
-    "errors_list": [10301, 20901, 20505]  # list with the actual error codes
-}

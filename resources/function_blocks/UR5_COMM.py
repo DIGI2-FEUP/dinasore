@@ -550,51 +550,26 @@ class UR5_COMM:
     # ss = send_UR()
 
     def __init__(self):
-        self.state = 'wait_move'
-        import random
-        self.id = random.random()
+        self.move_list = [[1.2, 1.1, 1.4, 1.6, 4.3, 6.5],
+                          [1.2, 1.1, 1.4, 1.6, 4.3, 6.5],
+                          [1.2, 1.1, 1.4, 1.6, 4.3, 6.5]]
+        self.move_index = 0
 
-    def schedule(self, event_name, event_value, X, Y, Z, RX, RY, RZ, id, select):
+    def schedule(self, event_name, event_value):
         # OUTPUT EVENTS
-        # MOVE_OUT - activated after the movement
+        # MOVE_END - activated after the movement
         # WAIT - wait to terminate the movement
 
         if event_name == 'MOVE':
-            print('run ur5 - move {0}'.format(self.id))
-            self.state = 'move'
-            # self.ss.send_move('movel', [X, Y, Z, RX, RY, RZ], wait=True)
-            return [None, event_value]
+            # print('run ur5 - move index {0}'.format(self.move_index))
+            time.sleep(5)
+            # self.ss.send_move('movel', self.move_list[self.move_index], wait=True)
 
-        elif event_name == 'STOP':
-            if id != select:
-                return [None, None]
-
-            if self.state == 'move':
-                self.state = 'stop'
-                # send the command to stop the robotic arm
-
-                return [None, event_value]
-
-            elif self.state == 'wait_move':
-                return [None, None]
-
-            elif self.state == 'stop':
-                return [None, event_value]
-
-        elif event_name == 'RESUME':
-            if id != select:
-                return [None, None]
-
-            if self.state == 'move':
-                print('run ur5 - resume {0}'.format(self.id))
-                self.state = 'wait_move'
-                return [event_value, None]
-
-            elif self.state == 'wait_move':
-                return [None, None]
-
-            elif self.state == 'stop':
-                self.state = 'move'
-                # send the commend to continue the movement
-
-                return [None, event_value]
+            self.move_index += 1
+            if self.move_index == len(self.move_list):
+                self.move_index = 0
+                # finish the movement
+                return [event_value + 1, None]
+            else:
+                # wait move
+                return [None, event_value + 1]

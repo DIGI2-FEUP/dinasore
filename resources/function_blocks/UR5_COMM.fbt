@@ -6,24 +6,12 @@
   <InterfaceList>
     <EventInputs>
       <Event Comment="Move request" Name="MOVE" Type="Event"/>
-      <Event Comment="Move request output" Name="STOP" Type="Event"/>
-      <Event Comment="Move request output" Name="RESUME" Type="Event">
-        <With Var="SELECT"/>
-      </Event>
     </EventInputs>
     <EventOutputs>
       <Event Comment="Move request output" Name="MOVE_DONE" Type="Event"/>
-      <Event Comment="Move request output" Name="WAIT" Type="Event"/>
+      <Event Comment="Move request output" Name="MOVE_WAIT" Type="Event"/>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Comment="X value" Name="X" Type="REAL"/>
-      <VarDeclaration Comment="Y value" Name="Y" Type="REAL"/>
-      <VarDeclaration Comment="Z value" Name="Z" Type="REAL"/>
-      <VarDeclaration Comment="RX value" Name="RX" Type="REAL"/>
-      <VarDeclaration Comment="RY value" Name="RY" Type="REAL"/>
-      <VarDeclaration Comment="RZ value" Name="RZ" Type="REAL"/>
-      <VarDeclaration Comment="RZ value" Name="ID" Type="UINT"/>
-      <VarDeclaration Comment="RZ value" Name="SELECT" Type="UINT"/>
     </InputVars>
     <OutputVars/>
   </InterfaceList>
