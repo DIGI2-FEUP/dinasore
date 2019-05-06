@@ -1,9 +1,17 @@
 ![logo](resources/images/logo.png)
 
 **D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that runs at the
-fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside function blocks. 
+fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside function blocks.
+
+The principal advantage of this platform is the redistribution of the running code over a distributed fog network. 
+So the user can develop their own code, in python, and them upload it to the different dinasore nodes in the network. 
 
 ## Architecture
+
+![distributed_arch](resources/images/iec61499Disitribution.png)
+
+As you can see in the previous image, each dinasore node in the network is responsible of running one part of the configuration, 
+so this way we're able to redistribute the data processing over all the dinasore nodes.
 
 ## Features
 
@@ -55,6 +63,10 @@ docker pull systecfof/dinasore:amd64-0.1
 docker run --network="host" systecfof/dinasore:amd64-0.1 -a 127.0.0.1 -p 61499
 ```
 
+### 4DIAC-IDE
+
+To draw the function block distributed architecture you need to use the 4DIAC-IDE, you can download him in this [link](https://www.eclipse.org/4diac/en_dow.php).
+
 ## Usage
 
 In this section we gonna show how you develop a new function block and after that how you develop a new configuration integrating
@@ -102,10 +114,10 @@ In that image we see the graphic representation of the function block, with all 
 ![fb](resources/images/fb.png)
 
 The second step to make a function block is encapsulate the code that you develop, inside the following the class.
-* First you must replace the class name (FB_NAME) by your new function block type.
-* Implement the state machine (inside schedule method) that checks what event was received and them execute the respective method.
-* Specify the returned attributes (output_events and output_variables) according to the order specified in the definition file.
-* Integrate the developed methods (if the method is shared between the function block instances put it inside the shared resources class,
+1. First you must replace the class name (FB_NAME) by your new function block type.
+2. Implement the state machine (inside schedule method) that checks what event was received and them execute the respective method.
+3. Specify the returned attributes (output_events and output_variables) according to the order specified in the definition file.
+4. Integrate the developed methods (if the method is shared between the function block instances put it inside the shared resources class,
 otherwise put it inside the function block class).
 
 
@@ -156,11 +168,11 @@ class FB_EXAMPLE:
 
 To integrate the new function block with the 4DIAC-IDE you must copy the .fbt file to the library folder:
 
-.../4diac-ide/typelibrary/new_folder_for_python_fb 
+**.../4diac-ide/typelibrary/new_folder_for_python_fb** 
 
 If you have a started project you must copy to the project library:
 
-.../4diac-ide/workspace/project_name/new_folder_for_python_fb
+**.../4diac-ide/workspace/project_name/new_folder_for_python_fb**
 
 
 ### Configuration Modeling (4DIAC-IDE)
@@ -173,7 +185,7 @@ in this page we find a simple tutorial, in this tutorial we see how to create co
 * [Distributed Configuration](https://www.eclipse.org/4diac/en_help.php?helppage=html/4diacIDE/distribute4diac.html) - 
 that tutorial is the continuation of the previous, in this case we use a distributed architecture.
 
-**NOTE:** You must only use the python function blocks (inside .../4diac-ide/typelibrary/new_folder_for_python_fb and 
-.../4diac-ide/workspace/project_name/new_folder_for_python_fb folders).
+**NOTE:** You must only use the python function blocks (inside **.../4diac-ide/typelibrary/new_folder_for_python_fb** and 
+**.../4diac-ide/workspace/project_name/new_folder_for_python_fb** folders).
 
 

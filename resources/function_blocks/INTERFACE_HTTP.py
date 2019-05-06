@@ -30,7 +30,7 @@ class HttpHandler(BaseHTTPRequestHandler):
             result_list = []
 
             if self.payload[2] != '!':
-                message_list = self.payload[2].split()
+                message_list = self.payload[2].split(',')
                 for i in range(int(len(message_list) / 4)):
                     image_obj = {'x': float(message_list[i * 4]),
                                  'y': float(message_list[i * 4 + 1]),
@@ -126,7 +126,7 @@ class INTERFACE_HTTP:
 
             self.payload[0] = 0
             self.payload[1] = 0
-            self.payload[2] = '0'
+            self.payload[2] = '!'
 
             self.init_event.wait()
             self.init_event.clear()
@@ -141,7 +141,7 @@ class INTERFACE_HTTP:
 
             self.payload[0] = 0
             self.payload[1] = 0
-            self.payload[2] = '0'
+            self.payload[2] = vs_out
 
             self.assembly_end.clear()
             # ends the assembly process
@@ -160,7 +160,7 @@ class INTERFACE_HTTP:
                 self.stop.clear()
                 self.resume.clear()
             # continues the movement
-            return [None, None, None, event_value]
+            return [None, None, None, event_value + 1]
 
 
 # http_interface = INTERFACE_HTTP()

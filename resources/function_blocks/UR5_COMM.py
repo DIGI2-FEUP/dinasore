@@ -561,7 +561,7 @@ class UR5_COMM:
         # WAIT - wait to terminate the movement
 
         if event_name == 'MOVE':
-            # print('run ur5 - move index {0}'.format(self.move_index))
+            print('run ur5 - move index {0}'.format(self.move_index))
             time.sleep(5)
             # self.ss.send_move('movel', self.move_list[self.move_index], wait=True)
 
@@ -569,7 +569,7 @@ class UR5_COMM:
             if self.move_index == len(self.move_list):
                 self.move_index = 0
                 # finish the movement
-                return [event_value + 1, None]
+                return [event_value, None]
             else:
                 # wait move
-                return [None, event_value + 1]
+                return [None, event_value]

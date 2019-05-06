@@ -4,14 +4,13 @@ class PROCESS_SC:
 
     def __init__(self):
         self.products_time = {'1': 10000,
-                              '2': 15000,
-                              '3': 20000}
+                              '2': 15000}
         self.execution_index = 0
         self.product_list = None
 
         self.current_product_id = 0
         self.current_time = 0
-        self.current_vs_result = 0
+        self.current_vs_result = '!'
 
     def __del__(self):
         pass
@@ -37,7 +36,7 @@ class PROCESS_SC:
             # splits the products string in a list of products
             self.product_list = product_str.split(',')
             self.execution_index = 0
-            self.current_vs_result = 0
+            self.current_vs_result = '!'
             # gets the current values of the product_id and time to send to the interface assembler
             self.current_product_id = self.product_list[self.execution_index]
             self.current_time = self.products_time[self.current_product_id]
