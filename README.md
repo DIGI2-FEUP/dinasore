@@ -22,6 +22,8 @@ so this way we're able to redistribute the data processing over all the dinasore
 - [x] Monitoring of all function blocks using the watch option at the 4DIAC-IDE
 - [x] Remote stop of a configuration that is running
 - [x] Docker integration
+- [ ] Opc-Ua integration
+- [ ] Self-description file usage
 
 ## Installation
 
@@ -76,6 +78,8 @@ all the functions blocks using the 4DIAC-IDE.
 
 Here we gonna show how the process to develop a new function block that is compatible with the 4DIAC-IDE and the DINASORE. 
 
+#### XML definition file
+
 To develop a new function block first we need to define the interface attributes that the function block uses. 
 That interface is composed by events and variables, both of them can be inputs or outputs. 
 The difference between an event and a variable is that the event triggers the execution of a certain functionality.
@@ -87,9 +91,13 @@ This kind of file is a .fbt file witch represents the function block terminology
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType>
 <FBType Comment="" Name="FB_EXAMPLE">
+  <SelfDiscription FBType="SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
   <InterfaceList>
     <EventInputs>
-      <Event Comment="" Name="E_IN1" Type="Event"/>
+      <Event Comment="" Name="E_IN1" Type="Event" OpcUa="Method">
+        <With Var="VAR_IN1"/>
+        <With Var="VAR_IN2"/>
+      </Event>
       <Event Comment="" Name="E_IN2" Type="Event"/>
     </EventInputs>
     <EventOutputs>
@@ -97,21 +105,48 @@ This kind of file is a .fbt file witch represents the function block terminology
       <Event Comment="" Name="E_OUT2" Type="Event"/>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Comment="" Name="VAR_IN1" Type="INT"/>
+      <VarDeclaration Comment="" Name="VAR_IN1" Type="INT" OpcUa="Subscription"/>
       <VarDeclaration Comment="" Name="VAR_IN2" Type="INT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration Comment="" Name="VAR_OUT1" Type="INT"/>
-      <VarDeclaration Comment="" Name="VAR_OUT2" Type="INT"/>
+      <VarDeclaration Comment="" Name="VAR_OUT1" Type="INT" OpcUa="Variable"/>
+      <VarDeclaration Comment="" Name="VAR_OUT2" Type="INT" OpcUa="Variable"/>
     </OutputVars>
   </InterfaceList>
 </FBType>
 ```
 
+##### Opc-Ua/Self-description file integration
+
+* **SENSOR** - 
+
+* **ACTUATOR** - 
+
+* **COMPONENT** - 
+
+* **SERVICE** - 
+
+* **ENDPOINT** -
+
+* **STARTPOINT** - 
+
+
+| FBType     | Variables  | Methods     | Subscriptions |
+| ---------- | :--------: | :---------: | :-----------: |
+| SENSOR     | OutputVars | InputEvents | InputVars     |
+| ACTUATOR   |            |             |               |
+| COMPONENT  | Both       |             |               |
+| SERVICE    | Both       | InputEvents | InputVars     |
+| ENDPOINT   |            |             | InputVars     |
+| STARTPOINT | OutputVars |             | -             |
+
+
 If we upload the previous file to the 4DIAC-IDE, we will see the following image as result. 
 In that image we see the graphic representation of the function block, with all the interface attributes that characterise it. 
 
 ![fb](resources/images/fb.png)
+
+#### Python file development
 
 The second step to make a function block is encapsulate the code that you develop, inside the following the class.
 1. First you must replace the class name (FB_NAME) by your new function block type.

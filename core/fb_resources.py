@@ -60,6 +60,34 @@ class FBResources:
 
         return root, fb_obj
 
+    def get_xml(self):
+        logging.info('getting the xml fb definition...')
+        root = None
+
+        try:
+            # Reads the xml
+            tree = ETree.parse(self.fbt_path)
+            # Gets the root element
+            root = tree.getroot()
+        except FileNotFoundError as error:
+            logging.error('can not find the .fbt file (check .fbt name = fb_type.fbt)')
+            logging.error(error)
+        else:
+            logging.info('fb definition (xml) imported from: {0}'.format(self.fbt_path))
+
+        return root
+
+    def get_description(self):
+        xml_root = self.get_xml()
+
+        # get the id and the type from the xml file
+        for iterator in xml_root:
+            if iterator.tag == 'SelfDiscription':
+                dev_id = iterator.attrib['ID']
+                dev_type = iterator.attrib['FBType']
+
+                return dev_id, dev_type
+
     def exists_fb(self):
         # Verifies if exists the python file
         exists_py = os.path.isfile(self.py_path)
@@ -79,3 +107,39 @@ class FBResources:
 
     def download_module(self, mod_id):
         pass
+
+
+class GeneralResources:
+
+    def __init__(self):
+        # Gets the file path to the python file
+        self.fb_path = os.path.join(os.path.dirname(sys.path[0]),
+                                    'resources',
+                                    'function_blocks')
+
+    def list_existing_fb(self):
+        only_files = []
+
+        for f in os.listdir(self.fb_path):
+            file_splitted = f.split('.')
+
+            if os.path.isfile(os.path.join(self.fb_path, f)) and \
+                    file_splitted[0] not in only_files and \
+                    file_splitted[0] != '__init__':
+
+                only_files.append(file_splitted[0])
+
+        return only_files
+
+    def search_description(self, dev_id):
+
+        fb_types = self.list_existing_fb()
+
+        for fb_type in fb_types:
+            fb = FBResources(fb_type)
+            # gets the device id and type
+            dev_id_iterator, dev_type = fb.get_description()
+
+            # compares if matches with the dev_id
+            if dev_id == dev_id_iterator:
+                return fb_type
