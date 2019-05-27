@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <smartobjectselfdescription xmlns="http://systec-fof.fe.up.pt/sosd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<general>
-		<data id="SMART_OBJECT_NAME" DataType="String" ValueRank="-1">Smart_Object_Test</data>
-		<data id="DEVICE_TYPE" DataType="String" ValueRank="-1">CompactRIO</data>
+		<data id="SMART_OBJECT_NAME" DataType="String" ValueRank="-1">Smart Object Simulatior</data>
+		<data id="DEVICE_TYPE" DataType="String" ValueRank="-1">Industrial PC</data>
 		<data id="SMART_OBJECT_ID" DataType="Guid" ValueRank="-1">11ae7c0e-90b8-11e8-9eb6-529269fb1459</data>
 		<data id="SMART_OBJECT_MAC" DataType="String" ValueRank="-1">78-24-AF-A5-8B-63</data>
 		<data id="STATE" DataType="String" ValueRank="-1">RUNNING</data>
 	</general>
 	<deviceset>
-		<device id="2fc87546-90b8-11e8-9eb6-529269fb1459" type="SENSOR" fb="false">
+		<device id="6ddeae8a-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
 			<variables>
-				<variable name="Temperature" DataType="Double" ValueRank="1">
+				<variable name="TempoAspersaoPowerI" DataType="Integer" ValueRank="-1">
 					<elements>
-						<element id="Type" DataType="String" ValueRank="-1">Temperature</element>
-						<element id="MeasurementType" DataType="String" ValueRank="-1">Degrees</element>
-						<element id="MeasurementUnits" DataType="String" ValueRank="-1">Cº</element>
-						<element id="Max" DataType="Integer" ValueRank="-1">64</element>
-						<element id="Min" DataType="Integer" ValueRank="-1">4</element>
+						<element id="MeasurementType" DataType="String" ValueRank="-1">Counter</element>
+						<element id="MeasurementUnits" DataType="String" ValueRank="-1">s</element>
+						<element id="Max" DataType="Integer" ValueRank="-1">40</element>
+						<element id="Min" DataType="Integer" ValueRank="-1">25</element>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
 					</elements>
 				</variable>
-                <variable name="Description" DataType="String" ValueRank="1">
+                <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">Simulated Temperature</element>
+                        <element id="Name" DataType="String" ValueRank="-1">TempoAspersaoPowerWashI</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
-                        <element id="Serial" DataType="String" ValueRank="-1"/>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">Simulated Sensor</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">TEMPO_ASPERSAO</element>
                     </elements>
                 </variable>
 			</variables>
@@ -44,24 +43,23 @@
 				<id>7de30e6c-90b8-11e8-9eb6-529269fb1459</id>
 			</subscriptions>
 		</device>
-		<device id="59f1dbe6-90b8-11e8-9eb6-529269fb1459" type="SENSOR" fb="false">
+		<device id="6ddeb128-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
 			<variables>
-                <variable name="Temperature" DataType="Double" ValueRank="1">
+				<variable name="Temperature" DataType="Integer" ValueRank="1">
+					<elements>
+						<element id="MeasurementType" DataType="String" ValueRank="-1">Temperature</element>
+						<element id="MeasurementUnits" DataType="String" ValueRank="-1">ºC</element>
+						<element id="Max" DataType="Integer" ValueRank="-1">58</element>
+						<element id="Min" DataType="Integer" ValueRank="-1">53</element>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="1"/>
+					</elements>
+				</variable>
+                <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
-                        <element id="Type" DataType="String" ValueRank="-1">Temperature</element>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Degrees</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">Cº</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">64</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">4</element>
-                    </elements>
-                </variable>
-                <variable name="Description" DataType="String" ValueRank="1">
-                    <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">Simulated Temperature</element>
+                        <element id="Name" DataType="String" ValueRank="-1">TemperaturaCSEProcesso</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
-                        <element id="Serial" DataType="String" ValueRank="-1"/>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">Simulated Sensor</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">TERMOMETRO</element>
                     </elements>
                 </variable>
 			</variables>
@@ -80,24 +78,23 @@
 				<id>7de30e6c-90b8-11e8-9eb6-529269fb1459</id>
 			</subscriptions>
 		</device>
-		<device id="84ce2b02-90b9-11e8-9eb6-529269fb1459" type="SENSOR" fb="false">
+		<device id="6ddeb286-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
 			<variables>
-                <variable name="Vibration" DataType="Double" ValueRank="1">
+				<variable name="TempoAspersaoCSE" DataType="Integer" ValueRank="-1">
+					<elements>
+						<element id="MeasurementType" DataType="String" ValueRank="-1">Counter</element>
+						<element id="MeasurementUnits" DataType="String" ValueRank="-1">s</element>
+						<element id="Max" DataType="Integer" ValueRank="-1">180</element>
+						<element id="Min" DataType="Integer" ValueRank="-1">155</element>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
+					</elements>
+				</variable>
+                <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
-                        <element id="Type" DataType="String" ValueRank="-1">Temperature</element>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Degrees</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">Cº</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">64</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">4</element>
-                    </elements>
-                </variable>
-                <variable name="Description" DataType="String" ValueRank="1">
-                    <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">Simulated Vibration</element>
+                        <element id="Name" DataType="String" ValueRank="-1">TempoAspersaoCSEProcesso</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
-                        <element id="Serial" DataType="String" ValueRank="-1"/>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">Simulated Sensor</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">TEMPO_ASPERSAO</element>
                     </elements>
                 </variable>
 			</variables>
@@ -113,54 +110,111 @@
 				</method>
 			</methods>
 			<subscriptions>
-				<id>84ce2b02-90b9-11e8-9eb6-529269fb1459</id>
+				<id>7de30e6c-90b8-11e8-9eb6-529269fb1459</id>
 			</subscriptions>
 		</device>
-		<device id="cfc9e8f4-90b8-11e8-9eb6-529269fb1459" type="COMPONENT" fb="true">
+		<device id="6ddeb3d0-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
 			<variables>
-				<variable name="Description" DataType="String" ValueRank="-1">
+				<variable name="Pressure_1" DataType="Float" ValueRank="1">
 					<elements>
-                        <element id="Name" DataType="String" ValueRank="-1">Loom Bearing</element>
-						<element id="Manufacturer" DataType="String" ValueRank="-1">SKF</element>
-						<element id="Model" DataType="String" ValueRank="-1">K 21x25x13</element>
-						<element id="Width" DataType="String" ValueRank="-1">13mm</element>
-						<element id="BoreDiameter" DataType="String" ValueRank="-1">21</element>
-						<element id="OutsideDiameter" DataType="String" ValueRank="-1">25</element>
-						<element id="Description" DataType="String" ValueRank="-1">Needle roller and cage assemblies</element>
-						<element id="YearBuilt" DataType="DateTime" ValueRank="-1">2018-02-01T23:00:00.000Z</element>
+						<element id="MeasurementType" DataType="String" ValueRank="1">Pressure</element>
+						<element id="MeasurementUnits" DataType="String" ValueRank="-1">bar</element>
+						<element id="Max" DataType="Float" ValueRank="-1">1.5</element>
+						<element id="Min" DataType="Float" ValueRank="-1">0</element>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="1"/>
 					</elements>
 				</variable>
+                <variable name="Description" DataType="String" ValueRank="-1">
+                    <elements>
+                        <element id="Name" DataType="String" ValueRank="-1">DP-FiltroCircuitoAgitação</element>
+                        <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
+                        <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">PRESSOSTATO</element>
+                    </elements>
+                </variable>
 			</variables>
 			<methods>
-            </methods>
+				<method name="Calibrate">
+					<arguments>
+						<argument name="Result" type="Output" DataType="Boolean" ValueRank="-1">
+							<elements>
+								<element id="Description" DataType="String" ValueRank="-1">Informs upon completion if the callibration has been successful</element>
+							</elements>
+						</argument>
+					</arguments>
+				</method>
+			</methods>
 			<subscriptions>
-				<id>84ce2b02-90b9-11e8-9eb6-529269fb1459</id>
+				<id>7de30e6c-90b8-11e8-9eb6-529269fb1459</id>
+			</subscriptions>
+		</device>
+		<device id="6ddeb51a-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
+			<variables>
+				<variable name="Pressure_2" DataType="Float" ValueRank="1">
+					<elements>
+						<element id="MeasurementType" DataType="String" ValueRank="1">Pressure</element>
+						<element id="MeasurementUnits" DataType="String" ValueRank="-1">bar</element>
+						<element id="Max" DataType="Float" ValueRank="-1">20</element>
+						<element id="Min" DataType="Float" ValueRank="-1">0.9</element>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="1"/>
+					</elements>
+				</variable>
+                <variable name="Description" DataType="String" ValueRank="-1">
+                    <elements>
+                        <element id="Name" DataType="String" ValueRank="-1">PressãoCircuitoAspersão</element>
+                        <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
+                        <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">PRESSOSTATO</element>
+                    </elements>
+                </variable>
+			</variables>
+			<methods>
+				<method name="Calibrate">
+					<arguments>
+						<argument name="Result" type="Output" DataType="Boolean" ValueRank="-1">
+							<elements>
+								<element id="Description" DataType="String" ValueRank="-1">Informs upon completion if the callibration has been successful</element>
+							</elements>
+						</argument>
+					</arguments>
+				</method>
+			</methods>
+			<subscriptions>
+				<id>7de30e6c-90b8-11e8-9eb6-529269fb1459</id>
 			</subscriptions>
 		</device>
 		<device id="7de30e6c-90b8-11e8-9eb6-529269fb1459" type="EQUIPMENT" fb="false">
 			<variables>
 				<variable name="Description" DataType="String" ValueRank="-1">
 					<elements>
-                        <element id="Name" DataType="String" ValueRank="-1">Label Loom</element>
-						<element id="Manufacturer" DataType="String" ValueRank="-1">Muller</element>
-						<element id="Model" DataType="String" ValueRank="-1">Mugrip MJB3</element>
-						<element id="PhysicalLinkType" DataType="String" ValueRank="-1">Simulation</element>
-						<element id="ProtocolName" DataType="String" ValueRank="-1">Simulation</element>
-						<element id="ProtocolNorm" DataType="String" ValueRank="-1">Simulation</element>
-						<element id="Description" DataType="String" ValueRank="-1">IDEPA label weaving machine</element>
-						<element id="YearBuilt" DataType="DateTime" ValueRank="-1">2018-02-01T23:00:00.000Z</element>
+                        <element id="Name" DataType="String" ValueRank="-1">TINA 0</element>
+						<element id="Manufacturer" DataType="String" ValueRank="-1">PSA</element>
+						<element id="Description" DataType="String" ValueRank="-1">Desengorduramento por aspersão</element>
+						<element id="YearBuilt" DataType="DateTime" ValueRank="-1">2019-02-01T23:00:00.000Z</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">TINA_0</element>
 					</elements>
 				</variable>
-				<variable name="Material" DataType="String" ValueRank="-1">
+				<variable name="MaterialName" DataType="String" ValueRank="-1">
 					<elements>
-						<element id="entry_timestamp" DataType="String" ValueRank="-1"/>
-						<element id="exit_timestamp" DataType="String" ValueRank="-1"/>
-						<element id="Description" DataType="String" ValueRank="-1">ID of the material being processed.</element>
+						<element id="In" DataType="UtcTime" ValueRank="-1"/>
+						<element id="Out" DataType="UtcTime" ValueRank="-1"/>
+						<element id="Description" DataType="String" ValueRank="-1">ID do chassis a ser processado.</element>
+					</elements>
+				</variable>
+				<variable name="ContainerName" DataType="String" ValueRank="-1">
+					<elements>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
+						<element id="Description" DataType="String" ValueRank="-1">ID do transportador do chassis.</element>
 					</elements>
 				</variable>
 				<variable name="State" DataType="String" ValueRank="-1">
 					<elements>
-						<element id="timestamp" DataType="UtcTime" ValueRank="-1"/>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
+					</elements>
+				</variable>
+				<variable name="ResourceName" DataType="String" ValueRank="-1">
+					<elements>
+						<element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
 					</elements>
 				</variable>
 			</variables>
@@ -185,297 +239,17 @@
 				</method>
 			</methods>
 			<subscriptions>
-				<id>2fc87546-90b8-11e8-9eb6-529269fb1459</id>
-				<id>59f1dbe6-90b8-11e8-9eb6-529269fb1459</id>
-				<id>cfc9e8f4-90b8-11e8-9eb6-529269fb1459</id>
+				<id>6ddeae8a-3b9f-11e9-b210-d663bd873d93</id>
+				<id>6ddeb128-3b9f-11e9-b210-d663bd873d93</id>
+				<id>6ddeb286-3b9f-11e9-b210-d663bd873d93</id>
+				<id>6ddeb3d0-3b9f-11e9-b210-d663bd873d93</id>
+				<id>6ddeb51a-3b9f-11e9-b210-d663bd873d93</id>
 			</subscriptions>
 		</device>
 	</deviceset>
 	<serviceinstanceset>
-		<serviceinstance id="ab3d2a3a-135a-11e9-ab14-d663bd873d93" type="DataService" dId="8ad761c8-90d5-11e8-9eb6-529269fb1459">
-			<methods>
-				<method name="AddLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the subscriber instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="RemoveLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the instance to cancel subscription</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="DeleteInstance">
-					<arguments>
-                    </arguments>
-				</method>
-			</methods>
-			<subscriptions>
-				<id>59f1dbe6-90b8-11e8-9eb6-529269fb1459</id>
-			</subscriptions>
-		</serviceinstance>
-		<serviceinstance id="ab3d2eb8-135a-11e9-ab14-d663bd873d93" type="DataService" dId="8ad761c8-90d5-11e8-9eb6-529269fb1459">
-			<methods>
-				<method name="AddLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the subscriber instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="RemoveLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the instance to cancel subscription</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="DeleteInstance">
-					<arguments>
-                    </arguments>
-				</method>
-			</methods>
-			<subscriptions>
-				<id>2fc87546-90b8-11e8-9eb6-529269fb1459</id>
-			</subscriptions>
-		</serviceinstance>
-		<serviceinstance id="ab3d3016-135a-11e9-ab14-d663bd873d93" type="DiagnosticService" dId="f919f8da-90d5-11e8-9eb6-529269fb1459">
-			<methods>
-				<method name="AddLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the subscriber instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="RemoveLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the instance to cancel subscription</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="DeleteInstance">
-					<arguments>
-                    </arguments>
-				</method>
-			</methods>
-			<subscriptions>
-				<id>2fc87546-90b8-11e8-9eb6-529269fb1459</id>
-				<id>59f1dbe6-90b8-11e8-9eb6-529269fb1459</id>
-			</subscriptions>
-		</serviceinstance>
-		<serviceinstance id="ab3d3156-135a-11e9-ab14-d663bd873d93" type="DiagnosticService" dId="aad77cb0-90d5-11e8-9eb6-529269fb1459">
-			<methods>
-				<method name="AddLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the subscriber instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="RemoveLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the instance to cancel subscription</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="DeleteInstance">
-					<arguments>
-                    </arguments>
-				</method>
-			</methods>
-			<subscriptions>
-				<id>ab3d2a3a-135a-11e9-ab14-d663bd873d93</id>
-				<id>ab3d2eb8-135a-11e9-ab14-d663bd873d93</id>
-			</subscriptions>
-		</serviceinstance>
-		<serviceinstance id="ab3d328c-135a-11e9-ab14-d663bd873d93" type="EndPointService" dId="649b5374-90d6-11e8-bada-529269fb1459">
-			<methods>
-				<method name="AddLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the subscriber instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="RemoveLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the instance to cancel subscription</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="DeleteInstance">
-					<arguments>
-                    </arguments>
-				</method>
-			</methods>
-			<subscriptions>
-				<id>ab3d3016-135a-11e9-ab14-d663bd873d93</id>
-			</subscriptions>
-		</serviceinstance>
-		<serviceinstance id="ab3d33b8-135a-11e9-ab14-d663bd873d93" type="EndPointService" dId="910986a6-90d6-11e8-9eb6-529269fb1459">
-			<methods>
-				<method name="AddLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the subscriber instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="RemoveLink">
-					<arguments>
-						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the instance to cancel subscription</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-				<method name="DeleteInstance">
-					<arguments>
-                    </arguments>
-				</method>
-			</methods>
-			<subscriptions>
-				<id>ab3d3156-135a-11e9-ab14-d663bd873d93</id>
-			</subscriptions>
-		</serviceinstance>
 	</serviceinstanceset>
 	<servicedescriptionset>
-		<servicedescription dId="8ad761c8-90d5-11e8-9eb6-529269fb1459" name="Normalize" namespace="dmr_normalize" version="1.0.0" type="DataService">
-			<methods>
-				<method name="CreateInstance">
-					<arguments>
-						<argument name="ServiceID" type="Output" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the created instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-			</methods>
-			<recipeadjustments>
-				<recipeadjustment name="Parameterization">
-					<variables>
-						<variable name="Min" DataType="Integer" ValueRank="-1">
-							<elements>
-								<element id="Min" DataType="Integer" ValueRank="-1">1</element>
-								<element id="Max" DataType="Integer" ValueRank="-1">50</element>
-								<element id="Default" DataType="Integer" ValueRank="-1">1</element>
-							</elements>
-						</variable>
-						<variable name="Max" DataType="Integer" ValueRank="-1">
-							<elements>
-								<element id="Min" DataType="Integer" ValueRank="-1">20</element>
-								<element id="Max" DataType="Integer" ValueRank="-1">100</element>
-								<element id="Default" DataType="Integer" ValueRank="-1">80</element>
-							</elements>
-						</variable>
-					</variables>
-				</recipeadjustment>
-				<recipeadjustment name="AcquisitionRate">
-					<variables>
-						<variable name="rate" DataType="Integer" ValueRank="-1">
-							<elements>
-								<element id="Min" DataType="Integer" ValueRank="-1">1</element>
-								<element id="Max" DataType="Integer" ValueRank="-1">1000</element>
-								<element id="Default" DataType="Integer" ValueRank="-1">500</element>
-								<element id="MeasurementUnits" DataType="String" ValueRank="-1">Hz</element>
-							</elements>
-						</variable>
-					</variables>
-				</recipeadjustment>
-			</recipeadjustments>
-			<interfaces>
-				<interface type="Arguments">
-					<variables>
-						<variable name="Value" DataType="Double" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">Input value for the normalization method</element>
-								<element id="Type" DataType="String" ValueRank="-1">Input</element>
-							</elements>
-						</variable>
-						<variable name="NormalizedValue" DataType="Double" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">Output normalized value</element>
-								<element id="Type" DataType="String" ValueRank="-1">Output</element>
-							</elements>
-						</variable>
-					</variables>
-				</interface>
-			</interfaces>
-		</servicedescription>
-		<servicedescription dId="aad77cb0-90d5-11e8-9eb6-529269fb1459" name="Fault Detection Validation" namespace="fdv" version="1.0.0" type="DiagnosticService">
-			<recipeadjustments>
-				<recipeadjustment name="AcquisitionRate">
-					<variables>
-						<variable name="rate" DataType="Integer" ValueRank="-1">
-							<elements>
-								<element id="Min" DataType="Integer" ValueRank="-1">1</element>
-								<element id="Max" DataType="Integer" ValueRank="-1">1000</element>
-								<element id="Default" DataType="Integer" ValueRank="-1">500</element>
-								<element id="MeasurementUnits" DataType="String" ValueRank="-1">Hz</element>
-							</elements>
-						</variable>
-					</variables>
-				</recipeadjustment>
-			</recipeadjustments>
-			<methods>
-				<method name="CreateInstance">
-					<arguments>
-						<argument name="ServiceID" type="Output" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the created instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-			</methods>
-			<interfaces>
-				<interface type="Arguments">
-					<variables>
-						<variable name="E2E" DataType="Double" ValueRank="-1">
-							<elements>
-								<element id="Type" DataType="String" ValueRank="-1">Input</element>
-							</elements>
-						</variable>
-						<variable name="Value" DataType="Double" ValueRank="-1">
-							<elements>
-								<element id="Type" DataType="String" ValueRank="-1">Output</element>
-							</elements>
-						</variable>
-					</variables>
-				</interface>
-			</interfaces>
-		</servicedescription>
 		<servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="Fast Fourier Transform" namespace="fft" version="1.0.0" type="DiagnosticService">
 			<recipeadjustments>
 				<recipeadjustment name="AcquisitionRate">
@@ -523,26 +297,6 @@
 		</servicedescription>
 	</servicedescriptionset>
 	<pointdescriptionset>
-		<endpointdescription dId="910986a6-90d6-11e8-9eb6-529269fb1459" name="IoT Platform" version="1.0.0" type="EndPointService">
-			<interfaces>
-				<interface type="Protocols">
-					<variables>
-						<variable name="OPC UA" DataType="String" ValueRank="-1">
-							<elements>
-								<element id="IP" DataType="String" ValueRank="-1">192.168.1.1</element>
-								<element id="PORT" DataType="String" ValueRank="-1">4048</element>
-							</elements>
-						</variable>
-						<variable name="HTTP" DataType="String" ValueRank="-1">
-							<elements>
-								<element id="IP" DataType="String" ValueRank="-1">192.168.1.1</element>
-								<element id="PORT" DataType="String" ValueRank="-1">8080</element>
-							</elements>
-						</variable>
-					</variables>
-				</interface>
-			</interfaces>
-		</endpointdescription>
 		<endpointdescription dId="649b5374-90d6-11e8-bada-529269fb1459" name="HMI Device" version="1.0.0" type="EndPointService">
 			<interfaces>
 				<interface type="Publish">

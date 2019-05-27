@@ -11,11 +11,14 @@ class FB(threading.Thread, fb_interface.FBInterface):
 
         self.fb_obj = fb_obj
         self.kill_event = threading.Event()
+        self.execution_end = threading.Event()
 
     def run(self):
         logging.info('fb {0} started.'.format(self.fb_name))
 
         while not self.kill_event.is_set():
+            # clears the event when starts the execution
+            self.execution_end.clear()
 
             self.wait_event()
 
@@ -50,6 +53,9 @@ class FB(threading.Thread, fb_interface.FBInterface):
                     break
 
                 self.update_outputs(outputs)
+
+                # sends a signal when ends execution
+                self.execution_end.set()
 
     def stop(self):
         self.kill_event.set()

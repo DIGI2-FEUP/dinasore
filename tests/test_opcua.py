@@ -8,9 +8,11 @@ from opc_ua.examples import methods_example
 
 
 class OpcUaTests(unittest.TestCase):
-    address = 'opc.tcp://localhost:4840'
+    address = 'opc.tcp://localhost:4842'
     object_name = 'ExampleObject'
     var_name = 'ExampleVar'
+    folder_name = 'ExampleFolder'
+    property_name = 'ExampleProperty'
     method_name = 'hello_word'
 
     address_auxiliary = 'opc.tcp://localhost:4841'
@@ -26,6 +28,8 @@ class OpcUaTests(unittest.TestCase):
                                 methods_example.hello_word,
                                 input_args=[ua.VariantType.String],
                                 output_args=[ua.VariantType.Boolean])
+        self.peer.create_folder(object_path, 2, self.folder_name)
+        self.peer.create_property(object_path, 2, self.property_name, 'This is a property')
 
     def tearDown(self):
         self.peer.stop()
