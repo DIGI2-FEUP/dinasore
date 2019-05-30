@@ -296,7 +296,7 @@
 		</serviceinstance>
 	</serviceinstanceset>
 	<servicedescriptionset>
-		<servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="Fast Fourier Transform" namespace="fft" version="1.0.0" type="DiagnosticService">
+		<servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="FastFourierTransform" namespace="fft" version="1.0.0" type="DiagnosticService">
 			<recipeadjustments>
 				<recipeadjustment name="AcquisitionRate">
 					<variables>

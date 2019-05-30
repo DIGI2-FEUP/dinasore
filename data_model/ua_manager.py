@@ -2,23 +2,9 @@ from core import configuration
 from opc_ua import peer
 from data_model import device, service
 import xml.etree.ElementTree as ETree
-from opcua import ua
 import os
 import sys
 import logging
-
-
-UA_TYPES = {'String': ua.VariantType.String,
-            'Double': ua.VariantType.Double,
-            'Integer': ua.VariantType.Int64,
-            'Float': ua.VariantType.Float,
-            'Boolean': ua.VariantType.Boolean}
-
-UA_RANKS = {'1': ua.ValueRank.OneDimension,
-            '0': ua.ValueRank.OneOrMoreDimensions,
-            '-1': ua.ValueRank.Scalar,
-            '-2': ua.ValueRank.Any,
-            '-3': ua.ValueRank.ScalarOrOneDimension}
 
 
 class UaManager(peer.UaPeer):
@@ -53,7 +39,7 @@ class UaManager(peer.UaPeer):
         # configuration (connection to 4diac code)
         self.config = None
         # sc id, base idx for the opc-ua nodeId
-        self.general_id, self.idx = '', ''
+        self.general_id, self.base_idx = '', ''
 
         # creates the root object 'SmartObject'
         self.create_object(2,
@@ -89,8 +75,7 @@ class UaManager(peer.UaPeer):
         self.config.start_work()
 
     def __parse_general(self, general_root):
-        self.idx = general_root[2].text
-        base_idx = 'ns=2;s={0}'.format(self.idx)
+        self.base_idx = 'ns=2;s={0}'.format(general_root[2].text)
         for item in general_root:
             # uses the SMART_OBJECT_NAME as the config_id
             if item.attrib['id'] == 'SMART_OBJECT_NAME':
@@ -99,7 +84,7 @@ class UaManager(peer.UaPeer):
 
             # adds the property to the opc-ua server
             browse_name = '2:{0}'.format(item.attrib['id'])
-            idx = '{0}.{1}'.format(base_idx, item.attrib['id'])
+            idx = '{0}.{1}'.format(self.base_idx, item.attrib['id'])
             self.create_property(self.ROOT_PATH, idx, browse_name, item.text)
 
     def from_xml(self):

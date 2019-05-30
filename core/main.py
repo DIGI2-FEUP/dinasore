@@ -41,7 +41,7 @@ if __name__ == "__main__":
     # creates the tcp server to communicate with the 4diac
     hand = tcp_server.TcpServer(address, port, 10, manager_4diac)
     # creates the opc-ua manager
-    manager_ua = ua_manager.UaManager('opc.tcp://{0}:4840'.format(address),
+    manager_ua = ua_manager.UaManager('opc.tcp://{0}:4841'.format(address),
                                       manager_4diac.set_config)
     # remove this line
     manager_ua.from_xml()
