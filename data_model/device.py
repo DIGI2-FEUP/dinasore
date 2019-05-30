@@ -1,18 +1,7 @@
 from collections import OrderedDict
 from core import fb_resources
 from opcua import ua
-
-UA_TYPES = {'String': ua.VariantType.String,
-            'Double': ua.VariantType.Double,
-            'Integer': ua.VariantType.Int64,
-            'Float': ua.VariantType.Float,
-            'Boolean': ua.VariantType.Boolean}
-
-UA_RANKS = {'1': ua.ValueRank.OneDimension,
-            '0': ua.ValueRank.OneOrMoreDimensions,
-            '-1': ua.ValueRank.Scalar,
-            '-2': ua.ValueRank.Any,
-            '-3': ua.ValueRank.ScalarOrOneDimension}
+from data_model import ua_manager
 
 
 class DeviceSet:
@@ -76,6 +65,7 @@ class Device:
         :param root_xml:
         """
         device_path = ''
+        device_idx = 'ns=2;s={0}'.format(root_xml.attrib['id'])
         device_type = root_xml.attrib['type']
 
         # creates the device object
@@ -92,7 +82,8 @@ class Device:
                             if element.attrib['id'] == 'Name':
                                 # creates the device object
                                 self.fb_name = element.text
-                                self.__ua_peer.create_object(2, self.fb_name, path=self.__DEVICE_SET_PATH)
+                                browse_name = '2:{0}'.format(self.fb_name)
+                                self.__ua_peer.create_object(device_idx, browse_name, path=self.__DEVICE_SET_PATH)
                                 # sets the path for the device object
                                 device_path = self.__ua_peer.generate_path(self.__DEVICE_SET_LIST +
                                                                            [(2, self.fb_name)])
@@ -100,13 +91,15 @@ class Device:
                             elif element.attrib['id'] == 'SourceType':
                                 self.fb_type = element.text
                                 # creates the respective property
-                                self.__ua_peer.create_property(device_path, 2, 'SourceType', self.fb_type)
+                                prop_idx = '{0}.{1}'.format(device_idx, 'SourceType')
+                                self.__ua_peer.create_property(device_path, prop_idx, '2:SourceType', self.fb_type)
 
-                            #
+                            # creates the state
                             elif element.attrib['id'] == 'SourceState':
                                 self.state = element.text
                                 # creates the respective property
-                                self.__ua_peer.create_property(device_path, 2, 'SourceState', self.state)
+                                prop_idx = '{0}.{1}'.format(device_idx, 'SourceState')
+                                self.__ua_peer.create_property(device_path, prop_idx, '2:SourceState', self.state)
                         break
                 break
 
@@ -119,7 +112,8 @@ class Device:
             fb = self.__ua_peer.config.get_fb(self.fb_name)
 
         # create the id property
-        self.__ua_peer.create_property(device_path, 2, 'ID', root_xml.attrib['id'])
+        prop_idx = '{0}.{1}'.format(device_idx, 'ID')
+        self.__ua_peer.create_property(device_path, prop_idx, '2:ID', root_xml.attrib['id'])
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -128,7 +122,8 @@ class Device:
             # link opc-ua variables in fb input variable
             if tag == 'variables':
                 # creates the variables folder
-                self.__ua_peer.create_folder(device_path, 2, 'Variables')
+                folder_idx = '{0}:{1}'.format(device_idx, 'Variables')
+                self.__ua_peer.create_folder(device_path, folder_idx, '2:Variables')
                 # path for the variables folder
                 vars_path = self.__ua_peer.generate_path(self.__DEVICE_SET_LIST +
                                                          [(2, self.fb_name), (2, 'Variables')])
@@ -137,11 +132,13 @@ class Device:
                     if var.attrib['name'] != 'Description':
                         var_name = var.attrib['name']
                         # creates the opc-ua variable
+                        var_idx = '{0}:{1}'.format(folder_idx, var_name)
+                        browse_name = '2:{0}'.format(var_name)
                         var_object = self.__ua_peer.create_typed_variable(vars_path,
-                                                                          2,
-                                                                          var_name,
-                                                                          UA_TYPES[var.attrib['DataType']],
-                                                                          UA_RANKS[var.attrib['ValueRank']],
+                                                                          var_idx,
+                                                                          browse_name,
+                                                                          ua_manager.UA_TYPES[var.attrib['DataType']],
+                                                                          ua_manager.UA_RANKS[var.attrib['ValueRank']],
                                                                           writable=False)
                         # adds the variable to the dictionary
                         self.__ua_variables[var_name] = var_object
@@ -149,7 +146,8 @@ class Device:
             # link opc-ua methods in fb methods
             elif tag == 'methods':
                 # creates the variables folder
-                self.__ua_peer.create_folder(device_path, 2, 'Methods')
+                folder_idx = '{0}:{1}'.format(device_idx, 'Methods')
+                self.__ua_peer.create_folder(device_path, folder_idx, '2:Methods')
                 # path for the variables folder
                 methods_path = self.__ua_peer.generate_path(self.__DEVICE_SET_LIST +
                                                             [(2, self.fb_name), (2, 'Methods')])
@@ -166,22 +164,24 @@ class Device:
                             output_names.append(argument.attrib['name'])
                             # gets the type
                             arg_type = argument.attrib['DataType']
-                            output_types.append(UA_TYPES[arg_type])
+                            output_types.append(ua_manager.UA_TYPES[arg_type])
                         elif argument.attrib['type'] == 'Input':
                             # gets the name
                             input_names.append(argument.attrib['name'])
                             # gets the type
                             arg_type = argument.attrib['DataType']
-                            input_types.append(UA_TYPES[arg_type])
+                            input_types.append(ua_manager.UA_TYPES[arg_type])
 
                     method2call = Method2Call(method_name, fb,
                                               input_names, output_names,
                                               input_types, output_types)
 
                     # creates the opc-ua method
+                    method_idx = '{0}:{1}'.format(folder_idx, method2call.method_name)
+                    browse_name = '2:{0}'.format(method2call.method_name)
                     self.__ua_peer.create_method(methods_path,
-                                                 2,
-                                                 method2call.method_name,
+                                                 method_idx,
+                                                 browse_name,
                                                  method2call.execute,
                                                  input_args=input_types,
                                                  output_args=output_types)
@@ -200,6 +200,7 @@ class Device:
 
 
 class Method2Call:
+
     def __init__(self, method_name, fb, input_names, output_names, input_types, output_types):
         self.method_name = method_name
         self.fb = fb

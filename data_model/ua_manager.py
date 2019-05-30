@@ -1,11 +1,24 @@
-from core import manager
 from core import configuration
 from opc_ua import peer
 from data_model import device, service
 import xml.etree.ElementTree as ETree
+from opcua import ua
 import os
 import sys
 import logging
+
+
+UA_TYPES = {'String': ua.VariantType.String,
+            'Double': ua.VariantType.Double,
+            'Integer': ua.VariantType.Int64,
+            'Float': ua.VariantType.Float,
+            'Boolean': ua.VariantType.Boolean}
+
+UA_RANKS = {'1': ua.ValueRank.OneDimension,
+            '0': ua.ValueRank.OneOrMoreDimensions,
+            '-1': ua.ValueRank.Scalar,
+            '-2': ua.ValueRank.Any,
+            '-3': ua.ValueRank.ScalarOrOneDimension}
 
 
 class UaManager(peer.UaPeer):
@@ -34,7 +47,7 @@ class UaManager(peer.UaPeer):
         self.__set_config = set_config
         # pointers to all the sets
         self.__device_set = None
-        self.__service_set = None
+        self.__services = None
         self.__point_set = None
 
         # configuration (connection to 4diac code)
@@ -54,7 +67,7 @@ class UaManager(peer.UaPeer):
     def __create_sets(self):
         # creates all the sets
         self.__device_set = device.DeviceSet(self)
-        self.__service_set = service.ServiceSet(self)
+        self.__services = service.Services(self)
 
     def __parse_sets(self, root):
         for base_element in root:
@@ -65,10 +78,10 @@ class UaManager(peer.UaPeer):
                 self.__device_set.from_xml(base_element)
 
             elif tag == 'serviceinstanceset':
-                pass
+                self.__services.instances_from_xml(base_element)
 
             elif tag == 'servicedescriptionset':
-                pass
+                self.__services.services_from_xml(base_element)
 
             elif tag == 'pointdescriptionset':
                 pass
@@ -112,8 +125,3 @@ class UaManager(peer.UaPeer):
             logging.error(error)
         else:
             logging.info('self definition (xml) imported from: {0}'.format(xml_path))
-
-
-man = manager.Manager()
-base = UaManager('opc.tcp://localhost:4841', man.set_config)
-base.from_xml()

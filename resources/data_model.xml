@@ -248,6 +248,52 @@
 		</device>
 	</deviceset>
 	<serviceinstanceset>
+		<serviceinstance id="ab3d2eb8-135a-11e9-ab14-d663bd873d93" type="DiagnosticService" dId="f919f8da-90d5-11e8-9eb6-529269fb1459">
+			<methods>
+				<method name="AddLink">
+					<arguments>
+						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
+							<elements>
+								<element id="Description" DataType="String" ValueRank="-1">ID of the subscriber instance</element>
+							</elements>
+						</argument>
+					</arguments>
+				</method>
+				<method name="RemoveLink">
+					<arguments>
+						<argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1">
+							<elements>
+								<element id="Description" DataType="String" ValueRank="-1">ID of the instance to cancel subscription</element>
+							</elements>
+						</argument>
+					</arguments>
+				</method>
+				<method name="DeleteInstance">
+					<arguments>
+                    </arguments>
+				</method>
+			</methods>
+            <!-- subscription type: Data or Context (related hardware... sensor, equipment)
+                   BrowseDirection: forward (means that subscription is an input),
+                                    inverse (means that subscription is an output),
+                                    both (means that the direction doesn't matter)
+                      VariableName: name of the service variable that is linked to that subscription -->
+			<subscriptions>
+				<id BrowseDirection="both" type="Context">6ddeae8a-3b9f-11e9-b210-d663bd873d93</id>
+                <id BrowseDirection="forward" type="Data" VariableName="Value">6ddeae8a-3b9f-11e9-b210-d663bd873d93:Variables:TempoAspersaoPowerWashI</id>
+			</subscriptions>
+			<recipeadjustments>
+				<recipeadjustment name="AcquisitionRate">
+					<variables>
+						<variable name="rate" DataType="Integer" ValueRank="-1">
+							<elements>
+								<element id="Current" DataType="Integer" ValueRank="-1">500</element>
+							</elements>
+						</variable>
+					</variables>
+				</recipeadjustment>
+			</recipeadjustments>
+		</serviceinstance>
 	</serviceinstanceset>
 	<servicedescriptionset>
 		<servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="Fast Fourier Transform" namespace="fft" version="1.0.0" type="DiagnosticService">
