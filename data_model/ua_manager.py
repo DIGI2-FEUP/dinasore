@@ -1,6 +1,6 @@
 from core import configuration
 from opc_ua import peer
-from data_model import device, service
+from data_model import device, service, utils
 import xml.etree.ElementTree as ETree
 import os
 import sys
@@ -50,43 +50,6 @@ class UaManager(peer.UaPeer):
         self.ROOT_LIST = [(0, 'Objects'), (2, 'SmartObject')]
         self.ROOT_PATH = self.generate_path(self.ROOT_LIST)
 
-    def __create_sets(self):
-        # creates all the sets
-        self.__device_set = device.DeviceSet(self)
-        self.__services = service.Services(self)
-
-    def __parse_sets(self, root):
-        for base_element in root:
-            # splits the tag in these 3 camps
-            uri, ignore, tag = base_element.tag[1:].partition("}")
-
-            if tag == 'deviceset':
-                self.__device_set.from_xml(base_element)
-
-            elif tag == 'serviceinstanceset':
-                self.__services.instances_from_xml(base_element)
-
-            elif tag == 'servicedescriptionset':
-                self.__services.services_from_xml(base_element)
-
-            elif tag == 'pointdescriptionset':
-                pass
-
-        self.config.start_work()
-
-    def __parse_general(self, general_root):
-        self.base_idx = 'ns=2;s={0}'.format(general_root[2].text)
-        for item in general_root:
-            # uses the SMART_OBJECT_NAME as the config_id
-            if item.attrib['id'] == 'SMART_OBJECT_NAME':
-                self.config = configuration.Configuration(item.text, 'EMB_RES')
-                self.__set_config(item.text, self.config)
-
-            # adds the property to the opc-ua server
-            browse_name = '2:{0}'.format(item.attrib['id'])
-            idx = '{0}.{1}'.format(self.base_idx, item.attrib['id'])
-            self.create_property(self.ROOT_PATH, idx, browse_name, item.text)
-
     def from_xml(self):
         logging.info('getting the xml self definition...')
         try:
@@ -110,3 +73,39 @@ class UaManager(peer.UaPeer):
             logging.error(error)
         else:
             logging.info('self definition (xml) imported from: {0}'.format(xml_path))
+
+    def __parse_general(self, general_root):
+        self.base_idx = 'ns=2;s={0}'.format(general_root[2].text)
+        for item in general_root:
+            # uses the SMART_OBJECT_NAME as the config_id
+            if item.attrib['id'] == 'SMART_OBJECT_NAME':
+                self.config = configuration.Configuration(item.text, 'EMB_RES')
+                self.__set_config(item.text, self.config)
+
+            # adds the property to the opc-ua server
+            utils.default_property(self, self.base_idx, self.ROOT_PATH,
+                                   property_name=item.attrib['id'], property_value=item.text)
+
+    def __parse_sets(self, root):
+        for base_element in root:
+            # splits the tag in these 3 camps
+            uri, ignore, tag = base_element.tag[1:].partition("}")
+
+            if tag == 'deviceset':
+                self.__device_set.from_xml(base_element)
+
+            elif tag == 'serviceinstanceset':
+                self.__services.instances_from_xml(base_element)
+
+            elif tag == 'servicedescriptionset':
+                self.__services.services_from_xml(base_element)
+
+            elif tag == 'pointdescriptionset':
+                pass
+
+        self.config.start_work()
+
+    def __create_sets(self):
+        # creates all the sets
+        self.__device_set = device.DeviceSet(self)
+        self.__services = service.Services(self)

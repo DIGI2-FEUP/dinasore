@@ -247,6 +247,53 @@
 			</subscriptions>
 		</device>
 	</deviceset>
+	<servicedescriptionset>
+		<servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="FastFourierTransform" namespace="fft" version="1.0.0" type="DiagnosticService">
+			<recipeadjustments>
+				<recipeadjustment name="AcquisitionRate">
+					<variables>
+						<variable name="rate" DataType="Integer" ValueRank="-1">
+							<elements>
+								<element id="Min" DataType="Integer" ValueRank="-1">1</element>
+								<element id="Max" DataType="Integer" ValueRank="-1">1000</element>
+								<element id="Default" DataType="Integer" ValueRank="-1">500</element>
+								<element id="MeasurementUnits" DataType="String" ValueRank="-1">Hz</element>
+							</elements>
+						</variable>
+					</variables>
+				</recipeadjustment>
+			</recipeadjustments>
+			<methods>
+				<method name="CreateInstance">
+					<arguments>
+						<argument name="ServiceID" type="Output" DataType="Guid" ValueRank="-1">
+							<elements>
+								<element id="Description" DataType="String" ValueRank="-1">ID of the created instance</element>
+							</elements>
+						</argument>
+					</arguments>
+				</method>
+			</methods>
+			<interfaces>
+				<interface type="Arguments">
+					<variables>
+						<variable name="Signal" DataType="Double" ValueRank="-2" ArrayDimensions="10">
+							<elements>
+								<element id="Description" DataType="String" ValueRank="-1">Input signal</element>
+								<element id="Type" DataType="String" ValueRank="-1">Input</element>
+							</elements>
+						</variable>
+						<variable name="Frequencies" DataType="Double" ValueRank="-2" ArrayDimensions="10">
+							<elements>
+								<element id="Description" DataType="String" ValueRank="-1">Output signal</element>
+								<element id="Type" DataType="String" ValueRank="-1">Output</element>
+							</elements>
+						</variable>
+					</variables>
+				</interface>
+			</interfaces>
+		</servicedescription>
+	</servicedescriptionset>
 	<serviceinstanceset>
 		<serviceinstance id="ab3d2eb8-135a-11e9-ab14-d663bd873d93" type="DiagnosticService" dId="f919f8da-90d5-11e8-9eb6-529269fb1459">
 			<methods>
@@ -295,53 +342,6 @@
 			</recipeadjustments>
 		</serviceinstance>
 	</serviceinstanceset>
-	<servicedescriptionset>
-		<servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="FastFourierTransform" namespace="fft" version="1.0.0" type="DiagnosticService">
-			<recipeadjustments>
-				<recipeadjustment name="AcquisitionRate">
-					<variables>
-						<variable name="rate" DataType="Integer" ValueRank="-1">
-							<elements>
-								<element id="Min" DataType="Integer" ValueRank="-1">1</element>
-								<element id="Max" DataType="Integer" ValueRank="-1">1000</element>
-								<element id="Default" DataType="Integer" ValueRank="-1">500</element>
-								<element id="MeasurementUnits" DataType="String" ValueRank="-1">Hz</element>
-							</elements>
-						</variable>
-					</variables>
-				</recipeadjustment>
-			</recipeadjustments>
-			<methods>
-				<method name="CreateInstance">
-					<arguments>
-						<argument name="ServiceID" type="Output" DataType="Guid" ValueRank="-1">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">ID of the created instance</element>
-							</elements>
-						</argument>
-					</arguments>
-				</method>
-			</methods>
-			<interfaces>
-				<interface type="Arguments">
-					<variables>
-						<variable name="Signal" DataType="Double" ValueRank="-2" ArrayDimensions="10">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">Input signal</element>
-								<element id="Type" DataType="String" ValueRank="-1">Input</element>
-							</elements>
-						</variable>
-						<variable name="Frequencies" DataType="Double" ValueRank="-2" ArrayDimensions="10">
-							<elements>
-								<element id="Description" DataType="String" ValueRank="-1">Output signal</element>
-								<element id="Type" DataType="String" ValueRank="-1">Output</element>
-							</elements>
-						</variable>
-					</variables>
-				</interface>
-			</interfaces>
-		</servicedescription>
-	</servicedescriptionset>
 	<pointdescriptionset>
 		<endpointdescription dId="649b5374-90d6-11e8-bada-529269fb1459" name="HMI Device" version="1.0.0" type="EndPointService">
 			<interfaces>

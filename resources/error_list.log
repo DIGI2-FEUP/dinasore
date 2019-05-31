@@ -1,17 +1,17 @@
-[2019-05-30 19:14:29,704][ERROR][MainThread] can not find that fb
-[2019-05-30 19:14:29,704][ERROR][MainThread] 'TempoAspersaoPowerWashI'
-[2019-05-30 19:14:29,706][ERROR][MainThread] can not find that fb
-[2019-05-30 19:14:29,706][ERROR][MainThread] 'TemperaturaCSEProcesso'
-[2019-05-30 19:14:29,709][ERROR][MainThread] can not find that fb
-[2019-05-30 19:14:29,709][ERROR][MainThread] 'TempoAspersaoCSEProcesso'
-[2019-05-30 19:14:29,711][ERROR][MainThread] can not find that fb
-[2019-05-30 19:14:29,712][ERROR][MainThread] 'DP-FiltroCircuitoAgitação'
-[2019-05-30 19:14:29,715][ERROR][MainThread] can not find that fb
-[2019-05-30 19:14:29,715][ERROR][MainThread] 'PressãoCircuitoAspersão'
-[2019-05-30 19:14:29,717][ERROR][MainThread] can not find that fb
-[2019-05-30 19:14:29,717][ERROR][MainThread] 'TINA 0'
-[2019-05-30 19:14:29,718][ERROR][MainThread] can not import the module (check fb_type.py nomenclature)
-[2019-05-30 19:14:29,718][ERROR][MainThread] No module named 'resources.function_blocks.TINA_0'
-[2019-05-30 19:14:29,718][ERROR][MainThread] can not create the fb type: TINA_0, instance: TINA 0
-[2019-05-30 19:14:29,718][ERROR][MainThread] can not find that fb
-[2019-05-30 19:14:29,718][ERROR][MainThread] 'TINA 0'
+[2019-05-31 12:22:05,524][ERROR][MainThread] can not find that fb
+[2019-05-31 12:22:05,524][ERROR][MainThread] 'TempoAspersaoPowerWashI'
+[2019-05-31 12:22:05,527][ERROR][MainThread] can not find that fb
+[2019-05-31 12:22:05,527][ERROR][MainThread] 'TemperaturaCSEProcesso'
+[2019-05-31 12:22:05,529][ERROR][MainThread] can not find that fb
+[2019-05-31 12:22:05,530][ERROR][MainThread] 'TempoAspersaoCSEProcesso'
+[2019-05-31 12:22:05,532][ERROR][MainThread] can not find that fb
+[2019-05-31 12:22:05,532][ERROR][MainThread] 'DP-FiltroCircuitoAgitação'
+[2019-05-31 12:22:05,536][ERROR][MainThread] can not find that fb
+[2019-05-31 12:22:05,536][ERROR][MainThread] 'PressãoCircuitoAspersão'
+[2019-05-31 12:22:05,538][ERROR][MainThread] can not find that fb
+[2019-05-31 12:22:05,538][ERROR][MainThread] 'TINA 0'
+[2019-05-31 12:22:05,538][ERROR][MainThread] can not import the module (check fb_type.py nomenclature)
+[2019-05-31 12:22:05,538][ERROR][MainThread] No module named 'resources.function_blocks.TINA_0'
+[2019-05-31 12:22:05,538][ERROR][MainThread] can not create the fb type: TINA_0, instance: TINA 0
+[2019-05-31 12:22:05,538][ERROR][MainThread] can not find that fb
+[2019-05-31 12:22:05,538][ERROR][MainThread] 'TINA 0'

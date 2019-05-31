@@ -12,8 +12,9 @@ class DeviceSet:
         self.__ua_peer = ua_peer
 
         # creates the opc-ua folder
-        idx = '{0}:{1}'.format(self.__ua_peer.base_idx, 'DeviceSet')
-        self.__ua_peer.create_folder(self.__ua_peer.ROOT_PATH, idx, '2:DeviceSet')
+        utils.default_folder(self.__ua_peer, self.__ua_peer.base_idx,
+                             self.__ua_peer.ROOT_PATH, self.__ua_peer.ROOT_LIST,
+                             'DeviceSet')
 
     def from_xml(self, xml_set):
         for dev_xml in xml_set:
@@ -65,6 +66,7 @@ class Device:
         :param root_xml:
         """
         device_path = ''
+        device_list = None
         device_idx = 'ns=2;s={0}'.format(root_xml.attrib['id'])
         device_type = root_xml.attrib['type']
 
@@ -80,26 +82,25 @@ class Device:
                         for element in var[0]:
                             # creates the opc-ua object
                             if element.attrib['id'] == 'Name':
-                                # creates the device object
                                 self.fb_name = element.text
-                                browse_name = '2:{0}'.format(self.fb_name)
-                                self.__ua_peer.create_object(device_idx, browse_name, path=self.__DEVICE_SET_PATH)
-                                # sets the path for the device object
-                                device_path = self.__ua_peer.generate_path(self.__DEVICE_SET_LIST +
-                                                                           [(2, self.fb_name)])
+                                # creates the device object
+                                device_list, device_path = utils.default_object(self.__ua_peer, device_idx,
+                                                                                self.__DEVICE_SET_PATH,
+                                                                                self.__DEVICE_SET_LIST,
+                                                                                self.fb_name)
                             # creates the fb
                             elif element.attrib['id'] == 'SourceType':
                                 self.fb_type = element.text
                                 # creates the respective property
-                                prop_idx = '{0}.{1}'.format(device_idx, 'SourceType')
-                                self.__ua_peer.create_property(device_path, prop_idx, '2:SourceType', self.fb_type)
+                                utils.default_property(self.__ua_peer, device_idx, device_path,
+                                                       property_name='SourceType', property_value=self.fb_type)
 
                             # creates the state
                             elif element.attrib['id'] == 'SourceState':
                                 self.state = element.text
                                 # creates the respective property
-                                prop_idx = '{0}.{1}'.format(device_idx, 'SourceState')
-                                self.__ua_peer.create_property(device_path, prop_idx, '2:SourceState', self.state)
+                                utils.default_property(self.__ua_peer, device_idx, device_path,
+                                                       property_name='SourceState', property_value=self.state)
                         break
                 break
 
@@ -112,8 +113,7 @@ class Device:
             fb = self.__ua_peer.config.get_fb(self.fb_name)
 
         # create the id property
-        prop_idx = '{0}.{1}'.format(device_idx, 'ID')
-        self.__ua_peer.create_property(device_path, prop_idx, '2:ID', root_xml.attrib['id'])
+        utils.default_property(self.__ua_peer, device_idx, device_path, 'ID', root_xml.attrib['id'])
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -123,9 +123,8 @@ class Device:
             if tag == 'variables':
                 # creates the variables folder
                 folder_idx, vars_path = utils.default_folder(self.__ua_peer,
-                                                             device_idx, device_path,
-                                                             self.__DEVICE_SET_LIST,
-                                                             self.fb_name, 'Variables')
+                                                             device_idx, device_path, device_list,
+                                                             'Variables')
                 # creates the opc-ua variables and links them
                 for var in item:
                     if var.attrib['name'] != 'Description':
@@ -144,9 +143,8 @@ class Device:
             elif tag == 'methods':
                 # creates the methods folder
                 folder_idx, methods_path = utils.default_folder(self.__ua_peer,
-                                                                device_idx, device_path,
-                                                                self.__DEVICE_SET_LIST,
-                                                                self.fb_name, 'Methods')
+                                                                device_idx, device_path, device_list,
+                                                                'Methods')
                 for method in item:
                     method_name = method.attrib['name']
 
@@ -184,9 +182,8 @@ class Device:
             elif tag == 'subscriptions':
                 # creates the subscriptions folder
                 folder_idx, subscriptions_path = utils.default_folder(self.__ua_peer,
-                                                                      device_idx, device_path,
-                                                                      self.__DEVICE_SET_LIST,
-                                                                      self.fb_name, 'Subscriptions')
+                                                                      device_idx, device_path, device_list,
+                                                                      'Subscriptions')
 
                 for subs in item:
                     # context connections between sensors/actuators and components/equipments
