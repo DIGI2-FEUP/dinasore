@@ -1,6 +1,6 @@
 from core import configuration
 from opc_ua import peer
-from data_model import device, service, utils
+from data_model import device_set, service_set, utils
 import xml.etree.ElementTree as ETree
 import os
 import sys
@@ -107,5 +107,5 @@ class UaManager(peer.UaPeer):
 
     def __create_sets(self):
         # creates all the sets
-        self.__device_set = device.DeviceSet(self)
-        self.__services = service.Services(self)
+        self.__device_set = device_set.DeviceSet(self)
+        self.__services = service_set.Services(self)
