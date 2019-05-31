@@ -1,4 +1,5 @@
 from data_model import utils
+from opcua import ua
 
 
 class Service:
@@ -6,6 +7,9 @@ class Service:
     def __init__(self, ua_peer):
         self.__ua_peer = ua_peer
         self.service_name, self.service_id = '', ''
+        # key: constant_name, value: value to set (converted)
+        self.constants = dict()
+        self.subscriptions = dict()
         # all instances from this service
         # key: instance_id, value: instance_obj
         self.__instances = dict()
@@ -74,7 +78,7 @@ class Service:
 
     def instance_from_xml(self, root_xml):
         # creates and parses the instance
-        instance = InstanceService(self.__ua_peer)
+        instance = InstanceService(self.__ua_peer, self)
         instance.from_xml(root_xml)
         # adds the method to the dict
         self.__instances[instance.instance_id] = instance
@@ -86,8 +90,9 @@ class Service:
 
 class InstanceService:
 
-    def __init__(self, ua_peer):
+    def __init__(self, ua_peer, service_base):
         self.__ua_peer = ua_peer
+        self.service_base = service_base
         self.instance_id = ''
 
         # creates the path to the service set folder folder
@@ -97,6 +102,15 @@ class InstanceService:
     def from_xml(self, root_xml):
         # gets the instance_id
         self.instance_id = root_xml.attrib['id']
+        # creates the instance object
+        instance_idx = 'ns=2;s={0}'.format(self.instance_id)
+        obj_name = '{0}:{1}'.format(self.service_base.service_name, self.instance_id)
+        instance_list, instance_path = utils.default_object(self.__ua_peer, instance_idx,
+                                                            self.__INSTANCE_SET_PATH, self.__INSTANCE_SET_LIST,
+                                                            obj_name)
+        # creates the id and dId property
+        utils.default_property(self.__ua_peer, instance_idx, instance_path, 'ID', self.instance_id)
+        utils.default_property(self.__ua_peer, instance_idx, instance_path, 'dID', self.service_base.service_id)
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -104,7 +118,43 @@ class InstanceService:
 
             # creates the default methods 'AddLink', 'RemoveLink' and 'DeleteInstance'
             if tag == 'methods':
-                pass
+                # create the folder for the methods
+                folder_idx, folder_path = utils.default_folder(self.__ua_peer,
+                                                               instance_idx, instance_path, instance_list,
+                                                               'Methods')
+                for method in item:
+                    if method.attrib['name'] == 'AddLink':
+                        # creates the opc-ua method 'AddLink'
+                        method_idx = '{0}:{1}'.format(folder_idx, 'AddLink')
+                        browse_name = '2:{0}'.format('AddLink')
+                        self.__ua_peer.create_method(folder_path,
+                                                     method_idx,
+                                                     browse_name,
+                                                     self.add_ua_link,
+                                                     input_args=[ua.VariantType.Guid],
+                                                     output_args=[])
+
+                    elif method.attrib['name'] == 'RemoveLink':
+                        # creates the opc-ua method 'RemoveLink'
+                        method_idx = '{0}:{1}'.format(folder_idx, 'RemoveLink')
+                        browse_name = '2:{0}'.format('RemoveLink')
+                        self.__ua_peer.create_method(folder_path,
+                                                     method_idx,
+                                                     browse_name,
+                                                     self.remove_ua_link,
+                                                     input_args=[ua.VariantType.Guid],
+                                                     output_args=[])
+
+                    elif method.attrib['name'] == 'DeleteInstance':
+                        # creates the opc-ua method 'DeleteInstance'
+                        method_idx = '{0}:{1}'.format(folder_idx, 'DeleteInstance')
+                        browse_name = '2:{0}'.format('DeleteInstance')
+                        self.__ua_peer.create_method(folder_path,
+                                                     method_idx,
+                                                     browse_name,
+                                                     self.delete_ua,
+                                                     input_args=[],
+                                                     output_args=[])
 
             elif tag == 'subscriptions':
                 pass
@@ -112,8 +162,14 @@ class InstanceService:
             elif tag == 'recipeadjustments':
                 pass
 
-    def add_ua_link(self):
-        pass
+    def add_ua_link(self, parent, *args):
+        print('adding link')
+        return []
 
-    def remove_ua_link(self):
-        pass
+    def remove_ua_link(self, parent, *args):
+        print('removing link')
+        return []
+
+    def delete_ua(self, parent, *args):
+        print('deleting instance')
+        return []

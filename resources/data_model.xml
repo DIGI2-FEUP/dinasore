@@ -24,7 +24,7 @@
                         <element id="Name" DataType="String" ValueRank="-1">TempoAspersaoPowerWashI</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">TEMPO_ASPERSAO</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">SprinklingTime</element>
                     </elements>
                 </variable>
 			</variables>
@@ -59,7 +59,7 @@
                         <element id="Name" DataType="String" ValueRank="-1">TemperaturaCSEProcesso</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">TERMOMETRO</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">Thermometer</element>
                     </elements>
                 </variable>
 			</variables>
@@ -94,7 +94,7 @@
                         <element id="Name" DataType="String" ValueRank="-1">TempoAspersaoCSEProcesso</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">TEMPO_ASPERSAO</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">SprinklingTime</element>
                     </elements>
                 </variable>
 			</variables>
@@ -126,10 +126,10 @@
 				</variable>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">DP-FiltroCircuitoAgitação</element>
+                        <element id="Name" DataType="String" ValueRank="-1">DPFiltroCircuitoAgitação</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">PRESSOSTATO</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">PressureSwitch</element>
                     </elements>
                 </variable>
 			</variables>
@@ -164,7 +164,7 @@
                         <element id="Name" DataType="String" ValueRank="-1">PressãoCircuitoAspersão</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">PRESSOSTATO</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">PressureSwitch</element>
                     </elements>
                 </variable>
 			</variables>

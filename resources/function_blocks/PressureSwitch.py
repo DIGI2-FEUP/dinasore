@@ -1,6 +1,6 @@
 
 
-class PRESSOSTATO:
+class PressureSwitch:
 
     def __init__(self):
         self.pressure_1 = 0
