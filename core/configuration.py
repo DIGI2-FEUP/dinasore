@@ -27,6 +27,9 @@ class Configuration:
     def set_fb(self, fb_name, fb_element):
         self.fb_dictionary[fb_name] = fb_element
 
+    def exists_fb(self, fb_name):
+        return fb_name in self.fb_dictionary
+
     def create_fb(self, fb_name, fb_type):
         logging.info('creating a new fb...')
 

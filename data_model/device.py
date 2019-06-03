@@ -64,13 +64,14 @@ class Device:
                         break
                 break
 
-        # gets the created fb
-        fb = self.__ua_peer.config.get_fb(self.fb_name)
+        # checks if exists that fb
+        exist_fb = self.__ua_peer.config.exists_fb(self.fb_name)
         # checks if the fb already exists
-        if fb is None:
+        if exist_fb is False:
             # creates the fb inside the configuration
             self.__ua_peer.config.create_fb(self.fb_name, self.fb_type)
-            fb = self.__ua_peer.config.get_fb(self.fb_name)
+        # gets the created fb
+        fb = self.__ua_peer.config.get_fb(self.fb_name)
 
         # create the id property
         utils.default_property(self.__ua_peer, device_idx, device_path, 'ID', root_xml.attrib['id'])

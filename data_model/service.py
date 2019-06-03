@@ -29,6 +29,11 @@ class Service:
         method
             add_instance     -> input_events (use push_event)
                              -> connect to add_instance logic
+
+        events to run method
+            Run    (input_event)
+            Run_O  (output_event)
+
         :param root_xml:
         """
         self.service_name = root_xml.attrib['name']
@@ -112,6 +117,8 @@ class InstanceService:
         utils.default_property(self.__ua_peer, instance_idx, instance_path, 'ID', self.instance_id)
         utils.default_property(self.__ua_peer, instance_idx, instance_path, 'dID', self.service_base.service_id)
 
+        # creates the fb for the instance
+
         for item in root_xml:
             # splits the tag in these 3 camps
             uri, ignore, tag = item.tag[1:].partition("}")
@@ -131,7 +138,7 @@ class InstanceService:
                                                      method_idx,
                                                      browse_name,
                                                      self.add_ua_link,
-                                                     input_args=[ua.VariantType.Guid],
+                                                     input_args=[ua.VariantType.String],
                                                      output_args=[])
 
                     elif method.attrib['name'] == 'RemoveLink':
@@ -142,7 +149,7 @@ class InstanceService:
                                                      method_idx,
                                                      browse_name,
                                                      self.remove_ua_link,
-                                                     input_args=[ua.VariantType.Guid],
+                                                     input_args=[ua.VariantType.String],
                                                      output_args=[])
 
                     elif method.attrib['name'] == 'DeleteInstance':
