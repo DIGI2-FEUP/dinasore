@@ -25,7 +25,7 @@ class DeviceSet:
                 dev.from_xml(dev_xml)
 
                 # use the fb_name as key
-                self.__devices[dev.device_id] = dev
+                self.__devices[dev.subs_id] = dev
 
     def from_diac(self, fb_type, fb):
         # get the xml fb definition xml file

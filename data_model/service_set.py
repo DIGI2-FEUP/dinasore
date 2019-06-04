@@ -32,7 +32,7 @@ class Services:
                 s.service_from_xml(service_xml)
 
                 # use the service_id as key
-                self.__service_set[s.service_id] = s
+                self.__service_set[s.subs_id] = s
 
     def instances_from_xml(self, xml_set):
         for instance_xml in xml_set:
