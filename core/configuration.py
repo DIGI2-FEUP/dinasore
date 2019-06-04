@@ -30,6 +30,13 @@ class Configuration:
     def exists_fb(self, fb_name):
         return fb_name in self.fb_dictionary
 
+    def create_virtualized_fb(self, fb_name, fb_type, ua_update):
+        logging.info('creating a virtualized (opc-ua) fb...')
+        self.create_fb(fb_name, fb_type)
+        # sets the ua variables update method
+        fb2update = self.get_fb(fb_name)
+        fb2update.ua_variables_update = ua_update
+
     def create_fb(self, fb_name, fb_type):
         logging.info('creating a new fb...')
 

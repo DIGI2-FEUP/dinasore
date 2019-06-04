@@ -2,10 +2,10 @@ from data_model import utils
 from opcua import ua
 
 
-class Service(utils.DiacInterface):
+class Service(utils.UaBaseStructure):
 
     def __init__(self, ua_peer):
-        utils.DiacInterface.__init__(self, ua_peer, 'ServiceDescriptionSet')
+        utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet')
         # key: constant_name, value: value to set (converted)
         self.constants = dict()
         self.subscriptions = dict()
@@ -105,7 +105,8 @@ class InstanceService(utils.DiacInterface):
 
     def __init__(self, ua_peer, service_base):
         utils.DiacInterface.__init__(self, ua_peer, 'ServiceInstanceSet')
-        self.service_base = service_base
+        self.fb_type = service_base.fb_type
+        self.subs_did = service_base.subs_id
 
     def from_xml(self, root_xml):
         # gets the instance_id
@@ -113,10 +114,10 @@ class InstanceService(utils.DiacInterface):
         self.fb_name = root_xml.attrib['id']
 
         # creates the header opc-ua (description, ...) of this instance
-        self.__create_header()
+        self.__create_header(root_xml)
 
         # creates the fb for the instance
-        self.ua_peer.config.create_fb(self.subs_id, self.service_base.fb_type)
+        self.ua_peer.config.create_virtualized_fb(self.subs_id, self.fb_type, self.update_variables)
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -129,14 +130,14 @@ class InstanceService(utils.DiacInterface):
             elif tag == 'subscriptions':
                 self.__create_links(item)
 
-    def __create_header(self):
+    def __create_header(self, header_xml):
         # creates the instance object
-        browse_name = '{0}:{1}'.format(self.service_base.fb_type, self.subs_id)
+        browse_name = '{0}:{1}'.format(self.fb_type, self.subs_id)
         self.create_base_object(browse_name)
 
         # creates the id and dId property
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
-        utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'dID', self.service_base.subs_id)
+        utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'dID', self.subs_did)
 
     def __create_methods(self, methods_xml):
         # create the folder for the methods
@@ -200,6 +201,9 @@ class InstanceService(utils.DiacInterface):
                 # its an output variable
                 elif subscription.attrib['BrowseDirection'] == 'inverse':
                     pass
+
+    def __create_variables(self, variables_xml):
+        pass
 
     def add_ua_link(self, parent, *args):
         print('adding link')

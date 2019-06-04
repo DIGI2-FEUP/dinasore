@@ -21,4 +21,6 @@ class PressureSwitch:
         elif event_name == 'Calibrate':
             print('calibration')
             self.cal_result = True
+            self.pressure_1 += 3
+            self.pressure_2 += 4
             return [None, None, event_value, self.pressure_1, self.pressure_2, self.cal_result]

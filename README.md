@@ -118,6 +118,10 @@ This kind of file is a .fbt file witch represents the function block terminology
 
 ##### Opc-Ua/Self-description file integration
 
+
+
+###### Connection-Interfaces
+
 - Device(fb) (1x1)
     - description.name: fb_name
     - description.SourceType: fb_type

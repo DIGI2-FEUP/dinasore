@@ -194,7 +194,7 @@
                 <id>7de30e6c-90b8-11e8-9eb6-529269fb1459</id>
             </subscriptions>
         </device>
-        <device id="7de30e6c-90b8-11e8-9eb6-529269fb1459" type="EQUIPMENT" fb="false">
+        <!--<device id="7de30e6c-90b8-11e8-9eb6-529269fb1459" type="EQUIPMENT" fb="false">
             <variables>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
@@ -263,7 +263,7 @@
                 <id>6ddeb3d0-3b9f-11e9-b210-d663bd873d93</id>
                 <id>6ddeb51a-3b9f-11e9-b210-d663bd873d93</id>
             </subscriptions>
-        </device>
+        </device>-->
     </deviceset>
     <servicedescriptionset>
         <servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="FastFourierTransform" namespace="fft"

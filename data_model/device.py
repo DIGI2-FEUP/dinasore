@@ -1,6 +1,4 @@
-from collections import OrderedDict
 from data_model import utils
-from opcua import ua
 
 
 class Device(utils.DiacInterface):
@@ -8,7 +6,6 @@ class Device(utils.DiacInterface):
     def __init__(self, ua_peer):
         utils.DiacInterface.__init__(self, ua_peer, 'DeviceSet')
         self.state = ''
-        self.__ua_variables = dict()
 
     def from_xml(self, root_xml):
         """
@@ -25,12 +22,8 @@ class Device(utils.DiacInterface):
         # creates the header opc-ua (description, ...) of this device
         self.__create_header(root_xml)
 
-        # checks if exists that fb
-        exist_fb = self.ua_peer.config.exists_fb(self.fb_name)
-        # checks if the fb already exists
-        if exist_fb is False:
-            # creates the fb inside the configuration
-            self.ua_peer.config.create_fb(self.fb_name, self.fb_type)
+        # creates the fb inside the configuration
+        self.ua_peer.config.create_virtualized_fb(self.fb_name, self.fb_type, self.update_variables)
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -99,39 +92,14 @@ class Device(utils.DiacInterface):
         for method in methods_xml:
             method_name = method.attrib['name']
 
-            input_types, output_types = [], []
-            input_names, output_names = [], []
-            # first parse the inputs and the outputs
-            for argument in method[0]:
-                if argument.attrib['type'] == 'Output':
-                    # gets the name
-                    output_names.append(argument.attrib['name'])
-                    # gets the type
-                    arg_type = argument.attrib['DataType']
-                    output_types.append(utils.UA_TYPES[arg_type])
-                elif argument.attrib['type'] == 'Input':
-                    # gets the name
-                    input_names.append(argument.attrib['name'])
-                    # gets the type
-                    arg_type = argument.attrib['DataType']
-                    input_types.append(utils.UA_TYPES[arg_type])
-
             # gets the created fb
             fb = self.ua_peer.config.get_fb(self.fb_name)
 
-            method2call = Method2Call(method_name, fb,
-                                      input_names, output_names,
-                                      input_types, output_types)
-
-            # creates the opc-ua method
-            method_idx = '{0}:{1}'.format(folder_idx, method2call.method_name)
-            browse_name = '2:{0}'.format(method2call.method_name)
-            self.ua_peer.create_method(methods_path,
-                                       method_idx,
-                                       browse_name,
-                                       method2call.execute,
-                                       input_args=input_types,
-                                       output_args=output_types)
+            method2call = utils.Method2Call(method_name, fb, self.ua_peer)
+            # parses the method from the xml
+            method2call.from_xml(method)
+            # virtualize (opc-ua) the method
+            method2call.virtualize(folder_idx, methods_path)
 
     def __create_variables(self, vars_xml):
         # creates the variables folder
@@ -150,7 +118,7 @@ class Device(utils.DiacInterface):
                                                                 utils.UA_RANKS[var.attrib['ValueRank']],
                                                                 writable=False)
                 # adds the variable to the dictionary
-                self.__ua_variables[var_name] = var_object
+                self.ua_variables[var_name] = var_object
 
     def __create_context_links(self, links_xml):
         # creates the subscriptions folder
@@ -162,33 +130,3 @@ class Device(utils.DiacInterface):
         for subs in links_xml:
             # context connections between sensors/actuators and components/equipments
             pass
-
-
-class Method2Call:
-
-    def __init__(self, method_name, fb, input_names, output_names, input_types, output_types):
-        self.method_name = method_name
-        self.fb = fb
-
-        self.inputs = OrderedDict()
-        for i in range(len(input_types)):
-            self.inputs[input_names[i]] = input_types[i]
-
-        self.outputs = OrderedDict()
-        for i in range(len(output_types)):
-            self.outputs[output_names[i]] = output_types[i]
-
-    def execute(self, parent, *args):
-        for i, (input_name, input_type) in enumerate(self.inputs.items()):
-            self.fb.set_attr(input_name, args[i].Value)
-
-        self.fb.push_event(self.method_name, 10)
-
-        self.fb.execution_end.wait()
-
-        output_return = []
-        for i, (output_name, output_type) in enumerate(self.outputs.items()):
-            v_type, value, is_watch = self.fb.read_attr(output_name)
-            output_return.append(ua.Variant(value, output_type))
-
-        return output_return

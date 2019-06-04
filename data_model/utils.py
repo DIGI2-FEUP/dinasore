@@ -1,4 +1,5 @@
 from opcua import ua
+from collections import OrderedDict
 
 UA_TYPES = {'String': ua.VariantType.String,
             'Double': ua.VariantType.Double,
@@ -38,7 +39,7 @@ def default_object(ua_peer, obj_idx, obj_path, path_list, obj_name):
     return new_list, new_path
 
 
-class DiacInterface:
+class UaBaseStructure:
 
     def __init__(self, ua_peer, folder_name):
         self.fb_name, self.fb_type = None, None
@@ -57,3 +58,86 @@ class DiacInterface:
         self.base_path_list, self.base_path = default_object(self.ua_peer, self.base_idx,
                                                              folder_path, folder_path_list,
                                                              browse_name)
+
+
+class DiacInterface(UaBaseStructure):
+
+    def __init__(self, ua_peer, folder_name):
+        UaBaseStructure.__init__(self, ua_peer, folder_name)
+        self.ua_variables = dict()
+
+    def __create_methods(self, methods_xml):
+        raise NotImplementedError
+
+    def __create_variables(self, variables_xml):
+        raise NotImplementedError
+
+    def __create_header(self, header_xml):
+        raise NotImplementedError
+
+    def update_variables(self):
+        # gets the function block
+        fb = self.ua_peer.config.get_fb(self.fb_name)
+        # iterates over the variables dict
+        for var_name, var_ua in self.ua_variables.items():
+            # reads the variable value
+            v_type, value, is_watch = fb.read_attr(var_name)
+            # writes the value inside the opc-ua variable
+            var_ua.set_value(value)
+
+
+class Method2Call:
+
+    def __init__(self, method_name, fb, ua_peer):
+        self.method_name = method_name
+        self.fb = fb
+        self.__ua_peer = ua_peer
+
+        self.inputs = OrderedDict()
+        self.outputs = OrderedDict()
+        self.input_types = []
+        self.output_types = []
+
+    def execute(self, parent, *args):
+        for i, (input_name, input_type) in enumerate(self.inputs.items()):
+            self.fb.set_attr(input_name, args[i].Value)
+
+        self.fb.push_event(self.method_name, 10)
+
+        self.fb.execution_end.wait()
+
+        output_return = []
+        for i, (output_name, output_type) in enumerate(self.outputs.items()):
+            v_type, value, is_watch = self.fb.read_attr(output_name)
+            output_return.append(ua.Variant(value, output_type))
+
+        return output_return
+
+    def from_xml(self, method_xml):
+        # first parse the inputs and the outputs
+        for argument in method_xml[0]:
+            if argument.attrib['type'] == 'Output':
+                # gets the name
+                var_name = argument.attrib['name']
+                # gets the type
+                arg_type = argument.attrib['DataType']
+                self.outputs[var_name] = arg_type
+                self.output_types.append(UA_TYPES[arg_type])
+            elif argument.attrib['type'] == 'Input':
+                # gets the name
+                var_name = argument.attrib['name']
+                # gets the type
+                arg_type = argument.attrib['DataType']
+                self.inputs[var_name] = arg_type
+                self.input_types.append(UA_TYPES[arg_type])
+
+    def virtualize(self, folder_idx, methods_path):
+        # creates the opc-ua method
+        method_idx = '{0}:{1}'.format(folder_idx, self.method_name)
+        browse_name = '2:{0}'.format(self.method_name)
+        self.__ua_peer.create_method(methods_path,
+                                     method_idx,
+                                     browse_name,
+                                     self.execute,
+                                     input_args=self.input_types,
+                                     output_args=self.output_types)

@@ -12,6 +12,7 @@ class FB(threading.Thread, fb_interface.FBInterface):
         self.fb_obj = fb_obj
         self.kill_event = threading.Event()
         self.execution_end = threading.Event()
+        self.ua_variables_update = None
 
     def run(self):
         logging.info('fb {0} started.'.format(self.fb_name))
@@ -53,6 +54,10 @@ class FB(threading.Thread, fb_interface.FBInterface):
                     break
 
                 self.update_outputs(outputs)
+
+                # updates the opc-ua interface
+                if self.ua_variables_update is not None:
+                    self.ua_variables_update()
 
                 # sends a signal when ends execution
                 self.execution_end.set()
