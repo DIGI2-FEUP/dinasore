@@ -6,7 +6,7 @@ from opcua import ua
 class Device:
 
     def __init__(self, ua_peer):
-        self.fb_name, self.fb_type, self.state = '', '', ''
+        self.device_id, self.fb_name, self.fb_type, self.state = '', '', '', ''
         self.__ua_peer = ua_peer
 
         # creates the path to that folder
@@ -25,9 +25,10 @@ class Device:
 
         :param root_xml:
         """
+        self.device_id = root_xml.attrib['id']
         device_path = ''
         device_list = None
-        device_idx = 'ns=2;s={0}'.format(root_xml.attrib['id'])
+        device_idx = 'ns=2;s={0}'.format(self.device_id)
         device_type = root_xml.attrib['type']
 
         # creates the device object

@@ -25,7 +25,7 @@ class DeviceSet:
                 dev.from_xml(dev_xml)
 
                 # use the fb_name as key
-                self.__devices[dev.fb_name] = dev
+                self.__devices[dev.device_id] = dev
 
     def from_diac(self, fb_type, fb):
         # get the xml fb definition xml file
@@ -40,3 +40,9 @@ class DeviceSet:
 
         # adds the device to the dictionary
         self.__devices[dev_id] = dev
+
+    def search_device(self, dev_id):
+        if dev_id in self.__devices:
+            return self.__devices[dev_id]
+        else:
+            return None

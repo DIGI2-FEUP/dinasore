@@ -1,5 +1,5 @@
-[2019-06-03 13:03:48,284][ERROR][MainThread] can not import the module (check fb_type.py nomenclature)
-[2019-06-03 13:03:48,284][ERROR][MainThread] No module named 'resources.function_blocks.TINA_0'
-[2019-06-03 13:03:48,284][ERROR][MainThread] can not create the fb type: TINA_0, instance: TINA 0
-[2019-06-03 13:03:48,284][ERROR][MainThread] can not find that fb
-[2019-06-03 13:03:48,284][ERROR][MainThread] 'TINA 0'
+[2019-06-04 12:32:15,484][ERROR][MainThread] can not import the module (check fb_type.py nomenclature)
+[2019-06-04 12:32:15,484][ERROR][MainThread] No module named 'resources.function_blocks.TINA_0'
+[2019-06-04 12:32:15,484][ERROR][MainThread] can not create the fb type: TINA_0, instance: TINA 0
+[2019-06-04 12:32:15,485][ERROR][MainThread] can not find that fb
+[2019-06-04 12:32:15,485][ERROR][MainThread] 'TINA 0'

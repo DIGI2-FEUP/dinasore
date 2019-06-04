@@ -64,8 +64,8 @@ class FB(threading.Thread, fb_interface.FBInterface):
         try:
             self.fb_obj.__del__()
         except AttributeError as exc:
-            logging.warn('can not delete the fb object.')
-            logging.warn(exc)
+            logging.warning('can not delete the fb object.')
+            logging.warning(exc)
 
         logging.info('fb {0} stopped.'.format(self.fb_name))
 

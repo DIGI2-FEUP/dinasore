@@ -5,7 +5,10 @@ from data_model import service
 class Services:
 
     def __init__(self, ua_peer):
+        # service_id: service
         self.__service_set = dict()
+        # instance_id: service_id
+        self.__instances_set = dict()
         # receives the peer methods to add the opc-ua services
         self.__ua_peer = ua_peer
 
@@ -43,9 +46,20 @@ class Services:
                 s = self.__service_set[service_id]
                 # parses the instance xml
                 s.instance_from_xml(instance_xml)
+                # connects the instance to the service
+                instance_id = instance_xml.attrib['id']
+                self.__instances_set[instance_id] = service_id
 
     def services_from_diac(self, xml_set):
         pass
 
     def instances_from_diac(self, xml_set):
         pass
+
+    def search_instance(self, instance_id):
+        if instance_id in self.__instances_set:
+            service_id = self.__instances_set[instance_id]
+            instance = self.__service_set[service_id].get_instance(instance_id)
+            return instance
+        else:
+            return None

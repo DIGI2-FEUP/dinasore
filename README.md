@@ -118,28 +118,25 @@ This kind of file is a .fbt file witch represents the function block terminology
 
 ##### Opc-Ua/Self-description file integration
 
-* **SENSOR** - 
+- Device(fb) (1x1)
+    - description.name: fb_name
+    - description.SourceType: fb_type
+    - methods: input_events
+    - variables: output_variables
+    - subscriptions: (context subs)
 
-* **ACTUATOR** - 
-
-* **COMPONENT** - 
-
-* **SERVICE** - 
-
-* **ENDPOINT** -
-
-* **STARTPOINT** - 
-
-
-| FBType     | Variables  | Methods     | Subscriptions |
-| ---------- | :--------: | :---------: | :-----------: |
-| SENSOR     | OutputVars | InputEvents | InputVars     |
-| ACTUATOR   |            |             |               |
-| COMPONENT  | Both       |             |               |
-| SERVICE    | Both       | InputEvents | InputVars     |
-| ENDPOINT   |            |             | InputVars     |
-| STARTPOINT | OutputVars |             | -             |
-
+- ServiceInstance(fb) (1x1)
+    - service.id: fb_name
+    - service.name: fb_type
+    - methods(run_method): input_events
+    - subscriptions
+        - context: only opc-ua
+        - data: connections between fb
+        - hardcoded: write a hardcoded value
+    
+(device_id: fb)
+(service_id: service_instance_id, ...)
+(service_instance_id: fb)
 
 If we upload the previous file to the 4DIAC-IDE, we will see the following image as result. 
 In that image we see the graphic representation of the function block, with all the interface attributes that characterise it. 

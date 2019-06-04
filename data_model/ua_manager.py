@@ -94,11 +94,11 @@ class UaManager(peer.UaPeer):
             if tag == 'deviceset':
                 self.__device_set.from_xml(base_element)
 
-            elif tag == 'serviceinstanceset':
-                self.__services.instances_from_xml(base_element)
-
             elif tag == 'servicedescriptionset':
                 self.__services.services_from_xml(base_element)
+
+            elif tag == 'serviceinstanceset':
+                self.__services.instances_from_xml(base_element)
 
             elif tag == 'pointdescriptionset':
                 pass
@@ -109,3 +109,13 @@ class UaManager(peer.UaPeer):
         # creates all the sets
         self.__device_set = device_set.DeviceSet(self)
         self.__services = service_set.Services(self)
+
+    def search_id(self, subs_id):
+        # first searches between the device
+        device = self.__device_set.search_device(subs_id)
+        if device is not None:
+            return device
+        else:
+            # if not exists any device searches in the instances
+            instance = self.__services.search_instance(subs_id)
+            return instance

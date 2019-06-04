@@ -6,7 +6,7 @@ class Service:
 
     def __init__(self, ua_peer):
         self.__ua_peer = ua_peer
-        self.service_name, self.service_id = '', ''
+        self.fb_type, self.service_id = '', ''
         # key: constant_name, value: value to set (converted)
         self.constants = dict()
         self.subscriptions = dict()
@@ -36,14 +36,14 @@ class Service:
 
         :param root_xml:
         """
-        self.service_name = root_xml.attrib['name']
+        self.fb_type = root_xml.attrib['name']
         self.service_id = root_xml.attrib['dId']
 
         # creates the service
         service_idx = 'ns=2;s={0}'.format(self.service_id)
         service_list, service_path = utils.default_object(self.__ua_peer, service_idx,
                                                           self.__SERVICE_SET_PATH, self.__SERVICE_SET_LIST,
-                                                          obj_name=self.service_name)
+                                                          obj_name=self.fb_type)
         for item in root_xml:
             # splits the tag in these 3 camps
             uri, ignore, tag = item.tag[1:].partition("}")
@@ -88,6 +88,12 @@ class Service:
         # adds the method to the dict
         self.__instances[instance.instance_id] = instance
 
+    def get_instance(self, instance_id):
+        if instance_id in self.__instances:
+            return self.__instances[instance_id]
+        else:
+            return None
+
     def instance_from_ua(self, parent, *args):
         print('create instance')
         return []
@@ -98,7 +104,7 @@ class InstanceService:
     def __init__(self, ua_peer, service_base):
         self.__ua_peer = ua_peer
         self.service_base = service_base
-        self.instance_id = ''
+        self.instance_id, self.fb_name = '', ''
 
         # creates the path to the service set folder folder
         self.__INSTANCE_SET_LIST = self.__ua_peer.ROOT_LIST + [(2, 'ServiceInstanceSet')]
@@ -107,9 +113,10 @@ class InstanceService:
     def from_xml(self, root_xml):
         # gets the instance_id
         self.instance_id = root_xml.attrib['id']
+        self.fb_name = root_xml.attrib['id']
         # creates the instance object
         instance_idx = 'ns=2;s={0}'.format(self.instance_id)
-        obj_name = '{0}:{1}'.format(self.service_base.service_name, self.instance_id)
+        obj_name = '{0}:{1}'.format(self.service_base.fb_type, self.instance_id)
         instance_list, instance_path = utils.default_object(self.__ua_peer, instance_idx,
                                                             self.__INSTANCE_SET_PATH, self.__INSTANCE_SET_LIST,
                                                             obj_name)
@@ -118,6 +125,9 @@ class InstanceService:
         utils.default_property(self.__ua_peer, instance_idx, instance_path, 'dID', self.service_base.service_id)
 
         # creates the fb for the instance
+        self.__ua_peer.config.create_fb(self.instance_id, self.service_base.fb_type)
+        # gets the created fb
+        fb = self.__ua_peer.config.get_fb(self.instance_id)
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -164,7 +174,28 @@ class InstanceService:
                                                      output_args=[])
 
             elif tag == 'subscriptions':
-                pass
+                # iterates over each subscription of the set
+                for subscription in item:
+                    # checks if is context subscription
+                    if subscription.attrib['type'] == 'Context':
+                        pass
+                    # checks if is data subscription
+                    elif subscription.attrib['type'] == 'Data':
+                        # its an input variable
+                        if subscription.attrib['BrowseDirection'] == 'forward':
+                            # parses the subscription
+                            sub_splitted = subscription.text.split(':')
+                            # gets the destination fb
+                            content = self.__ua_peer.search_id(sub_splitted[0])
+                            # creates the connection between the fb
+                            source = '{0}.{1}'.format(self.instance_id, subscription.attrib['VariableName'])
+                            destination = '{0}.{1}'.format(content.fb_name, sub_splitted[2])
+                            self.__ua_peer.config.create_connection(source=source, destination=destination)
+                            # connect the output event to input event
+
+                        # its an output variable
+                        elif subscription.attrib['BrowseDirection'] == 'inverse':
+                            pass
 
             elif tag == 'recipeadjustments':
                 pass
