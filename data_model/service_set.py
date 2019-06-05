@@ -14,13 +14,11 @@ class Services:
 
         # creates the service description opc-ua folder
         utils.default_folder(self.__ua_peer, self.__ua_peer.base_idx,
-                             self.__ua_peer.ROOT_PATH, self.__ua_peer.ROOT_LIST,
-                             'ServiceDescriptionSet')
+                             self.__ua_peer.ROOT_PATH, self.__ua_peer.ROOT_LIST, 'ServiceDescriptionSet')
 
         # creates the service instance opc-ua folder
         utils.default_folder(self.__ua_peer, self.__ua_peer.base_idx,
-                             self.__ua_peer.ROOT_PATH, self.__ua_peer.ROOT_LIST,
-                             'ServiceInstanceSet')
+                             self.__ua_peer.ROOT_PATH, self.__ua_peer.ROOT_LIST, 'ServiceInstanceSet')
 
     def services_from_xml(self, xml_set):
         for service_xml in xml_set:

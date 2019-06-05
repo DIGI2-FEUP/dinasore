@@ -20,8 +20,9 @@ def default_folder(ua_peer, obj_idx, obj_path, path_list, folder_name):
     browse_name = '2:{0}'.format(folder_name)
     ua_peer.create_folder(obj_path, folder_idx, browse_name)
     # path for the methods folder
-    folder_path = ua_peer.generate_path(path_list + [(2, folder_name)])
-    return folder_idx, folder_path
+    folder_list = path_list + [(2, folder_name)]
+    folder_path = ua_peer.generate_path(folder_list)
+    return folder_idx, folder_path, folder_list
 
 
 def default_property(ua_peer, obj_idx, obj_path, property_name, property_value):
@@ -58,6 +59,22 @@ class UaBaseStructure:
         self.base_path_list, self.base_path = default_object(self.ua_peer, self.base_idx,
                                                              folder_path, folder_path_list,
                                                              browse_name)
+
+    def create_variable(self, var_xml, folder_idx, vars_path):
+        var_name = var_xml.attrib['name']
+        # creates the opc-ua variable
+        var_idx = '{0}:{1}'.format(folder_idx, var_name)
+        browse_name = '2:{0}'.format(var_name)
+        # convert array dimensions
+        array_dimensions = 0
+        if 'ArrayDimensions' in var_xml.attrib:
+            array_dimensions = int(var_xml.attrib['ArrayDimensions'])
+        var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
+                                                        UA_TYPES[var_xml.attrib['DataType']],
+                                                        UA_RANKS[var_xml.attrib['ValueRank']],
+                                                        dimensions=array_dimensions,
+                                                        writable=False)
+        return var_idx, var_object
 
 
 class DiacInterface(UaBaseStructure):

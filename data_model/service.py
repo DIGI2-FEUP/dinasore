@@ -55,9 +55,8 @@ class Service(utils.UaBaseStructure):
 
     def __create_methods(self, methods_xml):
         # creates the methods folder
-        folder_idx, methods_path = utils.default_folder(self.ua_peer,
-                                                        self.base_idx, self.base_path, self.base_path_list,
-                                                        'Methods')
+        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                      self.base_path, self.base_path_list, 'Methods')
         # creates each different method
         for method_xml in methods_xml:
             # case method create instance
@@ -73,15 +72,30 @@ class Service(utils.UaBaseStructure):
 
     def __create_recipe_adjustments(self, adj_xml):
         # creates the Recipe Adjustments folder
-        folder_idx, adjustments_path = utils.default_folder(self.ua_peer,
-                                                            self.base_idx, self.base_path, self.base_path_list,
-                                                            'RecipeAdjustments')
+        folder_idx, adjs_path, adjs_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                self.base_path, self.base_path_list,
+                                                                'RecipeAdjustments')
 
-    def __create_interfaces(self, if_xml):
+    def __create_interfaces(self, ifs_xml):
         # creates the interfaces folder
-        folder_idx, interfaces_path = utils.default_folder(self.ua_peer,
-                                                           self.base_idx, self.base_path, self.base_path_list,
-                                                           'Interfaces')
+        folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                              self.base_path, self.base_path_list, 'Interfaces')
+        for if_xml in ifs_xml:
+            # gets the argument name and creates the folder
+            folder_name = if_xml.attrib['type']
+            folder_idx, if_path, if_list = utils.default_folder(self.ua_peer, folder_idx,
+                                                                ifs_path, ifs_list, folder_name)
+            # creates the variables arguments
+            if folder_name == 'Arguments':
+                # iterates over each variable
+                for var in if_xml[0]:
+                    # creates the variable
+                    var_idx, var_object = self.create_variable(var, folder_idx, if_path)
+                    var_path = self.ua_peer.generate_path(if_list + [(2, var.attrib['name'])])
+                    # creates the type property
+                    for ele in var[0]:
+                        if ele.attrib['id'] == 'Type':
+                            utils.default_property(self.ua_peer, var_idx, var_path, 'Type', ele.text)
 
     def instance_from_xml(self, root_xml):
         # creates and parses the instance
@@ -141,9 +155,8 @@ class InstanceService(utils.DiacInterface):
 
     def __create_methods(self, methods_xml):
         # create the folder for the methods
-        folder_idx, folder_path = utils.default_folder(self.ua_peer,
-                                                       self.base_idx, self.base_path, self.base_path_list,
-                                                       'Methods')
+        folder_idx, folder_path, folder_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                    self.base_path, self.base_path_list, 'Methods')
         for method in methods_xml:
             if method.attrib['name'] == 'AddLink':
                 # creates the opc-ua method 'AddLink'
@@ -179,8 +192,13 @@ class InstanceService(utils.DiacInterface):
                                            output_args=[])
 
     def __create_links(self, links_xml):
+        # creates the subscriptions folder
+        folder_idx, folder_path, folder_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                    self.base_path, self.base_path_list,
+                                                                    'Subscriptions')
         # iterates over each subscription of the set
         for subscription in links_xml:
+
             # checks if is context subscription
             if subscription.attrib['type'] == 'Context':
                 pass
@@ -203,7 +221,9 @@ class InstanceService(utils.DiacInterface):
                     pass
 
     def __create_variables(self, variables_xml):
-        pass
+        # creates the subscriptions folder
+        folder_idx, folder_path, folder_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                    self.base_path, self.base_path_list, 'Variables')
 
     def add_ua_link(self, parent, *args):
         print('adding link')
@@ -216,4 +236,3 @@ class InstanceService(utils.DiacInterface):
     def delete_ua(self, parent, *args):
         print('deleting instance')
         return []
-

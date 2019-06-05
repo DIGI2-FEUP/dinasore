@@ -343,6 +343,10 @@
                     <arguments>
                     </arguments>
                 </method>
+                <method name="CallInstance">
+                    <arguments>
+                    </arguments>
+                </method>
             </methods>
             <!-- subscription type: Data or Context (related hardware... sensor, equipment)
                    BrowseDirection: forward (means that subscription is an input),

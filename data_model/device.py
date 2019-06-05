@@ -86,9 +86,8 @@ class Device(utils.DiacInterface):
 
     def __create_methods(self, methods_xml):
         # creates the methods folder
-        folder_idx, methods_path = utils.default_folder(self.ua_peer,
-                                                        self.base_idx, self.base_path, self.base_path_list,
-                                                        'Methods')
+        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                      self.base_path, self.base_path_list, 'Methods')
         for method in methods_xml:
             method_name = method.attrib['name']
 
@@ -103,30 +102,20 @@ class Device(utils.DiacInterface):
 
     def __create_variables(self, vars_xml):
         # creates the variables folder
-        folder_idx, vars_path = utils.default_folder(self.ua_peer,
-                                                     self.base_idx, self.base_path, self.base_path_list,
-                                                     'Variables')
+        folder_idx, vars_path, vars_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                self.base_path, self.base_path_list, 'Variables')
         # creates the opc-ua variables and links them
         for var in vars_xml:
             if var.attrib['name'] != 'Description':
-                var_name = var.attrib['name']
-                # creates the opc-ua variable
-                var_idx = '{0}:{1}'.format(folder_idx, var_name)
-                browse_name = '2:{0}'.format(var_name)
-                var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
-                                                                utils.UA_TYPES[var.attrib['DataType']],
-                                                                utils.UA_RANKS[var.attrib['ValueRank']],
-                                                                writable=False)
+                # create the variable
+                var_idx, var_object = self.create_variable(var, folder_idx, vars_path)
                 # adds the variable to the dictionary
-                self.ua_variables[var_name] = var_object
+                self.ua_variables[var.attrib['name']] = var_object
 
     def __create_context_links(self, links_xml):
         # creates the subscriptions folder
-        folder_idx, subscriptions_path = utils.default_folder(self.ua_peer,
-                                                              self.base_idx, self.base_path,
-                                                              self.base_path_list,
-                                                              'Subscriptions')
-
+        folder_idx, subs_path, subs_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                self.base_path, self.base_path_list, 'Subscriptions')
         for subs in links_xml:
             # context connections between sensors/actuators and components/equipments
             pass

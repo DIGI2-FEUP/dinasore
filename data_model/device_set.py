@@ -12,8 +12,7 @@ class DeviceSet:
 
         # creates the opc-ua folder
         utils.default_folder(self.__ua_peer, self.__ua_peer.base_idx,
-                             self.__ua_peer.ROOT_PATH, self.__ua_peer.ROOT_LIST,
-                             'DeviceSet')
+                             self.__ua_peer.ROOT_PATH, self.__ua_peer.ROOT_LIST, 'DeviceSet')
 
     def from_xml(self, xml_set):
         for dev_xml in xml_set:
