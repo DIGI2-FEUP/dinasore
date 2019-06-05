@@ -112,8 +112,6 @@ class Method2Call:
 
         self.inputs = OrderedDict()
         self.outputs = OrderedDict()
-        self.input_types = []
-        self.output_types = []
 
     def execute(self, parent, *args):
         for i, (input_name, input_type) in enumerate(self.inputs.items()):
@@ -138,23 +136,33 @@ class Method2Call:
                 var_name = argument.attrib['name']
                 # gets the type
                 arg_type = argument.attrib['DataType']
-                self.outputs[var_name] = arg_type
-                self.output_types.append(UA_TYPES[arg_type])
+                self.outputs[var_name] = UA_TYPES[arg_type]
             elif argument.attrib['type'] == 'Input':
                 # gets the name
                 var_name = argument.attrib['name']
                 # gets the type
                 arg_type = argument.attrib['DataType']
-                self.inputs[var_name] = arg_type
-                self.input_types.append(UA_TYPES[arg_type])
+                self.inputs[var_name] = UA_TYPES[arg_type]
 
-    def virtualize(self, folder_idx, methods_path):
+    def parse_variable(self, var_xml):
+        # gets the name
+        var_name = var_xml.attrib['name']
+        # gets the type
+        arg_type = var_xml.attrib['DataType']
+        for ele in var_xml[0]:
+            # sets a input or output variable
+            if (ele.attrib['id'] == 'Type') and (ele.text == 'Input'):
+                self.inputs[var_name] = UA_TYPES[arg_type]
+            elif (ele.attrib['id'] == 'Type') and (ele.text == 'Output'):
+                self.outputs[var_name] = UA_TYPES[arg_type]
+
+    def virtualize(self, folder_idx, methods_path, ua_name):
         # creates the opc-ua method
-        method_idx = '{0}:{1}'.format(folder_idx, self.method_name)
-        browse_name = '2:{0}'.format(self.method_name)
+        method_idx = '{0}:{1}'.format(folder_idx, ua_name)
+        browse_name = '2:{0}'.format(ua_name)
         self.__ua_peer.create_method(methods_path,
                                      method_idx,
                                      browse_name,
                                      self.execute,
-                                     input_args=self.input_types,
-                                     output_args=self.output_types)
+                                     input_args=list(self.inputs.values()),
+                                     output_args=list(self.outputs.values()))

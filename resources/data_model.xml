@@ -297,13 +297,13 @@
             <interfaces>
                 <interface type="Arguments">
                     <variables>
-                        <variable name="Signal" DataType="Double" ValueRank="-2" ArrayDimensions="10">
+                        <variable name="Signal" DataType="Integer" ValueRank="-1">
                             <elements>
                                 <element id="Description" DataType="String" ValueRank="-1">Input signal</element>
                                 <element id="Type" DataType="String" ValueRank="-1">Input</element>
                             </elements>
                         </variable>
-                        <variable name="Frequencies" DataType="Double" ValueRank="-2" ArrayDimensions="10">
+                        <variable name="Frequencies" DataType="Integer" ValueRank="-1">
                             <elements>
                                 <element id="Description" DataType="String" ValueRank="-1">Output signal</element>
                                 <element id="Type" DataType="String" ValueRank="-1">Output</element>

@@ -98,7 +98,7 @@ class Device(utils.DiacInterface):
             # parses the method from the xml
             method2call.from_xml(method)
             # virtualize (opc-ua) the method
-            method2call.virtualize(folder_idx, methods_path)
+            method2call.virtualize(folder_idx, methods_path, method2call.method_name)
 
     def __create_variables(self, vars_xml):
         # creates the variables folder
