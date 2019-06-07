@@ -18,10 +18,10 @@
         </EventOutputs>
         <InputVars>
             <VarDeclaration Name="Rate" Type="INT"/>
-            <VarDeclaration Name="Signal" Type="STRING"/>
+            <VarDeclaration Name="Signal" Type="INT"/>
         </InputVars>
         <OutputVars>
-            <VarDeclaration Name="Frequencies" Type="STRING"/>
+            <VarDeclaration Name="Frequencies" Type="INT"/>
         </OutputVars>
     </InterfaceList>
 </FBType>

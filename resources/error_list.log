@@ -1,0 +1,685 @@
+[2019-06-07 13:08:38,120][INFO][MainThread] starting up on localhost port 61499
+[2019-06-07 13:08:38,120][INFO][MainThread] add_node: while adding node NumericNodeId(i=3062), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,121][INFO][MainThread] add_node: while adding node NumericNodeId(i=3063), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,121][INFO][MainThread] add_node: while adding node NumericNodeId(i=24), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,125][INFO][MainThread] add_node: while adding node NumericNodeId(i=31), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,127][INFO][MainThread] add_node: while adding node NumericNodeId(i=3068), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,128][INFO][MainThread] add_node: while adding node NumericNodeId(i=12170), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,128][INFO][MainThread] add_node: while adding node NumericNodeId(i=3067), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,128][INFO][MainThread] add_node: while adding node NumericNodeId(i=3069), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,128][INFO][MainThread] add_node: while adding node NumericNodeId(i=3070), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,128][INFO][MainThread] add_node: while adding node NumericNodeId(i=11433), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,129][INFO][MainThread] add_node: while adding node NumericNodeId(i=11498), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,129][INFO][MainThread] add_node: while adding node NumericNodeId(i=15002), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,129][INFO][MainThread] add_node: while adding node NumericNodeId(i=12908), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,129][INFO][MainThread] add_node: while adding node NumericNodeId(i=11512), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,130][INFO][MainThread] add_node: while adding node NumericNodeId(i=11513), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,130][INFO][MainThread] add_node: while adding node NumericNodeId(i=11432), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,130][INFO][MainThread] add_node: while adding node NumericNodeId(i=3071), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,130][INFO][MainThread] add_node: while adding node NumericNodeId(i=12745), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,130][INFO][MainThread] add_node: while adding node NumericNodeId(i=3072), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,131][INFO][MainThread] add_node: while adding node NumericNodeId(i=3073), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,131][INFO][MainThread] add_node: while adding node NumericNodeId(i=16306), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,177][INFO][MainThread] add_node: while adding node NumericNodeId(i=58), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,177][INFO][MainThread] add_node: while adding node NumericNodeId(i=62), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,180][INFO][MainThread] add_node: while adding node NumericNodeId(i=78), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,180][INFO][MainThread] add_node: while adding node NumericNodeId(i=80), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,180][INFO][MainThread] add_node: while adding node NumericNodeId(i=83), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,181][INFO][MainThread] add_node: while adding node NumericNodeId(i=79), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,181][INFO][MainThread] add_node: while adding node NumericNodeId(i=11508), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,182][INFO][MainThread] add_node: while adding node NumericNodeId(i=11510), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,182][INFO][MainThread] add_node: while adding node NumericNodeId(i=84), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,184][INFO][MainThread] add_node: while adding node NumericNodeId(i=15957), requested parent node NumericNodeId(i=11715) does not exists
+[2019-06-07 13:08:38,184][INFO][MainThread] add_node: while adding node NumericNodeId(i=15958), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,184][INFO][MainThread] add_node: while adding node NumericNodeId(i=15959), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,184][INFO][MainThread] add_node: while adding node NumericNodeId(i=15960), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,184][INFO][MainThread] add_node: while adding node NumericNodeId(i=15961), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,184][INFO][MainThread] add_node: while adding node NumericNodeId(i=15962), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,184][INFO][MainThread] add_node: while adding node NumericNodeId(i=15963), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,185][INFO][MainThread] add_node: while adding node NumericNodeId(i=15964), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,185][INFO][MainThread] add_node: while adding node NumericNodeId(i=16134), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,185][INFO][MainThread] add_node: while adding node NumericNodeId(i=16135), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,185][INFO][MainThread] add_node: while adding node NumericNodeId(i=16136), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-07 13:08:38,373][INFO][MainThread] add_node: while adding node NumericNodeId(i=16314), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,654][INFO][MainThread] add_node: while adding node NumericNodeId(i=11214), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,658][INFO][MainThread] add_node: while adding node NumericNodeId(i=11202), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,660][INFO][MainThread] add_node: while adding node NumericNodeId(i=11215), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,671][INFO][MainThread] add_node: while adding node NumericNodeId(i=2341), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,671][INFO][MainThread] add_node: while adding node NumericNodeId(i=2342), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,671][INFO][MainThread] add_node: while adding node NumericNodeId(i=2343), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,672][INFO][MainThread] add_node: while adding node NumericNodeId(i=11285), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,672][INFO][MainThread] add_node: while adding node NumericNodeId(i=2344), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,672][INFO][MainThread] add_node: while adding node NumericNodeId(i=11304), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,672][INFO][MainThread] add_node: while adding node NumericNodeId(i=2346), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,672][INFO][MainThread] add_node: while adding node NumericNodeId(i=2347), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,672][INFO][MainThread] add_node: while adding node NumericNodeId(i=2348), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,673][INFO][MainThread] add_node: while adding node NumericNodeId(i=2349), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,673][INFO][MainThread] add_node: while adding node NumericNodeId(i=2350), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,673][INFO][MainThread] add_node: while adding node NumericNodeId(i=11286), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,673][INFO][MainThread] add_node: while adding node NumericNodeId(i=11287), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,673][INFO][MainThread] add_node: while adding node NumericNodeId(i=11305), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,673][INFO][MainThread] add_node: while adding node NumericNodeId(i=11306), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,674][INFO][MainThread] add_node: while adding node NumericNodeId(i=11288), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,674][INFO][MainThread] add_node: while adding node NumericNodeId(i=2351), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,674][INFO][MainThread] add_node: while adding node NumericNodeId(i=2352), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,674][INFO][MainThread] add_node: while adding node NumericNodeId(i=11307), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,674][INFO][MainThread] add_node: while adding node NumericNodeId(i=11308), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,674][INFO][MainThread] add_node: while adding node NumericNodeId(i=2355), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,675][INFO][MainThread] add_node: while adding node NumericNodeId(i=2357), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,675][INFO][MainThread] add_node: while adding node NumericNodeId(i=2358), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,675][INFO][MainThread] add_node: while adding node NumericNodeId(i=2359), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,675][INFO][MainThread] add_node: while adding node NumericNodeId(i=11505), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,675][INFO][MainThread] add_node: while adding node NumericNodeId(i=11506), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,675][INFO][MainThread] add_node: while adding node NumericNodeId(i=11507), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,676][INFO][MainThread] add_node: while adding node NumericNodeId(i=2360), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,676][INFO][MainThread] add_node: while adding node NumericNodeId(i=2361), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,676][INFO][MainThread] add_node: while adding node NumericNodeId(i=2362), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,676][INFO][MainThread] add_node: while adding node NumericNodeId(i=2363), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,676][INFO][MainThread] add_node: while adding node NumericNodeId(i=2364), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,676][INFO][MainThread] add_node: while adding node NumericNodeId(i=11292), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,677][INFO][MainThread] add_node: while adding node NumericNodeId(i=11426), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,677][INFO][MainThread] add_node: while adding node NumericNodeId(i=11427), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,677][INFO][MainThread] add_node: while adding node NumericNodeId(i=11428), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,677][INFO][MainThread] add_node: while adding node NumericNodeId(i=11429), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-07 13:08:38,726][INFO][MainThread] Created internal session Internal
+[2019-06-07 13:08:38,727][WARNING][MainThread] Endpoints other than open requested but private key and certificate are not set.
+[2019-06-07 13:08:38,727][INFO][MainThread] starting internal server
+[2019-06-07 13:08:38,729][WARNING][MainThread] Listening on localhost:4841
+[2019-06-07 13:08:38,729][INFO][MainThread] getting the xml self definition...
+[2019-06-07 13:08:38,730][INFO][MainThread] creating a new fb...
+[2019-06-07 13:08:38,730][INFO][MainThread] importing fb python file and definition file...
+[2019-06-07 13:08:38,731][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/EMB_RES.fbt
+[2019-06-07 13:08:38,731][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/EMB_RES.py
+[2019-06-07 13:08:38,731][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-07 13:08:38,731][INFO][MainThread] parsing successful with:
+[2019-06-07 13:08:38,731][INFO][MainThread] input events: OrderedDict()
+[2019-06-07 13:08:38,731][INFO][MainThread] output events: OrderedDict([('COLD', ('Event', None, False)), ('WARM', ('Event', None, False)), ('STOP', ('Event', None, False))])
+[2019-06-07 13:08:38,731][INFO][MainThread] input vars: OrderedDict()
+[2019-06-07 13:08:38,731][INFO][MainThread] output vars: OrderedDict()
+[2019-06-07 13:08:38,731][INFO][MainThread] created fb type: EMB_RES, instance: START
+[2019-06-07 13:08:38,734][INFO][MainThread] creating a virtualized (opc-ua) fb...
+[2019-06-07 13:08:38,734][INFO][MainThread] creating a new fb...
+[2019-06-07 13:08:38,734][INFO][MainThread] importing fb python file and definition file...
+[2019-06-07 13:08:38,735][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.fbt
+[2019-06-07 13:08:38,735][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.py
+[2019-06-07 13:08:38,735][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-07 13:08:38,735][INFO][MainThread] parsing successful with:
+[2019-06-07 13:08:38,735][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-07 13:08:38,735][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-07 13:08:38,735][INFO][MainThread] input vars: OrderedDict()
+[2019-06-07 13:08:38,735][INFO][MainThread] output vars: OrderedDict([('TempoAspersaoPowerWashI', ('REAL', None, False)), ('TempoAspersaoCSE', ('REAL', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-07 13:08:38,735][INFO][MainThread] created fb type: SprinklingTime, instance: TempoAspersaoPowerWashI
+[2019-06-07 13:08:38,736][INFO][MainThread] creating a new connection...
+[2019-06-07 13:08:38,736][INFO][MainThread] connection created between START.COLD and TempoAspersaoPowerWashI.Init
+[2019-06-07 13:08:38,737][INFO][MainThread] creating a virtualized (opc-ua) fb...
+[2019-06-07 13:08:38,737][INFO][MainThread] creating a new fb...
+[2019-06-07 13:08:38,737][INFO][MainThread] importing fb python file and definition file...
+[2019-06-07 13:08:38,738][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/Thermometer.fbt
+[2019-06-07 13:08:38,738][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/Thermometer.py
+[2019-06-07 13:08:38,738][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-07 13:08:38,738][INFO][MainThread] parsing successful with:
+[2019-06-07 13:08:38,738][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-07 13:08:38,738][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-07 13:08:38,738][INFO][MainThread] input vars: OrderedDict()
+[2019-06-07 13:08:38,738][INFO][MainThread] output vars: OrderedDict([('Temperature', ('INT', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-07 13:08:38,738][INFO][MainThread] created fb type: Thermometer, instance: TemperaturaCSEProcesso
+[2019-06-07 13:08:38,739][INFO][MainThread] creating a new connection...
+[2019-06-07 13:08:38,739][INFO][MainThread] connection created between START.COLD and TemperaturaCSEProcesso.Init
+[2019-06-07 13:08:38,740][INFO][MainThread] creating a virtualized (opc-ua) fb...
+[2019-06-07 13:08:38,740][INFO][MainThread] creating a new fb...
+[2019-06-07 13:08:38,740][INFO][MainThread] importing fb python file and definition file...
+[2019-06-07 13:08:38,740][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.fbt
+[2019-06-07 13:08:38,740][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.py
+[2019-06-07 13:08:38,740][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-07 13:08:38,740][INFO][MainThread] parsing successful with:
+[2019-06-07 13:08:38,740][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-07 13:08:38,741][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-07 13:08:38,741][INFO][MainThread] input vars: OrderedDict()
+[2019-06-07 13:08:38,741][INFO][MainThread] output vars: OrderedDict([('TempoAspersaoPowerWashI', ('REAL', None, False)), ('TempoAspersaoCSE', ('REAL', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-07 13:08:38,741][INFO][MainThread] created fb type: SprinklingTime, instance: TempoAspersaoCSEProcesso
+[2019-06-07 13:08:38,742][INFO][MainThread] creating a new connection...
+[2019-06-07 13:08:38,742][INFO][MainThread] connection created between START.COLD and TempoAspersaoCSEProcesso.Init
+[2019-06-07 13:08:38,743][INFO][MainThread] creating a virtualized (opc-ua) fb...
+[2019-06-07 13:08:38,743][INFO][MainThread] creating a new fb...
+[2019-06-07 13:08:38,743][INFO][MainThread] importing fb python file and definition file...
+[2019-06-07 13:08:38,743][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.fbt
+[2019-06-07 13:08:38,743][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.py
+[2019-06-07 13:08:38,743][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-07 13:08:38,743][INFO][MainThread] parsing successful with:
+[2019-06-07 13:08:38,743][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-07 13:08:38,744][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-07 13:08:38,744][INFO][MainThread] input vars: OrderedDict()
+[2019-06-07 13:08:38,744][INFO][MainThread] output vars: OrderedDict([('Pressure_1', ('REAL', None, False)), ('Pressure_2', ('REAL', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-07 13:08:38,744][INFO][MainThread] created fb type: PressureSwitch, instance: DPFiltroCircuitoAgitação
+[2019-06-07 13:08:38,745][INFO][MainThread] creating a new connection...
+[2019-06-07 13:08:38,745][INFO][MainThread] connection created between START.COLD and DPFiltroCircuitoAgitação.Init
+[2019-06-07 13:08:38,746][INFO][MainThread] creating a virtualized (opc-ua) fb...
+[2019-06-07 13:08:38,746][INFO][MainThread] creating a new fb...
+[2019-06-07 13:08:38,746][INFO][MainThread] importing fb python file and definition file...
+[2019-06-07 13:08:38,746][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.fbt
+[2019-06-07 13:08:38,746][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.py
+[2019-06-07 13:08:38,746][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-07 13:08:38,746][INFO][MainThread] parsing successful with:
+[2019-06-07 13:08:38,746][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-07 13:08:38,746][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-07 13:08:38,746][INFO][MainThread] input vars: OrderedDict()
+[2019-06-07 13:08:38,746][INFO][MainThread] output vars: OrderedDict([('Pressure_1', ('REAL', None, False)), ('Pressure_2', ('REAL', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-07 13:08:38,746][INFO][MainThread] created fb type: PressureSwitch, instance: PressãoCircuitoAspersão
+[2019-06-07 13:08:38,748][INFO][MainThread] creating a new connection...
+[2019-06-07 13:08:38,748][INFO][MainThread] connection created between START.COLD and PressãoCircuitoAspersão.Init
+[2019-06-07 13:08:38,751][INFO][MainThread] creating a virtualized (opc-ua) fb...
+[2019-06-07 13:08:38,751][INFO][MainThread] creating a new fb...
+[2019-06-07 13:08:38,751][INFO][MainThread] importing fb python file and definition file...
+[2019-06-07 13:08:38,752][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/FastFourierTransform.fbt
+[2019-06-07 13:08:38,752][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/FastFourierTransform.py
+[2019-06-07 13:08:38,752][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-07 13:08:38,752][INFO][MainThread] parsing successful with:
+[2019-06-07 13:08:38,752][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Run', ('Event', None, False))])
+[2019-06-07 13:08:38,752][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Run_O', ('Event', None, False))])
+[2019-06-07 13:08:38,752][INFO][MainThread] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', None, False))])
+[2019-06-07 13:08:38,752][INFO][MainThread] output vars: OrderedDict([('Frequencies', ('INT', None, False))])
+[2019-06-07 13:08:38,752][INFO][MainThread] created fb type: FastFourierTransform, instance: ab3d2eb8-135a-11e9-ab14-d663bd873d93
+[2019-06-07 13:08:38,756][INFO][MainThread] creating a new connection...
+[2019-06-07 13:08:38,756][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Pressure_1 and ab3d2eb8-135a-11e9-ab14-d663bd873d93.Signal
+[2019-06-07 13:08:38,756][INFO][MainThread] creating a new connection...
+[2019-06-07 13:08:38,756][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Read_O and ab3d2eb8-135a-11e9-ab14-d663bd873d93.Run
+[2019-06-07 13:08:38,756][INFO][MainThread] starting the fb flow...
+[2019-06-07 13:08:38,756][INFO][TempoAspersaoPowerWashI] fb TempoAspersaoPowerWashI started.
+[2019-06-07 13:08:38,756][INFO][TemperaturaCSEProcesso] fb TemperaturaCSEProcesso started.
+[2019-06-07 13:08:38,757][INFO][TempoAspersaoCSEProcesso] fb TempoAspersaoCSEProcesso started.
+[2019-06-07 13:08:38,757][INFO][DPFiltroCircuitoAgitação] fb DPFiltroCircuitoAgitação started.
+[2019-06-07 13:08:38,757][INFO][PressãoCircuitoAspersão] fb PressãoCircuitoAspersão started.
+[2019-06-07 13:08:38,757][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] fb ab3d2eb8-135a-11e9-ab14-d663bd873d93 started.
+[2019-06-07 13:08:38,757][INFO][MainThread] updating the outputs...
+[2019-06-07 13:08:38,757][INFO][MainThread] self definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/data_model.xml
+[2019-06-07 13:08:38,757][INFO][TemperaturaCSEProcesso] reading fb inputs...
+[2019-06-07 13:08:38,757][INFO][TempoAspersaoCSEProcesso] reading fb inputs...
+[2019-06-07 13:08:38,757][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
+[2019-06-07 13:08:38,758][INFO][PressãoCircuitoAspersão] reading fb inputs...
+[2019-06-07 13:08:38,758][INFO][TempoAspersaoPowerWashI] reading fb inputs...
+[2019-06-07 13:08:38,758][INFO][MainThread] waiting for a connection...
+[2019-06-07 13:08:38,758][INFO][TemperaturaCSEProcesso] input vars: OrderedDict()
+[2019-06-07 13:08:38,758][INFO][TempoAspersaoCSEProcesso] input vars: OrderedDict()
+[2019-06-07 13:08:38,758][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
+[2019-06-07 13:08:38,758][INFO][PressãoCircuitoAspersão] input vars: OrderedDict()
+[2019-06-07 13:08:38,758][INFO][PressãoCircuitoAspersão] running fb...
+[2019-06-07 13:08:38,758][INFO][TemperaturaCSEProcesso] running fb...
+[2019-06-07 13:08:38,758][INFO][TempoAspersaoCSEProcesso] running fb...
+[2019-06-07 13:08:38,758][INFO][DPFiltroCircuitoAgitação] running fb...
+[2019-06-07 13:08:38,759][INFO][DPFiltroCircuitoAgitação] updating the outputs...
+[2019-06-07 13:08:38,758][INFO][TempoAspersaoPowerWashI] input vars: OrderedDict()
+[2019-06-07 13:08:38,758][INFO][TemperaturaCSEProcesso] updating the outputs...
+[2019-06-07 13:08:38,758][INFO][TempoAspersaoCSEProcesso] updating the outputs...
+[2019-06-07 13:08:38,758][INFO][PressãoCircuitoAspersão] updating the outputs...
+[2019-06-07 13:08:38,759][INFO][TempoAspersaoPowerWashI] running fb...
+[2019-06-07 13:08:38,759][INFO][TempoAspersaoPowerWashI] updating the outputs...
+[2019-06-07 13:08:39,772][INFO][Thread-1] New connection from ('127.0.0.1', 59974)
+[2019-06-07 13:08:39,779][INFO][Thread-1] Activate session request
+[2019-06-07 13:08:39,780][INFO][Thread-1] request to activate non-existing session
+[2019-06-07 13:08:39,780][INFO][Thread-1] sending service fault response: The session id is not valid. (BadSessionIdInvalid)
+[2019-06-07 13:08:39,783][INFO][Thread-1] Create session request
+[2019-06-07 13:08:39,783][INFO][Thread-1] Created internal session ('127.0.0.1', 59974)
+[2019-06-07 13:08:39,784][INFO][Thread-1] Create session request
+[2019-06-07 13:08:39,784][INFO][Thread-1] get endpoint
+[2019-06-07 13:08:39,784][INFO][Thread-1] sending create session response
+[2019-06-07 13:08:39,787][INFO][Thread-1] Activate session request
+[2019-06-07 13:08:39,788][INFO][Thread-1] activate session
+[2019-06-07 13:08:39,788][INFO][Thread-1] Activated internal session ('127.0.0.1', 59974) for user User.Anonymous
+[2019-06-07 13:08:39,789][INFO][Thread-1] sending read response
+[2019-06-07 13:08:39,792][INFO][Thread-1] Read request
+[2019-06-07 13:08:39,792][INFO][Thread-1] sending read response
+[2019-06-07 13:08:40,809][INFO][Thread-1] Read request
+[2019-06-07 13:08:40,825][INFO][Thread-1] sending read response
+[2019-06-07 13:08:41,830][INFO][Thread-1] Read request
+[2019-06-07 13:08:41,831][INFO][Thread-1] sending read response
+[2019-06-07 13:08:42,836][INFO][Thread-1] Read request
+[2019-06-07 13:08:42,837][INFO][Thread-1] sending read response
+[2019-06-07 13:08:43,843][INFO][Thread-1] Read request
+[2019-06-07 13:08:43,843][INFO][Thread-1] sending read response
+[2019-06-07 13:08:44,848][INFO][Thread-1] Read request
+[2019-06-07 13:08:44,849][INFO][Thread-1] sending read response
+[2019-06-07 13:08:45,853][INFO][Thread-1] Read request
+[2019-06-07 13:08:45,854][INFO][Thread-1] sending read response
+[2019-06-07 13:08:46,857][INFO][Thread-1] Read request
+[2019-06-07 13:08:46,858][INFO][Thread-1] sending read response
+[2019-06-07 13:08:47,863][INFO][Thread-1] Read request
+[2019-06-07 13:08:47,864][INFO][Thread-1] sending read response
+[2019-06-07 13:08:48,869][INFO][Thread-1] Read request
+[2019-06-07 13:08:48,870][INFO][Thread-1] sending read response
+[2019-06-07 13:08:49,875][INFO][Thread-1] Read request
+[2019-06-07 13:08:49,876][INFO][Thread-1] sending read response
+[2019-06-07 13:08:50,881][INFO][Thread-1] Read request
+[2019-06-07 13:08:50,882][INFO][Thread-1] sending read response
+[2019-06-07 13:08:51,886][INFO][Thread-1] Read request
+[2019-06-07 13:08:51,887][INFO][Thread-1] sending read response
+[2019-06-07 13:08:52,893][INFO][Thread-1] Read request
+[2019-06-07 13:08:52,893][INFO][Thread-1] sending read response
+[2019-06-07 13:08:53,898][INFO][Thread-1] Read request
+[2019-06-07 13:08:53,899][INFO][Thread-1] sending read response
+[2019-06-07 13:08:54,903][INFO][Thread-1] Read request
+[2019-06-07 13:08:54,904][INFO][Thread-1] sending read response
+[2019-06-07 13:08:55,908][INFO][Thread-1] Read request
+[2019-06-07 13:08:55,908][INFO][Thread-1] sending read response
+[2019-06-07 13:08:56,912][INFO][Thread-1] Read request
+[2019-06-07 13:08:56,913][INFO][Thread-1] sending read response
+[2019-06-07 13:08:57,918][INFO][Thread-1] Read request
+[2019-06-07 13:08:57,918][INFO][Thread-1] sending read response
+[2019-06-07 13:08:58,923][INFO][Thread-1] Read request
+[2019-06-07 13:08:58,924][INFO][Thread-1] sending read response
+[2019-06-07 13:08:59,928][INFO][Thread-1] Read request
+[2019-06-07 13:08:59,928][INFO][Thread-1] sending read response
+[2019-06-07 13:09:00,931][INFO][Thread-1] Read request
+[2019-06-07 13:09:00,932][INFO][Thread-1] sending read response
+[2019-06-07 13:09:01,937][INFO][Thread-1] Read request
+[2019-06-07 13:09:01,937][INFO][Thread-1] sending read response
+[2019-06-07 13:09:02,942][INFO][Thread-1] Read request
+[2019-06-07 13:09:02,943][INFO][Thread-1] sending read response
+[2019-06-07 13:09:03,947][INFO][Thread-1] Read request
+[2019-06-07 13:09:03,947][INFO][Thread-1] sending read response
+[2019-06-07 13:09:04,949][INFO][Thread-1] Read request
+[2019-06-07 13:09:04,949][INFO][Thread-1] sending read response
+[2019-06-07 13:09:05,332][INFO][Thread-1] call request
+[2019-06-07 13:09:05,333][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
+[2019-06-07 13:09:05,334][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
+[2019-06-07 13:09:05,334][INFO][DPFiltroCircuitoAgitação] running fb...
+[2019-06-07 13:09:05,334][INFO][DPFiltroCircuitoAgitação] updating the outputs...
+[2019-06-07 13:09:05,336][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
+[2019-06-07 13:09:05,336][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 3, False))])
+[2019-06-07 13:09:05,336][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
+[2019-06-07 13:09:05,337][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
+[2019-06-07 13:09:05,953][INFO][Thread-1] Read request
+[2019-06-07 13:09:05,953][INFO][Thread-1] sending read response
+[2019-06-07 13:09:06,958][INFO][Thread-1] Read request
+[2019-06-07 13:09:06,959][INFO][Thread-1] sending read response
+[2019-06-07 13:09:07,963][INFO][Thread-1] Read request
+[2019-06-07 13:09:07,964][INFO][Thread-1] sending read response
+[2019-06-07 13:09:08,969][INFO][Thread-1] Read request
+[2019-06-07 13:09:08,969][INFO][Thread-1] sending read response
+[2019-06-07 13:09:09,974][INFO][Thread-1] Read request
+[2019-06-07 13:09:09,975][INFO][Thread-1] sending read response
+[2019-06-07 13:09:10,980][INFO][Thread-1] Read request
+[2019-06-07 13:09:10,981][INFO][Thread-1] sending read response
+[2019-06-07 13:09:11,986][INFO][Thread-1] Read request
+[2019-06-07 13:09:11,987][INFO][Thread-1] sending read response
+[2019-06-07 13:09:12,991][INFO][Thread-1] Read request
+[2019-06-07 13:09:12,992][INFO][Thread-1] sending read response
+[2019-06-07 13:09:13,312][INFO][Thread-1] Read request
+[2019-06-07 13:09:13,313][INFO][Thread-1] sending read response
+[2019-06-07 13:09:13,316][INFO][Thread-1] Browse request
+[2019-06-07 13:09:13,317][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:13,320][INFO][Thread-1] Read request
+[2019-06-07 13:09:13,324][INFO][Thread-1] sending read response
+[2019-06-07 13:09:13,327][INFO][Thread-1] Browse request
+[2019-06-07 13:09:13,330][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:13,333][INFO][Thread-1] Read request
+[2019-06-07 13:09:13,334][INFO][Thread-1] sending read response
+[2019-06-07 13:09:13,336][INFO][Thread-1] Browse request
+[2019-06-07 13:09:13,337][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:13,339][INFO][Thread-1] Read request
+[2019-06-07 13:09:13,341][INFO][Thread-1] sending read response
+[2019-06-07 13:09:13,343][INFO][Thread-1] Browse request
+[2019-06-07 13:09:13,343][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:13,345][INFO][Thread-1] Read request
+[2019-06-07 13:09:13,345][INFO][Thread-1] sending read response
+[2019-06-07 13:09:13,346][INFO][Thread-1] Read request
+[2019-06-07 13:09:13,347][INFO][Thread-1] sending read response
+[2019-06-07 13:09:13,352][INFO][Thread-1] Browse request
+[2019-06-07 13:09:13,352][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:13,353][INFO][Thread-1] Browse request
+[2019-06-07 13:09:13,354][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:13,996][INFO][Thread-1] Read request
+[2019-06-07 13:09:13,997][INFO][Thread-1] sending read response
+[2019-06-07 13:09:15,000][INFO][Thread-1] Read request
+[2019-06-07 13:09:15,001][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,006][INFO][Thread-1] Read request
+[2019-06-07 13:09:16,007][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,485][INFO][Thread-1] Read request
+[2019-06-07 13:09:16,486][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,488][INFO][Thread-1] Browse request
+[2019-06-07 13:09:16,489][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:16,492][INFO][Thread-1] Read request
+[2019-06-07 13:09:16,496][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,500][INFO][Thread-1] Browse request
+[2019-06-07 13:09:16,502][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:16,505][INFO][Thread-1] Read request
+[2019-06-07 13:09:16,506][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,509][INFO][Thread-1] Browse request
+[2019-06-07 13:09:16,510][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:16,512][INFO][Thread-1] Read request
+[2019-06-07 13:09:16,514][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,516][INFO][Thread-1] Browse request
+[2019-06-07 13:09:16,517][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:16,519][INFO][Thread-1] Read request
+[2019-06-07 13:09:16,520][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,521][INFO][Thread-1] Read request
+[2019-06-07 13:09:16,521][INFO][Thread-1] sending read response
+[2019-06-07 13:09:16,526][INFO][Thread-1] Browse request
+[2019-06-07 13:09:16,527][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:16,528][INFO][Thread-1] Browse request
+[2019-06-07 13:09:16,528][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:17,012][INFO][Thread-1] Read request
+[2019-06-07 13:09:17,013][INFO][Thread-1] sending read response
+[2019-06-07 13:09:18,017][INFO][Thread-1] Read request
+[2019-06-07 13:09:18,018][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,023][INFO][Thread-1] Read request
+[2019-06-07 13:09:19,023][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,741][INFO][Thread-1] Read request
+[2019-06-07 13:09:19,742][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,745][INFO][Thread-1] Browse request
+[2019-06-07 13:09:19,745][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:19,748][INFO][Thread-1] Read request
+[2019-06-07 13:09:19,751][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,755][INFO][Thread-1] Browse request
+[2019-06-07 13:09:19,757][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:19,760][INFO][Thread-1] Read request
+[2019-06-07 13:09:19,761][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,764][INFO][Thread-1] Browse request
+[2019-06-07 13:09:19,764][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:19,767][INFO][Thread-1] Read request
+[2019-06-07 13:09:19,770][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,772][INFO][Thread-1] Browse request
+[2019-06-07 13:09:19,773][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:19,775][INFO][Thread-1] Read request
+[2019-06-07 13:09:19,776][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,777][INFO][Thread-1] Read request
+[2019-06-07 13:09:19,777][INFO][Thread-1] sending read response
+[2019-06-07 13:09:19,783][INFO][Thread-1] Browse request
+[2019-06-07 13:09:19,783][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:19,784][INFO][Thread-1] Browse request
+[2019-06-07 13:09:19,785][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:20,028][INFO][Thread-1] Read request
+[2019-06-07 13:09:20,029][INFO][Thread-1] sending read response
+[2019-06-07 13:09:20,837][INFO][Thread-1] Read request
+[2019-06-07 13:09:20,838][INFO][Thread-1] sending read response
+[2019-06-07 13:09:20,840][INFO][Thread-1] Browse request
+[2019-06-07 13:09:20,841][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:20,844][INFO][Thread-1] Read request
+[2019-06-07 13:09:20,847][INFO][Thread-1] sending read response
+[2019-06-07 13:09:20,850][INFO][Thread-1] Browse request
+[2019-06-07 13:09:20,852][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:20,855][INFO][Thread-1] Read request
+[2019-06-07 13:09:20,856][INFO][Thread-1] sending read response
+[2019-06-07 13:09:20,858][INFO][Thread-1] Browse request
+[2019-06-07 13:09:20,859][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:20,862][INFO][Thread-1] Read request
+[2019-06-07 13:09:20,864][INFO][Thread-1] sending read response
+[2019-06-07 13:09:20,867][INFO][Thread-1] Browse request
+[2019-06-07 13:09:20,868][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:20,870][INFO][Thread-1] Read request
+[2019-06-07 13:09:20,871][INFO][Thread-1] sending read response
+[2019-06-07 13:09:20,872][INFO][Thread-1] Read request
+[2019-06-07 13:09:20,872][INFO][Thread-1] sending read response
+[2019-06-07 13:09:20,878][INFO][Thread-1] Browse request
+[2019-06-07 13:09:20,879][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:20,880][INFO][Thread-1] Browse request
+[2019-06-07 13:09:20,881][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:21,033][INFO][Thread-1] Read request
+[2019-06-07 13:09:21,034][INFO][Thread-1] sending read response
+[2019-06-07 13:09:21,437][INFO][Thread-1] Read request
+[2019-06-07 13:09:21,438][INFO][Thread-1] sending read response
+[2019-06-07 13:09:21,441][INFO][Thread-1] Browse request
+[2019-06-07 13:09:21,442][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:21,445][INFO][Thread-1] Read request
+[2019-06-07 13:09:21,447][INFO][Thread-1] sending read response
+[2019-06-07 13:09:21,451][INFO][Thread-1] Browse request
+[2019-06-07 13:09:21,452][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:21,455][INFO][Thread-1] Read request
+[2019-06-07 13:09:21,456][INFO][Thread-1] sending read response
+[2019-06-07 13:09:21,458][INFO][Thread-1] Browse request
+[2019-06-07 13:09:21,459][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:21,462][INFO][Thread-1] Read request
+[2019-06-07 13:09:21,465][INFO][Thread-1] sending read response
+[2019-06-07 13:09:21,468][INFO][Thread-1] Browse request
+[2019-06-07 13:09:21,469][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:21,471][INFO][Thread-1] Read request
+[2019-06-07 13:09:21,471][INFO][Thread-1] sending read response
+[2019-06-07 13:09:21,472][INFO][Thread-1] Read request
+[2019-06-07 13:09:21,473][INFO][Thread-1] sending read response
+[2019-06-07 13:09:21,478][INFO][Thread-1] Browse request
+[2019-06-07 13:09:21,478][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:21,480][INFO][Thread-1] Browse request
+[2019-06-07 13:09:21,480][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,039][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,039][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,092][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,093][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,095][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,095][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,097][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,099][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,101][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,102][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,104][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,105][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,107][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,107][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,109][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,111][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,113][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,114][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,116][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,117][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,119][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,119][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,126][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,127][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,128][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,128][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,629][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,630][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,633][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,634][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,637][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,639][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,643][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,644][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,647][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,648][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,650][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,651][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,654][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,656][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,660][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,661][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,663][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,664][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,665][INFO][Thread-1] Read request
+[2019-06-07 13:09:22,666][INFO][Thread-1] sending read response
+[2019-06-07 13:09:22,672][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,673][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:22,674][INFO][Thread-1] Browse request
+[2019-06-07 13:09:22,675][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:23,044][INFO][Thread-1] Read request
+[2019-06-07 13:09:23,045][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,049][INFO][Thread-1] Read request
+[2019-06-07 13:09:24,049][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,613][INFO][Thread-1] Read request
+[2019-06-07 13:09:24,614][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,616][INFO][Thread-1] Browse request
+[2019-06-07 13:09:24,617][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:24,620][INFO][Thread-1] Read request
+[2019-06-07 13:09:24,623][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,626][INFO][Thread-1] Browse request
+[2019-06-07 13:09:24,628][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:24,631][INFO][Thread-1] Read request
+[2019-06-07 13:09:24,632][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,634][INFO][Thread-1] Browse request
+[2019-06-07 13:09:24,635][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:24,638][INFO][Thread-1] Read request
+[2019-06-07 13:09:24,640][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,643][INFO][Thread-1] Browse request
+[2019-06-07 13:09:24,644][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:24,646][INFO][Thread-1] Read request
+[2019-06-07 13:09:24,646][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,648][INFO][Thread-1] Read request
+[2019-06-07 13:09:24,648][INFO][Thread-1] sending read response
+[2019-06-07 13:09:24,653][INFO][Thread-1] Browse request
+[2019-06-07 13:09:24,654][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:24,655][INFO][Thread-1] Browse request
+[2019-06-07 13:09:24,656][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:25,053][INFO][Thread-1] Read request
+[2019-06-07 13:09:25,053][INFO][Thread-1] sending read response
+[2019-06-07 13:09:25,285][INFO][Thread-1] Read request
+[2019-06-07 13:09:25,286][INFO][Thread-1] sending read response
+[2019-06-07 13:09:25,288][INFO][Thread-1] Browse request
+[2019-06-07 13:09:25,289][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:25,292][INFO][Thread-1] Read request
+[2019-06-07 13:09:25,294][INFO][Thread-1] sending read response
+[2019-06-07 13:09:25,301][INFO][Thread-1] Browse request
+[2019-06-07 13:09:25,304][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:25,309][INFO][Thread-1] Read request
+[2019-06-07 13:09:25,310][INFO][Thread-1] sending read response
+[2019-06-07 13:09:25,313][INFO][Thread-1] Browse request
+[2019-06-07 13:09:25,314][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:25,316][INFO][Thread-1] Read request
+[2019-06-07 13:09:25,319][INFO][Thread-1] sending read response
+[2019-06-07 13:09:25,321][INFO][Thread-1] Browse request
+[2019-06-07 13:09:25,322][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:25,323][INFO][Thread-1] Read request
+[2019-06-07 13:09:25,324][INFO][Thread-1] sending read response
+[2019-06-07 13:09:25,325][INFO][Thread-1] Read request
+[2019-06-07 13:09:25,325][INFO][Thread-1] sending read response
+[2019-06-07 13:09:25,330][INFO][Thread-1] Browse request
+[2019-06-07 13:09:25,331][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:25,332][INFO][Thread-1] Browse request
+[2019-06-07 13:09:25,332][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:26,057][INFO][Thread-1] Read request
+[2019-06-07 13:09:26,058][INFO][Thread-1] sending read response
+[2019-06-07 13:09:27,062][INFO][Thread-1] Read request
+[2019-06-07 13:09:27,063][INFO][Thread-1] sending read response
+[2019-06-07 13:09:28,069][INFO][Thread-1] Read request
+[2019-06-07 13:09:28,070][INFO][Thread-1] sending read response
+[2019-06-07 13:09:29,074][INFO][Thread-1] Read request
+[2019-06-07 13:09:29,075][INFO][Thread-1] sending read response
+[2019-06-07 13:09:30,080][INFO][Thread-1] Read request
+[2019-06-07 13:09:30,081][INFO][Thread-1] sending read response
+[2019-06-07 13:09:30,582][INFO][Thread-1] Browse request
+[2019-06-07 13:09:30,583][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:31,085][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,086][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,637][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,638][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,641][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,643][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,648][INFO][Thread-1] Browse request
+[2019-06-07 13:09:31,649][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:31,652][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,653][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,655][INFO][Thread-1] Browse request
+[2019-06-07 13:09:31,656][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:31,659][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,661][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,665][INFO][Thread-1] Browse request
+[2019-06-07 13:09:31,666][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:31,670][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,670][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,673][INFO][Thread-1] Browse request
+[2019-06-07 13:09:31,674][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:31,677][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,680][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,683][INFO][Thread-1] Browse request
+[2019-06-07 13:09:31,684][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:31,688][INFO][Thread-1] Read request
+[2019-06-07 13:09:31,689][INFO][Thread-1] sending read response
+[2019-06-07 13:09:31,701][INFO][Thread-1] Browse request
+[2019-06-07 13:09:31,702][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:31,704][INFO][Thread-1] Browse request
+[2019-06-07 13:09:31,705][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:32,091][INFO][Thread-1] Read request
+[2019-06-07 13:09:32,092][INFO][Thread-1] sending read response
+[2019-06-07 13:09:32,445][INFO][Thread-1] Read request
+[2019-06-07 13:09:32,446][INFO][Thread-1] sending read response
+[2019-06-07 13:09:32,448][INFO][Thread-1] Browse request
+[2019-06-07 13:09:32,449][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:32,452][INFO][Thread-1] Read request
+[2019-06-07 13:09:32,454][INFO][Thread-1] sending read response
+[2019-06-07 13:09:32,457][INFO][Thread-1] Browse request
+[2019-06-07 13:09:32,459][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:33,097][INFO][Thread-1] Read request
+[2019-06-07 13:09:33,097][INFO][Thread-1] sending read response
+[2019-06-07 13:09:34,102][INFO][Thread-1] Read request
+[2019-06-07 13:09:34,103][INFO][Thread-1] sending read response
+[2019-06-07 13:09:35,108][INFO][Thread-1] Read request
+[2019-06-07 13:09:35,108][INFO][Thread-1] sending read response
+[2019-06-07 13:09:36,113][INFO][Thread-1] Read request
+[2019-06-07 13:09:36,114][INFO][Thread-1] sending read response
+[2019-06-07 13:09:37,118][INFO][Thread-1] Read request
+[2019-06-07 13:09:37,119][INFO][Thread-1] sending read response
+[2019-06-07 13:09:37,211][INFO][Thread-1] call request
+[2019-06-07 13:09:37,211][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
+[2019-06-07 13:09:37,212][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 1, False))])
+[2019-06-07 13:09:37,212][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
+[2019-06-07 13:09:37,212][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
+[2019-06-07 13:09:38,123][INFO][Thread-1] Read request
+[2019-06-07 13:09:38,124][INFO][Thread-1] sending read response
+[2019-06-07 13:09:39,128][INFO][Thread-1] Read request
+[2019-06-07 13:09:39,129][INFO][Thread-1] sending read response
+[2019-06-07 13:09:40,134][INFO][Thread-1] Read request
+[2019-06-07 13:09:40,135][INFO][Thread-1] sending read response
+[2019-06-07 13:09:41,140][INFO][Thread-1] Read request
+[2019-06-07 13:09:41,141][INFO][Thread-1] sending read response
+[2019-06-07 13:09:42,146][INFO][Thread-1] Read request
+[2019-06-07 13:09:42,147][INFO][Thread-1] sending read response
+[2019-06-07 13:09:43,153][INFO][Thread-1] Read request
+[2019-06-07 13:09:43,154][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,160][INFO][Thread-1] Read request
+[2019-06-07 13:09:44,161][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,773][INFO][Thread-1] Read request
+[2019-06-07 13:09:44,774][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,777][INFO][Thread-1] Browse request
+[2019-06-07 13:09:44,778][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:44,781][INFO][Thread-1] Read request
+[2019-06-07 13:09:44,784][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,787][INFO][Thread-1] Browse request
+[2019-06-07 13:09:44,788][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:44,791][INFO][Thread-1] Read request
+[2019-06-07 13:09:44,792][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,795][INFO][Thread-1] Browse request
+[2019-06-07 13:09:44,796][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:44,798][INFO][Thread-1] Read request
+[2019-06-07 13:09:44,801][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,804][INFO][Thread-1] Browse request
+[2019-06-07 13:09:44,805][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:44,808][INFO][Thread-1] Read request
+[2019-06-07 13:09:44,808][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,810][INFO][Thread-1] Read request
+[2019-06-07 13:09:44,810][INFO][Thread-1] sending read response
+[2019-06-07 13:09:44,818][INFO][Thread-1] Browse request
+[2019-06-07 13:09:44,819][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:44,821][INFO][Thread-1] Browse request
+[2019-06-07 13:09:44,821][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:45,167][INFO][Thread-1] Read request
+[2019-06-07 13:09:45,168][INFO][Thread-1] sending read response
+[2019-06-07 13:09:45,805][INFO][Thread-1] Read request
+[2019-06-07 13:09:45,806][INFO][Thread-1] sending read response
+[2019-06-07 13:09:45,808][INFO][Thread-1] Browse request
+[2019-06-07 13:09:45,809][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:45,812][INFO][Thread-1] Read request
+[2019-06-07 13:09:45,815][INFO][Thread-1] sending read response
+[2019-06-07 13:09:45,818][INFO][Thread-1] Browse request
+[2019-06-07 13:09:45,820][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:45,823][INFO][Thread-1] Read request
+[2019-06-07 13:09:45,824][INFO][Thread-1] sending read response
+[2019-06-07 13:09:45,827][INFO][Thread-1] Browse request
+[2019-06-07 13:09:45,828][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:45,831][INFO][Thread-1] Read request
+[2019-06-07 13:09:45,833][INFO][Thread-1] sending read response
+[2019-06-07 13:09:45,837][INFO][Thread-1] Browse request
+[2019-06-07 13:09:45,838][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:45,840][INFO][Thread-1] Read request
+[2019-06-07 13:09:45,840][INFO][Thread-1] sending read response
+[2019-06-07 13:09:45,842][INFO][Thread-1] Read request
+[2019-06-07 13:09:45,842][INFO][Thread-1] sending read response
+[2019-06-07 13:09:45,848][INFO][Thread-1] Browse request
+[2019-06-07 13:09:45,848][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:45,850][INFO][Thread-1] Browse request
+[2019-06-07 13:09:45,850][INFO][Thread-1] sending browse response
+[2019-06-07 13:09:46,173][INFO][Thread-1] Read request
+[2019-06-07 13:09:46,173][INFO][Thread-1] sending read response
+[2019-06-07 13:09:47,178][INFO][Thread-1] Read request
+[2019-06-07 13:09:47,179][INFO][Thread-1] sending read response
+[2019-06-07 13:09:48,184][INFO][Thread-1] Read request
+[2019-06-07 13:09:48,185][INFO][Thread-1] sending read response
+[2019-06-07 13:09:49,093][INFO][MainThread] interrupted server
+[2019-06-07 13:09:49,189][INFO][Thread-1] Read request
+[2019-06-07 13:09:49,190][INFO][Thread-1] sending read response

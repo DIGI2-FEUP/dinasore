@@ -8,16 +8,16 @@ class Thermometer:
 
     def schedule(self, event_name, event_value):
         if event_name == 'Init':
-            print('initialization')
+            # print('initialization')
             return [event_value, None, None, self.temperature, self.cal_result]
 
         elif event_name == 'Read':
-            print('read temperature')
+            # print('read temperature')
             self.temperature += 1
             return [None, event_value, None, self.temperature, self.cal_result]
 
         elif event_name == 'Calibrate':
-            print('calibration')
+            # print('calibration')
             self.cal_result = True
             return [None, None, event_value, self.temperature, self.cal_result]
 

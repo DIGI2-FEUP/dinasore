@@ -355,7 +355,7 @@
                       VariableName: name of the service variable that is linked to that subscription -->
             <subscriptions>
                 <id BrowseDirection="both" type="Context">6ddeae8a-3b9f-11e9-b210-d663bd873d93</id>
-                <id BrowseDirection="forward" type="Data" VariableName="Value">6ddeae8a-3b9f-11e9-b210-d663bd873d93:Variables:TempoAspersaoPowerWashI</id>
+                <id BrowseDirection="forward" type="Data" VariableName="Signal">6ddeb3d0-3b9f-11e9-b210-d663bd873d93:Variables:Pressure_1</id>
             </subscriptions>
             <recipeadjustments>
                 <recipeadjustment name="AcquisitionRate">

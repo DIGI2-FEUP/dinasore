@@ -1,4 +1,5 @@
 from data_model import utils
+from data_model import device
 from opcua import ua
 
 
@@ -26,7 +27,8 @@ class InstanceService(utils.DiacInterface):
         self.ua_peer.config.create_virtualized_fb(self.subs_id, self.fb_type, self.update_variables)
 
         # create the ua method to call
-        self.ua_method = utils.Method2Call('Run', self.ua_peer.config.get_fb(self.fb_name), self.ua_peer)
+        fb = self.ua_peer.config.get_fb(self.fb_name)
+        self.ua_method = utils.Method2Call('Run', fb, self.ua_peer)
         # create the linked variables
         self.__create_variables(None)
 
@@ -111,10 +113,18 @@ class InstanceService(utils.DiacInterface):
                     # gets the destination fb
                     content = self.ua_peer.search_id(sub_splitted[0])
                     # creates the connection between the fb
-                    source = '{0}.{1}'.format(self.subs_id, subscription.attrib['VariableName'])
-                    destination = '{0}.{1}'.format(content.fb_name, sub_splitted[2])
+                    source = '{0}.{1}'.format(content.fb_name, sub_splitted[2])
+                    destination = '{0}.{1}'.format(self.subs_id, subscription.attrib['VariableName'])
                     self.ua_peer.config.create_connection(source=source, destination=destination)
                     # connect the output event to input event
+                    if isinstance(content, device.Device):
+                        source_event = '{0}.{1}'.format(content.fb_name, 'Read_O')
+                    else:
+                        source_event = '{0}.{1}'.format(content.fb_name, 'Run_O')
+
+                    # creates the connection between the fb
+                    destination_event = '{0}.{1}'.format(self.subs_id, 'Run')
+                    self.ua_peer.config.create_connection(source=source_event, destination=destination_event)
 
                 # its an output variable
                 elif subscription.attrib['BrowseDirection'] == 'inverse':
