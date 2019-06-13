@@ -2,9 +2,15 @@ from opcua import ua
 from collections import OrderedDict
 
 UA_TYPES = {'String': ua.VariantType.String,
+            'STRING': ua.VariantType.String,
             'Double': ua.VariantType.Double,
             'Integer': ua.VariantType.Int64,
+            'INT': ua.VariantType.Int64,
+            'UINT': ua.VariantType.UInt64,
             'Float': ua.VariantType.Float,
+            'REAL': ua.VariantType.Float,
+            'LREAL': ua.VariantType.Float,
+            'BOOL': ua.VariantType.Boolean,
             'Boolean': ua.VariantType.Boolean}
 
 UA_RANKS = {'1': ua.ValueRank.OneDimension,
@@ -76,6 +82,17 @@ class UaBaseStructure:
                                                         writable=False)
         return var_idx, var_object
 
+    def create_fb_variable(self, var_xml, folder_idx, vars_path):
+        var_name = var_xml.attrib['Name']
+        # creates the opc-ua variable
+        var_idx = '{0}:{1}'.format(folder_idx, var_name)
+        browse_name = '2:{0}'.format(var_name)
+        var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
+                                                        UA_TYPES[var_xml.attrib['Type']],
+                                                        UA_RANKS['0'],
+                                                        writable=False)
+        return var_idx, var_object
+
 
 class DiacInterface(UaBaseStructure):
 
@@ -83,13 +100,13 @@ class DiacInterface(UaBaseStructure):
         UaBaseStructure.__init__(self, ua_peer, folder_name)
         self.ua_variables = dict()
 
-    def __create_methods(self, methods_xml):
+    def __parse_methods(self, methods_xml):
         raise NotImplementedError
 
-    def __create_variables(self, variables_xml):
+    def __parse_variables(self, variables_xml):
         raise NotImplementedError
 
-    def __create_header(self, header_xml):
+    def __parse_header(self, header_xml):
         raise NotImplementedError
 
     def update_variables(self):
@@ -143,6 +160,29 @@ class Method2Call:
                 # gets the type
                 arg_type = argument.attrib['DataType']
                 self.inputs[var_name] = UA_TYPES[arg_type]
+
+    def from_fb(self, input_xml, output_xml):
+        # gets the method input arguments
+        for entry in input_xml:
+            if 'OpcUa' in entry.attrib:
+                var_specs = entry.attrib['OpcUa'].split('.')
+                if self.method_name in var_specs:
+                    # gets the name
+                    var_name = entry.attrib['Name']
+                    # gets the type
+                    arg_type = entry.attrib['Type']
+                    self.inputs[var_name] = UA_TYPES[arg_type]
+
+        # gets the method output arguments
+        for entry in output_xml:
+            if 'OpcUa' in entry.attrib:
+                var_specs = entry.attrib['OpcUa'].split('.')
+                if self.method_name in var_specs:
+                    # gets the name
+                    var_name = entry.attrib['Name']
+                    # gets the type
+                    arg_type = entry.attrib['Type']
+                    self.outputs[var_name] = UA_TYPES[arg_type]
 
     def parse_variable(self, var_xml):
         # gets the name

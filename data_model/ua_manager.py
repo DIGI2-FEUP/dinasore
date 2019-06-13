@@ -74,6 +74,18 @@ class UaManager(peer.UaPeer):
         else:
             logging.info('self definition (xml) imported from: {0}'.format(xml_path))
 
+    def from_fb(self, fb, fb_xml):
+        # check if exists the opc-ua tag inside the fb_xml
+        for item in fb_xml:
+            if item.tag == 'SelfDiscription':
+                item_type = item.attrib['FBType'].split('.')
+
+                if item_type[0] == 'DEVICE':
+                    self.__device_set.from_fb(fb, item)
+
+                if item_type[0] == 'SERVICE':
+                    pass
+
     def __parse_general(self, general_root):
         self.base_idx = 'ns=2;s={0}'.format(general_root[2].text)
         for item in general_root:

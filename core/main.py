@@ -33,7 +33,7 @@ if __name__ == "__main__":
     if os.path.isfile(log_path):
         os.remove(log_path)
     logging.basicConfig(filename=log_path,
-                        level=logging.INFO,
+                        level=logging.ERROR,
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
 
     # creates the 4diac manager

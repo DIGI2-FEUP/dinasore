@@ -91,7 +91,7 @@ This kind of file is a .fbt file witch represents the function block terminology
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType>
 <FBType Comment="" Name="FB_EXAMPLE">
-  <SelfDiscription FBType="SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
+  <SelfDiscription FBType="DEVICE.SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
   <InterfaceList>
     <EventInputs>
       <Event Comment="" Name="E_IN1" Type="Event" OpcUa="Method">
@@ -118,6 +118,11 @@ This kind of file is a .fbt file witch represents the function block terminology
 
 ##### Opc-Ua/Self-description file integration
 
+If you want to virtualize any fb using opc-ua you need to add the "SelfDiscription" tag to the function block xml.
+This tag has as attributes the "FBType" witch could be a DEVICE.SENSOR, DEVICE.ACTUATOR, DEVICE.EQUIPMENT or a SERVICE.
+The other attribute that you need to specify is the unique ID of that function block.
+
+You need also to add the attribute OpcUa="Variable" inside each variable you want to virtualize.
 
 
 ###### Connection-Interfaces

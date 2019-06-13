@@ -21,7 +21,7 @@ class InstanceService(utils.DiacInterface):
         self.fb_name = root_xml.attrib['id']
 
         # creates the header opc-ua (description, ...) of this instance
-        self.__create_header(root_xml)
+        self.__parse_header(root_xml)
 
         # creates the fb for the instance
         self.ua_peer.config.create_virtualized_fb(self.subs_id, self.fb_type, self.update_variables)
@@ -30,7 +30,7 @@ class InstanceService(utils.DiacInterface):
         fb = self.ua_peer.config.get_fb(self.fb_name)
         self.ua_method = utils.Method2Call('Run', fb, self.ua_peer)
         # create the linked variables
-        self.__create_variables(None)
+        self.__parse_variables(None)
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -38,12 +38,12 @@ class InstanceService(utils.DiacInterface):
 
             if tag == 'methods':
                 # creates the default methods 'AddLink', 'RemoveLink' and 'DeleteInstance'
-                self.__create_methods(item)
+                self.__parse_methods(item)
 
             elif tag == 'subscriptions':
                 self.__create_links(item)
 
-    def __create_header(self, header_xml):
+    def __parse_header(self, header_xml):
         # creates the instance object
         browse_name = '{0}:{1}'.format(self.fb_type, self.subs_id)
         self.create_base_object(browse_name)
@@ -52,7 +52,7 @@ class InstanceService(utils.DiacInterface):
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'dID', self.subs_did)
 
-    def __create_methods(self, methods_xml):
+    def __parse_methods(self, methods_xml):
         # create the folder for the methods
         folder_idx, folder_path, folder_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                     self.base_path, self.base_path_list, 'Methods')
@@ -130,7 +130,7 @@ class InstanceService(utils.DiacInterface):
                 elif subscription.attrib['BrowseDirection'] == 'inverse':
                     pass
 
-    def __create_variables(self, vars_xml):
+    def __parse_variables(self, vars_xml):
         # creates the subscriptions folder
         folder_idx, folder_path, folder_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                     self.base_path, self.base_path_list, 'Variables')

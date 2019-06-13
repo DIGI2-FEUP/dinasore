@@ -1,4 +1,3 @@
-from core import fb_resources
 from data_model import utils
 from data_model import device
 
@@ -26,19 +25,15 @@ class DeviceSet:
                 # use the fb_name as key
                 self.__devices[dev.subs_id] = dev
 
-    def from_diac(self, fb_type, fb):
-        # get the xml fb definition xml file
-        fb = fb_resources.FBResources(fb_type)
+    def from_fb(self, fb, fb_xml):
 
-        # gets the device id and type
-        dev_id, dev_type = fb.get_description()
         # creates the device
         dev = device.Device(self.__ua_peer)
         # links the fb to the device
-        dev.from_diac(fb)
+        dev.from_fb(fb, fb_xml)
 
         # adds the device to the dictionary
-        self.__devices[dev_id] = dev
+        self.__devices[dev.subs_id] = dev
 
     def search_device(self, dev_id):
         if dev_id in self.__devices:
