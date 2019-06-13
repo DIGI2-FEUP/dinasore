@@ -1,4 +1,5 @@
 from data_model import utils
+import uuid
 
 
 class Device(utils.DiacInterface):
@@ -42,8 +43,7 @@ class Device(utils.DiacInterface):
 
         # link variable to the start fb (sensor to init fb)
         if root_xml.attrib['type'] == 'SENSOR':
-            self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
-                                                  '{0}.{1}'.format(self.fb_name, 'Init'))
+            self.create_sensor_extras()
 
     def from_fb(self, fb, fb_xml):
         # gets the fb_name
@@ -52,11 +52,13 @@ class Device(utils.DiacInterface):
         self.fb_type = fb.fb_type
         # updates the state
         self.state = 'RUNNING'
+        device_type = None
         input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
         for item in fb_xml:
             # gets the id
             if item.tag == 'SelfDiscription':
                 self.subs_id = item.attrib['ID']
+                device_type = item.attrib['FBType'].split('.')[1]
             # gets the events and vars
             elif item.tag == 'InterfaceList':
                 # Iterates over the interface list
@@ -108,6 +110,21 @@ class Device(utils.DiacInterface):
                     var_idx, var_object = self.create_fb_variable(var_specs, folder_idx, vars_path)
                     # adds the variable to the dictionary
                     self.ua_variables[var_specs.attrib['Name']] = var_object
+
+        # link variable to the start fb (sensor to init fb)
+        if device_type == 'SENSOR':
+            self.create_sensor_extras()
+
+    def create_sensor_extras(self):
+        self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
+                                              '{0}.{1}'.format(self.fb_name, 'Init'))
+        # creates the fb that runs the device in loop
+        sleep_fb_name = str(uuid.uuid4())
+        self.ua_peer.config.create_fb(sleep_fb_name, 'SLEEP')
+        self.ua_peer.config.create_connection('{0}.{1}'.format(sleep_fb_name, 'SLEEP_O'),
+                                              '{0}.{1}'.format(self.fb_name, 'Read'))
+        self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'Read_O'),
+                                              '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
 
     def __create_header_objects(self):
         # creates the device object

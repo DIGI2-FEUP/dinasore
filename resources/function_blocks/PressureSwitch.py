@@ -10,7 +10,7 @@ class PressureSwitch:
     def schedule(self, event_name, event_value):
         if event_name == 'Init':
             # print('initialization')
-            return [event_value, None, None, self.pressure_1, self.pressure_2, self.cal_result]
+            return [event_value, event_value, None, self.pressure_1, self.pressure_2, self.cal_result]
 
         elif event_name == 'Read':
             # print('read temperature')
