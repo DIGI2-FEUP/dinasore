@@ -10,11 +10,16 @@
     <InterfaceList>
         <EventInputs>
             <Event Comment="" Name="Init" Type="Event"/>
-            <Event Comment="" Name="Run" Type="Event"/>
+            <Event Comment="" Name="Run" Type="Event">
+              <With Var="Rate"/>
+              <With Var="Signal"/>
+            </Event>
         </EventInputs>
         <EventOutputs>
             <Event Comment="" Name="Init_O" Type="Event"/>
-            <Event Comment="" Name="Run_O" Type="Event"/>
+            <Event Comment="" Name="Run_O" Type="Event">
+              <With Var="Frequencies"/>
+            </Event>
         </EventOutputs>
         <InputVars>
             <VarDeclaration Name="Rate" Type="INT"/>

@@ -11,7 +11,7 @@ class InstanceService(utils.DiacInterface):
         # service associated to this instance
         self.subs_did = service_base.subs_id
         # service xml variables
-        self.variables_xml = service_base.variables_xml
+        self.variables_list = service_base.variables_list
         # create the opc-ua method to call
         self.ua_method = None
 
@@ -134,18 +134,16 @@ class InstanceService(utils.DiacInterface):
         # creates the subscriptions folder
         folder_idx, folder_path, folder_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                     self.base_path, self.base_path_list, 'Variables')
-        for var_xml in self.variables_xml:
+        for var_dict in self.variables_list:
             # creates the variable
-            var_idx, var_object = self.create_variable(var_xml, folder_idx, folder_path)
-            var_path = self.ua_peer.generate_path(folder_list + [(2, var_xml.attrib['name'])])
+            var_idx, var_object = self.create_variable_by_dict(var_dict, folder_idx, folder_path)
+            var_path = self.ua_peer.generate_path(folder_list + [(2, var_dict['Name'])])
             # creates the type property
-            for ele in var_xml[0]:
-                if ele.attrib['id'] == 'Type':
-                    utils.default_property(self.ua_peer, var_idx, var_path, 'Type', ele.text)
+            utils.default_property(self.ua_peer, var_idx, var_path, 'Type', var_dict['Type'])
             # parse the variable in the ua method
-            self.ua_method.parse_variable(var_xml)
+            self.ua_method.parse_variable(var_dict)
             # link the variables object to update
-            self.ua_variables[var_xml.attrib['name']] = var_object
+            self.ua_variables[var_dict['Name']] = var_object
 
     def add_ua_link(self, parent, *args):
         print('adding link')

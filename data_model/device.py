@@ -39,11 +39,11 @@ class Device(utils.DiacInterface):
                 self.__parse_methods(item)
 
             elif tag == 'subscriptions':
-                self.__create_context_links(item)
+                self.__parse_context_links(item)
 
         # link variable to the start fb (sensor to init fb)
         if root_xml.attrib['type'] == 'SENSOR':
-            self.create_sensor_extras()
+            self.__create_sensor_extras()
 
     def from_fb(self, fb, fb_xml):
         # gets the fb_name
@@ -52,30 +52,12 @@ class Device(utils.DiacInterface):
         self.fb_type = fb.fb_type
         # updates the state
         self.state = 'RUNNING'
-        device_type = None
-        input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
-        for item in fb_xml:
-            # gets the id
-            if item.tag == 'SelfDiscription':
-                self.subs_id = item.attrib['ID']
-                device_type = item.attrib['FBType'].split('.')[1]
-            # gets the events and vars
-            elif item.tag == 'InterfaceList':
-                # Iterates over the interface list
-                # to find the inputs/outputs
-                for interface in item:
-                    # Input events
-                    if interface.tag == 'EventInputs':
-                        input_events_xml = interface
-                    # Output events
-                    elif interface.tag == 'EventOutput':
-                        output_events_xml = interface
-                    # Input variables
-                    elif interface.tag == 'InputVars':
-                        input_vars_xml = interface
-                    # Output variables
-                    elif interface.tag == 'OutputVars':
-                        output_vars_xml = interface
+
+        # parses the fb description
+        ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+            self.parse_fb_description(fb_xml)
+        # gets the type of device
+        device_type = ua_type.split('.')[1]
 
         # creates the header opc-ua items
         self.__create_header_objects()
@@ -113,9 +95,9 @@ class Device(utils.DiacInterface):
 
         # link variable to the start fb (sensor to init fb)
         if device_type == 'SENSOR':
-            self.create_sensor_extras()
+            self.__create_sensor_extras()
 
-    def create_sensor_extras(self):
+    def __create_sensor_extras(self):
         self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
                                               '{0}.{1}'.format(self.fb_name, 'Init'))
         # creates the fb that runs the device in loop
@@ -191,7 +173,7 @@ class Device(utils.DiacInterface):
                 # adds the variable to the dictionary
                 self.ua_variables[var.attrib['name']] = var_object
 
-    def __create_context_links(self, links_xml):
+    def __parse_context_links(self, links_xml):
         # creates the subscriptions folder
         folder_idx, subs_path, subs_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                 self.base_path, self.base_path_list, 'Subscriptions')

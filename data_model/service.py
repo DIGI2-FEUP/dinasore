@@ -7,9 +7,7 @@ class Service(utils.UaBaseStructure):
     def __init__(self, ua_peer):
         utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet')
         # key: constant_name, value: value to set (converted)
-        self.constants = dict()
-        self.subscriptions = dict()
-        self.variables_xml = []
+        self.variables_list = []
         # all instances from this service
         # key: instance_id, value: instance_obj
         self.__instances = dict()
@@ -44,20 +42,59 @@ class Service(utils.UaBaseStructure):
 
             if tag == 'recipeadjustments':
                 # sets the constant variables values
-                self.__create_recipe_adjustments(item)
+                self.__parse_recipe_adjustments(item)
 
             elif tag == 'methods':
                 # sets the method 'CreateInstance'
-                self.__create_methods(item)
+                self.__parse_methods(item)
 
             elif tag == 'interfaces':
                 # parses the info from each interface
-                self.__create_interfaces(item)
+                self.__parse_interfaces(item)
 
     def service_from_fb(self, fb, fb_xml):
-        pass
+        self.fb_type = fb.fb_type
 
-    def __create_methods(self, methods_xml):
+        # parses the fb description
+        ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+            self.parse_fb_description(fb_xml)
+
+        # creates the device object
+        self.create_base_object(self.fb_name)
+
+        # creates the methods folder
+        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                                      self.base_path, self.base_path_list, 'Methods')
+        # creates the create instance opc-ua method
+        method_idx = '{0}:{1}'.format(folder_idx, 'CreateInstance')
+        self.ua_peer.create_method(methods_path, method_idx, '2:CreateInstance', self.instance_from_ua,
+                                   input_args=[], output_args=[])
+
+        # creates the interfaces folder
+        folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
+                                                              self.base_path, self.base_path_list, 'Interfaces')
+        folder_idx, if_path, if_list = utils.default_folder(self.ua_peer, folder_idx,
+                                                            ifs_path, ifs_list, 'Arguments')
+        # create the input variables interface
+        for var_xml in input_vars_xml:
+            self.create_fb_variable(var_xml, folder_idx, if_path)
+            # adds the variables to the list
+            var_dict = {'Name': var_xml.attrib['Name'],
+                        'Type': 'Input',
+                        'DataType': var_xml.attrib['Type'],
+                        'ValueRank': '0'}
+            self.variables_list.append(var_dict)
+        # create the output variables interface
+        for var_xml in output_vars_xml:
+            self.create_fb_variable(var_xml, folder_idx, if_path)
+            # adds the variables to the list
+            var_dict = {'Name': var_xml.attrib['Name'],
+                        'Type': 'Output',
+                        'DataType': var_xml.attrib['Type'],
+                        'ValueRank': '0'}
+            self.variables_list.append(var_dict)
+
+    def __parse_methods(self, methods_xml):
         # creates the methods folder
         folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                       self.base_path, self.base_path_list, 'Methods')
@@ -74,13 +111,13 @@ class Service(utils.UaBaseStructure):
                                            input_args=[],
                                            output_args=[])
 
-    def __create_recipe_adjustments(self, adj_xml):
+    def __parse_recipe_adjustments(self, adj_xml):
         # creates the Recipe Adjustments folder
         folder_idx, adjs_path, adjs_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                 self.base_path, self.base_path_list,
                                                                 'RecipeAdjustments')
 
-    def __create_interfaces(self, ifs_xml):
+    def __parse_interfaces(self, ifs_xml):
         # creates the interfaces folder
         folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                               self.base_path, self.base_path_list, 'Interfaces')
@@ -93,15 +130,21 @@ class Service(utils.UaBaseStructure):
             if folder_name == 'Arguments':
                 # iterates over each variable
                 for var in if_xml[0]:
-                    # add the xml var to the list
-                    self.variables_xml.append(var)
+                    var_dict = dict()
                     # creates the variable
                     var_idx, var_object = self.create_variable(var, folder_idx, if_path)
                     var_path = self.ua_peer.generate_path(if_list + [(2, var.attrib['name'])])
                     # creates the type property
                     for ele in var[0]:
                         if ele.attrib['id'] == 'Type':
+                            var_dict['Type'] = ele.text
                             utils.default_property(self.ua_peer, var_idx, var_path, 'Type', ele.text)
+
+                    # add the var to the list
+                    var_dict['Name'] = var.attrib['name']
+                    var_dict['DataType'] = var.attrib['DataType']
+                    var_dict['ValueRank'] = var.attrib['ValueRank']
+                    self.variables_list.append(var_dict)
 
     def instance_from_xml(self, root_xml):
         # creates and parses the instance

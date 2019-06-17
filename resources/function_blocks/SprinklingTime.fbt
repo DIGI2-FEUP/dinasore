@@ -12,13 +12,18 @@
     </EventInputs>
     <EventOutputs>
       <Event Comment="" Name="Init_O" Type="Event"/>
-      <Event Comment="" Name="Read_O" Type="Event"/>
-      <Event Comment="" Name="Calibrate_O" Type="Event"/>
+      <Event Comment="" Name="Read_O" Type="Event">
+        <With Var="TempoAspersaoPowerWashI"/>
+        <With Var="TempoAspersaoCSE"/>
+      </Event>
+      <Event Comment="" Name="Calibrate_O" Type="Event">
+        <With Var="Result"/>
+      </Event>
     </EventOutputs>
     <InputVars/>
     <OutputVars>
-      <VarDeclaration Name="TempoAspersaoPowerWashI" Type="REAL"/>
-      <VarDeclaration Name="TempoAspersaoCSE" Type="REAL"/>
+      <VarDeclaration Name="TempoAspersaoPowerWashI" Type="INT"/>
+      <VarDeclaration Name="TempoAspersaoCSE" Type="INT"/>
       <VarDeclaration Name="Result" Type="BOOL"/>
     </OutputVars>
   </InterfaceList>

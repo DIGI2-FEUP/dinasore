@@ -13,7 +13,9 @@
       <Event Comment="" Name="EO0" Type="Event"/>
       <Event Comment="" Name="EO1" Type="Event"/>
     </EventOutputs>
-    <InputVars/>
+    <InputVars>
+      <VarDeclaration Comment="" Name="G" Type="BOOL"/>
+    </InputVars>
     <OutputVars/>
   </InterfaceList>
 </FBType>

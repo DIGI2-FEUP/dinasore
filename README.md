@@ -84,33 +84,53 @@ To develop a new function block first we need to define the interface attributes
 That interface is composed by events and variables, both of them can be inputs or outputs. 
 The difference between an event and a variable is that the event triggers the execution of a certain functionality.
 
-The following code show the definition in xml of a function block with 2 input events, 2 output events, 2 input variables and 2 output variables. 
-This kind of file is a .fbt file witch represents the function block terminology.
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType>
+<FBType Comment="" Name="SENSOR_EXAMPLE">
+  <SelfDiscription FBType="DEVICE.SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
+  <InterfaceList>
+    <EventInputs>
+      <Event Comment="" Name="Init" Type="Event"/>
+      <Event Comment="" Name="Read" Type="Event"/>
+      <Event Comment="" Name="E_IN1" Type="Event" OpcUa="Method"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Comment="" Name="Init_O" Type="Event"/>
+      <Event Comment="" Name="Read_O" Type="Event"/>
+      <Event Comment="" Name="E_OUT1" Type="Event"/
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Comment="" Name="VAR_IN1" Type="INT" OpcUa="E_IN1"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Comment="" Name="VAR_OUT1" Type="INT" OpcUa="Variable.E_IN1"/>
+      <VarDeclaration Comment="" Name="VAR_OUT2" Type="INT" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>
+```
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType>
-<FBType Comment="" Name="FB_EXAMPLE">
+<FBType Comment="" Name="SENSOR_EXAMPLE">
   <SelfDiscription FBType="DEVICE.SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
   <InterfaceList>
     <EventInputs>
-      <Event Comment="" Name="E_IN1" Type="Event" OpcUa="Method">
-        <With Var="VAR_IN1"/>
-        <With Var="VAR_IN2"/>
-      </Event>
-      <Event Comment="" Name="E_IN2" Type="Event"/>
+      <Event Comment="" Name="Init" Type="Event"/>
+      <Event Comment="" Name="Run" Type="Event"/>
     </EventInputs>
     <EventOutputs>
-      <Event Comment="" Name="E_OUT1" Type="Event"/>
-      <Event Comment="" Name="E_OUT2" Type="Event"/>
+      <Event Comment="" Name="Init_O" Type="Event"/>
+      <Event Comment="" Name="Run_O" Type="Event"/>
     </EventOutputs>
     <InputVars>
-      <VarDeclaration Comment="" Name="VAR_IN1" Type="INT" OpcUa="Subscription"/>
-      <VarDeclaration Comment="" Name="VAR_IN2" Type="INT"/>
+      <VarDeclaration Comment="" Name="VAR_IN1" Type="INT"/>
     </InputVars>
     <OutputVars>
-      <VarDeclaration Comment="" Name="VAR_OUT1" Type="INT" OpcUa="Variable"/>
-      <VarDeclaration Comment="" Name="VAR_OUT2" Type="INT" OpcUa="Variable"/>
+      <VarDeclaration Comment="" Name="VAR_OUT1" Type="INT"/>
+      <VarDeclaration Comment="" Name="VAR_OUT2" Type="INT"/>
     </OutputVars>
   </InterfaceList>
 </FBType>

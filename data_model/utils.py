@@ -82,16 +82,61 @@ class UaBaseStructure:
                                                         writable=False)
         return var_idx, var_object
 
+    def create_variable_by_dict(self, var_dict, folder_idx, vars_path):
+        var_name = var_dict['Name']
+        # creates the opc-ua variable
+        var_idx = '{0}:{1}'.format(folder_idx, var_name)
+        browse_name = '2:{0}'.format(var_name)
+        # convert array dimensions
+        array_dimensions = 0
+        if 'ArrayDimensions' in var_dict:
+            array_dimensions = int(var_dict['ArrayDimensions'])
+        var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
+                                                        UA_TYPES[var_dict['DataType']],
+                                                        UA_RANKS[var_dict['ValueRank']],
+                                                        dimensions=array_dimensions,
+                                                        writable=False)
+        return var_idx, var_object
+
     def create_fb_variable(self, var_xml, folder_idx, vars_path):
         var_name = var_xml.attrib['Name']
         # creates the opc-ua variable
         var_idx = '{0}:{1}'.format(folder_idx, var_name)
         browse_name = '2:{0}'.format(var_name)
+        # CHECK THE VALUE RANK OF THE VARIABLE
         var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
                                                         UA_TYPES[var_xml.attrib['Type']],
                                                         UA_RANKS['0'],
                                                         writable=False)
         return var_idx, var_object
+
+    def parse_fb_description(self, fb_xml):
+        ua_type = None
+        input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
+        for item in fb_xml:
+            # gets the id
+            if item.tag == 'SelfDiscription':
+                self.subs_id = item.attrib['ID']
+                ua_type = item.attrib['FBType']
+            # gets the events and vars
+            elif item.tag == 'InterfaceList':
+                # Iterates over the interface list
+                # to find the inputs/outputs
+                for interface in item:
+                    # Input events
+                    if interface.tag == 'EventInputs':
+                        input_events_xml = interface
+                    # Output events
+                    elif interface.tag == 'EventOutput':
+                        output_events_xml = interface
+                    # Input variables
+                    elif interface.tag == 'InputVars':
+                        input_vars_xml = interface
+                    # Output variables
+                    elif interface.tag == 'OutputVars':
+                        output_vars_xml = interface
+
+        return ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
 
 
 class DiacInterface(UaBaseStructure):
@@ -184,17 +229,16 @@ class Method2Call:
                     arg_type = entry.attrib['Type']
                     self.outputs[var_name] = UA_TYPES[arg_type]
 
-    def parse_variable(self, var_xml):
+    def parse_variable(self, var_dict):
         # gets the name
-        var_name = var_xml.attrib['name']
+        var_name = var_dict['Name']
         # gets the type
-        arg_type = var_xml.attrib['DataType']
-        for ele in var_xml[0]:
-            # sets a input or output variable
-            if (ele.attrib['id'] == 'Type') and (ele.text == 'Input'):
-                self.inputs[var_name] = UA_TYPES[arg_type]
-            elif (ele.attrib['id'] == 'Type') and (ele.text == 'Output'):
-                self.outputs[var_name] = UA_TYPES[arg_type]
+        arg_type = var_dict['DataType']
+        # sets a input or output variable
+        if var_dict['Type'] == 'Input':
+            self.inputs[var_name] = UA_TYPES[arg_type]
+        if var_dict['Type'] == 'Output':
+            self.outputs[var_name] = UA_TYPES[arg_type]
 
     def virtualize(self, folder_idx, methods_path, ua_name):
         # creates the opc-ua method

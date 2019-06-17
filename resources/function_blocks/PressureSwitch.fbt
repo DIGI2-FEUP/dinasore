@@ -12,13 +12,16 @@
     </EventInputs>
     <EventOutputs>
       <Event Comment="" Name="Init_O" Type="Event"/>
-      <Event Comment="" Name="Read_O" Type="Event"/>
+      <Event Comment="" Name="Read_O" Type="Event">
+        <With Var="Pressure_1"/>
+        <With Var="Pressure_2"/>
+      </Event>
       <Event Comment="" Name="Calibrate_O" Type="Event"/>
     </EventOutputs>
     <InputVars/>
     <OutputVars>
-      <VarDeclaration Name="Pressure_1" Type="REAL" OpcUa="Variable"/>
-      <VarDeclaration Name="Pressure_2" Type="REAL" OpcUa="Variable"/>
+      <VarDeclaration Name="Pressure_1" Type="INT" OpcUa="Variable"/>
+      <VarDeclaration Name="Pressure_2" Type="INT" OpcUa="Variable"/>
       <VarDeclaration Name="Result" Type="BOOL" OpcUa="Calibrate"/>
     </OutputVars>
   </InterfaceList>
