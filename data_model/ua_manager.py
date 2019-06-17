@@ -84,7 +84,7 @@ class UaManager(peer.UaPeer):
                     self.__device_set.from_fb(fb, item)
 
                 if item_type[0] == 'SERVICE':
-                    pass
+                    self.__services.from_fb(fb, item)
 
     def __parse_general(self, general_root):
         self.base_idx = 'ns=2;s={0}'.format(general_root[2].text)

@@ -21,17 +21,14 @@ class DeviceSet:
             if tag == 'device':
                 dev = device.Device(self.__ua_peer)
                 dev.from_xml(dev_xml)
-
                 # use the fb_name as key
                 self.__devices[dev.subs_id] = dev
 
     def from_fb(self, fb, fb_xml):
-
         # creates the device
         dev = device.Device(self.__ua_peer)
         # links the fb to the device
         dev.from_fb(fb, fb_xml)
-
         # adds the device to the dictionary
         self.__devices[dev.subs_id] = dev
 

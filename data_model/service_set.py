@@ -32,6 +32,29 @@ class Services:
                 # use the service_id as key
                 self.__service_set[s.subs_id] = s
 
+    def from_fb(self, fb, fb_xml):
+        service_id = None
+        # gets the service_id
+        for entry in fb_xml:
+            # splits the tag in these 3 camps
+            uri, ignore, tag = fb_xml.tag[1:].partition("}")
+            if tag == 'SelfDiscription':
+                service_id = entry.attrib['ID']
+
+        # checks if the service already exist in the service set
+        if service_id not in self.__service_set:
+            # otherwise it creates the service
+            s = service.Service(self.__ua_peer)
+            s.service_from_fb(fb, fb_xml)
+            # use the service_id as key
+            self.__service_set[s.subs_id] = s
+
+        # get the service and create the instance
+        s = self.__service_set[service_id]
+        s.instance_from_fb(fb, fb_xml)
+        # the instance_id is the same as the fb_name
+        self.__instances_set[fb.fb_name] = service_id
+
     def instances_from_xml(self, xml_set):
         for instance_xml in xml_set:
             # splits the tag in these 3 camps
@@ -47,12 +70,6 @@ class Services:
                 # connects the instance to the service
                 instance_id = instance_xml.attrib['id']
                 self.__instances_set[instance_id] = service_id
-
-    def services_from_diac(self, xml_set):
-        pass
-
-    def instances_from_diac(self, xml_set):
-        pass
 
     def search_instance(self, instance_id):
         if instance_id in self.__instances_set:

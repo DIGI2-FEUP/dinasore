@@ -54,6 +54,9 @@ class Service(utils.UaBaseStructure):
                 # parses the info from each interface
                 self.__create_interfaces(item)
 
+    def service_from_fb(self, fb, fb_xml):
+        pass
+
     def __create_methods(self, methods_xml):
         # creates the methods folder
         folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
@@ -106,6 +109,9 @@ class Service(utils.UaBaseStructure):
         inst.from_xml(root_xml)
         # adds the method to the dict
         self.__instances[inst.subs_id] = inst
+
+    def instance_from_fb(self, fb, fb_xml):
+        pass
 
     def get_instance(self, instance_id):
         if instance_id in self.__instances:
