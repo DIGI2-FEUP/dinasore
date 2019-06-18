@@ -10,26 +10,9 @@ class Service(utils.UaBaseStructure):
         self.variables_list = []
         # all instances from this service
         # key: instance_id, value: instance_obj
-        self.__instances = dict()
+        self.instances_dict = dict()
 
-    def service_from_xml(self, root_xml):
-        """
-        service.name         -> fb_type
-        recipe_adjustment
-            parameter        -> input_vars   (use config.write_connection)
-        interfaces
-            inputs           -> input_vars   (use set_attr)
-            outputs          -> output_vars  (use read_attr)
-        method
-            add_instance     -> input_events (use push_event)
-                             -> connect to add_instance logic
-
-        events to run method
-            Run    (input_event)
-            Run_O  (output_event)
-
-        :param root_xml:
-        """
+    def from_xml(self, root_xml):
         self.fb_type = root_xml.attrib['name']
         self.subs_id = root_xml.attrib['dId']
 
@@ -46,14 +29,14 @@ class Service(utils.UaBaseStructure):
 
             elif tag == 'methods':
                 # sets the method 'CreateInstance'
-                self.__parse_methods(item)
+                self.__create_methods()
 
             elif tag == 'interfaces':
                 # parses the info from each interface
                 self.__parse_interfaces(item)
 
-    def service_from_fb(self, fb, fb_xml):
-        self.fb_type = fb.fb_type
+    def from_fb(self, fb_type, fb_xml):
+        self.fb_type = fb_type
 
         # parses the fb description
         ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
@@ -62,13 +45,8 @@ class Service(utils.UaBaseStructure):
         # creates the device object
         self.create_base_object(self.fb_name)
 
-        # creates the methods folder
-        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                      self.base_path, self.base_path_list, 'Methods')
-        # creates the create instance opc-ua method
-        method_idx = '{0}:{1}'.format(folder_idx, 'CreateInstance')
-        self.ua_peer.create_method(methods_path, method_idx, '2:CreateInstance', self.instance_from_ua,
-                                   input_args=[], output_args=[])
+        # creates the methods
+        self.__create_methods()
 
         # creates the interfaces folder
         folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
@@ -94,22 +72,28 @@ class Service(utils.UaBaseStructure):
                         'ValueRank': '0'}
             self.variables_list.append(var_dict)
 
-    def __parse_methods(self, methods_xml):
+    def instance_from_xml(self, root_xml):
+        # creates and parses the instance
+        inst = instance.InstanceService(self.ua_peer, self)
+        inst.from_xml(root_xml)
+        # adds the method to the dict
+        self.instances_dict[inst.subs_id] = inst
+
+    def instance_from_fb(self, fb, fb_xml):
+        # creates and parses the instance
+        inst = instance.InstanceService(self.ua_peer, self)
+        inst.from_fb(fb, fb_xml)
+        # adds the method to the dict
+        self.instances_dict[inst.subs_id] = inst
+
+    def __create_methods(self):
         # creates the methods folder
         folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                       self.base_path, self.base_path_list, 'Methods')
-        # creates each different method
-        for method_xml in methods_xml:
-            # case method create instance
-            if method_xml.attrib['name'] == 'CreateInstance':
-                # creates the opc-ua method
-                method_idx = '{0}:{1}'.format(folder_idx, 'CreateInstance')
-                self.ua_peer.create_method(methods_path,
-                                           method_idx,
-                                           '2:CreateInstance',
-                                           self.instance_from_ua,
-                                           input_args=[],
-                                           output_args=[])
+        # creates the opc-ua method
+        method_idx = '{0}:{1}'.format(folder_idx, 'CreateInstance')
+        self.ua_peer.create_method(methods_path, method_idx, '2:CreateInstance', self.instance_from_ua,
+                                   input_args=[], output_args=[])
 
     def __parse_recipe_adjustments(self, adj_xml):
         # creates the Recipe Adjustments folder
@@ -145,22 +129,6 @@ class Service(utils.UaBaseStructure):
                     var_dict['DataType'] = var.attrib['DataType']
                     var_dict['ValueRank'] = var.attrib['ValueRank']
                     self.variables_list.append(var_dict)
-
-    def instance_from_xml(self, root_xml):
-        # creates and parses the instance
-        inst = instance.InstanceService(self.ua_peer, self)
-        inst.from_xml(root_xml)
-        # adds the method to the dict
-        self.__instances[inst.subs_id] = inst
-
-    def instance_from_fb(self, fb, fb_xml):
-        pass
-
-    def get_instance(self, instance_id):
-        if instance_id in self.__instances:
-            return self.__instances[instance_id]
-        else:
-            return None
 
     def instance_from_ua(self, parent, *args):
         print('create instance')

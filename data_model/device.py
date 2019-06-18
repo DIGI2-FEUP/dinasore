@@ -2,10 +2,10 @@ from data_model import utils
 import uuid
 
 
-class Device(utils.DiacInterface):
+class Device(utils.UaBaseStructure):
 
     def __init__(self, ua_peer):
-        utils.DiacInterface.__init__(self, ua_peer, 'DeviceSet')
+        utils.UaBaseStructure.__init__(self, ua_peer, 'DeviceSet')
         self.state = ''
 
     def from_xml(self, root_xml):
@@ -39,7 +39,7 @@ class Device(utils.DiacInterface):
                 self.__parse_methods(item)
 
             elif tag == 'subscriptions':
-                self.__parse_context_links(item)
+                self.__parse_context_subscriptions(item)
 
         # link variable to the start fb (sensor to init fb)
         if root_xml.attrib['type'] == 'SENSOR':
@@ -173,7 +173,7 @@ class Device(utils.DiacInterface):
                 # adds the variable to the dictionary
                 self.ua_variables[var.attrib['name']] = var_object
 
-    def __parse_context_links(self, links_xml):
+    def __parse_context_subscriptions(self, links_xml):
         # creates the subscriptions folder
         folder_idx, subs_path, subs_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                                 self.base_path, self.base_path_list, 'Subscriptions')

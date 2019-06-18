@@ -33,7 +33,7 @@ class UaManager(peer.UaPeer):
         self.__set_config = set_config
         # pointers to all the sets
         self.__device_set = None
-        self.__services = None
+        self.__service_set = None
         self.__point_set = None
 
         # configuration (connection to 4diac code)
@@ -75,16 +75,17 @@ class UaManager(peer.UaPeer):
             logging.info('self definition (xml) imported from: {0}'.format(xml_path))
 
     def from_fb(self, fb, fb_xml):
-        # check if exists the opc-ua tag inside the fb_xml
-        for item in fb_xml:
-            if item.tag == 'SelfDiscription':
-                item_type = item.attrib['FBType'].split('.')
+        item_id, item_type = utils.read_description_from_fb(fb_xml)
+        item_type = item_type.split('.')
 
-                if item_type[0] == 'DEVICE':
-                    self.__device_set.from_fb(fb, item)
+        if item_type[0] == 'DEVICE':
+            self.__device_set.from_fb(fb, fb_xml)
 
-                if item_type[0] == 'SERVICE':
-                    self.__services.from_fb(fb, item)
+        if item_type[0] == 'SERVICE':
+            # first check if needs to create the service
+            self.__service_set.from_fb(fb.fb_type, fb_xml)
+            # after create the instance
+            self.__service_set.instances_from_fb(fb, fb_xml)
 
     def __parse_general(self, general_root):
         self.base_idx = 'ns=2;s={0}'.format(general_root[2].text)
@@ -107,10 +108,10 @@ class UaManager(peer.UaPeer):
                 self.__device_set.from_xml(base_element)
 
             elif tag == 'servicedescriptionset':
-                self.__services.services_from_xml(base_element)
+                self.__service_set.from_xml(base_element)
 
             elif tag == 'serviceinstanceset':
-                self.__services.instances_from_xml(base_element)
+                self.__service_set.instances_from_xml(base_element)
 
             elif tag == 'pointdescriptionset':
                 pass
@@ -120,14 +121,18 @@ class UaManager(peer.UaPeer):
     def __create_sets(self):
         # creates all the sets
         self.__device_set = device_set.DeviceSet(self)
-        self.__services = service_set.Services(self)
+        self.__service_set = service_set.Services(self)
 
     def search_id(self, subs_id):
         # first searches between the device
-        device = self.__device_set.search_device(subs_id)
-        if device is not None:
+        if subs_id in self.__device_set.devices_dict:
+            device = self.__device_set.devices_dict[subs_id]
             return device
-        else:
-            # if not exists any device searches in the instances
-            instance = self.__services.search_instance(subs_id)
+        elif subs_id in self.__service_set.instance_map:
+            # gets the service_id
+            service_id = self.__service_set.instance_map[subs_id]
+            # then gets the instance
+            instance = self.__service_set.service_dict[service_id].instances_dict[subs_id]
             return instance
+        else:
+            return None

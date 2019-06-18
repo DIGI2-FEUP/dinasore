@@ -46,6 +46,18 @@ def default_object(ua_peer, obj_idx, obj_path, path_list, obj_name):
     return new_list, new_path
 
 
+def read_description_from_fb(fb_xml):
+    search_id, search_type = None, None
+    # gets the search_id
+    for entry in fb_xml:
+        # splits the tag in these 3 camps
+        uri, ignore, tag = fb_xml.tag[1:].partition("}")
+        if tag == 'SelfDiscription':
+            search_id = entry.attrib['ID']
+            search_type = entry.attrib['FBType']
+    return search_id, search_type
+
+
 class UaBaseStructure:
 
     def __init__(self, ua_peer, folder_name):
@@ -54,6 +66,10 @@ class UaBaseStructure:
         self.base_idx, self.base_path, self.base_path_list = None, None, None
         self.ua_peer = ua_peer
         self.folder_name = folder_name
+        self.ua_variables = dict()
+
+    def from_xml(self, root_xml):
+        raise NotImplementedError
 
     def create_base_object(self, browse_name):
         # creates the path to set the folder
@@ -137,22 +153,6 @@ class UaBaseStructure:
                         output_vars_xml = interface
 
         return ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
-
-
-class DiacInterface(UaBaseStructure):
-
-    def __init__(self, ua_peer, folder_name):
-        UaBaseStructure.__init__(self, ua_peer, folder_name)
-        self.ua_variables = dict()
-
-    def __parse_methods(self, methods_xml):
-        raise NotImplementedError
-
-    def __parse_variables(self, variables_xml):
-        raise NotImplementedError
-
-    def __parse_header(self, header_xml):
-        raise NotImplementedError
 
     def update_variables(self):
         # gets the function block
