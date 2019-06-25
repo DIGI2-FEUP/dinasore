@@ -1,20 +1,24 @@
 from data_model import ua_manager
 from core import manager
+from core import configuration
 from opc_ua import client
 import unittest
 
 
 class DataModelTests(unittest.TestCase):
     port_server = 4841
-    base_list = [(0, 'Objects'), (2, 'SmartObject')]
+    base_name = 'SmartObject'
+    base_list = [(0, 'Objects'), (2, base_name)]
 
     def setUp(self):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_ua = ua_manager.UaManager('opc.tcp://localhost:{0}'.format(self.port_server),
-                                               self.manager_4diac.set_config)
-        self.manager_ua.from_xml()
+        config = configuration.Configuration(self.base_name, 'EMB_RES')
+        self.manager_4diac.set_config(self.base_name, config)
+        self.manager_ua = ua_manager.UaManager(self.base_name, 'opc.tcp://localhost:{0}'.format(self.port_server),
+                                               config)
+        self.manager_ua.from_xml('data_model_original.xml')
 
     def tearDown(self):
         self.manager_ua.config.stop_work()

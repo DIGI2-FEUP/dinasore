@@ -55,7 +55,8 @@ class Configuration:
             fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition)
             self.set_fb(fb_name, fb_element)
             logging.info('created fb type: {0}, instance: {1}'.format(fb_type, fb_name))
-
+            # returns the both elements
+            return fb_element, fb_definition
         else:
             logging.error('can not create the fb type: {0}, instance: {1}'.format(fb_type, fb_name))
 

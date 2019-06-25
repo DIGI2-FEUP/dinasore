@@ -1,4 +1,5 @@
 from core import configuration
+from data_model import ua_manager
 from xml.etree import ElementTree as ETree
 import time
 import struct
@@ -11,6 +12,11 @@ class Manager:
     def __init__(self):
         self.start_time = time.time()*1000
         self.config_dictionary = dict()
+
+        # attributes responsible for the ua integration
+        self.ua_integration = False
+        self.ua_url = 'opc.tcp://localhost:4048'
+        self.manager_ua = None
 
     def get_config(self, config_id):
         fb_element = None
@@ -44,6 +50,13 @@ class Manager:
                         # Creates the configuration
                         config = configuration.Configuration(conf_name, conf_type)
                         self.set_config(conf_name, config)
+                        # check the options for ua_integration
+                        if self.ua_integration:
+                            # first stop the previous manager
+                            self.manager_ua.stop_ua()
+                            del self.manager_ua
+                            # creates the new ua_manager
+                            self.manager_ua = ua_manager.UaManager(conf_name, self.ua_url, config)
 
         elif action == 'QUERY':
             pass
@@ -113,7 +126,11 @@ class Manager:
                 if child.tag == 'FB':
                     fb_name = child.attrib['Name']
                     fb_type = child.attrib['Type']
-                    self.get_config(config_id).create_fb(fb_name, fb_type)
+                    fb, fb_xml = self.get_config(config_id).create_fb(fb_name, fb_type)
+                    # check the options for ua_integration
+                    if self.ua_integration:
+                        # parses from fb
+                        self.manager_ua.from_fb(fb, fb_xml)
 
                 # Create connection
                 elif child.tag == 'Connection':
@@ -168,3 +185,14 @@ class Manager:
 
         response = b''.join([response_header, response_xml])
         return response
+
+    def build_ua_manager(self, base_name, address, port, file_name):
+        # creates the opc-ua manager
+        config = configuration.Configuration(base_name, 'EMB_RES')
+        self.set_config(base_name, config)
+        self.ua_url = 'opc.tcp://{0}:{1}'.format(address, port)
+        self.manager_ua = ua_manager.UaManager(base_name, self.ua_url, config)
+        # parses the description file
+        self.manager_ua.from_xml(file_name)
+        # sets the option for ua_integration
+        self.ua_integration = True

@@ -50,9 +50,7 @@ def read_description_from_fb(fb_xml):
     search_id, search_type = None, None
     # gets the search_id
     for entry in fb_xml:
-        # splits the tag in these 3 camps
-        uri, ignore, tag = fb_xml.tag[1:].partition("}")
-        if tag == 'SelfDiscription':
+        if entry.tag == 'SelfDiscription':
             search_id = entry.attrib['ID']
             search_type = entry.attrib['FBType']
     return search_id, search_type
@@ -175,7 +173,7 @@ class Method2Call:
         self.inputs = OrderedDict()
         self.outputs = OrderedDict()
 
-    def execute(self, parent, *args):
+    def __execute(self, parent, *args):
         for i, (input_name, input_type) in enumerate(self.inputs.items()):
             self.fb.set_attr(input_name, args[i].Value)
 
@@ -237,7 +235,7 @@ class Method2Call:
         # sets a input or output variable
         if var_dict['Type'] == 'Input':
             self.inputs[var_name] = UA_TYPES[arg_type]
-        if var_dict['Type'] == 'Output':
+        elif var_dict['Type'] == 'Output':
             self.outputs[var_name] = UA_TYPES[arg_type]
 
     def virtualize(self, folder_idx, methods_path, ua_name):
@@ -247,6 +245,6 @@ class Method2Call:
         self.__ua_peer.create_method(methods_path,
                                      method_idx,
                                      browse_name,
-                                     self.execute,
+                                     self.__execute,
                                      input_args=list(self.inputs.values()),
                                      output_args=list(self.outputs.values()))
