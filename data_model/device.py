@@ -64,8 +64,7 @@ class Device(utils.UaBaseStructure):
         self.__create_header_objects()
 
         # creates the methods folder
-        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                      self.base_path,
+        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx, self.base_path,
                                                                       self.base_path_list, 'Methods')
         # Iterates over the input events
         for event in input_events_xml:
@@ -82,17 +81,30 @@ class Device(utils.UaBaseStructure):
                     method2call.virtualize(folder_idx, methods_path, method2call.method_name)
 
         # creates the variables folder
-        folder_idx, vars_path, vars_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                self.base_path, self.base_path_list, 'Variables')
+        folder_idx, vars_path, vars_list = utils.default_folder(self.ua_peer, self.base_idx, self.base_path,
+                                                                self.base_path_list, 'Variables')
         # Iterates over the input_vars
         for entry in input_vars_xml:
             if 'OpcUa' in entry.attrib:
                 var_specs = entry.attrib['OpcUa'].split('.')
                 if 'Variable' in var_specs:
                     # create the variable
-                    var_idx, var_object = self.create_fb_variable(var_specs, folder_idx, vars_path)
+                    var_idx, var_object = self.create_fb_variable(entry, folder_idx, vars_path)
                     # adds the variable to the dictionary
-                    self.ua_variables[var_specs.attrib['Name']] = var_object
+                    self.ua_variables[entry.attrib['Name']] = var_object
+
+        # Iterates over the output_vars
+        for entry in output_vars_xml:
+            if 'OpcUa' in entry.attrib:
+                var_specs = entry.attrib['OpcUa'].split('.')
+                if 'Variable' in var_specs:
+                    # create the variable
+                    var_idx, var_object = self.create_fb_variable(entry, folder_idx, vars_path)
+                    # adds the variable to the dictionary
+                    self.ua_variables[entry.attrib['Name']] = var_object
+
+        # pass the method to update the variables
+        fb.ua_variables_update = self.update_variables
 
         # link variable to the start fb (sensor to init fb)
         if device_type == 'SENSOR':

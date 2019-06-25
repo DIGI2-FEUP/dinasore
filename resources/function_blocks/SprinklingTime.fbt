@@ -8,7 +8,7 @@
     <EventInputs>
       <Event Comment="" Name="Init" Type="Event"/>
       <Event Comment="" Name="Read" Type="Event"/>
-      <Event Comment="" Name="Calibrate" Type="Event"/>
+      <Event Comment="" Name="Calibrate" Type="Event" OpcUa="Method"/>
     </EventInputs>
     <EventOutputs>
       <Event Comment="" Name="Init_O" Type="Event"/>
@@ -22,9 +22,9 @@
     </EventOutputs>
     <InputVars/>
     <OutputVars>
-      <VarDeclaration Name="TempoAspersaoPowerWashI" Type="INT"/>
-      <VarDeclaration Name="TempoAspersaoCSE" Type="INT"/>
-      <VarDeclaration Name="Result" Type="BOOL"/>
+      <VarDeclaration Name="TempoAspersaoPowerWashI" Type="INT" OpcUa="Variable"/>
+      <VarDeclaration Name="TempoAspersaoCSE" Type="INT" OpcUa="Variable"/>
+      <VarDeclaration Name="Result" Type="BOOL" OpcUa="Calibrate"/>
     </OutputVars>
   </InterfaceList>
 </FBType>

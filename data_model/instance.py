@@ -34,8 +34,19 @@ class InstanceService(utils.UaBaseStructure):
         self.subs_id = fb.fb_name
         self.fb_name = fb.fb_name
 
-        # create the instance based in the previous attrib
-        self.__create_instance()
+        # creates the header opc-ua (description, ...) of this instance
+        self.__create_header()
+
+        # pass the method to update the variables
+        fb.ua_variables_update = self.update_variables
+
+        # create the ua method to call
+        fb = self.ua_peer.config.get_fb(self.fb_name)
+        self.ua_method = utils.Method2Call('Run', fb, self.ua_peer)
+        # create the linked variables
+        self.__create_variables()
+        # creates the default methods 'AddLink', 'RemoveLink' and 'DeleteInstance'
+        self.__create_methods()
 
     def __create_instance(self):
         # creates the header opc-ua (description, ...) of this instance

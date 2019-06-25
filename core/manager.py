@@ -52,6 +52,7 @@ class Manager:
                         self.set_config(conf_name, config)
                         # check the options for ua_integration
                         if self.ua_integration:
+                            # add try catch OSError: [Errno 98] Address already in use
                             # creates the new ua_manager
                             self.manager_ua = ua_manager.UaManager(conf_name, self.ua_url, config)
 
