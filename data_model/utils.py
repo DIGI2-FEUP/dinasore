@@ -124,13 +124,14 @@ class UaBaseStructure:
                                                         writable=False)
         return var_idx, var_object
 
-    def parse_fb_description(self, fb_xml):
-        ua_type = None
+    @staticmethod
+    def parse_fb_description(fb_xml):
+        fb_id, ua_type = None, None
         input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
         for item in fb_xml:
             # gets the id
             if item.tag == 'SelfDiscription':
-                self.subs_id = item.attrib['ID']
+                fb_id = item.attrib['ID']
                 ua_type = item.attrib['FBType']
             # gets the events and vars
             elif item.tag == 'InterfaceList':
@@ -150,7 +151,7 @@ class UaBaseStructure:
                     elif interface.tag == 'OutputVars':
                         output_vars_xml = interface
 
-        return ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
+        return fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
 
     def update_variables(self):
         # gets the function block

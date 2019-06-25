@@ -52,9 +52,6 @@ class Manager:
                         self.set_config(conf_name, config)
                         # check the options for ua_integration
                         if self.ua_integration:
-                            # first stop the previous manager
-                            self.manager_ua.stop_ua()
-                            del self.manager_ua
                             # creates the new ua_manager
                             self.manager_ua = ua_manager.UaManager(conf_name, self.ua_url, config)
 
@@ -108,6 +105,10 @@ class Manager:
                         self.config_dictionary.pop(conf_name)
                         # Release memory
                         gc.collect()
+            # check the options for ua_integration
+            if self.ua_integration:
+                # first stop the previous manager
+                self.manager_ua.stop_ua()
 
         response = self.build_response(request_id, xml)
         return response

@@ -54,8 +54,9 @@ class Device(utils.UaBaseStructure):
         self.state = 'RUNNING'
 
         # parses the fb description
-        ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+        fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
             self.parse_fb_description(fb_xml)
+        self.subs_id = self.fb_name
         # gets the type of device
         device_type = ua_type.split('.')[1]
 

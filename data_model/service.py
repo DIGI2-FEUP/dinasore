@@ -35,8 +35,9 @@ class Service(utils.UaBaseStructure):
         self.fb_type = fb_type
 
         # parses the fb description
-        ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+        fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
             self.parse_fb_description(fb_xml)
+        self.subs_id = fb_id
 
         # creates the device object
         self.create_base_object(self.fb_type)
