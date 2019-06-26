@@ -17,8 +17,8 @@ class DataModelTests(unittest.TestCase):
         config = configuration.Configuration(self.base_name, 'EMB_RES')
         self.manager_4diac.set_config(self.base_name, config)
         self.manager_ua = ua_manager.UaManager(self.base_name, 'opc.tcp://localhost:{0}'.format(self.port_server),
-                                               config)
-        self.manager_ua.from_xml('data_model_original.xml')
+                                               config, 'data_model_original.xml')
+        self.manager_ua.from_xml()
 
     def tearDown(self):
         self.manager_ua.config.stop_work()

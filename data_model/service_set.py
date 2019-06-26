@@ -2,7 +2,7 @@ from data_model import utils
 from data_model import service
 
 
-class Services:
+class ServiceSet:
 
     def __init__(self, ua_peer):
         # service_id: service

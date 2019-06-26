@@ -39,7 +39,7 @@ class Device(utils.UaBaseStructure):
                 self.__parse_methods(item)
 
             elif tag == 'subscriptions':
-                self.__parse_context_subscriptions(item)
+                pass
 
         # link variable to the start fb (sensor to init fb)
         if root_xml.attrib['type'] == 'SENSOR':
@@ -185,11 +185,3 @@ class Device(utils.UaBaseStructure):
                 var_idx, var_object = self.create_variable(var, folder_idx, vars_path)
                 # adds the variable to the dictionary
                 self.ua_variables[var.attrib['name']] = var_object
-
-    def __parse_context_subscriptions(self, links_xml):
-        # creates the subscriptions folder
-        folder_idx, subs_path, subs_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                self.base_path, self.base_path_list, 'Subscriptions')
-        for subs in links_xml:
-            # context connections between sensors/actuators and components/equipments
-            pass

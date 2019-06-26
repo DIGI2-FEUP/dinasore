@@ -29,7 +29,7 @@ class Service(utils.UaBaseStructure):
 
             elif tag == 'interfaces':
                 # parses the info from each interface
-                self.__parse_interfaces(item)
+                self.__parse_variables(item)
 
     def from_fb(self, fb_type, fb_xml):
         self.fb_type = fb_type
@@ -82,7 +82,7 @@ class Service(utils.UaBaseStructure):
         self.ua_peer.create_method(methods_path, method_idx, '2:CreateInstance', self.instance_from_ua,
                                    input_args=[], output_args=[])
 
-    def __parse_interfaces(self, ifs_xml):
+    def __parse_variables(self, ifs_xml):
         # creates the interfaces folder
         folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                               self.base_path, self.base_path_list, 'Variables')

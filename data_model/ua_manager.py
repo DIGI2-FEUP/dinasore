@@ -8,25 +8,7 @@ import logging
 
 class UaManager(peer.UaPeer):
 
-    def __init__(self, base_name, address, config):
-        """
-        SmartObject             -> obj
-            DEVICE_TYPE         -> prop
-            SMART_OBJECT_ID     -> prop
-            SMART_OBJECT_NAME   -> prop
-            STATE               -> prop
-            DeviceSet           -> folder
-                Dev1            -> obj
-                    Vars        -> folder
-                    Methods     -> folder
-            ServiceSet          -> folder
-            ServiceInstanceSet  -> folder
-            PointDescriptionSet -> folder
-
-        :param address:
-        :param set_config:
-        """
-
+    def __init__(self, base_name, address, config, file_name):
         peer.UaPeer.__init__(self, address)
 
         # base idx for the opc-ua nodeId
@@ -44,45 +26,43 @@ class UaManager(peer.UaPeer):
 
         # pointers to all the sets
         self.__device_set = device_set.DeviceSet(self)
-        self.__service_set = service_set.Services(self)
+        self.__service_set = service_set.ServiceSet(self)
         self.__point_set = None
 
-    def from_xml(self, file_name):
+        # parse the xml
         logging.info('getting the xml self definition...')
         try:
             xml_path = os.path.join(os.path.dirname(sys.path[0]),
-                                    'resources',
-                                    file_name)
+                                    'resources', file_name)
             # Reads the xml
             tree = ETree.parse(xml_path)
             # Gets the root element
-            root = tree.getroot()
-
-            for base_element in root:
-                # splits the tag in these 3 camps
-                uri, ignore, tag = base_element.tag[1:].partition("}")
-
-                if tag == 'general':
-                    for item in base_element:
-                        # adds the property to the opc-ua server
-                        utils.default_property(self, self.base_idx, self.ROOT_PATH,
-                                               property_name=item.attrib['id'], property_value=item.text)
-                elif tag == 'deviceset':
-                    self.__device_set.from_xml(base_element)
-                elif tag == 'servicedescriptionset':
-                    self.__service_set.from_xml(base_element)
-                elif tag == 'serviceinstanceset':
-                    self.__service_set.instances_from_xml(base_element)
-                elif tag == 'pointdescriptionset':
-                    pass
-
-            self.config.start_work()
+            self.root_xml = tree.getroot()
 
         except FileNotFoundError as error:
             logging.error('can not find the self definition file')
             logging.error(error)
         else:
             logging.info('self definition (xml) imported from: {0}'.format(xml_path))
+
+        # creates the properties
+        self.__create_properties()
+
+    def from_xml(self):
+        for base_element in self.root_xml:
+            # splits the tag in these 3 camps
+            uri, ignore, tag = base_element.tag[1:].partition("}")
+
+            if tag == 'deviceset':
+                self.__device_set.from_xml(base_element)
+            elif tag == 'servicedescriptionset':
+                self.__service_set.from_xml(base_element)
+            elif tag == 'serviceinstanceset':
+                self.__service_set.instances_from_xml(base_element)
+            elif tag == 'pointdescriptionset':
+                pass
+
+        self.config.start_work()
 
     def from_fb(self, fb, fb_xml):
         item_id, item_type = utils.read_description_from_fb(fb_xml)
@@ -96,6 +76,17 @@ class UaManager(peer.UaPeer):
             self.__service_set.from_fb(fb.fb_type, fb_xml)
             # after create the instance
             self.__service_set.instance_from_fb(fb, fb_xml)
+
+    def __create_properties(self):
+        for base_element in self.root_xml:
+            # splits the tag in these 3 camps
+            uri, ignore, tag = base_element.tag[1:].partition("}")
+
+            if tag == 'general':
+                for item in base_element:
+                    # adds the property to the opc-ua server
+                    utils.default_property(self, self.base_idx, self.ROOT_PATH,
+                                           property_name=item.attrib['id'], property_value=item.text)
 
     def save_xml(self, file_name):
         pass

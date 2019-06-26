@@ -69,6 +69,9 @@ class UaBaseStructure:
     def from_xml(self, root_xml):
         raise NotImplementedError
 
+    def from_fb(self, fb, fb_xml):
+        raise NotImplementedError
+
     def create_base_object(self, browse_name):
         # creates the path to set the folder
         folder_path_list = self.ua_peer.ROOT_LIST + [(2, self.folder_name)]

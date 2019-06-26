@@ -114,9 +114,7 @@ class InstanceService(utils.UaBaseStructure):
 
     def __parse_subscriptions(self, links_xml):
         # creates the subscriptions folder
-        folder_idx, folder_path, folder_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                    self.base_path, self.base_path_list,
-                                                                    'Subscriptions')
+        utils.default_folder(self.ua_peer, self.base_idx, self.base_path, self.base_path_list, 'Subscriptions')
         # iterates over each subscription of the set
         for subscription in links_xml:
 

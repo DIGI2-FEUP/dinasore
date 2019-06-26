@@ -17,6 +17,7 @@ class Manager:
         self.ua_integration = False
         self.ua_url = 'opc.tcp://localhost:4048'
         self.manager_ua = None
+        self.description_file = None
 
     def get_config(self, config_id):
         fb_element = None
@@ -54,8 +55,10 @@ class Manager:
                         if self.ua_integration:
                             # add try catch OSError: [Errno 98] Address already in use
                             # creates the new ua_manager
-                            self.manager_ua = ua_manager.UaManager(conf_name, self.ua_url, config)
-
+                            self.manager_ua = ua_manager.UaManager(conf_name,
+                                                                   self.ua_url,
+                                                                   config,
+                                                                   self.description_file)
         elif action == 'QUERY':
             pass
 
@@ -192,9 +195,10 @@ class Manager:
         # creates the opc-ua manager
         config = configuration.Configuration(base_name, 'EMB_RES')
         self.set_config(base_name, config)
+        self.description_file = file_name
         self.ua_url = 'opc.tcp://{0}:{1}'.format(address, port)
-        self.manager_ua = ua_manager.UaManager(base_name, self.ua_url, config)
+        self.manager_ua = ua_manager.UaManager(base_name, self.ua_url, config, self.description_file)
         # parses the description file
-        self.manager_ua.from_xml(file_name)
+        self.manager_ua.from_xml()
         # sets the option for ua_integration
         self.ua_integration = True
