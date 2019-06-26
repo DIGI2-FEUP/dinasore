@@ -27,7 +27,6 @@ class UaManager(peer.UaPeer):
         # pointers to all the sets
         self.__device_set = device_set.DeviceSet(self)
         self.__service_set = service_set.ServiceSet(self)
-        self.__point_set = None
 
         # parse the xml
         logging.info('getting the xml self definition...')

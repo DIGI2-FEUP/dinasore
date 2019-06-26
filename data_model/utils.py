@@ -56,21 +56,49 @@ def read_description_from_fb(fb_xml):
     return search_id, search_type
 
 
+def parse_fb_description(fb_xml):
+    fb_id, ua_type = None, None
+    input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
+    for item in fb_xml:
+        # gets the id
+        if item.tag == 'SelfDiscription':
+            fb_id = item.attrib['ID']
+            ua_type = item.attrib['FBType']
+        # gets the events and vars
+        elif item.tag == 'InterfaceList':
+            # Iterates over the interface list
+            # to find the inputs/outputs
+            for interface in item:
+                # Input events
+                if interface.tag == 'EventInputs':
+                    input_events_xml = interface
+                # Output events
+                elif interface.tag == 'EventOutput':
+                    output_events_xml = interface
+                # Input variables
+                elif interface.tag == 'InputVars':
+                    input_vars_xml = interface
+                # Output variables
+                elif interface.tag == 'OutputVars':
+                    output_vars_xml = interface
+
+    return fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
+
+
 class UaBaseStructure:
 
-    def __init__(self, ua_peer, folder_name):
-        self.fb_name, self.fb_type = None, None
-        self.subs_id = None
+    def __init__(self, ua_peer, folder_name, subs_id, fb_name, fb_type):
+        self.subs_id = subs_id
+        self.fb_name = fb_name
+        self.fb_type = fb_type
         self.base_idx, self.base_path, self.base_path_list = None, None, None
         self.ua_peer = ua_peer
         self.folder_name = folder_name
         self.ua_variables = dict()
 
-    def from_xml(self, root_xml):
-        raise NotImplementedError
+        # creates the methods folder
 
-    def from_fb(self, fb, fb_xml):
-        raise NotImplementedError
+        # creates the variables folder
 
     def create_base_object(self, browse_name):
         # creates the path to set the folder
@@ -126,35 +154,6 @@ class UaBaseStructure:
                                                         UA_RANKS['0'],
                                                         writable=False)
         return var_idx, var_object
-
-    @staticmethod
-    def parse_fb_description(fb_xml):
-        fb_id, ua_type = None, None
-        input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
-        for item in fb_xml:
-            # gets the id
-            if item.tag == 'SelfDiscription':
-                fb_id = item.attrib['ID']
-                ua_type = item.attrib['FBType']
-            # gets the events and vars
-            elif item.tag == 'InterfaceList':
-                # Iterates over the interface list
-                # to find the inputs/outputs
-                for interface in item:
-                    # Input events
-                    if interface.tag == 'EventInputs':
-                        input_events_xml = interface
-                    # Output events
-                    elif interface.tag == 'EventOutput':
-                        output_events_xml = interface
-                    # Input variables
-                    elif interface.tag == 'InputVars':
-                        input_vars_xml = interface
-                    # Output variables
-                    elif interface.tag == 'OutputVars':
-                        output_vars_xml = interface
-
-        return fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
 
     def update_variables(self):
         # gets the function block

@@ -5,65 +5,15 @@ from opcua import ua
 
 class InstanceService(utils.UaBaseStructure):
 
-    def __init__(self, ua_peer, service_base):
-        utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceInstanceSet')
-        self.fb_type = service_base.fb_type
+    def __init__(self, ua_peer, service_id, var_list, subs_id, fb_name, fb_type):
+        utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceInstanceSet', subs_id, fb_name, fb_type)
         # service associated to this instance
-        self.subs_did = service_base.subs_id
+        self.subs_did = service_id
         # service xml variables
-        self.variables_list = service_base.variables_list
+        self.variables_list = var_list
         # create the opc-ua method to call
         self.ua_method = None
 
-    def from_xml(self, root_xml):
-        # gets the instance_id
-        self.subs_id = root_xml.attrib['id']
-        self.fb_name = root_xml.attrib['id']
-
-        # create the instance based in the previous attrib
-        self.__create_instance()
-
-        for item in root_xml:
-            # splits the tag in these 3 camps
-            uri, ignore, tag = item.tag[1:].partition("}")
-            if tag == 'subscriptions':
-                self.__parse_subscriptions(item)
-
-    def from_fb(self, fb, fb_xml):
-        # gets the instance_id
-        self.subs_id = fb.fb_name
-        self.fb_name = fb.fb_name
-
-        # creates the header opc-ua (description, ...) of this instance
-        self.__create_header()
-
-        # pass the method to update the variables
-        fb.ua_variables_update = self.update_variables
-
-        # create the ua method to call
-        fb = self.ua_peer.config.get_fb(self.fb_name)
-        self.ua_method = utils.Method2Call('Run', fb, self.ua_peer)
-        # create the linked variables
-        self.__create_variables()
-        # creates the default methods 'AddLink', 'RemoveLink' and 'DeleteInstance'
-        self.__create_methods()
-
-    def __create_instance(self):
-        # creates the header opc-ua (description, ...) of this instance
-        self.__create_header()
-
-        # creates the fb for the instance
-        self.ua_peer.config.create_virtualized_fb(self.subs_id, self.fb_type, self.update_variables)
-
-        # create the ua method to call
-        fb = self.ua_peer.config.get_fb(self.fb_name)
-        self.ua_method = utils.Method2Call('Run', fb, self.ua_peer)
-        # create the linked variables
-        self.__create_variables()
-        # creates the default methods 'AddLink', 'RemoveLink' and 'DeleteInstance'
-        self.__create_methods()
-
-    def __create_header(self):
         # creates the instance object
         browse_name = '{0}:{1}'.format(self.fb_type, self.subs_id)
         self.create_base_object(browse_name)
@@ -71,6 +21,35 @@ class InstanceService(utils.UaBaseStructure):
         # creates the id and dId property
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'dID', self.subs_did)
+
+    def from_xml(self, root_xml):
+        # create the instance based in the previous attrib
+        self.__create_instance()
+
+        # creates the fb for the instance
+        self.ua_peer.config.create_virtualized_fb(self.subs_id, self.fb_type, self.update_variables)
+
+        for item in root_xml:
+            # splits the tag in these 3 camps
+            uri, ignore, tag = item.tag[1:].partition("}")
+            if tag == 'subscriptions':
+                self.__parse_subscriptions(item)
+
+    def from_fb(self, fb):
+        # create the instance based in the previous attrib
+        self.__create_instance()
+
+        # pass the method to update the variables
+        fb.ua_variables_update = self.update_variables
+
+    def __create_instance(self):
+        # create the ua method to call
+        fb = self.ua_peer.config.get_fb(self.fb_name)
+        self.ua_method = utils.Method2Call('Run', fb, self.ua_peer)
+        # create the linked variables
+        self.__create_variables()
+        # creates the default methods 'AddLink', 'RemoveLink' and 'DeleteInstance'
+        self.__create_methods()
 
     def __create_methods(self):
         # create the folder for the methods

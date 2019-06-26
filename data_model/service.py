@@ -4,47 +4,30 @@ from data_model import instance
 
 class Service(utils.UaBaseStructure):
 
-    def __init__(self, ua_peer):
-        utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet')
+    def __init__(self, ua_peer, subs_id, fb_name, fb_type):
+        utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet', subs_id, fb_name, fb_type)
         # key: constant_name, value: value to set (converted)
         self.variables_list = []
         # all instances from this service
         # key: instance_id, value: instance_obj
         self.instances_dict = dict()
 
+        # creates the device object
+        self.create_base_object(self.fb_type)
+
+        # sets the method 'CreateInstance'
+        self.__create_methods()
+
     def from_xml(self, root_xml):
-        self.fb_type = root_xml.attrib['name']
-        self.subs_id = root_xml.attrib['dId']
-
-        # creates the service
-        self.create_base_object(browse_name=self.fb_type)
-
         for item in root_xml:
             # splits the tag in these 3 camps
             uri, ignore, tag = item.tag[1:].partition("}")
 
-            if tag == 'methods':
-                # sets the method 'CreateInstance'
-                self.__create_methods()
-
-            elif tag == 'interfaces':
+            if tag == 'interfaces':
                 # parses the info from each interface
                 self.__parse_variables(item)
 
-    def from_fb(self, fb_type, fb_xml):
-        self.fb_type = fb_type
-
-        # parses the fb description
-        fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
-            self.parse_fb_description(fb_xml)
-        self.subs_id = fb_id
-
-        # creates the device object
-        self.create_base_object(self.fb_type)
-
-        # creates the methods
-        self.__create_methods()
-
+    def from_fb(self, input_vars_xml, output_vars_xml):
         # creates the interfaces folder
         folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
                                                               self.base_path, self.base_path_list, 'Variables')
@@ -60,16 +43,23 @@ class Service(utils.UaBaseStructure):
             self.__create_var_entry('Output', var_xml)
 
     def instance_from_xml(self, root_xml):
+        # gets the instance_id
+        subs_id = root_xml.attrib['id']
+        fb_name = root_xml.attrib['id']
         # creates and parses the instance
-        inst = instance.InstanceService(self.ua_peer, self)
+        inst = instance.InstanceService(self.ua_peer, self.subs_id, self.variables_list, subs_id, fb_name, self.fb_type)
         inst.from_xml(root_xml)
         # adds the method to the dict
         self.instances_dict[inst.subs_id] = inst
 
-    def instance_from_fb(self, fb, fb_xml):
+    def instance_from_fb(self, fb):
+        # gets the instance_id
+        subs_id = fb.fb_name
+        fb_name = fb.fb_name
+        fb_type = fb.fb_type
         # creates and parses the instance
-        inst = instance.InstanceService(self.ua_peer, self)
-        inst.from_fb(fb, fb_xml)
+        inst = instance.InstanceService(self.ua_peer, self.subs_id, self.variables_list, subs_id, fb_name, fb_type)
+        inst.from_fb(fb)
         # adds the method to the dict
         self.instances_dict[inst.subs_id] = inst
 

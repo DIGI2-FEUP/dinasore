@@ -19,7 +19,7 @@ class Configuration:
         try:
             fb_element = self.fb_dictionary[fb_name]
         except KeyError as error:
-            logging.error('can not find that fb')
+            logging.error('can not find that fb {0}'.format(fb_name))
             logging.error(error)
 
         return fb_element
@@ -31,7 +31,7 @@ class Configuration:
         return fb_name in self.fb_dictionary
 
     def create_virtualized_fb(self, fb_name, fb_type, ua_update):
-        logging.info('creating a virtualized (opc-ua) fb...')
+        logging.info('creating a virtualized (opc-ua) fb {0}...'.format(fb_name))
         self.create_fb(fb_name, fb_type)
         # sets the ua variables update method
         fb2update = self.get_fb(fb_name)
