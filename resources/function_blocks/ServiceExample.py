@@ -1,6 +1,6 @@
 
 
-class FastFourierTransform:
+class ServiceExample:
 
     def __init__(self):
         pass
@@ -11,5 +11,4 @@ class FastFourierTransform:
             return [event_value, None, signal + 1]
 
         elif event_name == 'Run':
-            # print('run')
             return [None, event_value, signal + 1]

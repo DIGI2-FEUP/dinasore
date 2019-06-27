@@ -27,34 +27,34 @@ class DataModelTests(unittest.TestCase):
     def test_fb_created(self):
         # check the number of fb
         n_fb = len(self.manager_ua.config.fb_dictionary)
-        self.assertEqual(n_fb, 12)
+        self.assertEqual(n_fb, 8)
 
     def test_device_set(self):
         c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
 
         path = c.generate_path(self.base_list + [(2, 'DeviceSet')])
         children = c.get_object(path).get_children()
-        self.assertEqual(len(children), 5)
+        self.assertEqual(len(children), 3)
 
         c.disconnect()
 
     def test_device_method(self):
         c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
 
-        method_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'DPFiltroCircuitoAgitação'),
+        method_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'TTS - Tina 1'),
                                                         (2, 'Methods'), (2, 'Calibrate')])
-        var_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'DPFiltroCircuitoAgitação'),
-                                                     (2, 'Variables'), (2, 'Pressure_1')])
+        var_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'TTS - Tina 0'),
+                                                     (2, 'Variables'), (2, 'Pressure')])
 
         method_r = c.call_method(method_path.copy(), None)
         read_r = c.read(var_path)
         self.assertEqual(method_r, True)
-        self.assertEqual(read_r, 3)
+        self.assertEqual(read_r, 0)
 
         method_r = c.call_method(method_path.copy(), None)
         read_r = c.read(var_path)
         self.assertEqual(method_r, True)
-        self.assertEqual(read_r, 6)
+        self.assertEqual(read_r, 0)
 
         c.disconnect()
 
