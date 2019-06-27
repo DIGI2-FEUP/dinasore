@@ -1,346 +1,346 @@
-[2019-06-27 13:21:38,301][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,301][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,301][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/EMB_RES.fbt
-[2019-06-27 13:21:38,301][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/EMB_RES.py
-[2019-06-27 13:21:38,301][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,301][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,301][INFO][MainThread] input events: OrderedDict()
-[2019-06-27 13:21:38,302][INFO][MainThread] output events: OrderedDict([('COLD', ('Event', None, False)), ('WARM', ('Event', None, False)), ('STOP', ('Event', None, False))])
-[2019-06-27 13:21:38,302][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,302][INFO][MainThread] output vars: OrderedDict()
-[2019-06-27 13:21:38,302][INFO][MainThread] created fb type: EMB_RES, instance: START
-[2019-06-27 13:21:38,302][INFO][MainThread] add_node: while adding node NumericNodeId(i=3062), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,302][INFO][MainThread] add_node: while adding node NumericNodeId(i=3063), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,302][INFO][MainThread] add_node: while adding node NumericNodeId(i=24), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,306][INFO][MainThread] add_node: while adding node NumericNodeId(i=31), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,309][INFO][MainThread] add_node: while adding node NumericNodeId(i=3068), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,309][INFO][MainThread] add_node: while adding node NumericNodeId(i=12170), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,309][INFO][MainThread] add_node: while adding node NumericNodeId(i=3067), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,310][INFO][MainThread] add_node: while adding node NumericNodeId(i=3069), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,310][INFO][MainThread] add_node: while adding node NumericNodeId(i=3070), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,310][INFO][MainThread] add_node: while adding node NumericNodeId(i=11433), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,310][INFO][MainThread] add_node: while adding node NumericNodeId(i=11498), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,311][INFO][MainThread] add_node: while adding node NumericNodeId(i=15002), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,311][INFO][MainThread] add_node: while adding node NumericNodeId(i=12908), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,311][INFO][MainThread] add_node: while adding node NumericNodeId(i=11512), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,311][INFO][MainThread] add_node: while adding node NumericNodeId(i=11513), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,311][INFO][MainThread] add_node: while adding node NumericNodeId(i=11432), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,312][INFO][MainThread] add_node: while adding node NumericNodeId(i=3071), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,312][INFO][MainThread] add_node: while adding node NumericNodeId(i=12745), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,312][INFO][MainThread] add_node: while adding node NumericNodeId(i=3072), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,312][INFO][MainThread] add_node: while adding node NumericNodeId(i=3073), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,313][INFO][MainThread] add_node: while adding node NumericNodeId(i=16306), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,356][INFO][MainThread] add_node: while adding node NumericNodeId(i=58), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,357][INFO][MainThread] add_node: while adding node NumericNodeId(i=62), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,359][INFO][MainThread] add_node: while adding node NumericNodeId(i=78), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,360][INFO][MainThread] add_node: while adding node NumericNodeId(i=80), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,360][INFO][MainThread] add_node: while adding node NumericNodeId(i=83), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,360][INFO][MainThread] add_node: while adding node NumericNodeId(i=79), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,361][INFO][MainThread] add_node: while adding node NumericNodeId(i=11508), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,361][INFO][MainThread] add_node: while adding node NumericNodeId(i=11510), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,361][INFO][MainThread] add_node: while adding node NumericNodeId(i=84), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,363][INFO][MainThread] add_node: while adding node NumericNodeId(i=15957), requested parent node NumericNodeId(i=11715) does not exists
-[2019-06-27 13:21:38,363][INFO][MainThread] add_node: while adding node NumericNodeId(i=15958), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,363][INFO][MainThread] add_node: while adding node NumericNodeId(i=15959), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,363][INFO][MainThread] add_node: while adding node NumericNodeId(i=15960), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,363][INFO][MainThread] add_node: while adding node NumericNodeId(i=15961), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,363][INFO][MainThread] add_node: while adding node NumericNodeId(i=15962), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,364][INFO][MainThread] add_node: while adding node NumericNodeId(i=15963), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,364][INFO][MainThread] add_node: while adding node NumericNodeId(i=15964), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,364][INFO][MainThread] add_node: while adding node NumericNodeId(i=16134), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,364][INFO][MainThread] add_node: while adding node NumericNodeId(i=16135), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,364][INFO][MainThread] add_node: while adding node NumericNodeId(i=16136), requested parent node NumericNodeId(i=15957) does not exists
-[2019-06-27 13:21:38,544][INFO][MainThread] add_node: while adding node NumericNodeId(i=16314), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,800][INFO][MainThread] add_node: while adding node NumericNodeId(i=11214), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,803][INFO][MainThread] add_node: while adding node NumericNodeId(i=11202), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,805][INFO][MainThread] add_node: while adding node NumericNodeId(i=11215), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,815][INFO][MainThread] add_node: while adding node NumericNodeId(i=2341), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,815][INFO][MainThread] add_node: while adding node NumericNodeId(i=2342), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,815][INFO][MainThread] add_node: while adding node NumericNodeId(i=2343), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,815][INFO][MainThread] add_node: while adding node NumericNodeId(i=11285), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,815][INFO][MainThread] add_node: while adding node NumericNodeId(i=2344), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,816][INFO][MainThread] add_node: while adding node NumericNodeId(i=11304), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,816][INFO][MainThread] add_node: while adding node NumericNodeId(i=2346), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,816][INFO][MainThread] add_node: while adding node NumericNodeId(i=2347), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,816][INFO][MainThread] add_node: while adding node NumericNodeId(i=2348), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,816][INFO][MainThread] add_node: while adding node NumericNodeId(i=2349), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,816][INFO][MainThread] add_node: while adding node NumericNodeId(i=2350), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,817][INFO][MainThread] add_node: while adding node NumericNodeId(i=11286), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,817][INFO][MainThread] add_node: while adding node NumericNodeId(i=11287), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,817][INFO][MainThread] add_node: while adding node NumericNodeId(i=11305), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,817][INFO][MainThread] add_node: while adding node NumericNodeId(i=11306), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,817][INFO][MainThread] add_node: while adding node NumericNodeId(i=11288), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,817][INFO][MainThread] add_node: while adding node NumericNodeId(i=2351), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,818][INFO][MainThread] add_node: while adding node NumericNodeId(i=2352), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,818][INFO][MainThread] add_node: while adding node NumericNodeId(i=11307), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,818][INFO][MainThread] add_node: while adding node NumericNodeId(i=11308), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,818][INFO][MainThread] add_node: while adding node NumericNodeId(i=2355), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,818][INFO][MainThread] add_node: while adding node NumericNodeId(i=2357), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,818][INFO][MainThread] add_node: while adding node NumericNodeId(i=2358), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,818][INFO][MainThread] add_node: while adding node NumericNodeId(i=2359), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,819][INFO][MainThread] add_node: while adding node NumericNodeId(i=11505), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,819][INFO][MainThread] add_node: while adding node NumericNodeId(i=11506), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,819][INFO][MainThread] add_node: while adding node NumericNodeId(i=11507), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,819][INFO][MainThread] add_node: while adding node NumericNodeId(i=2360), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,819][INFO][MainThread] add_node: while adding node NumericNodeId(i=2361), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,819][INFO][MainThread] add_node: while adding node NumericNodeId(i=2362), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,819][INFO][MainThread] add_node: while adding node NumericNodeId(i=2363), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,820][INFO][MainThread] add_node: while adding node NumericNodeId(i=2364), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,820][INFO][MainThread] add_node: while adding node NumericNodeId(i=11292), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,820][INFO][MainThread] add_node: while adding node NumericNodeId(i=11426), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,820][INFO][MainThread] add_node: while adding node NumericNodeId(i=11427), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,820][INFO][MainThread] add_node: while adding node NumericNodeId(i=11428), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,820][INFO][MainThread] add_node: while adding node NumericNodeId(i=11429), requested parent node is null TwoByteNodeId(i=0) True
-[2019-06-27 13:21:38,868][INFO][MainThread] Created internal session Internal
-[2019-06-27 13:21:38,869][WARNING][MainThread] Endpoints other than open requested but private key and certificate are not set.
-[2019-06-27 13:21:38,869][INFO][MainThread] starting internal server
-[2019-06-27 13:21:38,871][WARNING][MainThread] Listening on localhost:4841
-[2019-06-27 13:21:38,872][INFO][MainThread] getting the xml self definition...
-[2019-06-27 13:21:38,873][INFO][MainThread] self definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/data_model_original.xml
-[2019-06-27 13:21:38,876][INFO][MainThread] creating a virtualized (opc-ua) fb TempoAspersaoPowerWashI...
-[2019-06-27 13:21:38,876][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,876][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,876][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.fbt
-[2019-06-27 13:21:38,876][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.py
-[2019-06-27 13:21:38,876][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,876][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,876][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
-[2019-06-27 13:21:38,876][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
-[2019-06-27 13:21:38,876][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,876][INFO][MainThread] output vars: OrderedDict([('TempoAspersaoPowerWashI', ('INT', None, False)), ('TempoAspersaoCSE', ('INT', None, False)), ('Result', ('BOOL', None, False))])
-[2019-06-27 13:21:38,877][INFO][MainThread] created fb type: SprinklingTime, instance: TempoAspersaoPowerWashI
-[2019-06-27 13:21:38,877][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,877][INFO][MainThread] connection created between START.COLD and TempoAspersaoPowerWashI.Init
-[2019-06-27 13:21:38,877][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,877][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,878][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
-[2019-06-27 13:21:38,878][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
-[2019-06-27 13:21:38,878][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,878][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,878][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
-[2019-06-27 13:21:38,878][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
-[2019-06-27 13:21:38,878][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,878][INFO][MainThread] output vars: OrderedDict()
-[2019-06-27 13:21:38,878][INFO][MainThread] created fb type: SLEEP, instance: 780def04-afa1-4a6d-a0f8-2e1b1eaf98af
-[2019-06-27 13:21:38,878][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,878][INFO][MainThread] connection created between 780def04-afa1-4a6d-a0f8-2e1b1eaf98af.SLEEP_O and TempoAspersaoPowerWashI.Read
-[2019-06-27 13:21:38,878][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,878][INFO][MainThread] connection created between TempoAspersaoPowerWashI.Read_O and 780def04-afa1-4a6d-a0f8-2e1b1eaf98af.SLEEP
-[2019-06-27 13:21:38,879][INFO][MainThread] creating a virtualized (opc-ua) fb TemperaturaCSEProcesso...
-[2019-06-27 13:21:38,879][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,879][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,880][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/Thermometer.fbt
-[2019-06-27 13:21:38,880][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/Thermometer.py
-[2019-06-27 13:21:38,880][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,880][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,880][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
-[2019-06-27 13:21:38,880][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
-[2019-06-27 13:21:38,880][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,880][INFO][MainThread] output vars: OrderedDict([('Temperature', ('INT', None, False)), ('Result', ('BOOL', None, False))])
-[2019-06-27 13:21:38,880][INFO][MainThread] created fb type: Thermometer, instance: TemperaturaCSEProcesso
-[2019-06-27 13:21:38,881][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,881][INFO][MainThread] connection created between START.COLD and TemperaturaCSEProcesso.Init
-[2019-06-27 13:21:38,881][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,881][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,881][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
-[2019-06-27 13:21:38,881][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
-[2019-06-27 13:21:38,881][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,881][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,881][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
-[2019-06-27 13:21:38,881][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
-[2019-06-27 13:21:38,881][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,881][INFO][MainThread] output vars: OrderedDict()
-[2019-06-27 13:21:38,881][INFO][MainThread] created fb type: SLEEP, instance: 4ff6035b-c46e-43ca-8e4d-f73181f200bf
-[2019-06-27 13:21:38,881][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,881][INFO][MainThread] connection created between 4ff6035b-c46e-43ca-8e4d-f73181f200bf.SLEEP_O and TemperaturaCSEProcesso.Read
-[2019-06-27 13:21:38,881][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,881][INFO][MainThread] connection created between TemperaturaCSEProcesso.Read_O and 4ff6035b-c46e-43ca-8e4d-f73181f200bf.SLEEP
-[2019-06-27 13:21:38,883][INFO][MainThread] creating a virtualized (opc-ua) fb TempoAspersaoCSEProcesso...
-[2019-06-27 13:21:38,883][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,883][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,883][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.fbt
-[2019-06-27 13:21:38,883][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.py
-[2019-06-27 13:21:38,883][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,883][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,883][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
-[2019-06-27 13:21:38,883][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
-[2019-06-27 13:21:38,883][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,883][INFO][MainThread] output vars: OrderedDict([('TempoAspersaoPowerWashI', ('INT', None, False)), ('TempoAspersaoCSE', ('INT', None, False)), ('Result', ('BOOL', None, False))])
-[2019-06-27 13:21:38,883][INFO][MainThread] created fb type: SprinklingTime, instance: TempoAspersaoCSEProcesso
-[2019-06-27 13:21:38,884][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,884][INFO][MainThread] connection created between START.COLD and TempoAspersaoCSEProcesso.Init
-[2019-06-27 13:21:38,884][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,884][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,884][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
-[2019-06-27 13:21:38,884][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
-[2019-06-27 13:21:38,884][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,884][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,885][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
-[2019-06-27 13:21:38,885][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
-[2019-06-27 13:21:38,885][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,885][INFO][MainThread] output vars: OrderedDict()
-[2019-06-27 13:21:38,885][INFO][MainThread] created fb type: SLEEP, instance: 37e1b92f-6c05-4f2e-878b-4b5ad05e3faa
-[2019-06-27 13:21:38,885][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,885][INFO][MainThread] connection created between 37e1b92f-6c05-4f2e-878b-4b5ad05e3faa.SLEEP_O and TempoAspersaoCSEProcesso.Read
-[2019-06-27 13:21:38,885][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,885][INFO][MainThread] connection created between TempoAspersaoCSEProcesso.Read_O and 37e1b92f-6c05-4f2e-878b-4b5ad05e3faa.SLEEP
-[2019-06-27 13:21:38,886][INFO][MainThread] creating a virtualized (opc-ua) fb DPFiltroCircuitoAgitação...
-[2019-06-27 13:21:38,886][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,886][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,886][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.fbt
-[2019-06-27 13:21:38,886][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.py
-[2019-06-27 13:21:38,887][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,887][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,887][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
-[2019-06-27 13:21:38,887][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
-[2019-06-27 13:21:38,887][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,887][INFO][MainThread] output vars: OrderedDict([('Pressure_1', ('INT', None, False)), ('Pressure_2', ('INT', None, False)), ('Result', ('BOOL', None, False))])
-[2019-06-27 13:21:38,887][INFO][MainThread] created fb type: PressureSwitch, instance: DPFiltroCircuitoAgitação
-[2019-06-27 13:21:38,887][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,887][INFO][MainThread] connection created between START.COLD and DPFiltroCircuitoAgitação.Init
-[2019-06-27 13:21:38,888][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,888][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,888][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
-[2019-06-27 13:21:38,888][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
-[2019-06-27 13:21:38,888][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,888][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,888][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
-[2019-06-27 13:21:38,888][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
-[2019-06-27 13:21:38,888][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,888][INFO][MainThread] output vars: OrderedDict()
-[2019-06-27 13:21:38,888][INFO][MainThread] created fb type: SLEEP, instance: 44c40bf8-23db-4053-b10c-39b42dc334a0
-[2019-06-27 13:21:38,888][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,888][INFO][MainThread] connection created between 44c40bf8-23db-4053-b10c-39b42dc334a0.SLEEP_O and DPFiltroCircuitoAgitação.Read
-[2019-06-27 13:21:38,888][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,888][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Read_O and 44c40bf8-23db-4053-b10c-39b42dc334a0.SLEEP
-[2019-06-27 13:21:38,889][INFO][MainThread] creating a virtualized (opc-ua) fb PressãoCircuitoAspersão...
-[2019-06-27 13:21:38,889][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,889][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,890][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.fbt
-[2019-06-27 13:21:38,890][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.py
-[2019-06-27 13:21:38,890][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,890][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,890][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
-[2019-06-27 13:21:38,890][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
-[2019-06-27 13:21:38,890][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,890][INFO][MainThread] output vars: OrderedDict([('Pressure_1', ('INT', None, False)), ('Pressure_2', ('INT', None, False)), ('Result', ('BOOL', None, False))])
-[2019-06-27 13:21:38,890][INFO][MainThread] created fb type: PressureSwitch, instance: PressãoCircuitoAspersão
-[2019-06-27 13:21:38,891][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,891][INFO][MainThread] connection created between START.COLD and PressãoCircuitoAspersão.Init
-[2019-06-27 13:21:38,891][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,891][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,891][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
-[2019-06-27 13:21:38,891][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
-[2019-06-27 13:21:38,891][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,891][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,891][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
-[2019-06-27 13:21:38,891][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
-[2019-06-27 13:21:38,891][INFO][MainThread] input vars: OrderedDict()
-[2019-06-27 13:21:38,891][INFO][MainThread] output vars: OrderedDict()
-[2019-06-27 13:21:38,891][INFO][MainThread] created fb type: SLEEP, instance: 6b8b03eb-f840-4339-a646-b79327eff588
-[2019-06-27 13:21:38,891][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,891][INFO][MainThread] connection created between 6b8b03eb-f840-4339-a646-b79327eff588.SLEEP_O and PressãoCircuitoAspersão.Read
-[2019-06-27 13:21:38,891][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,891][INFO][MainThread] connection created between PressãoCircuitoAspersão.Read_O and 6b8b03eb-f840-4339-a646-b79327eff588.SLEEP
-[2019-06-27 13:21:38,894][INFO][MainThread] creating a virtualized (opc-ua) fb ab3d2eb8-135a-11e9-ab14-d663bd873d93...
-[2019-06-27 13:21:38,894][INFO][MainThread] creating a new fb...
-[2019-06-27 13:21:38,894][INFO][MainThread] importing fb python file and definition file...
-[2019-06-27 13:21:38,895][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/FastFourierTransform.fbt
-[2019-06-27 13:21:38,895][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/FastFourierTransform.py
-[2019-06-27 13:21:38,895][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
-[2019-06-27 13:21:38,895][INFO][MainThread] parsing successful with:
-[2019-06-27 13:21:38,895][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Run', ('Event', None, False))])
-[2019-06-27 13:21:38,895][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Run_O', ('Event', None, False))])
-[2019-06-27 13:21:38,895][INFO][MainThread] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', None, False))])
-[2019-06-27 13:21:38,895][INFO][MainThread] output vars: OrderedDict([('Frequencies', ('INT', None, False))])
-[2019-06-27 13:21:38,895][INFO][MainThread] created fb type: FastFourierTransform, instance: ab3d2eb8-135a-11e9-ab14-d663bd873d93
-[2019-06-27 13:21:38,898][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,898][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Pressure_1 and ab3d2eb8-135a-11e9-ab14-d663bd873d93.Signal
-[2019-06-27 13:21:38,898][INFO][MainThread] creating a new connection...
-[2019-06-27 13:21:38,899][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Read_O and ab3d2eb8-135a-11e9-ab14-d663bd873d93.Run
-[2019-06-27 13:21:38,899][INFO][MainThread] starting the fb flow...
-[2019-06-27 13:21:38,899][INFO][TempoAspersaoPowerWashI] fb TempoAspersaoPowerWashI started.
-[2019-06-27 13:21:38,899][INFO][780def04-afa1-4a6d-a0f8-2e1b1eaf98af] fb 780def04-afa1-4a6d-a0f8-2e1b1eaf98af started.
-[2019-06-27 13:21:38,899][INFO][TemperaturaCSEProcesso] fb TemperaturaCSEProcesso started.
-[2019-06-27 13:21:38,899][INFO][4ff6035b-c46e-43ca-8e4d-f73181f200bf] fb 4ff6035b-c46e-43ca-8e4d-f73181f200bf started.
-[2019-06-27 13:21:38,899][INFO][TempoAspersaoCSEProcesso] fb TempoAspersaoCSEProcesso started.
-[2019-06-27 13:21:38,900][INFO][37e1b92f-6c05-4f2e-878b-4b5ad05e3faa] fb 37e1b92f-6c05-4f2e-878b-4b5ad05e3faa started.
-[2019-06-27 13:21:38,900][INFO][DPFiltroCircuitoAgitação] fb DPFiltroCircuitoAgitação started.
-[2019-06-27 13:21:38,900][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] fb 44c40bf8-23db-4053-b10c-39b42dc334a0 started.
-[2019-06-27 13:21:38,900][INFO][PressãoCircuitoAspersão] fb PressãoCircuitoAspersão started.
-[2019-06-27 13:21:38,900][INFO][6b8b03eb-f840-4339-a646-b79327eff588] fb 6b8b03eb-f840-4339-a646-b79327eff588 started.
-[2019-06-27 13:21:38,900][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] fb ab3d2eb8-135a-11e9-ab14-d663bd873d93 started.
-[2019-06-27 13:21:38,900][INFO][MainThread] updating the outputs...
-[2019-06-27 13:21:38,901][INFO][TempoAspersaoPowerWashI] reading fb inputs...
-[2019-06-27 13:21:38,901][INFO][TemperaturaCSEProcesso] reading fb inputs...
-[2019-06-27 13:21:38,901][INFO][MainThread] starting up on localhost port 61499
-[2019-06-27 13:21:38,901][INFO][TempoAspersaoCSEProcesso] reading fb inputs...
-[2019-06-27 13:21:38,901][INFO][TempoAspersaoCSEProcesso] input vars: OrderedDict()
-[2019-06-27 13:21:38,901][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
-[2019-06-27 13:21:38,901][INFO][TempoAspersaoPowerWashI] input vars: OrderedDict()
-[2019-06-27 13:21:38,901][INFO][TemperaturaCSEProcesso] input vars: OrderedDict()
-[2019-06-27 13:21:38,901][INFO][MainThread] waiting for a connection...
-[2019-06-27 13:21:38,901][INFO][PressãoCircuitoAspersão] reading fb inputs...
-[2019-06-27 13:21:38,901][INFO][TempoAspersaoCSEProcesso] running fb...
-[2019-06-27 13:21:38,901][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
-[2019-06-27 13:21:38,902][INFO][TempoAspersaoPowerWashI] running fb...
-[2019-06-27 13:21:38,902][INFO][TemperaturaCSEProcesso] running fb...
-[2019-06-27 13:21:38,902][INFO][PressãoCircuitoAspersão] input vars: OrderedDict()
-[2019-06-27 13:21:38,902][INFO][TempoAspersaoCSEProcesso] updating the outputs...
-[2019-06-27 13:21:38,902][INFO][DPFiltroCircuitoAgitação] running fb...
-[2019-06-27 13:21:38,902][INFO][TempoAspersaoPowerWashI] updating the outputs...
-[2019-06-27 13:21:38,902][INFO][TemperaturaCSEProcesso] updating the outputs...
-[2019-06-27 13:21:38,902][INFO][PressãoCircuitoAspersão] running fb...
-[2019-06-27 13:21:38,903][INFO][PressãoCircuitoAspersão] updating the outputs...
-[2019-06-27 13:21:38,902][INFO][DPFiltroCircuitoAgitação] updating the outputs...
-[2019-06-27 13:21:38,903][INFO][6b8b03eb-f840-4339-a646-b79327eff588] reading fb inputs...
-[2019-06-27 13:21:38,903][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] reading fb inputs...
-[2019-06-27 13:21:38,903][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
-[2019-06-27 13:21:38,904][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 0, False))])
-[2019-06-27 13:21:38,903][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] input vars: OrderedDict()
-[2019-06-27 13:21:38,904][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] running fb...
-[2019-06-27 13:21:38,904][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
-[2019-06-27 13:21:38,904][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
-[2019-06-27 13:21:38,903][INFO][6b8b03eb-f840-4339-a646-b79327eff588] input vars: OrderedDict()
-[2019-06-27 13:21:38,904][INFO][6b8b03eb-f840-4339-a646-b79327eff588] running fb...
-[2019-06-27 13:21:39,905][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] updating the outputs...
-[2019-06-27 13:21:39,906][INFO][6b8b03eb-f840-4339-a646-b79327eff588] updating the outputs...
-[2019-06-27 13:21:39,906][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
-[2019-06-27 13:21:39,906][INFO][PressãoCircuitoAspersão] reading fb inputs...
-[2019-06-27 13:21:39,907][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
-[2019-06-27 13:21:39,907][INFO][PressãoCircuitoAspersão] input vars: OrderedDict()
-[2019-06-27 13:21:39,908][INFO][DPFiltroCircuitoAgitação] running fb...
-[2019-06-27 13:21:39,908][INFO][PressãoCircuitoAspersão] running fb...
-[2019-06-27 13:21:39,908][INFO][DPFiltroCircuitoAgitação] updating the outputs...
-[2019-06-27 13:21:39,909][INFO][PressãoCircuitoAspersão] updating the outputs...
-[2019-06-27 13:21:39,910][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
-[2019-06-27 13:21:39,910][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 1, False))])
-[2019-06-27 13:21:39,911][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
-[2019-06-27 13:21:39,911][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
-[2019-06-27 13:21:39,912][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] reading fb inputs...
-[2019-06-27 13:21:39,912][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] input vars: OrderedDict()
-[2019-06-27 13:21:39,912][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] running fb...
-[2019-06-27 13:21:39,913][INFO][6b8b03eb-f840-4339-a646-b79327eff588] reading fb inputs...
-[2019-06-27 13:21:39,913][INFO][6b8b03eb-f840-4339-a646-b79327eff588] input vars: OrderedDict()
-[2019-06-27 13:21:39,913][INFO][6b8b03eb-f840-4339-a646-b79327eff588] running fb...
-[2019-06-27 13:21:40,675][INFO][MainThread] interrupted server
-[2019-06-27 13:21:40,914][INFO][6b8b03eb-f840-4339-a646-b79327eff588] updating the outputs...
-[2019-06-27 13:21:40,914][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] updating the outputs...
-[2019-06-27 13:21:40,914][INFO][PressãoCircuitoAspersão] reading fb inputs...
-[2019-06-27 13:21:40,915][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
-[2019-06-27 13:21:40,915][INFO][PressãoCircuitoAspersão] input vars: OrderedDict()
-[2019-06-27 13:21:40,916][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
-[2019-06-27 13:21:40,916][INFO][PressãoCircuitoAspersão] running fb...
-[2019-06-27 13:21:40,916][INFO][DPFiltroCircuitoAgitação] running fb...
-[2019-06-27 13:21:40,917][INFO][PressãoCircuitoAspersão] updating the outputs...
-[2019-06-27 13:21:40,917][INFO][DPFiltroCircuitoAgitação] updating the outputs...
-[2019-06-27 13:21:40,918][INFO][6b8b03eb-f840-4339-a646-b79327eff588] reading fb inputs...
-[2019-06-27 13:21:40,919][INFO][6b8b03eb-f840-4339-a646-b79327eff588] input vars: OrderedDict()
-[2019-06-27 13:21:40,919][INFO][6b8b03eb-f840-4339-a646-b79327eff588] running fb...
-[2019-06-27 13:21:40,919][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
-[2019-06-27 13:21:40,920][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 2, False))])
-[2019-06-27 13:21:40,920][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
-[2019-06-27 13:21:40,920][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
-[2019-06-27 13:21:40,920][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] reading fb inputs...
-[2019-06-27 13:21:40,921][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] input vars: OrderedDict()
-[2019-06-27 13:21:40,921][INFO][44c40bf8-23db-4053-b10c-39b42dc334a0] running fb...
+[2019-06-27 16:32:05,913][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:05,913][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:05,914][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/EMB_RES.fbt
+[2019-06-27 16:32:05,914][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/EMB_RES.py
+[2019-06-27 16:32:05,914][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:05,915][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:05,915][INFO][MainThread] input events: OrderedDict()
+[2019-06-27 16:32:05,915][INFO][MainThread] output events: OrderedDict([('COLD', ('Event', None, False)), ('WARM', ('Event', None, False)), ('STOP', ('Event', None, False))])
+[2019-06-27 16:32:05,915][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:05,915][INFO][MainThread] output vars: OrderedDict()
+[2019-06-27 16:32:05,915][INFO][MainThread] created fb type: EMB_RES, instance: START
+[2019-06-27 16:32:05,915][INFO][MainThread] add_node: while adding node NumericNodeId(i=3062), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,915][INFO][MainThread] add_node: while adding node NumericNodeId(i=3063), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,916][INFO][MainThread] add_node: while adding node NumericNodeId(i=24), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,919][INFO][MainThread] add_node: while adding node NumericNodeId(i=31), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,922][INFO][MainThread] add_node: while adding node NumericNodeId(i=3068), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,923][INFO][MainThread] add_node: while adding node NumericNodeId(i=12170), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,923][INFO][MainThread] add_node: while adding node NumericNodeId(i=3067), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,923][INFO][MainThread] add_node: while adding node NumericNodeId(i=3069), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,923][INFO][MainThread] add_node: while adding node NumericNodeId(i=3070), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,923][INFO][MainThread] add_node: while adding node NumericNodeId(i=11433), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,924][INFO][MainThread] add_node: while adding node NumericNodeId(i=11498), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,924][INFO][MainThread] add_node: while adding node NumericNodeId(i=15002), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,924][INFO][MainThread] add_node: while adding node NumericNodeId(i=12908), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,924][INFO][MainThread] add_node: while adding node NumericNodeId(i=11512), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,924][INFO][MainThread] add_node: while adding node NumericNodeId(i=11513), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,925][INFO][MainThread] add_node: while adding node NumericNodeId(i=11432), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,925][INFO][MainThread] add_node: while adding node NumericNodeId(i=3071), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,925][INFO][MainThread] add_node: while adding node NumericNodeId(i=12745), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,925][INFO][MainThread] add_node: while adding node NumericNodeId(i=3072), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,925][INFO][MainThread] add_node: while adding node NumericNodeId(i=3073), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,926][INFO][MainThread] add_node: while adding node NumericNodeId(i=16306), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,972][INFO][MainThread] add_node: while adding node NumericNodeId(i=58), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,972][INFO][MainThread] add_node: while adding node NumericNodeId(i=62), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,975][INFO][MainThread] add_node: while adding node NumericNodeId(i=78), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,976][INFO][MainThread] add_node: while adding node NumericNodeId(i=80), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,976][INFO][MainThread] add_node: while adding node NumericNodeId(i=83), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,976][INFO][MainThread] add_node: while adding node NumericNodeId(i=79), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,977][INFO][MainThread] add_node: while adding node NumericNodeId(i=11508), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,977][INFO][MainThread] add_node: while adding node NumericNodeId(i=11510), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,978][INFO][MainThread] add_node: while adding node NumericNodeId(i=84), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:05,979][INFO][MainThread] add_node: while adding node NumericNodeId(i=15957), requested parent node NumericNodeId(i=11715) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=15958), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=15959), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=15960), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=15961), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=15962), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=15963), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=15964), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=16134), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=16135), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:05,980][INFO][MainThread] add_node: while adding node NumericNodeId(i=16136), requested parent node NumericNodeId(i=15957) does not exists
+[2019-06-27 16:32:06,175][INFO][MainThread] add_node: while adding node NumericNodeId(i=16314), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,457][INFO][MainThread] add_node: while adding node NumericNodeId(i=11214), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,460][INFO][MainThread] add_node: while adding node NumericNodeId(i=11202), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,462][INFO][MainThread] add_node: while adding node NumericNodeId(i=11215), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,473][INFO][MainThread] add_node: while adding node NumericNodeId(i=2341), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,473][INFO][MainThread] add_node: while adding node NumericNodeId(i=2342), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,474][INFO][MainThread] add_node: while adding node NumericNodeId(i=2343), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,474][INFO][MainThread] add_node: while adding node NumericNodeId(i=11285), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,474][INFO][MainThread] add_node: while adding node NumericNodeId(i=2344), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,474][INFO][MainThread] add_node: while adding node NumericNodeId(i=11304), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,474][INFO][MainThread] add_node: while adding node NumericNodeId(i=2346), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,474][INFO][MainThread] add_node: while adding node NumericNodeId(i=2347), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,475][INFO][MainThread] add_node: while adding node NumericNodeId(i=2348), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,475][INFO][MainThread] add_node: while adding node NumericNodeId(i=2349), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,475][INFO][MainThread] add_node: while adding node NumericNodeId(i=2350), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,475][INFO][MainThread] add_node: while adding node NumericNodeId(i=11286), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,475][INFO][MainThread] add_node: while adding node NumericNodeId(i=11287), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,475][INFO][MainThread] add_node: while adding node NumericNodeId(i=11305), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,476][INFO][MainThread] add_node: while adding node NumericNodeId(i=11306), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,476][INFO][MainThread] add_node: while adding node NumericNodeId(i=11288), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,476][INFO][MainThread] add_node: while adding node NumericNodeId(i=2351), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,476][INFO][MainThread] add_node: while adding node NumericNodeId(i=2352), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,476][INFO][MainThread] add_node: while adding node NumericNodeId(i=11307), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,476][INFO][MainThread] add_node: while adding node NumericNodeId(i=11308), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,477][INFO][MainThread] add_node: while adding node NumericNodeId(i=2355), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,477][INFO][MainThread] add_node: while adding node NumericNodeId(i=2357), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,477][INFO][MainThread] add_node: while adding node NumericNodeId(i=2358), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,477][INFO][MainThread] add_node: while adding node NumericNodeId(i=2359), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,477][INFO][MainThread] add_node: while adding node NumericNodeId(i=11505), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,477][INFO][MainThread] add_node: while adding node NumericNodeId(i=11506), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,478][INFO][MainThread] add_node: while adding node NumericNodeId(i=11507), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,478][INFO][MainThread] add_node: while adding node NumericNodeId(i=2360), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,478][INFO][MainThread] add_node: while adding node NumericNodeId(i=2361), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,478][INFO][MainThread] add_node: while adding node NumericNodeId(i=2362), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,478][INFO][MainThread] add_node: while adding node NumericNodeId(i=2363), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,478][INFO][MainThread] add_node: while adding node NumericNodeId(i=2364), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,478][INFO][MainThread] add_node: while adding node NumericNodeId(i=11292), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,479][INFO][MainThread] add_node: while adding node NumericNodeId(i=11426), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,479][INFO][MainThread] add_node: while adding node NumericNodeId(i=11427), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,479][INFO][MainThread] add_node: while adding node NumericNodeId(i=11428), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,479][INFO][MainThread] add_node: while adding node NumericNodeId(i=11429), requested parent node is null TwoByteNodeId(i=0) True
+[2019-06-27 16:32:06,529][INFO][MainThread] Created internal session Internal
+[2019-06-27 16:32:06,530][WARNING][MainThread] Endpoints other than open requested but private key and certificate are not set.
+[2019-06-27 16:32:06,530][INFO][MainThread] starting internal server
+[2019-06-27 16:32:06,532][WARNING][MainThread] Listening on localhost:4841
+[2019-06-27 16:32:06,534][INFO][MainThread] getting the xml self definition...
+[2019-06-27 16:32:06,534][INFO][MainThread] self definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/data_model_original.xml
+[2019-06-27 16:32:06,538][INFO][MainThread] creating a virtualized (opc-ua) fb TempoAspersaoPowerWashI...
+[2019-06-27 16:32:06,538][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,538][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,538][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.fbt
+[2019-06-27 16:32:06,538][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.py
+[2019-06-27 16:32:06,538][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,539][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,539][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-27 16:32:06,539][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-27 16:32:06,539][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,539][INFO][MainThread] output vars: OrderedDict([('TempoAspersaoPowerWashI', ('INT', None, False)), ('TempoAspersaoCSE', ('INT', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-27 16:32:06,539][INFO][MainThread] created fb type: SprinklingTime, instance: TempoAspersaoPowerWashI
+[2019-06-27 16:32:06,540][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,540][INFO][MainThread] connection created between START.COLD and TempoAspersaoPowerWashI.Init
+[2019-06-27 16:32:06,540][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,540][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,540][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
+[2019-06-27 16:32:06,540][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
+[2019-06-27 16:32:06,540][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,540][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,540][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
+[2019-06-27 16:32:06,540][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
+[2019-06-27 16:32:06,540][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,540][INFO][MainThread] output vars: OrderedDict()
+[2019-06-27 16:32:06,540][INFO][MainThread] created fb type: SLEEP, instance: 65cb6621-f843-438e-8047-3ddcdd706a60
+[2019-06-27 16:32:06,540][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,540][INFO][MainThread] connection created between 65cb6621-f843-438e-8047-3ddcdd706a60.SLEEP_O and TempoAspersaoPowerWashI.Read
+[2019-06-27 16:32:06,540][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,540][INFO][MainThread] connection created between TempoAspersaoPowerWashI.Read_O and 65cb6621-f843-438e-8047-3ddcdd706a60.SLEEP
+[2019-06-27 16:32:06,542][INFO][MainThread] creating a virtualized (opc-ua) fb TemperaturaCSEProcesso...
+[2019-06-27 16:32:06,542][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,542][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,542][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/Thermometer.fbt
+[2019-06-27 16:32:06,542][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/Thermometer.py
+[2019-06-27 16:32:06,542][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,542][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,542][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-27 16:32:06,542][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-27 16:32:06,542][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,542][INFO][MainThread] output vars: OrderedDict([('Temperature', ('INT', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-27 16:32:06,542][INFO][MainThread] created fb type: Thermometer, instance: TemperaturaCSEProcesso
+[2019-06-27 16:32:06,543][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,543][INFO][MainThread] connection created between START.COLD and TemperaturaCSEProcesso.Init
+[2019-06-27 16:32:06,543][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,543][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,543][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
+[2019-06-27 16:32:06,544][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
+[2019-06-27 16:32:06,544][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,544][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,544][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
+[2019-06-27 16:32:06,544][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
+[2019-06-27 16:32:06,544][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,544][INFO][MainThread] output vars: OrderedDict()
+[2019-06-27 16:32:06,544][INFO][MainThread] created fb type: SLEEP, instance: d5373fec-e48f-429a-bb0a-d9d7a4ac4aa5
+[2019-06-27 16:32:06,544][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,544][INFO][MainThread] connection created between d5373fec-e48f-429a-bb0a-d9d7a4ac4aa5.SLEEP_O and TemperaturaCSEProcesso.Read
+[2019-06-27 16:32:06,544][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,544][INFO][MainThread] connection created between TemperaturaCSEProcesso.Read_O and d5373fec-e48f-429a-bb0a-d9d7a4ac4aa5.SLEEP
+[2019-06-27 16:32:06,545][INFO][MainThread] creating a virtualized (opc-ua) fb TempoAspersaoCSEProcesso...
+[2019-06-27 16:32:06,545][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,545][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,545][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.fbt
+[2019-06-27 16:32:06,546][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SprinklingTime.py
+[2019-06-27 16:32:06,546][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,546][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,546][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-27 16:32:06,546][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-27 16:32:06,546][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,546][INFO][MainThread] output vars: OrderedDict([('TempoAspersaoPowerWashI', ('INT', None, False)), ('TempoAspersaoCSE', ('INT', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-27 16:32:06,546][INFO][MainThread] created fb type: SprinklingTime, instance: TempoAspersaoCSEProcesso
+[2019-06-27 16:32:06,547][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,547][INFO][MainThread] connection created between START.COLD and TempoAspersaoCSEProcesso.Init
+[2019-06-27 16:32:06,547][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,547][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,547][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
+[2019-06-27 16:32:06,547][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
+[2019-06-27 16:32:06,547][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,547][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,547][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
+[2019-06-27 16:32:06,547][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
+[2019-06-27 16:32:06,547][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,547][INFO][MainThread] output vars: OrderedDict()
+[2019-06-27 16:32:06,548][INFO][MainThread] created fb type: SLEEP, instance: c78a4087-c35c-4866-b053-d8924d281506
+[2019-06-27 16:32:06,548][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,548][INFO][MainThread] connection created between c78a4087-c35c-4866-b053-d8924d281506.SLEEP_O and TempoAspersaoCSEProcesso.Read
+[2019-06-27 16:32:06,548][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,548][INFO][MainThread] connection created between TempoAspersaoCSEProcesso.Read_O and c78a4087-c35c-4866-b053-d8924d281506.SLEEP
+[2019-06-27 16:32:06,549][INFO][MainThread] creating a virtualized (opc-ua) fb DPFiltroCircuitoAgitação...
+[2019-06-27 16:32:06,549][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,549][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,550][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.fbt
+[2019-06-27 16:32:06,550][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.py
+[2019-06-27 16:32:06,550][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,550][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,550][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-27 16:32:06,550][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-27 16:32:06,550][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,550][INFO][MainThread] output vars: OrderedDict([('Pressure_1', ('INT', None, False)), ('Pressure_2', ('INT', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-27 16:32:06,550][INFO][MainThread] created fb type: PressureSwitch, instance: DPFiltroCircuitoAgitação
+[2019-06-27 16:32:06,551][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,551][INFO][MainThread] connection created between START.COLD and DPFiltroCircuitoAgitação.Init
+[2019-06-27 16:32:06,551][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,551][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,551][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
+[2019-06-27 16:32:06,551][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
+[2019-06-27 16:32:06,551][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,551][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,551][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
+[2019-06-27 16:32:06,551][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
+[2019-06-27 16:32:06,551][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,551][INFO][MainThread] output vars: OrderedDict()
+[2019-06-27 16:32:06,551][INFO][MainThread] created fb type: SLEEP, instance: 48c70631-8091-4ba5-8aad-cc5bde862749
+[2019-06-27 16:32:06,551][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,551][INFO][MainThread] connection created between 48c70631-8091-4ba5-8aad-cc5bde862749.SLEEP_O and DPFiltroCircuitoAgitação.Read
+[2019-06-27 16:32:06,551][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,551][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Read_O and 48c70631-8091-4ba5-8aad-cc5bde862749.SLEEP
+[2019-06-27 16:32:06,553][INFO][MainThread] creating a virtualized (opc-ua) fb PressãoCircuitoAspersão...
+[2019-06-27 16:32:06,553][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,553][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,553][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.fbt
+[2019-06-27 16:32:06,553][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/PressureSwitch.py
+[2019-06-27 16:32:06,553][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,553][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,553][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Read', ('Event', None, False)), ('Calibrate', ('Event', None, False))])
+[2019-06-27 16:32:06,553][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Read_O', ('Event', None, False)), ('Calibrate_O', ('Event', None, False))])
+[2019-06-27 16:32:06,553][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,553][INFO][MainThread] output vars: OrderedDict([('Pressure_1', ('INT', None, False)), ('Pressure_2', ('INT', None, False)), ('Result', ('BOOL', None, False))])
+[2019-06-27 16:32:06,553][INFO][MainThread] created fb type: PressureSwitch, instance: PressãoCircuitoAspersão
+[2019-06-27 16:32:06,554][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,554][INFO][MainThread] connection created between START.COLD and PressãoCircuitoAspersão.Init
+[2019-06-27 16:32:06,554][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,554][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,554][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.fbt
+[2019-06-27 16:32:06,554][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/SLEEP.py
+[2019-06-27 16:32:06,554][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,555][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,555][INFO][MainThread] input events: OrderedDict([('SLEEP', ('Event', None, False))])
+[2019-06-27 16:32:06,555][INFO][MainThread] output events: OrderedDict([('SLEEP_O', ('Event', None, False))])
+[2019-06-27 16:32:06,555][INFO][MainThread] input vars: OrderedDict()
+[2019-06-27 16:32:06,555][INFO][MainThread] output vars: OrderedDict()
+[2019-06-27 16:32:06,555][INFO][MainThread] created fb type: SLEEP, instance: f8cdf11d-f993-4d40-b213-79c389bd0073
+[2019-06-27 16:32:06,555][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,555][INFO][MainThread] connection created between f8cdf11d-f993-4d40-b213-79c389bd0073.SLEEP_O and PressãoCircuitoAspersão.Read
+[2019-06-27 16:32:06,555][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,555][INFO][MainThread] connection created between PressãoCircuitoAspersão.Read_O and f8cdf11d-f993-4d40-b213-79c389bd0073.SLEEP
+[2019-06-27 16:32:06,559][INFO][MainThread] creating a virtualized (opc-ua) fb ab3d2eb8-135a-11e9-ab14-d663bd873d93...
+[2019-06-27 16:32:06,559][INFO][MainThread] creating a new fb...
+[2019-06-27 16:32:06,559][INFO][MainThread] importing fb python file and definition file...
+[2019-06-27 16:32:06,560][INFO][MainThread] fb definition (xml) imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/FastFourierTransform.fbt
+[2019-06-27 16:32:06,560][INFO][MainThread] python file imported from: /home/eliseu/Dropbox/SYSTEC/python/dinasore-ua/resources/function_blocks/FastFourierTransform.py
+[2019-06-27 16:32:06,560][INFO][MainThread] parsing the fb interface (inputs/outputs events/vars)
+[2019-06-27 16:32:06,560][INFO][MainThread] parsing successful with:
+[2019-06-27 16:32:06,560][INFO][MainThread] input events: OrderedDict([('Init', ('Event', None, False)), ('Run', ('Event', None, False))])
+[2019-06-27 16:32:06,560][INFO][MainThread] output events: OrderedDict([('Init_O', ('Event', None, False)), ('Run_O', ('Event', None, False))])
+[2019-06-27 16:32:06,560][INFO][MainThread] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', None, False))])
+[2019-06-27 16:32:06,560][INFO][MainThread] output vars: OrderedDict([('Frequencies', ('INT', None, False))])
+[2019-06-27 16:32:06,560][INFO][MainThread] created fb type: FastFourierTransform, instance: ab3d2eb8-135a-11e9-ab14-d663bd873d93
+[2019-06-27 16:32:06,563][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,564][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Pressure_1 and ab3d2eb8-135a-11e9-ab14-d663bd873d93.Signal
+[2019-06-27 16:32:06,564][INFO][MainThread] creating a new connection...
+[2019-06-27 16:32:06,564][INFO][MainThread] connection created between DPFiltroCircuitoAgitação.Read_O and ab3d2eb8-135a-11e9-ab14-d663bd873d93.Run
+[2019-06-27 16:32:06,564][INFO][MainThread] starting the fb flow...
+[2019-06-27 16:32:06,564][INFO][TempoAspersaoPowerWashI] fb TempoAspersaoPowerWashI started.
+[2019-06-27 16:32:06,564][INFO][65cb6621-f843-438e-8047-3ddcdd706a60] fb 65cb6621-f843-438e-8047-3ddcdd706a60 started.
+[2019-06-27 16:32:06,564][INFO][TemperaturaCSEProcesso] fb TemperaturaCSEProcesso started.
+[2019-06-27 16:32:06,564][INFO][d5373fec-e48f-429a-bb0a-d9d7a4ac4aa5] fb d5373fec-e48f-429a-bb0a-d9d7a4ac4aa5 started.
+[2019-06-27 16:32:06,564][INFO][TempoAspersaoCSEProcesso] fb TempoAspersaoCSEProcesso started.
+[2019-06-27 16:32:06,565][INFO][c78a4087-c35c-4866-b053-d8924d281506] fb c78a4087-c35c-4866-b053-d8924d281506 started.
+[2019-06-27 16:32:06,565][INFO][DPFiltroCircuitoAgitação] fb DPFiltroCircuitoAgitação started.
+[2019-06-27 16:32:06,565][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] fb 48c70631-8091-4ba5-8aad-cc5bde862749 started.
+[2019-06-27 16:32:06,565][INFO][PressãoCircuitoAspersão] fb PressãoCircuitoAspersão started.
+[2019-06-27 16:32:06,565][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] fb f8cdf11d-f993-4d40-b213-79c389bd0073 started.
+[2019-06-27 16:32:06,565][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] fb ab3d2eb8-135a-11e9-ab14-d663bd873d93 started.
+[2019-06-27 16:32:06,565][INFO][MainThread] updating the outputs...
+[2019-06-27 16:32:06,565][INFO][TempoAspersaoPowerWashI] reading fb inputs...
+[2019-06-27 16:32:06,565][INFO][TemperaturaCSEProcesso] reading fb inputs...
+[2019-06-27 16:32:06,566][INFO][TemperaturaCSEProcesso] input vars: OrderedDict()
+[2019-06-27 16:32:06,566][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
+[2019-06-27 16:32:06,566][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
+[2019-06-27 16:32:06,566][INFO][MainThread] starting up on localhost port 61499
+[2019-06-27 16:32:06,566][INFO][TempoAspersaoPowerWashI] input vars: OrderedDict()
+[2019-06-27 16:32:06,566][INFO][TempoAspersaoPowerWashI] running fb...
+[2019-06-27 16:32:06,566][INFO][TemperaturaCSEProcesso] running fb...
+[2019-06-27 16:32:06,566][INFO][TemperaturaCSEProcesso] updating the outputs...
+[2019-06-27 16:32:06,566][INFO][DPFiltroCircuitoAgitação] running fb...
+[2019-06-27 16:32:06,566][INFO][DPFiltroCircuitoAgitação] updating the outputs...
+[2019-06-27 16:32:06,566][INFO][TempoAspersaoPowerWashI] updating the outputs...
+[2019-06-27 16:32:06,566][INFO][MainThread] waiting for a connection...
+[2019-06-27 16:32:06,566][INFO][PressãoCircuitoAspersão] reading fb inputs...
+[2019-06-27 16:32:06,567][INFO][PressãoCircuitoAspersão] input vars: OrderedDict()
+[2019-06-27 16:32:06,566][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] reading fb inputs...
+[2019-06-27 16:32:06,567][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] input vars: OrderedDict()
+[2019-06-27 16:32:06,567][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] running fb...
+[2019-06-27 16:32:06,567][INFO][PressãoCircuitoAspersão] running fb...
+[2019-06-27 16:32:06,567][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
+[2019-06-27 16:32:06,567][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 0, False))])
+[2019-06-27 16:32:06,567][INFO][PressãoCircuitoAspersão] updating the outputs...
+[2019-06-27 16:32:06,566][INFO][TempoAspersaoCSEProcesso] reading fb inputs...
+[2019-06-27 16:32:06,567][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
+[2019-06-27 16:32:06,567][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] reading fb inputs...
+[2019-06-27 16:32:06,567][INFO][TempoAspersaoCSEProcesso] input vars: OrderedDict()
+[2019-06-27 16:32:06,567][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
+[2019-06-27 16:32:06,567][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] input vars: OrderedDict()
+[2019-06-27 16:32:06,567][INFO][TempoAspersaoCSEProcesso] running fb...
+[2019-06-27 16:32:06,568][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] running fb...
+[2019-06-27 16:32:06,568][INFO][TempoAspersaoCSEProcesso] updating the outputs...
+[2019-06-27 16:32:07,568][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] updating the outputs...
+[2019-06-27 16:32:07,569][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
+[2019-06-27 16:32:07,569][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
+[2019-06-27 16:32:07,569][INFO][DPFiltroCircuitoAgitação] running fb...
+[2019-06-27 16:32:07,569][INFO][DPFiltroCircuitoAgitação] updating the outputs...
+[2019-06-27 16:32:07,570][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] updating the outputs...
+[2019-06-27 16:32:07,571][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
+[2019-06-27 16:32:07,571][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 1, False))])
+[2019-06-27 16:32:07,571][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
+[2019-06-27 16:32:07,571][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
+[2019-06-27 16:32:07,572][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] reading fb inputs...
+[2019-06-27 16:32:07,572][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] input vars: OrderedDict()
+[2019-06-27 16:32:07,573][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] running fb...
+[2019-06-27 16:32:07,573][INFO][PressãoCircuitoAspersão] reading fb inputs...
+[2019-06-27 16:32:07,573][INFO][PressãoCircuitoAspersão] input vars: OrderedDict()
+[2019-06-27 16:32:07,573][INFO][PressãoCircuitoAspersão] running fb...
+[2019-06-27 16:32:07,574][INFO][PressãoCircuitoAspersão] updating the outputs...
+[2019-06-27 16:32:07,574][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] reading fb inputs...
+[2019-06-27 16:32:07,574][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] input vars: OrderedDict()
+[2019-06-27 16:32:07,575][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] running fb...
+[2019-06-27 16:32:08,208][INFO][MainThread] interrupted server
+[2019-06-27 16:32:08,574][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] updating the outputs...
+[2019-06-27 16:32:08,574][INFO][DPFiltroCircuitoAgitação] reading fb inputs...
+[2019-06-27 16:32:08,574][INFO][DPFiltroCircuitoAgitação] input vars: OrderedDict()
+[2019-06-27 16:32:08,575][INFO][DPFiltroCircuitoAgitação] running fb...
+[2019-06-27 16:32:08,575][INFO][DPFiltroCircuitoAgitação] updating the outputs...
+[2019-06-27 16:32:08,575][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] reading fb inputs...
+[2019-06-27 16:32:08,576][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] input vars: OrderedDict()
+[2019-06-27 16:32:08,576][INFO][48c70631-8091-4ba5-8aad-cc5bde862749] running fb...
+[2019-06-27 16:32:08,576][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] reading fb inputs...
+[2019-06-27 16:32:08,576][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] updating the outputs...
+[2019-06-27 16:32:08,577][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] input vars: OrderedDict([('Rate', ('INT', None, False)), ('Signal', ('INT', 2, False))])
+[2019-06-27 16:32:08,577][INFO][PressãoCircuitoAspersão] reading fb inputs...
+[2019-06-27 16:32:08,578][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] running fb...
+[2019-06-27 16:32:08,578][INFO][PressãoCircuitoAspersão] input vars: OrderedDict()
+[2019-06-27 16:32:08,578][INFO][ab3d2eb8-135a-11e9-ab14-d663bd873d93] updating the outputs...
+[2019-06-27 16:32:08,578][INFO][PressãoCircuitoAspersão] running fb...
+[2019-06-27 16:32:08,579][INFO][PressãoCircuitoAspersão] updating the outputs...
+[2019-06-27 16:32:08,580][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] reading fb inputs...
+[2019-06-27 16:32:08,580][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] input vars: OrderedDict()
+[2019-06-27 16:32:08,581][INFO][f8cdf11d-f993-4d40-b213-79c389bd0073] running fb...

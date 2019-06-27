@@ -27,6 +27,7 @@ class Service(utils.UaBaseStructure):
             # splits the tag in these 3 camps
             uri, ignore, tag = item.tag[1:].partition("}")
 
+            # parses the input/output variables
             if tag == 'interfaces':
                 # parses the info from each interface
                 for if_xml in item:
@@ -51,6 +52,25 @@ class Service(utils.UaBaseStructure):
                             var_dict['DataType'] = var.attrib['DataType']
                             var_dict['ValueRank'] = var.attrib['ValueRank']
                             self.variables_list.append(var_dict)
+
+            # parses the constant variables
+            elif tag == 'recipeadjustments':
+                # iterate over each constant
+                for rec_adj in item:
+                    # iterates over each variable in the 'recipe adjustments'
+                    for variable in rec_adj[0]:
+                        var_dict = dict()
+                        var_dict['Name'] = variable.attrib['name']
+                        var_dict['DataType'] = variable.attrib['DataType']
+                        var_dict['ValueRank'] = variable.attrib['ValueRank']
+                        var_dict['Type'] = 'Constant'
+                        self.variables_list.append(var_dict)
+
+                        # creates the opc-ua variable
+                        var_idx, var_object = self.create_xml_variable(variable)
+                        var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_dict['Name'])])
+
+                        utils.default_property(self.ua_peer, var_idx, var_path, 'Type', var_dict['Type'])
 
     def from_fb(self, input_vars_xml, output_vars_xml):
         # create the input variables interface
