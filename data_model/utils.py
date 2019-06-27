@@ -46,16 +46,6 @@ def default_object(ua_peer, obj_idx, obj_path, path_list, obj_name):
     return new_list, new_path
 
 
-def read_description_from_fb(fb_xml):
-    search_id, search_type = None, None
-    # gets the search_id
-    for entry in fb_xml:
-        if entry.tag == 'SelfDiscription':
-            search_id = entry.attrib['ID']
-            search_type = entry.attrib['FBType']
-    return search_id, search_type
-
-
 def parse_fb_description(fb_xml):
     fb_id, ua_type = None, None
     input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None

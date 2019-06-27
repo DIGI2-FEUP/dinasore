@@ -31,11 +31,27 @@ class Device(utils.UaBaseStructure):
 
             if tag == 'variables':
                 # link opc-ua variables in fb input variable
-                self.__parse_variables(item)
+                # creates the opc-ua variables and links them
+                for var in item:
+                    if var.attrib['name'] != 'Description':
+                        # create the variable
+                        var_idx, var_object = self.create_xml_variable(var)
+                        # adds the variable to the dictionary
+                        self.ua_variables[var.attrib['name']] = var_object
 
             elif tag == 'methods':
                 # link opc-ua methods in fb methods
-                self.__parse_methods(item)
+                for method in item:
+                    method_name = method.attrib['name']
+
+                    # gets the created fb
+                    fb = self.ua_peer.config.get_fb(self.fb_name)
+
+                    method2call = utils.Method2Call(method_name, fb, self.ua_peer)
+                    # parses the method from the xml
+                    method2call.from_xml(method)
+                    # virtualize (opc-ua) the method
+                    method2call.virtualize(self.methods_idx, self.methods_path, method2call.method_name)
 
             elif tag == 'subscriptions':
                 pass
@@ -103,24 +119,3 @@ class Device(utils.UaBaseStructure):
         self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'Read_O'),
                                               '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
 
-    def __parse_methods(self, methods_xml):
-        for method in methods_xml:
-            method_name = method.attrib['name']
-
-            # gets the created fb
-            fb = self.ua_peer.config.get_fb(self.fb_name)
-
-            method2call = utils.Method2Call(method_name, fb, self.ua_peer)
-            # parses the method from the xml
-            method2call.from_xml(method)
-            # virtualize (opc-ua) the method
-            method2call.virtualize(self.methods_idx, self.methods_path, method2call.method_name)
-
-    def __parse_variables(self, vars_xml):
-        # creates the opc-ua variables and links them
-        for var in vars_xml:
-            if var.attrib['name'] != 'Description':
-                # create the variable
-                var_idx, var_object = self.create_xml_variable(var)
-                # adds the variable to the dictionary
-                self.ua_variables[var.attrib['name']] = var_object

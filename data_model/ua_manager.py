@@ -64,8 +64,9 @@ class UaManager(peer.UaPeer):
         self.config.start_work()
 
     def from_fb(self, fb, fb_xml):
-        item_id, item_type = utils.read_description_from_fb(fb_xml)
-        item_type = item_type.split('.')
+        device_id, device_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+                utils.parse_fb_description(fb_xml)
+        item_type = device_type.split('.')
 
         if item_type[0] == 'DEVICE':
             self.__device_set.from_fb(fb, fb_xml)
