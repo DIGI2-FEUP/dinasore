@@ -87,20 +87,14 @@ def parse_fb_description(fb_xml):
 
 class UaBaseStructure:
 
-    def __init__(self, ua_peer, folder_name, subs_id, fb_name, fb_type):
+    def __init__(self, ua_peer, folder_name, subs_id, fb_name, fb_type, browse_name):
         self.subs_id = subs_id
         self.fb_name = fb_name
         self.fb_type = fb_type
-        self.base_idx, self.base_path, self.base_path_list = None, None, None
         self.ua_peer = ua_peer
         self.folder_name = folder_name
         self.ua_variables = dict()
 
-        # creates the methods folder
-
-        # creates the variables folder
-
-    def create_base_object(self, browse_name):
         # creates the path to set the folder
         folder_path_list = self.ua_peer.ROOT_LIST + [(2, self.folder_name)]
         folder_path = self.ua_peer.generate_path(folder_path_list)
@@ -111,47 +105,55 @@ class UaBaseStructure:
                                                              folder_path, folder_path_list,
                                                              browse_name)
 
-    def create_variable(self, var_xml, folder_idx, vars_path):
+        # creates the methods folder
+        self.methods_idx, self.methods_path, methods_list = default_folder(self.ua_peer, self.base_idx, self.base_path,
+                                                                           self.base_path_list, 'Methods')
+
+        # creates the variables folder
+        self.vars_idx, self.vars_path, self.vars_list = default_folder(self.ua_peer, self.base_idx, self.base_path,
+                                                                       self.base_path_list, 'Variables')
+
+    def create_xml_variable(self, var_xml):
         var_name = var_xml.attrib['name']
         # creates the opc-ua variable
-        var_idx = '{0}:{1}'.format(folder_idx, var_name)
+        var_idx = '{0}:{1}'.format(self.vars_idx, var_name)
         browse_name = '2:{0}'.format(var_name)
         # convert array dimensions
         array_dimensions = 0
         if 'ArrayDimensions' in var_xml.attrib:
             array_dimensions = int(var_xml.attrib['ArrayDimensions'])
-        var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
+        var_object = self.ua_peer.create_typed_variable(self.vars_path, var_idx, browse_name,
                                                         UA_TYPES[var_xml.attrib['DataType']],
                                                         UA_RANKS[var_xml.attrib['ValueRank']],
                                                         dimensions=array_dimensions,
                                                         writable=False)
         return var_idx, var_object
 
-    def create_variable_by_dict(self, var_dict, folder_idx, vars_path):
+    def create_fb_variable(self, var_xml):
+        var_name = var_xml.attrib['Name']
+        # creates the opc-ua variable
+        var_idx = '{0}:{1}'.format(self.vars_idx, var_name)
+        browse_name = '2:{0}'.format(var_name)
+        # CHECK THE VALUE RANK OF THE VARIABLE
+        var_object = self.ua_peer.create_typed_variable(self.vars_path, var_idx, browse_name,
+                                                        UA_TYPES[var_xml.attrib['Type']],
+                                                        UA_RANKS['0'],
+                                                        writable=False)
+        return var_idx, var_object
+
+    def create_variable_by_dict(self, var_dict):
         var_name = var_dict['Name']
         # creates the opc-ua variable
-        var_idx = '{0}:{1}'.format(folder_idx, var_name)
+        var_idx = '{0}:{1}'.format(self.vars_idx, var_name)
         browse_name = '2:{0}'.format(var_name)
         # convert array dimensions
         array_dimensions = 0
         if 'ArrayDimensions' in var_dict:
             array_dimensions = int(var_dict['ArrayDimensions'])
-        var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
+        var_object = self.ua_peer.create_typed_variable(self.vars_path, var_idx, browse_name,
                                                         UA_TYPES[var_dict['DataType']],
                                                         UA_RANKS[var_dict['ValueRank']],
                                                         dimensions=array_dimensions,
-                                                        writable=False)
-        return var_idx, var_object
-
-    def create_fb_variable(self, var_xml, folder_idx, vars_path):
-        var_name = var_xml.attrib['Name']
-        # creates the opc-ua variable
-        var_idx = '{0}:{1}'.format(folder_idx, var_name)
-        browse_name = '2:{0}'.format(var_name)
-        # CHECK THE VALUE RANK OF THE VARIABLE
-        var_object = self.ua_peer.create_typed_variable(vars_path, var_idx, browse_name,
-                                                        UA_TYPES[var_xml.attrib['Type']],
-                                                        UA_RANKS['0'],
                                                         writable=False)
         return var_idx, var_object
 

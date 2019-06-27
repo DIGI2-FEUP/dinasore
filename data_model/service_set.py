@@ -48,15 +48,15 @@ class ServiceSet:
             # use the service_id as key
             self.service_dict[s.subs_id] = s
 
-    def instance_from_fb(self, fb, fb_xml):
+    def create_instance_from_fb(self, fb, fb_xml):
         service_id, service_type = utils.read_description_from_fb(fb_xml)
         # get the service and create the instance
         s = self.service_dict[service_id]
-        s.instance_from_fb(fb)
+        s.create_instance_from_fb(fb)
         # the instance_id is the same as the fb_name
         self.instances_map[fb.fb_name] = service_id
 
-    def instances_from_xml(self, xml_set):
+    def create_instances_from_xml(self, xml_set):
         for instance_xml in xml_set:
             # splits the tag in these 3 camps
             uri, ignore, tag = instance_xml.tag[1:].partition("}")
@@ -67,7 +67,7 @@ class ServiceSet:
                 # gets the respective service from the dictionary
                 s = self.service_dict[service_id]
                 # parses the instance xml
-                s.instance_from_xml(instance_xml)
+                s.create_instance_from_xml(instance_xml)
                 # connects the instance to the service
                 instance_id = instance_xml.attrib['id']
                 self.instances_map[instance_id] = service_id

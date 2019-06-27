@@ -57,7 +57,7 @@ class UaManager(peer.UaPeer):
             elif tag == 'servicedescriptionset':
                 self.__service_set.from_xml(base_element)
             elif tag == 'serviceinstanceset':
-                self.__service_set.instances_from_xml(base_element)
+                self.__service_set.create_instances_from_xml(base_element)
             elif tag == 'pointdescriptionset':
                 pass
 
@@ -74,7 +74,7 @@ class UaManager(peer.UaPeer):
             # first check if needs to create the service
             self.__service_set.from_fb(fb.fb_type, fb_xml)
             # after create the instance
-            self.__service_set.instance_from_fb(fb, fb_xml)
+            self.__service_set.create_instance_from_fb(fb, fb_xml)
 
     def __create_properties(self):
         for base_element in self.root_xml:

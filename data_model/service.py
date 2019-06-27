@@ -5,18 +5,22 @@ from data_model import instance
 class Service(utils.UaBaseStructure):
 
     def __init__(self, ua_peer, subs_id, fb_name, fb_type):
-        utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet', subs_id, fb_name, fb_type)
+        utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet',
+                                       subs_id=subs_id,
+                                       fb_name=fb_name,
+                                       fb_type=fb_type,
+                                       browse_name=fb_type)
         # key: constant_name, value: value to set (converted)
         self.variables_list = []
         # all instances from this service
         # key: instance_id, value: instance_obj
         self.instances_dict = dict()
 
-        # creates the device object
-        self.create_base_object(self.fb_type)
-
         # sets the method 'CreateInstance'
-        self.__create_methods()
+        # creates the opc-ua method
+        method_idx = '{0}:{1}'.format(self.methods_idx, 'CreateInstance')
+        self.ua_peer.create_method(self.methods_path, method_idx, '2:CreateInstance', self.instance_from_ua,
+                                   input_args=[], output_args=[])
 
     def from_xml(self, root_xml):
         for item in root_xml:
@@ -28,21 +32,18 @@ class Service(utils.UaBaseStructure):
                 self.__parse_variables(item)
 
     def from_fb(self, input_vars_xml, output_vars_xml):
-        # creates the interfaces folder
-        folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                              self.base_path, self.base_path_list, 'Variables')
         # create the input variables interface
         for var_xml in input_vars_xml:
-            self.create_fb_variable(var_xml, folder_idx, ifs_path)
+            self.create_fb_variable(var_xml)
             # adds the variables to the list
             self.__create_var_entry('Input', var_xml)
         # create the output variables interface
         for var_xml in output_vars_xml:
-            self.create_fb_variable(var_xml, folder_idx, ifs_path)
+            self.create_fb_variable(var_xml)
             # adds the variables to the list
             self.__create_var_entry('Output', var_xml)
 
-    def instance_from_xml(self, root_xml):
+    def create_instance_from_xml(self, root_xml):
         # gets the instance_id
         subs_id = root_xml.attrib['id']
         fb_name = root_xml.attrib['id']
@@ -52,7 +53,7 @@ class Service(utils.UaBaseStructure):
         # adds the method to the dict
         self.instances_dict[inst.subs_id] = inst
 
-    def instance_from_fb(self, fb):
+    def create_instance_from_fb(self, fb):
         # gets the instance_id
         subs_id = fb.fb_name
         fb_name = fb.fb_name
@@ -63,19 +64,7 @@ class Service(utils.UaBaseStructure):
         # adds the method to the dict
         self.instances_dict[inst.subs_id] = inst
 
-    def __create_methods(self):
-        # creates the methods folder
-        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                      self.base_path, self.base_path_list, 'Methods')
-        # creates the opc-ua method
-        method_idx = '{0}:{1}'.format(folder_idx, 'CreateInstance')
-        self.ua_peer.create_method(methods_path, method_idx, '2:CreateInstance', self.instance_from_ua,
-                                   input_args=[], output_args=[])
-
     def __parse_variables(self, ifs_xml):
-        # creates the interfaces folder
-        folder_idx, ifs_path, ifs_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                              self.base_path, self.base_path_list, 'Variables')
         for if_xml in ifs_xml:
             # gets the argument name and creates the folder
             folder_name = if_xml.attrib['type']
@@ -85,8 +74,8 @@ class Service(utils.UaBaseStructure):
                 for var in if_xml[0]:
                     var_dict = dict()
                     # creates the variable
-                    var_idx, var_object = self.create_variable(var, folder_idx, ifs_path)
-                    var_path = self.ua_peer.generate_path(ifs_list + [(2, var.attrib['name'])])
+                    var_idx, var_object = self.create_xml_variable(var)
+                    var_path = self.ua_peer.generate_path(self.vars_list + [(2, var.attrib['name'])])
                     # creates the type property
                     for ele in var[0]:
                         if ele.attrib['id'] == 'Type':

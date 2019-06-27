@@ -5,10 +5,21 @@ import uuid
 class Device(utils.UaBaseStructure):
 
     def __init__(self, ua_peer, subs_id, fb_name, fb_type, state):
-        utils.UaBaseStructure.__init__(self, ua_peer, 'DeviceSet', subs_id, fb_name, fb_type)
+        utils.UaBaseStructure.__init__(self, ua_peer, 'DeviceSet',
+                                       subs_id=subs_id,
+                                       fb_name=fb_name,
+                                       fb_type=fb_type,
+                                       browse_name=fb_name)
         self.state = state
 
-        self.__create_header_objects()
+        # creates the fb_type property
+        utils.default_property(self.ua_peer, self.base_idx, self.base_path,
+                               property_name='SourceType', property_value=self.fb_type)
+        # creates the state property
+        utils.default_property(self.ua_peer, self.base_idx, self.base_path,
+                               property_name='SourceState', property_value=self.state)
+        # create the id property
+        utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
 
     def from_xml(self, root_xml):
         # creates the fb inside the configuration
@@ -40,9 +51,6 @@ class Device(utils.UaBaseStructure):
         # gets the type of device
         device_type = ua_type.split('.')[1]
 
-        # creates the methods folder
-        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx, self.base_path,
-                                                                      self.base_path_list, 'Methods')
         # Iterates over the input events
         for event in input_events_xml:
             # check if is a opc-ua method
@@ -55,18 +63,15 @@ class Device(utils.UaBaseStructure):
                     # parses the inputs_vars and the output_vars
                     method2call.from_fb(input_vars_xml, output_vars_xml)
                     # virtualize (opc-ua) the method
-                    method2call.virtualize(folder_idx, methods_path, method2call.method_name)
+                    method2call.virtualize(self.methods_idx, self.methods_path, method2call.method_name)
 
-        # creates the variables folder
-        folder_idx, vars_path, vars_list = utils.default_folder(self.ua_peer, self.base_idx, self.base_path,
-                                                                self.base_path_list, 'Variables')
         # Iterates over the input_vars
         for entry in input_vars_xml:
             if 'OpcUa' in entry.attrib:
                 var_specs = entry.attrib['OpcUa'].split('.')
                 if 'Variable' in var_specs:
                     # create the variable
-                    var_idx, var_object = self.create_fb_variable(entry, folder_idx, vars_path)
+                    var_idx, var_object = self.create_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
 
@@ -76,7 +81,7 @@ class Device(utils.UaBaseStructure):
                 var_specs = entry.attrib['OpcUa'].split('.')
                 if 'Variable' in var_specs:
                     # create the variable
-                    var_idx, var_object = self.create_fb_variable(entry, folder_idx, vars_path)
+                    var_idx, var_object = self.create_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
 
@@ -98,22 +103,7 @@ class Device(utils.UaBaseStructure):
         self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'Read_O'),
                                               '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
 
-    def __create_header_objects(self):
-        # creates the device object
-        self.create_base_object(self.fb_name)
-        # creates the fb_type property
-        utils.default_property(self.ua_peer, self.base_idx, self.base_path,
-                               property_name='SourceType', property_value=self.fb_type)
-        # creates the state property
-        utils.default_property(self.ua_peer, self.base_idx, self.base_path,
-                               property_name='SourceState', property_value=self.state)
-        # create the id property
-        utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
-
     def __parse_methods(self, methods_xml):
-        # creates the methods folder
-        folder_idx, methods_path, methods_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                      self.base_path, self.base_path_list, 'Methods')
         for method in methods_xml:
             method_name = method.attrib['name']
 
@@ -124,16 +114,13 @@ class Device(utils.UaBaseStructure):
             # parses the method from the xml
             method2call.from_xml(method)
             # virtualize (opc-ua) the method
-            method2call.virtualize(folder_idx, methods_path, method2call.method_name)
+            method2call.virtualize(self.methods_idx, self.methods_path, method2call.method_name)
 
     def __parse_variables(self, vars_xml):
-        # creates the variables folder
-        folder_idx, vars_path, vars_list = utils.default_folder(self.ua_peer, self.base_idx,
-                                                                self.base_path, self.base_path_list, 'Variables')
         # creates the opc-ua variables and links them
         for var in vars_xml:
             if var.attrib['name'] != 'Description':
                 # create the variable
-                var_idx, var_object = self.create_variable(var, folder_idx, vars_path)
+                var_idx, var_object = self.create_xml_variable(var)
                 # adds the variable to the dictionary
                 self.ua_variables[var.attrib['name']] = var_object
