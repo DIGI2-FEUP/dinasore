@@ -9,9 +9,9 @@
         <data id="STATE" DataType="String" ValueRank="-1">RUNNING</data>
     </general>
     <deviceset>
-        <device id="6ddeae8a-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
+        <device id="TEMPERATURE_SENSOR_1" type="SENSOR" fb="false">
             <variables>
-                <variable name="Temperature" DataType="Integer" ValueRank="-1">
+                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1">
                     <elements>
                         <element id="MeasurementType" DataType="String" ValueRank="-1">Temperature</element>
                         <element id="MeasurementUnits" DataType="String" ValueRank="-1">ºC</element>
@@ -20,37 +20,19 @@
                         <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
                     </elements>
                 </variable>
-                <variable name="Pressure" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Pressure</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">bar</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
-                <variable name="ProcessTime" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Counter</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">s</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">TTS - Tina 0</element>
+                        <element id="Name" DataType="String" ValueRank="-1">TEMPERATURE_SENSOR_1</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">Tina0</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">TEMPERATURE_SENSOR</element>
                     </elements>
                 </variable>
             </variables>
             <methods>
-                <method name="Calibrate">
+                <method name="CALIBRATE">
                     <arguments>
-                        <argument name="Result" type="Output" DataType="Boolean" ValueRank="-1">
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1">
                             <elements>
                                 <element id="Description" DataType="String" ValueRank="-1">Informs upon completion if
                                     the callibration has been successful
@@ -63,18 +45,9 @@
             <subscriptions>
             </subscriptions>
         </device>
-        <device id="6ddeb128-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
+        <device id="PRESSURE_SENSOR_1" type="SENSOR" fb="false">
             <variables>
-                <variable name="Temperature" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Temperature</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">ºC</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
-                <variable name="Pressure" DataType="Integer" ValueRank="-1">
+                <variable name="PRESSURE" DataType="Integer" ValueRank="-1">
                     <elements>
                         <element id="MeasurementType" DataType="String" ValueRank="-1">Pressure</element>
                         <element id="MeasurementUnits" DataType="String" ValueRank="-1">bar</element>
@@ -83,28 +56,19 @@
                         <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
                     </elements>
                 </variable>
-                <variable name="ProcessTime" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Counter</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">s</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">TTS - Tina 1</element>
+                        <element id="Name" DataType="String" ValueRank="-1">PRESSURE_SENSOR_1</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">Tina1</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">PRESSURE_SENSOR</element>
                     </elements>
                 </variable>
             </variables>
             <methods>
-                <method name="Calibrate">
+                <method name="CALIBRATE">
                     <arguments>
-                        <argument name="Result" type="Output" DataType="Boolean" ValueRank="-1">
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1">
                             <elements>
                                 <element id="Description" DataType="String" ValueRank="-1">Informs upon completion if
                                     the callibration has been successful
@@ -117,27 +81,9 @@
             <subscriptions>
             </subscriptions>
         </device>
-        <device id="6ddeb3d0-3b9f-11e9-b210-d663bd873d93" type="SENSOR" fb="false">
+        <device id="PROCESS_TIME_1" type="SENSOR" fb="false">
             <variables>
-                <variable name="Temperature" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Temperature</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">ºC</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
-                <variable name="Pressure" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Pressure</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">bar</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
-                <variable name="ProcessTime" DataType="Integer" ValueRank="-1">
+                <variable name="TIME" DataType="Integer" ValueRank="-1">
                     <elements>
                         <element id="MeasurementType" DataType="String" ValueRank="-1">Counter</element>
                         <element id="MeasurementUnits" DataType="String" ValueRank="-1">s</element>
@@ -148,17 +94,17 @@
                 </variable>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">Tina - CATAFORENSE</element>
+                        <element id="Name" DataType="String" ValueRank="-1">PROCESS_TIME_1</element>
                         <element id="Manufacturer" DataType="String" ValueRank="-1">SYSTEC-FoF</element>
                         <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">Cata</element>
+                        <element id="SourceType" DataType="String" ValueRank="-1">PROCESS_TIME</element>
                     </elements>
                 </variable>
             </variables>
             <methods>
-                <method name="Calibrate">
+                <method name="CALIBRATE">
                     <arguments>
-                        <argument name="Result" type="Output" DataType="Boolean" ValueRank="-1">
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1">
                             <elements>
                                 <element id="Description" DataType="String" ValueRank="-1">Informs upon completion if
                                     the callibration has been successful
@@ -173,11 +119,11 @@
         </device>
     </deviceset>
     <servicedescriptionset>
-        <servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="ServiceExample" namespace="fft" version="1.0.0" type="DiagnosticService">
+        <servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="S_EXAMPLE" namespace="fft" version="1.0.0" type="DiagnosticService">
             <recipeadjustments>
                 <recipeadjustment name="AcquisitionRate">
                     <variables>
-                        <variable name="Rate" DataType="Integer" ValueRank="-1">
+                        <variable name="RATE" DataType="Integer" ValueRank="-1">
                             <elements>
                                 <element id="Min" DataType="Integer" ValueRank="-1">1</element>
                                 <element id="Max" DataType="Integer" ValueRank="-1">1000</element>
@@ -203,13 +149,13 @@
             <interfaces>
                 <interface type="Arguments">
                     <variables>
-                        <variable name="Signal" DataType="Integer" ValueRank="-1">
+                        <variable name="SIGNAL" DataType="Integer" ValueRank="-1">
                             <elements>
                                 <element id="Description" DataType="String" ValueRank="-1">Input signal</element>
                                 <element id="Type" DataType="String" ValueRank="-1">Input</element>
                             </elements>
                         </variable>
-                        <variable name="Frequencies" DataType="Integer" ValueRank="-1">
+                        <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1">
                             <elements>
                                 <element id="Description" DataType="String" ValueRank="-1">Output signal</element>
                                 <element id="Type" DataType="String" ValueRank="-1">Output</element>
@@ -260,8 +206,8 @@
                                     both (means that the direction doesn't matter)
                       VariableName: name of the service variable that is linked to that subscription -->
             <subscriptions>
-                <id BrowseDirection="both" type="Context">6ddeae8a-3b9f-11e9-b210-d663bd873d93</id>
-                <id BrowseDirection="forward" type="Data" VariableName="Signal">6ddeb3d0-3b9f-11e9-b210-d663bd873d93:Variables:ProcessTime</id>
+                <id BrowseDirection="both" type="Context">PROCESS_TIME_1</id>
+                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TIME</id>
             </subscriptions>
             <recipeadjustments>
                 <recipeadjustment name="AcquisitionRate">

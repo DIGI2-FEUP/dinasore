@@ -47,7 +47,7 @@ class InstanceService(utils.UaBaseStructure):
     def __create_instance(self):
         # create the ua method to call
         fb = self.ua_peer.config.get_fb(self.fb_name)
-        self.ua_method = utils.Method2Call('Run', fb, self.ua_peer)
+        self.ua_method = utils.Method2Call('RUN', fb, self.ua_peer)
 
         # create the linked variables
         for var_dict in self.variables_list:
@@ -103,12 +103,12 @@ class InstanceService(utils.UaBaseStructure):
                     self.ua_peer.config.create_connection(source=source, destination=destination)
                     # connect the output event to input event
                     if isinstance(content, device.Device):
-                        source_event = '{0}.{1}'.format(content.fb_name, 'Read_O')
+                        source_event = '{0}.{1}'.format(content.fb_name, 'READ_O')
                     else:
-                        source_event = '{0}.{1}'.format(content.fb_name, 'Run_O')
+                        source_event = '{0}.{1}'.format(content.fb_name, 'RUN_O')
 
                     # creates the connection between the fb
-                    destination_event = '{0}.{1}'.format(self.subs_id, 'Run')
+                    destination_event = '{0}.{1}'.format(self.subs_id, 'RUN')
                     self.ua_peer.config.create_connection(source=source_event, destination=destination_event)
 
                 # its an output variable

@@ -41,10 +41,10 @@ class DataModelTests(unittest.TestCase):
     def test_device_method(self):
         c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
 
-        method_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'TTS - Tina 1'),
-                                                        (2, 'Methods'), (2, 'Calibrate')])
-        var_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'TTS - Tina 0'),
-                                                     (2, 'Variables'), (2, 'Pressure')])
+        method_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'PRESSURE_SENSOR_1'),
+                                                        (2, 'Methods'), (2, 'CALIBRATE')])
+        var_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'PRESSURE_SENSOR_1'),
+                                                     (2, 'Variables'), (2, 'PRESSURE')])
 
         method_r = c.call_method(method_path.copy(), None)
         read_r = c.read(var_path)

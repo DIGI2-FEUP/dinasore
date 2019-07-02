@@ -110,12 +110,12 @@ class Device(utils.UaBaseStructure):
 
     def __create_sensor_extras(self):
         self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
-                                              '{0}.{1}'.format(self.fb_name, 'Init'))
+                                              '{0}.{1}'.format(self.fb_name, 'INIT'))
         # creates the fb that runs the device in loop
         sleep_fb_name = str(uuid.uuid4())
         self.ua_peer.config.create_fb(sleep_fb_name, 'SLEEP')
         self.ua_peer.config.create_connection('{0}.{1}'.format(sleep_fb_name, 'SLEEP_O'),
-                                              '{0}.{1}'.format(self.fb_name, 'Read'))
-        self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'Read_O'),
+                                              '{0}.{1}'.format(self.fb_name, 'READ'))
+        self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'READ_O'),
                                               '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
 

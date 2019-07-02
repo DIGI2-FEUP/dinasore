@@ -9,24 +9,24 @@
                  Remarks="initial API and implementation and/or initial documentation" Version="1.0"/>
     <InterfaceList>
         <EventInputs>
-            <Event Comment="" Name="Init" Type="Event"/>
-            <Event Comment="" Name="Run" Type="Event">
-              <With Var="Rate"/>
-              <With Var="Signal"/>
+            <Event Comment="" Name="INIT" Type="Event"/>
+            <Event Comment="" Name="RUN" Type="Event">
+              <With Var="RATE"/>
+              <With Var="SIGNAL"/>
             </Event>
         </EventInputs>
         <EventOutputs>
-            <Event Comment="" Name="Init_O" Type="Event"/>
-            <Event Comment="" Name="Run_O" Type="Event">
-              <With Var="Frequencies"/>
+            <Event Comment="" Name="INIT_O" Type="Event"/>
+            <Event Comment="" Name="RUN_O" Type="Event">
+              <With Var="FREQUENCIES"/>
             </Event>
         </EventOutputs>
         <InputVars>
-            <VarDeclaration Name="Rate" Type="INT" OpcUa="Constant"/>
-            <VarDeclaration Name="Signal" Type="INT" OpcUa="Variable"/>
+            <VarDeclaration Name="RATE" Type="INT" OpcUa="Constant"/>
+            <VarDeclaration Name="SIGNAL" Type="INT" OpcUa="Variable"/>
         </InputVars>
         <OutputVars>
-            <VarDeclaration Name="Frequencies" Type="INT" OpcUa="Variable"/>
+            <VarDeclaration Name="FREQUENCIES" Type="INT" OpcUa="Variable"/>
         </OutputVars>
     </InterfaceList>
 </FBType>
