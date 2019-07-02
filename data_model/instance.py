@@ -7,12 +7,11 @@ class InstanceService(utils.UaBaseStructure):
 
     def __init__(self, ua_peer, service_id, var_list, subs_id, fb_name, fb_type):
         # creates the instance object
-        browse_name = '{0}:{1}'.format(fb_type, subs_id)
         utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceInstanceSet',
                                        subs_id=subs_id,
                                        fb_name=fb_name,
                                        fb_type=fb_type,
-                                       browse_name=browse_name)
+                                       browse_name=subs_id)
         # service associated to this instance
         self.subs_did = service_id
         # service xml variables

@@ -167,7 +167,7 @@
         </servicedescription>
     </servicedescriptionset>
     <serviceinstanceset>
-        <serviceinstance id="ab3d2eb8-135a-11e9-ab14-d663bd873d93" type="DiagnosticService" dId="f919f8da-90d5-11e8-9eb6-529269fb1459">
+        <serviceinstance id="SERVICE_EXAMPLE_1" type="DiagnosticService" dId="f919f8da-90d5-11e8-9eb6-529269fb1459">
             <methods>
                 <method name="AddLink">
                     <arguments>

@@ -1,2 +1,0 @@
-[2019-07-02 11:46:38,585][WARNING][MainThread] Endpoints other than open requested but private key and certificate are not set.
-[2019-07-02 11:46:38,587][WARNING][MainThread] Listening on localhost:4841
