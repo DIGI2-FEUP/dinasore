@@ -52,12 +52,16 @@ class UaManager(peer.UaPeer):
             # splits the tag in these 3 camps
             uri, ignore, tag = base_element.tag[1:].partition("}")
 
+            # parses the device set
             if tag == 'deviceset':
                 self.__device_set.from_xml(base_element)
+            # parses the service description set
             elif tag == 'servicedescriptionset':
                 self.__service_set.from_xml(base_element)
+            # parses the service instance set
             elif tag == 'serviceinstanceset':
                 self.__service_set.create_instances_from_xml(base_element)
+            # parses the point description
             elif tag == 'pointdescriptionset':
                 pass
 
@@ -75,7 +79,28 @@ class UaManager(peer.UaPeer):
             # first check if needs to create the service
             self.__service_set.from_fb(fb.fb_type, fb_xml)
             # after create the instance
-            self.__service_set.create_instance_from_fb(fb, fb_xml)
+            self.__service_set.create_instance_from_fb(fb)
+
+    def save_xml(self):
+        # first delete all elements except the general data
+        for base_element in self.root_xml:
+            # splits the tag in these 3 camps
+            uri, ignore, tag = base_element.tag[1:].partition("}")
+
+            # if is different removes the element
+            if tag != 'general':
+                self.root_xml.remove(base_element)
+
+        # saves the device set
+        device_set_xml = ETree.SubElement(self.root_xml, 'deviceset')
+        self.__device_set.save_xml(device_set_xml)
+        # saves the service set
+        service_set_xml = ETree.SubElement(self.root_xml, 'servicedescriptionset')
+        self.__service_set.save_xml(service_set_xml)
+        # saves the instance set
+        instance_set_xml = ETree.SubElement(self.root_xml, 'serviceinstanceset')
+        # saves the point set
+        point_set_xml = ETree.SubElement(self.root_xml, 'pointdescriptionset')
 
     def __create_properties(self):
         for base_element in self.root_xml:
@@ -87,9 +112,6 @@ class UaManager(peer.UaPeer):
                     # adds the property to the opc-ua server
                     utils.default_property(self, self.base_idx, self.ROOT_PATH,
                                            property_name=item.attrib['id'], property_value=item.text)
-
-    def save_xml(self, file_name):
-        pass
 
     def stop_ua(self):
         # stops the configuration work

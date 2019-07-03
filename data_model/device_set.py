@@ -1,8 +1,9 @@
 from data_model import utils
 from data_model import device
+import xml.etree.ElementTree as ETree
 
 
-class DeviceSet:
+class DeviceSet(utils.UaInterface):
 
     def __init__(self, ua_peer):
         self.devices_dict = dict()
@@ -35,6 +36,14 @@ class DeviceSet:
         dev.from_fb(fb, fb_xml)
         # adds the device to the dictionary
         self.devices_dict[dev.subs_id] = dev
+
+    def save_xml(self, xml_set):
+        # iterates over the devices dictionary and creates each device
+        for key, device_item in self.devices_dict.items():
+            # creates the device element
+            device_xml = ETree.SubElement(xml_set, 'device')
+            # creates the content off that device
+            device_item.save_xml(device_xml)
 
     @staticmethod
     def __parse_xml_header(header_xml):

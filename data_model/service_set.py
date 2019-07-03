@@ -2,7 +2,7 @@ from data_model import utils
 from data_model import service
 
 
-class ServiceSet:
+class ServiceSet(utils.UaInterface):
 
     def __init__(self, ua_peer):
         # service_id: service
@@ -46,7 +46,10 @@ class ServiceSet:
             # use the service_id as key
             self.service_dict[s.subs_id] = s
 
-    def create_instance_from_fb(self, fb, fb_xml):
+    def save_xml(self, xml_set):
+        pass
+
+    def create_instance_from_fb(self, fb):
         # get the service and create the instance
         s = self.service_dict[fb.fb_type]
         s.create_instance_from_fb(fb)

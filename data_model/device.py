@@ -1,8 +1,9 @@
 from data_model import utils
+import xml.etree.ElementTree as ETree
 import uuid
 
 
-class Device(utils.UaBaseStructure):
+class Device(utils.UaBaseStructure, utils.UaInterface):
 
     def __init__(self, ua_peer, subs_id, fb_name, fb_type, state):
         utils.UaBaseStructure.__init__(self, ua_peer, 'DeviceSet',
@@ -108,6 +109,43 @@ class Device(utils.UaBaseStructure):
         if device_type == 'SENSOR':
             self.__create_sensor_extras()
 
+    def save_xml(self, device_xml):
+        # receives a device xml element
+        device_xml.attrib['id'] = self.subs_id
+        device_xml.attrib['type'] = ''
+
+        # creates the variables xml
+        variables_xml = ETree.SubElement(device_xml, 'variables')
+
+        # creates the description variable
+        description_xml = ETree.SubElement(variables_xml, 'variable')
+        description_xml.attrib = {'name': 'Description', 'DataType': 'String', 'ValueRank': '-1'}
+        # adds the name to the description
+        name_xml = ETree.SubElement(description_xml, 'elements')
+        name_xml.attrib = {'name': 'Name', 'DataType': 'String', 'ValueRank': '-1'}
+        name_xml.text = self.fb_name
+        # adds the state to the description
+        state_xml = ETree.SubElement(description_xml, 'elements')
+        state_xml.attrib = {'name': 'SourceState', 'DataType': 'String', 'ValueRank': '-1'}
+        state_xml.text = self.state
+        # adds the type to the description
+        type_xml = ETree.SubElement(description_xml, 'elements')
+        type_xml.attrib = {'name': 'SourceType', 'DataType': 'String', 'ValueRank': '-1'}
+        type_xml.text = self.fb_type
+
+        # gets the variables object
+        vars_object = self.ua_peer.get_object(self.vars_path)
+        children = vars_object.get_children()
+        for child in children:
+            # creates each variables
+            var_xml = ETree.SubElement(variables_xml, 'variable')
+            var_xml.attrib = {'name': child.get_display_name().to_string(),
+                              'DataType': utils.XML_TYPES[child.get_data_type_as_variant_type()],
+                              'ValueRank': str(child.get_value_rank())}
+
+        # creates the methods xml
+        methods_xml = ETree.SubElement(device_xml, 'methods')
+
     def __create_sensor_extras(self):
         self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
                                               '{0}.{1}'.format(self.fb_name, 'INIT'))
@@ -118,4 +156,3 @@ class Device(utils.UaBaseStructure):
                                               '{0}.{1}'.format(self.fb_name, 'READ'))
         self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'READ_O'),
                                               '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
-

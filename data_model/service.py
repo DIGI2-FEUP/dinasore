@@ -2,7 +2,7 @@ from data_model import utils
 from data_model import instance
 
 
-class Service(utils.UaBaseStructure):
+class Service(utils.UaBaseStructure, utils.UaInterface):
 
     def __init__(self, ua_peer, subs_id, fb_name, fb_type):
         utils.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet',
@@ -86,6 +86,9 @@ class Service(utils.UaBaseStructure):
             # adds the variables to the list
             self.__create_var_entry('Output', var_xml)
 
+    def save_xml(self, xml_set):
+        pass
+
     def create_instance_from_xml(self, root_xml):
         # gets the instance_id
         subs_id = root_xml.attrib['id']
@@ -103,7 +106,7 @@ class Service(utils.UaBaseStructure):
         fb_type = fb.fb_type
         # creates and parses the instance
         inst = instance.InstanceService(self.ua_peer, self.subs_id, self.variables_list, subs_id, fb_name, fb_type)
-        inst.from_fb(fb)
+        inst.from_fb(fb, None)
         # adds the method to the dict
         self.instances_dict[inst.subs_id] = inst
 

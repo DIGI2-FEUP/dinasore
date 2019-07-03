@@ -3,7 +3,7 @@ from data_model import device
 from opcua import ua
 
 
-class InstanceService(utils.UaBaseStructure):
+class InstanceService(utils.UaBaseStructure, utils.UaInterface):
 
     def __init__(self, ua_peer, service_id, var_list, subs_id, fb_name, fb_type):
         # creates the instance object
@@ -39,12 +39,15 @@ class InstanceService(utils.UaBaseStructure):
             if tag == 'subscriptions':
                 self.__parse_subscriptions(item)
 
-    def from_fb(self, fb):
+    def from_fb(self, fb, optional):
         # pass the method to update the variables
         fb.ua_variables_update = self.update_variables
 
         # creates the instance
         self.__create_instance()
+
+    def save_xml(self, xml_set):
+        pass
 
     def __create_instance(self):
         # create the ua method to call

@@ -1,4 +1,5 @@
 from opcua import ua
+from opcua import uamethod
 from collections import OrderedDict
 
 UA_TYPES = {'String': ua.VariantType.String,
@@ -13,11 +14,17 @@ UA_TYPES = {'String': ua.VariantType.String,
             'BOOL': ua.VariantType.Boolean,
             'Boolean': ua.VariantType.Boolean}
 
-UA_RANKS = {'1': ua.ValueRank.OneDimension,
-            '0': ua.ValueRank.OneOrMoreDimensions,
-            '-1': ua.ValueRank.Scalar,
-            '-2': ua.ValueRank.Any,
-            '-3': ua.ValueRank.ScalarOrOneDimension}
+NODE_TYPES = {ua.VariantType.String: ua.NodeId(ua.ObjectIds.String),
+              ua.VariantType.Double: ua.NodeId(ua.ObjectIds.Double),
+              ua.VariantType.Int64: ua.NodeId(ua.ObjectIds.Int64),
+              ua.VariantType.Float: ua.NodeId(ua.ObjectIds.Float),
+              ua.VariantType.Boolean: ua.NodeId(ua.ObjectIds.Boolean)}
+
+XML_TYPES = {ua.VariantType.String: 'String',
+             ua.VariantType.Double: 'Double',
+             ua.VariantType.Int64: 'Integer',
+             ua.VariantType.Float: 'Float',
+             ua.VariantType.Boolean: 'Boolean'}
 
 
 def default_folder(ua_peer, obj_idx, obj_path, path_list, folder_name):
@@ -75,6 +82,18 @@ def parse_fb_description(fb_xml):
     return fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
 
 
+class UaInterface:
+
+    def from_xml(self, item_xml):
+        raise NotImplementedError
+
+    def from_fb(self, fb, optional_fb_xml):
+        raise NotImplementedError
+
+    def save_xml(self, xml_set):
+        raise NotImplementedError
+
+
 class UaBaseStructure:
 
     def __init__(self, ua_peer, folder_name, subs_id, fb_name, fb_type, browse_name):
@@ -114,7 +133,7 @@ class UaBaseStructure:
             array_dimensions = int(var_xml.attrib['ArrayDimensions'])
         var_object = self.ua_peer.create_typed_variable(self.vars_path, var_idx, browse_name,
                                                         UA_TYPES[var_xml.attrib['DataType']],
-                                                        UA_RANKS[var_xml.attrib['ValueRank']],
+                                                        int(var_xml.attrib['ValueRank']),
                                                         dimensions=array_dimensions,
                                                         writable=False)
         var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_name)])
@@ -128,7 +147,7 @@ class UaBaseStructure:
         # CHECK THE VALUE RANK OF THE VARIABLE
         var_object = self.ua_peer.create_typed_variable(self.vars_path, var_idx, browse_name,
                                                         UA_TYPES[var_xml.attrib['Type']],
-                                                        UA_RANKS['0'],
+                                                        0,
                                                         writable=False)
         var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_name)])
         return var_idx, var_object, var_path
@@ -144,7 +163,7 @@ class UaBaseStructure:
             array_dimensions = int(var_dict['ArrayDimensions'])
         var_object = self.ua_peer.create_typed_variable(self.vars_path, var_idx, browse_name,
                                                         UA_TYPES[var_dict['DataType']],
-                                                        UA_RANKS[var_dict['ValueRank']],
+                                                        int(var_dict['ValueRank']),
                                                         dimensions=array_dimensions,
                                                         writable=False)
         var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_name)])
@@ -161,7 +180,7 @@ class UaBaseStructure:
             var_ua.set_value(value)
 
 
-class Method2Call:
+class Method2Call(UaInterface):
 
     def __init__(self, method_name, fb, ua_peer):
         self.method_name = method_name
@@ -171,9 +190,10 @@ class Method2Call:
         self.inputs = OrderedDict()
         self.outputs = OrderedDict()
 
+    @uamethod
     def __execute(self, parent, *args):
         for i, (input_name, input_type) in enumerate(self.inputs.items()):
-            self.fb.set_attr(input_name, args[i].Value)
+            self.fb.set_attr(input_name, args[i])
 
         self.fb.push_event(self.method_name, 10)
 
@@ -182,7 +202,7 @@ class Method2Call:
         output_return = []
         for i, (output_name, output_type) in enumerate(self.outputs.items()):
             v_type, value, is_watch = self.fb.read_attr(output_name)
-            output_return.append(ua.Variant(value, output_type))
+            output_return.append(value)
 
         return output_return
 
@@ -193,14 +213,22 @@ class Method2Call:
                 # gets the name
                 var_name = argument.attrib['name']
                 # gets the type
-                arg_type = argument.attrib['DataType']
-                self.outputs[var_name] = UA_TYPES[arg_type]
+                arg = ua.Argument()
+                arg.Name = argument.attrib['name']
+                arg.DataType = NODE_TYPES[UA_TYPES[argument.attrib['DataType']]]
+                arg.ValueRank = int(argument.attrib['ValueRank'])
+                # adds the argument to the list
+                self.outputs[var_name] = arg
             elif argument.attrib['type'] == 'Input':
                 # gets the name
                 var_name = argument.attrib['name']
                 # gets the type
-                arg_type = argument.attrib['DataType']
-                self.inputs[var_name] = UA_TYPES[arg_type]
+                arg = ua.Argument()
+                arg.Name = argument.attrib['name']
+                arg.DataType = NODE_TYPES[UA_TYPES[argument.attrib['DataType']]]
+                arg.ValueRank = int(argument.attrib['ValueRank'])
+                # adds the argument to the list
+                self.inputs[var_name] = arg
 
     def from_fb(self, input_xml, output_xml):
         # gets the method input arguments
@@ -211,9 +239,11 @@ class Method2Call:
                     # gets the name
                     var_name = entry.attrib['Name']
                     # gets the type
-                    arg_type = entry.attrib['Type']
-                    self.inputs[var_name] = UA_TYPES[arg_type]
-
+                    arg = ua.Argument()
+                    arg.Name = entry.attrib['Name']
+                    arg.DataType = NODE_TYPES[UA_TYPES[entry.attrib['Type']]]
+                    # adds the argument to the list
+                    self.inputs[var_name] = arg
         # gets the method output arguments
         for entry in output_xml:
             if 'OpcUa' in entry.attrib:
@@ -222,19 +252,28 @@ class Method2Call:
                     # gets the name
                     var_name = entry.attrib['Name']
                     # gets the type
-                    arg_type = entry.attrib['Type']
-                    self.outputs[var_name] = UA_TYPES[arg_type]
+                    arg = ua.Argument()
+                    arg.Name = entry.attrib['Name']
+                    arg.DataType = NODE_TYPES[UA_TYPES[entry.attrib['Type']]]
+                    # adds the argument to the list
+                    self.outputs[var_name] = arg
+
+    def save_xml(self, method_xml):
+        pass
 
     def parse_variable(self, var_dict):
         # gets the name
         var_name = var_dict['Name']
         # gets the type
-        arg_type = var_dict['DataType']
+        arg = ua.Argument()
+        arg.Name = var_dict['Name']
+        arg.DataType = NODE_TYPES[UA_TYPES[var_dict['DataType']]]
+        arg.ValueRank = int(var_dict['ValueRank'])
         # sets a input or output variable
         if var_dict['Type'] == 'Input':
-            self.inputs[var_name] = UA_TYPES[arg_type]
+            self.inputs[var_name] = arg
         elif var_dict['Type'] == 'Output':
-            self.outputs[var_name] = UA_TYPES[arg_type]
+            self.outputs[var_name] = arg
 
     def virtualize(self, folder_idx, methods_path, ua_name):
         # creates the opc-ua method

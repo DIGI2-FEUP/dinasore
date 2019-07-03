@@ -48,12 +48,12 @@ class DataModelTests(unittest.TestCase):
 
         method_r = c.call_method(method_path.copy(), None)
         read_r = c.read(var_path)
-        self.assertEqual(method_r, True)
+        self.assertEqual(method_r, [True])
         self.assertEqual(read_r, 0)
 
         method_r = c.call_method(method_path.copy(), None)
         read_r = c.read(var_path)
-        self.assertEqual(method_r, True)
+        self.assertEqual(method_r, [True])
         self.assertEqual(read_r, 0)
 
         c.disconnect()
