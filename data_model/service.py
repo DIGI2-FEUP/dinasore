@@ -39,8 +39,7 @@ class Service(utils.UaBaseStructure):
                         for var in if_xml[0]:
                             var_dict = dict()
                             # creates the variable
-                            var_idx, var_object = self.create_xml_variable(var)
-                            var_path = self.ua_peer.generate_path(self.vars_list + [(2, var.attrib['name'])])
+                            var_idx, var_object, var_path = self.create_xml_variable(var)
                             # creates the type property
                             for ele in var[0]:
                                 if ele.attrib['id'] == 'Type':
@@ -67,20 +66,23 @@ class Service(utils.UaBaseStructure):
                         self.variables_list.append(var_dict)
 
                         # creates the opc-ua variable
-                        var_idx, var_object = self.create_xml_variable(variable)
-                        var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_dict['Name'])])
-
+                        var_idx, var_object, var_path = self.create_xml_variable(variable)
+                        # creates the respective property
                         utils.default_property(self.ua_peer, var_idx, var_path, 'Type', var_dict['Type'])
 
     def from_fb(self, input_vars_xml, output_vars_xml):
         # create the input variables interface
         for var_xml in input_vars_xml:
-            self.create_fb_variable(var_xml)
+            var_idx, var_object, var_path = self.create_fb_variable(var_xml)
+            # also creates the property
+            utils.default_property(self.ua_peer, var_idx, var_path, 'Type', 'Output')
             # adds the variables to the list
             self.__create_var_entry('Input', var_xml)
         # create the output variables interface
         for var_xml in output_vars_xml:
-            self.create_fb_variable(var_xml)
+            var_idx, var_object, var_path = self.create_fb_variable(var_xml)
+            # also creates the property
+            utils.default_property(self.ua_peer, var_idx, var_path, 'Type', 'Output')
             # adds the variables to the list
             self.__create_var_entry('Output', var_xml)
 

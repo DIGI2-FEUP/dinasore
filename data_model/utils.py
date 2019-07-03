@@ -117,7 +117,8 @@ class UaBaseStructure:
                                                         UA_RANKS[var_xml.attrib['ValueRank']],
                                                         dimensions=array_dimensions,
                                                         writable=False)
-        return var_idx, var_object
+        var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_name)])
+        return var_idx, var_object, var_path
 
     def create_fb_variable(self, var_xml):
         var_name = var_xml.attrib['Name']
@@ -129,7 +130,8 @@ class UaBaseStructure:
                                                         UA_TYPES[var_xml.attrib['Type']],
                                                         UA_RANKS['0'],
                                                         writable=False)
-        return var_idx, var_object
+        var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_name)])
+        return var_idx, var_object, var_path
 
     def create_variable_by_dict(self, var_dict):
         var_name = var_dict['Name']
@@ -145,7 +147,8 @@ class UaBaseStructure:
                                                         UA_RANKS[var_dict['ValueRank']],
                                                         dimensions=array_dimensions,
                                                         writable=False)
-        return var_idx, var_object
+        var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_name)])
+        return var_idx, var_object, var_path
 
     def update_variables(self):
         # gets the function block

@@ -11,15 +11,7 @@
     <deviceset>
         <device id="TEMPERATURE_SENSOR_1" type="SENSOR" fb="false">
             <variables>
-                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Temperature</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">ºC</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
+                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
                         <element id="Name" DataType="String" ValueRank="-1">TEMPERATURE_SENSOR_1</element>
@@ -47,15 +39,7 @@
         </device>
         <device id="PRESSURE_SENSOR_1" type="SENSOR" fb="false">
             <variables>
-                <variable name="PRESSURE" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Pressure</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">bar</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
+                <variable name="PRESSURE" DataType="Integer" ValueRank="-1"/>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
                         <element id="Name" DataType="String" ValueRank="-1">PRESSURE_SENSOR_1</element>
@@ -83,15 +67,7 @@
         </device>
         <device id="PROCESS_TIME_1" type="SENSOR" fb="false">
             <variables>
-                <variable name="TIME" DataType="Integer" ValueRank="-1">
-                    <elements>
-                        <element id="MeasurementType" DataType="String" ValueRank="-1">Counter</element>
-                        <element id="MeasurementUnits" DataType="String" ValueRank="-1">s</element>
-                        <element id="Max" DataType="Integer" ValueRank="-1">40</element>
-                        <element id="Min" DataType="Integer" ValueRank="-1">25</element>
-                        <element id="Timestamp" DataType="UtcTime" ValueRank="-1"/>
-                    </elements>
-                </variable>
+                <variable name="TIME" DataType="Integer" ValueRank="-1"/>
                 <variable name="Description" DataType="String" ValueRank="-1">
                     <elements>
                         <element id="Name" DataType="String" ValueRank="-1">PROCESS_TIME_1</element>
@@ -119,18 +95,11 @@
         </device>
     </deviceset>
     <servicedescriptionset>
-        <servicedescription dId="f919f8da-90d5-11e8-9eb6-529269fb1459" name="S_EXAMPLE" namespace="fft" version="1.0.0" type="DiagnosticService">
+        <servicedescription dId="S_EXAMPLE" name="S_EXAMPLE" namespace="fft" version="1.0.0" type="DiagnosticService">
             <recipeadjustments>
-                <recipeadjustment name="AcquisitionRate">
+                <recipeadjustment name="RATE">
                     <variables>
-                        <variable name="RATE" DataType="Integer" ValueRank="-1">
-                            <elements>
-                                <element id="Min" DataType="Integer" ValueRank="-1">1</element>
-                                <element id="Max" DataType="Integer" ValueRank="-1">1000</element>
-                                <element id="Default" DataType="Integer" ValueRank="-1">500</element>
-                                <element id="MeasurementUnits" DataType="String" ValueRank="-1">Hz</element>
-                            </elements>
-                        </variable>
+                        <variable name="RATE" DataType="Integer" ValueRank="-1"/>
                     </variables>
                 </recipeadjustment>
             </recipeadjustments>
@@ -167,7 +136,7 @@
         </servicedescription>
     </servicedescriptionset>
     <serviceinstanceset>
-        <serviceinstance id="SERVICE_EXAMPLE_1" type="DiagnosticService" dId="f919f8da-90d5-11e8-9eb6-529269fb1459">
+        <serviceinstance id="SERVICE_EXAMPLE_1" type="DiagnosticService" dId="S_EXAMPLE">
             <methods>
                 <method name="AddLink">
                     <arguments>
@@ -208,18 +177,8 @@
             <subscriptions>
                 <id BrowseDirection="both" type="Context">PROCESS_TIME_1</id>
                 <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TIME</id>
+                <id BrowseDirection="both" type="Data" VariableName="RATE">500</id>
             </subscriptions>
-            <recipeadjustments>
-                <recipeadjustment name="AcquisitionRate">
-                    <variables>
-                        <variable name="rate" DataType="Integer" ValueRank="-1">
-                            <elements>
-                                <element id="Current" DataType="Integer" ValueRank="-1">500</element>
-                            </elements>
-                        </variable>
-                    </variables>
-                </recipeadjustment>
-            </recipeadjustments>
         </serviceinstance>
     </serviceinstanceset>
     <pointdescriptionset>

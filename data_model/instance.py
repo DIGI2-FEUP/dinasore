@@ -23,6 +23,9 @@ class InstanceService(utils.UaBaseStructure):
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'dID', self.subs_did)
 
+        # creates the subscriptions folder
+        utils.default_folder(self.ua_peer, self.base_idx, self.base_path, self.base_path_list, 'Subscriptions')
+
     def from_xml(self, root_xml):
         # creates the fb for the instance
         self.ua_peer.config.create_virtualized_fb(self.subs_id, self.fb_type, self.update_variables)
@@ -51,8 +54,7 @@ class InstanceService(utils.UaBaseStructure):
         # create the linked variables
         for var_dict in self.variables_list:
             # creates the variable
-            var_idx, var_object = self.create_variable_by_dict(var_dict)
-            var_path = self.ua_peer.generate_path(self.vars_list + [(2, var_dict['Name'])])
+            var_idx, var_object, var_path = self.create_variable_by_dict(var_dict)
             # creates the type property
             utils.default_property(self.ua_peer, var_idx, var_path, 'Type', var_dict['Type'])
             # parse the variable in the ua method
@@ -80,8 +82,6 @@ class InstanceService(utils.UaBaseStructure):
         self.ua_method.virtualize(self.methods_idx, self.methods_path, 'CallInstance')
 
     def __parse_subscriptions(self, links_xml):
-        # creates the subscriptions folder
-        utils.default_folder(self.ua_peer, self.base_idx, self.base_path, self.base_path_list, 'Subscriptions')
         # iterates over each subscription of the set
         for subscription in links_xml:
 
@@ -109,6 +109,14 @@ class InstanceService(utils.UaBaseStructure):
                     # creates the connection between the fb
                     destination_event = '{0}.{1}'.format(self.subs_id, 'RUN')
                     self.ua_peer.config.create_connection(source=source_event, destination=destination_event)
+
+                # its a constant
+                elif subscription.attrib['BrowseDirection'] == 'both':
+                    # gets the value to write
+                    source = subscription.text
+                    destination = '{0}.{1}'.format(self.subs_id, subscription.attrib['VariableName'])
+                    # write the value in the fb
+                    self.ua_peer.config.write_connection(source_value=source, destination=destination)
 
                 # its an output variable
                 elif subscription.attrib['BrowseDirection'] == 'inverse':

@@ -35,7 +35,7 @@ class Device(utils.UaBaseStructure):
                 for var in item:
                     if var.attrib['name'] != 'Description':
                         # create the variable
-                        var_idx, var_object = self.create_xml_variable(var)
+                        var_idx, var_object, var_path = self.create_xml_variable(var)
                         # adds the variable to the dictionary
                         self.ua_variables[var.attrib['name']] = var_object
 
@@ -87,7 +87,7 @@ class Device(utils.UaBaseStructure):
                 var_specs = entry.attrib['OpcUa'].split('.')
                 if 'Variable' in var_specs:
                     # create the variable
-                    var_idx, var_object = self.create_fb_variable(entry)
+                    var_idx, var_object, var_path = self.create_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
 
@@ -97,7 +97,7 @@ class Device(utils.UaBaseStructure):
                 var_specs = entry.attrib['OpcUa'].split('.')
                 if 'Variable' in var_specs:
                     # create the variable
-                    var_idx, var_object = self.create_fb_variable(entry)
+                    var_idx, var_object, var_path = self.create_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
 

@@ -41,19 +41,17 @@ class ServiceSet:
         # checks if the service already exist in the service set
         if service_id not in self.service_dict:
             # otherwise it creates the service
-            s = service.Service(self.__ua_peer, service_id, None, fb_type)
+            s = service.Service(self.__ua_peer, fb_type, None, fb_type)
             s.from_fb(input_vars_xml, output_vars_xml)
             # use the service_id as key
             self.service_dict[s.subs_id] = s
 
     def create_instance_from_fb(self, fb, fb_xml):
-        service_id, service_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
-                utils.parse_fb_description(fb_xml)
         # get the service and create the instance
-        s = self.service_dict[service_id]
+        s = self.service_dict[fb.fb_type]
         s.create_instance_from_fb(fb)
         # the instance_id is the same as the fb_name
-        self.instances_map[fb.fb_name] = service_id
+        self.instances_map[fb.fb_name] = fb.fb_type
 
     def create_instances_from_xml(self, xml_set):
         for instance_xml in xml_set:

@@ -38,7 +38,7 @@ if __name__ == "__main__":
     # creates the 4diac manager
     m = manager.Manager()
     # sets the ua integration option
-    m.build_ua_manager('SmartComponent', address, 4841, 'data_model_original.xml')
+    m.build_ua_manager('SMART_COMPONENT', address, 4841, 'data_model_original.xml')
 
     # creates the tcp server to communicate with the 4diac
     hand = tcp_server.TcpServer(address, port, 10, m)
