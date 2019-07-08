@@ -111,8 +111,6 @@ class Manager:
                         gc.collect()
             # check the options for ua_integration
             if self.ua_integration:
-                # saves the actual configuration
-                self.manager_ua.save_xml()
                 # first stop the previous manager
                 self.manager_ua.stop_ua()
 

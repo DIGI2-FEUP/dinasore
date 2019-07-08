@@ -1,4 +1,3 @@
-from data_model import ua_manager
 from core import manager
 from core import configuration
 from opc_ua import client
@@ -7,8 +6,9 @@ import unittest
 
 class DataModelTests(unittest.TestCase):
     port_server = 4841
-    base_name = 'SmartObject'
+    base_name = 'SMART_OBJECT'
     base_list = [(0, 'Objects'), (2, base_name)]
+    file_name = 'data_model_original.xml'
 
     def setUp(self):
         # creates the 4diac manager
@@ -16,17 +16,15 @@ class DataModelTests(unittest.TestCase):
         # creates the opc-ua manager
         config = configuration.Configuration(self.base_name, 'EMB_RES')
         self.manager_4diac.set_config(self.base_name, config)
-        self.manager_ua = ua_manager.UaManager(self.base_name, 'opc.tcp://localhost:{0}'.format(self.port_server),
-                                               config, 'data_model_original.xml')
-        self.manager_ua.from_xml()
+        self.manager_4diac.build_ua_manager(self.base_name, 'localhost', 4841, self.file_name)
 
     def tearDown(self):
-        self.manager_ua.config.stop_work()
-        self.manager_ua.stop()
+        self.manager_4diac.manager_ua.config.stop_work()
+        self.manager_4diac.manager_ua.stop()
 
     def test_fb_created(self):
         # check the number of fb
-        n_fb = len(self.manager_ua.config.fb_dictionary)
+        n_fb = len(self.manager_4diac.manager_ua.config.fb_dictionary)
         self.assertEqual(n_fb, 8)
 
     def test_device_set(self):
@@ -58,8 +56,25 @@ class DataModelTests(unittest.TestCase):
 
         c.disconnect()
 
-    def test_parse_service(self):
+    def test_service_set(self):
+        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+
+        path = c.generate_path(self.base_list + [(2, 'ServiceDescriptionSet')])
+        children = c.get_object(path).get_children()
+        self.assertEqual(len(children), 1)
+
+        c.disconnect()
+
+    def test_instance_call(self):
+        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+
+        method_path = c.generate_path(self.base_list + [(2, 'ServiceInstanceSet'), (2, 'SERVICE_EXAMPLE_1'),
+                                                        (2, 'Methods'), (2, 'CallInstance')])
+        method_r = c.call_method(method_path.copy(), 2)
+        self.assertEqual(method_r, [3])
+
+        c.disconnect()
+
+    def test_fb_upload(self):
         pass
 
-    def test_service_call(self):
-        pass

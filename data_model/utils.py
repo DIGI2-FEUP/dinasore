@@ -222,7 +222,7 @@ class Method2Call(UaInterface):
                 # gets the type
                 arg = ua.Argument()
                 arg.Name = argument.attrib['name']
-                arg.DataType = UA_NODE[UA_TYPES[argument.attrib['DataType']]].Identifier
+                arg.DataType = UA_NODE[UA_TYPES[argument.attrib['DataType']]]
                 arg.ValueRank = int(argument.attrib['ValueRank'])
                 # adds the argument to the list
                 self.outputs[var_name] = arg
@@ -232,7 +232,7 @@ class Method2Call(UaInterface):
                 # gets the type
                 arg = ua.Argument()
                 arg.Name = argument.attrib['name']
-                arg.DataType = UA_NODE[UA_TYPES[argument.attrib['DataType']]].Identifier
+                arg.DataType = UA_NODE[UA_TYPES[argument.attrib['DataType']]]
                 arg.ValueRank = int(argument.attrib['ValueRank'])
                 # adds the argument to the list
                 self.inputs[var_name] = arg
@@ -248,7 +248,7 @@ class Method2Call(UaInterface):
                     # gets the type
                     arg = ua.Argument()
                     arg.Name = entry.attrib['Name']
-                    arg.DataType = UA_NODE[UA_TYPES[entry.attrib['Type']]].Identifier
+                    arg.DataType = UA_NODE[UA_TYPES[entry.attrib['Type']]]
                     # adds the argument to the list
                     self.inputs[var_name] = arg
         # gets the method output arguments
@@ -261,7 +261,7 @@ class Method2Call(UaInterface):
                     # gets the type
                     arg = ua.Argument()
                     arg.Name = entry.attrib['Name']
-                    arg.DataType = UA_NODE[UA_TYPES[entry.attrib['Type']]].Identifier
+                    arg.DataType = UA_NODE[UA_TYPES[entry.attrib['Type']]]
                     # adds the argument to the list
                     self.outputs[var_name] = arg
 
@@ -277,7 +277,7 @@ class Method2Call(UaInterface):
             arg_xml = ETree.SubElement(method_arguments, 'argument')
             arg_xml.attrib['name'] = input_arg.Name
             arg_xml.attrib['type'] = 'Input'
-            arg_xml.attrib['DataType'] = XML_NODE[input_arg.DataType]
+            arg_xml.attrib['DataType'] = XML_NODE[input_arg.DataType.Identifier]
             arg_xml.attrib['ValueRank'] = str(input_arg.ValueRank)
         # get the output arguments
         for output_name, output_arg in self.outputs.items():
@@ -285,7 +285,7 @@ class Method2Call(UaInterface):
             arg_xml = ETree.SubElement(method_arguments, 'argument')
             arg_xml.attrib['name'] = output_arg.Name
             arg_xml.attrib['type'] = 'Output'
-            arg_xml.attrib['DataType'] = XML_NODE[output_arg.DataType]
+            arg_xml.attrib['DataType'] = XML_NODE[output_arg.DataType.Identifier]
             arg_xml.attrib['ValueRank'] = str(output_arg.ValueRank)
 
     def parse_variable(self, var_dict):
@@ -294,7 +294,7 @@ class Method2Call(UaInterface):
         # gets the type
         arg = ua.Argument()
         arg.Name = var_dict['Name']
-        arg.DataType = UA_NODE[UA_TYPES[var_dict['DataType']]].Identifier
+        arg.DataType = UA_NODE[UA_TYPES[var_dict['DataType']]]
         arg.ValueRank = int(var_dict['ValueRank'])
         # sets a input or output variable
         if var_dict['Type'] == 'Input':

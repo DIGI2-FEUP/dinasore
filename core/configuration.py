@@ -143,6 +143,10 @@ class Configuration:
         for fb_name, fb_element in self.fb_dictionary.items():
             if fb_name != 'START':
                 fb_element.start()
+                # check if the update_variables service is null
+                if fb_element.ua_variables_update is not None:
+                    # updates the opc-ua variables
+                    fb_element.ua_variables_update()
 
         outputs = self.get_fb('START').fb_obj.schedule()
         self.get_fb('START').update_outputs(outputs)
