@@ -1,0 +1,94 @@
+[2019-07-08 12:19:16,458][ERROR][Thread-2] Exception raised while parsing message from client, closing
+Traceback (most recent call last):
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/binary_server_asyncio.py", line 75, in _process_data
+    ret = self.processor.process(hdr, buf)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 94, in process
+    return self.process_message(msg.SecurityHeader(), msg.SequenceHeader(), msg.body())
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 114, in process_message
+    return self._process_message(typeid, requesthdr, algohdr, seqhdr, body)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 193, in _process_message
+    self.send_response(requesthdr.RequestHandle, algohdr, seqhdr, response)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 48, in send_response
+    struct_to_binary(response), message_type=msgtype, request_id=seqhdr.RequestId, algohdr=algohdr)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 253, in struct_to_binary
+    packet.append(list_to_binary(uatype[6:], val))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 293, in list_to_binary
+    pack = [to_binary(uatype, el) for el in val]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 293, in <listcomp>
+    pack = [to_binary(uatype, el) for el in val]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 271, in to_binary
+    return pack_uatype(vtype, val)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 191, in pack_uatype
+    return struct_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 258, in struct_to_binary
+    packet.append(to_binary(uatype, val))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 271, in to_binary
+    return pack_uatype(vtype, val)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 189, in pack_uatype
+    return variant_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 370, in variant_to_binary
+    b.append(pack_uatype_array(var.VariantType, ua.flatten(var.Value)))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 221, in pack_uatype_array
+    b = [pack_uatype(vtype, val) for val in array]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 221, in <listcomp>
+    b = [pack_uatype(vtype, val) for val in array]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 185, in pack_uatype
+    return extensionobject_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 457, in extensionobject_to_binary
+    Body = struct_to_binary(obj)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 258, in struct_to_binary
+    packet.append(to_binary(uatype, val))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 271, in to_binary
+    return pack_uatype(vtype, val)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 187, in pack_uatype
+    return nodeid_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 300, in nodeid_to_binary
+    if nodeid.NodeIdType == ua.NodeIdType.TwoByte:
+AttributeError: 'int' object has no attribute 'NodeIdType'
+[2019-07-08 12:19:49,473][ERROR][Thread-2] Exception raised while parsing message from client, closing
+Traceback (most recent call last):
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/binary_server_asyncio.py", line 75, in _process_data
+    ret = self.processor.process(hdr, buf)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 94, in process
+    return self.process_message(msg.SecurityHeader(), msg.SequenceHeader(), msg.body())
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 114, in process_message
+    return self._process_message(typeid, requesthdr, algohdr, seqhdr, body)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 193, in _process_message
+    self.send_response(requesthdr.RequestHandle, algohdr, seqhdr, response)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/server/uaprocessor.py", line 48, in send_response
+    struct_to_binary(response), message_type=msgtype, request_id=seqhdr.RequestId, algohdr=algohdr)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 253, in struct_to_binary
+    packet.append(list_to_binary(uatype[6:], val))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 293, in list_to_binary
+    pack = [to_binary(uatype, el) for el in val]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 293, in <listcomp>
+    pack = [to_binary(uatype, el) for el in val]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 271, in to_binary
+    return pack_uatype(vtype, val)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 191, in pack_uatype
+    return struct_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 258, in struct_to_binary
+    packet.append(to_binary(uatype, val))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 271, in to_binary
+    return pack_uatype(vtype, val)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 189, in pack_uatype
+    return variant_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 370, in variant_to_binary
+    b.append(pack_uatype_array(var.VariantType, ua.flatten(var.Value)))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 221, in pack_uatype_array
+    b = [pack_uatype(vtype, val) for val in array]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 221, in <listcomp>
+    b = [pack_uatype(vtype, val) for val in array]
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 185, in pack_uatype
+    return extensionobject_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 457, in extensionobject_to_binary
+    Body = struct_to_binary(obj)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 258, in struct_to_binary
+    packet.append(to_binary(uatype, val))
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 271, in to_binary
+    return pack_uatype(vtype, val)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 187, in pack_uatype
+    return nodeid_to_binary(value)
+  File "/home/eliseu/.local/lib/python3.6/site-packages/opcua/ua/ua_binary.py", line 300, in nodeid_to_binary
+    if nodeid.NodeIdType == ua.NodeIdType.TwoByte:
+AttributeError: 'int' object has no attribute 'NodeIdType'

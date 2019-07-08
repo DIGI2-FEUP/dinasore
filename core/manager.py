@@ -111,6 +111,8 @@ class Manager:
                         gc.collect()
             # check the options for ua_integration
             if self.ua_integration:
+                # saves the actual configuration
+                self.manager_ua.save_xml()
                 # first stop the previous manager
                 self.manager_ua.stop_ua()
 
@@ -142,6 +144,10 @@ class Manager:
                     connection_source = child.attrib['Source']
                     connection_destination = child.attrib['Destination']
                     self.get_config(config_id).create_connection(connection_source, connection_destination)
+                    # check the options for ua_integration
+                    if self.ua_integration:
+                        # parses from subscription
+                        self.manager_ua.services_set.create_subscription(connection_source, connection_destination)
 
                 # Create watch
                 elif child.tag == 'Watch':
@@ -161,6 +167,10 @@ class Manager:
         elif action == 'START':
             # Starts the configuration
             self.get_config(config_id).start_work()
+            # check the options for ua_integration
+            if self.ua_integration:
+                # saves the actual configuration
+                self.manager_ua.save_xml()
 
         elif action == 'WRITE':
             # Iterate over the list of children

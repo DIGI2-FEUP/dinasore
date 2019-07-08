@@ -1,3 +1,4 @@
+import xml.etree.ElementTree as ETree
 from data_model import utils
 from data_model import service
 
@@ -46,13 +47,25 @@ class ServiceSet(utils.UaInterface):
             # use the service_id as key
             self.service_dict[s.subs_id] = s
 
-    def save_xml(self, xml_set):
-        pass
+    def save_xml(self, xml_set, xml_instances=None):
+        # iterates over the services dictionary
+        for service_name, service_item in self.service_dict.items():
+            # creates the service xml
+            service_xml = ETree.SubElement(xml_set, 'servicedescription')
+            # saves the content of that service
+            service_item.save_xml(service_xml)
 
-    def create_instance_from_fb(self, fb):
+            # iterates over the instances of that service
+            for instance_name, instance_item in service_item.instances_dict.items():
+                # creates the instance xml
+                instance_xml = ETree.SubElement(xml_instances, 'serviceinstance')
+                # saves the content of that instance
+                instance_item.save_xml(instance_xml)
+
+    def create_instance_from_fb(self, fb, fb_xml):
         # get the service and create the instance
         s = self.service_dict[fb.fb_type]
-        s.create_instance_from_fb(fb)
+        s.create_instance_from_fb(fb, fb_xml)
         # the instance_id is the same as the fb_name
         self.instances_map[fb.fb_name] = fb.fb_type
 
@@ -71,3 +84,21 @@ class ServiceSet(utils.UaInterface):
                 # connects the instance to the service
                 instance_id = instance_xml.attrib['id']
                 self.instances_map[instance_id] = service_id
+
+    def create_subscription(self, source, destination):
+        # splits both source and destination (fb, fb_variable)
+        source_attr = source.split(sep='.')
+        destination_attr = destination.split(sep='.')
+
+        fb = self.__ua_peer.config.get_fb(destination_attr[0])
+        # checks if the fb is already a service
+        if fb.fb_type in self.service_dict:
+            s = self.service_dict.get(fb.fb_type)
+            # checks if the instance exists already
+            # checks if the destination is a variable (not event)
+            if (destination_attr[0] in s.instances_dict) and (destination_attr[1] in fb.input_vars):
+                # builds the node_id for the source
+                node_id = '{0}:Variables:{1}'.format(source_attr[0], source_attr[1])
+                # creates the subscription at the instance
+                s.instances_dict[destination_attr[0]].create_subscription(source_node=node_id,
+                                                                          destination_variable=destination_attr[1])

@@ -1,5 +1,6 @@
 from opcua import ua
 from opcua import uamethod
+import xml.etree.ElementTree as ETree
 from collections import OrderedDict
 
 UA_TYPES = {'String': ua.VariantType.String,
@@ -14,17 +15,23 @@ UA_TYPES = {'String': ua.VariantType.String,
             'BOOL': ua.VariantType.Boolean,
             'Boolean': ua.VariantType.Boolean}
 
-NODE_TYPES = {ua.VariantType.String: ua.NodeId(ua.ObjectIds.String),
-              ua.VariantType.Double: ua.NodeId(ua.ObjectIds.Double),
-              ua.VariantType.Int64: ua.NodeId(ua.ObjectIds.Int64),
-              ua.VariantType.Float: ua.NodeId(ua.ObjectIds.Float),
-              ua.VariantType.Boolean: ua.NodeId(ua.ObjectIds.Boolean)}
+UA_NODE = {ua.VariantType.String: ua.NodeId(ua.ObjectIds.String),
+           ua.VariantType.Double: ua.NodeId(ua.ObjectIds.Double),
+           ua.VariantType.Int64: ua.NodeId(ua.ObjectIds.Int64),
+           ua.VariantType.Float: ua.NodeId(ua.ObjectIds.Float),
+           ua.VariantType.Boolean: ua.NodeId(ua.ObjectIds.Boolean)}
 
 XML_TYPES = {ua.VariantType.String: 'String',
              ua.VariantType.Double: 'Double',
              ua.VariantType.Int64: 'Integer',
              ua.VariantType.Float: 'Float',
              ua.VariantType.Boolean: 'Boolean'}
+
+XML_NODE = {ua.ObjectIds.String: 'String',
+            ua.ObjectIds.Double: 'Double',
+            ua.ObjectIds.Int64: 'Integer',
+            ua.ObjectIds.Float: 'Float',
+            ua.ObjectIds.Boolean: 'Boolean'}
 
 
 def default_folder(ua_peer, obj_idx, obj_path, path_list, folder_name):
@@ -215,7 +222,7 @@ class Method2Call(UaInterface):
                 # gets the type
                 arg = ua.Argument()
                 arg.Name = argument.attrib['name']
-                arg.DataType = NODE_TYPES[UA_TYPES[argument.attrib['DataType']]]
+                arg.DataType = UA_NODE[UA_TYPES[argument.attrib['DataType']]].Identifier
                 arg.ValueRank = int(argument.attrib['ValueRank'])
                 # adds the argument to the list
                 self.outputs[var_name] = arg
@@ -225,7 +232,7 @@ class Method2Call(UaInterface):
                 # gets the type
                 arg = ua.Argument()
                 arg.Name = argument.attrib['name']
-                arg.DataType = NODE_TYPES[UA_TYPES[argument.attrib['DataType']]]
+                arg.DataType = UA_NODE[UA_TYPES[argument.attrib['DataType']]].Identifier
                 arg.ValueRank = int(argument.attrib['ValueRank'])
                 # adds the argument to the list
                 self.inputs[var_name] = arg
@@ -241,7 +248,7 @@ class Method2Call(UaInterface):
                     # gets the type
                     arg = ua.Argument()
                     arg.Name = entry.attrib['Name']
-                    arg.DataType = NODE_TYPES[UA_TYPES[entry.attrib['Type']]]
+                    arg.DataType = UA_NODE[UA_TYPES[entry.attrib['Type']]].Identifier
                     # adds the argument to the list
                     self.inputs[var_name] = arg
         # gets the method output arguments
@@ -254,12 +261,32 @@ class Method2Call(UaInterface):
                     # gets the type
                     arg = ua.Argument()
                     arg.Name = entry.attrib['Name']
-                    arg.DataType = NODE_TYPES[UA_TYPES[entry.attrib['Type']]]
+                    arg.DataType = UA_NODE[UA_TYPES[entry.attrib['Type']]].Identifier
                     # adds the argument to the list
                     self.outputs[var_name] = arg
 
     def save_xml(self, method_xml):
-        pass
+        # writes the method name
+        method_xml.attrib['name'] = self.method_name
+
+        # creates the arguments tag
+        method_arguments = ETree.SubElement(method_xml, 'arguments')
+        # get the input arguments
+        for input_name, input_arg in self.inputs.items():
+            # creates the xml argument
+            arg_xml = ETree.SubElement(method_arguments, 'argument')
+            arg_xml.attrib['name'] = input_arg.Name
+            arg_xml.attrib['type'] = 'Input'
+            arg_xml.attrib['DataType'] = XML_NODE[input_arg.DataType]
+            arg_xml.attrib['ValueRank'] = str(input_arg.ValueRank)
+        # get the output arguments
+        for output_name, output_arg in self.outputs.items():
+            # creates the xml argument
+            arg_xml = ETree.SubElement(method_arguments, 'argument')
+            arg_xml.attrib['name'] = output_arg.Name
+            arg_xml.attrib['type'] = 'Output'
+            arg_xml.attrib['DataType'] = XML_NODE[output_arg.DataType]
+            arg_xml.attrib['ValueRank'] = str(output_arg.ValueRank)
 
     def parse_variable(self, var_dict):
         # gets the name
@@ -267,7 +294,7 @@ class Method2Call(UaInterface):
         # gets the type
         arg = ua.Argument()
         arg.Name = var_dict['Name']
-        arg.DataType = NODE_TYPES[UA_TYPES[var_dict['DataType']]]
+        arg.DataType = UA_NODE[UA_TYPES[var_dict['DataType']]].Identifier
         arg.ValueRank = int(var_dict['ValueRank'])
         # sets a input or output variable
         if var_dict['Type'] == 'Input':

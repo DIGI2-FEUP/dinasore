@@ -1,5 +1,6 @@
 from data_model import utils
 from data_model import device
+import xml.etree.ElementTree as ETree
 from opcua import ua
 
 
@@ -24,7 +25,11 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'dID', self.subs_did)
 
         # creates the subscriptions folder
-        utils.default_folder(self.ua_peer, self.base_idx, self.base_path, self.base_path_list, 'Subscriptions')
+        subs_idx, subs_path, subs_list = utils.default_folder(self.ua_peer, self.base_idx, self.base_path,
+                                                              self.base_path_list, 'Subscriptions')
+        self.subscriptions_folder = self.ua_peer.get_object(subs_path)
+        # creates the dictionary where are stored teh connections
+        self.subscriptions_dict = dict()
 
     def from_xml(self, root_xml):
         # creates the fb for the instance
@@ -39,7 +44,7 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
             if tag == 'subscriptions':
                 self.__parse_subscriptions(item)
 
-    def from_fb(self, fb, optional):
+    def from_fb(self, fb, fb_xml):
         # pass the method to update the variables
         fb.ua_variables_update = self.update_variables
 
@@ -47,7 +52,38 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
         self.__create_instance()
 
     def save_xml(self, xml_set):
-        pass
+        # sets the attributes of that instance
+        xml_set.attrib['id'] = self.subs_id
+        xml_set.attrib['dId'] = self.subs_did
+
+        # creates the subscriptions xml
+        subscriptions_xml = ETree.SubElement(xml_set, 'subscriptions')
+
+        # iterates over the subscriptions
+        for subs_name, subs_value in self.subscriptions_dict.items():
+            # creates the subscription
+            subs_xml = ETree.SubElement(subscriptions_xml, 'id')
+            subs_xml.attrib['BrowseDirection'] = 'forward'
+            subs_xml.attrib['type'] = 'Data'
+            subs_xml.attrib['VariableName'] = subs_name
+
+            # gets the node_id
+            node_id = None
+            for item in subs_value.nodeid.to_string().split(';'):
+                if item[:2] == 's=':
+                    node_id = item[2:]
+            subs_xml.text = node_id
+
+        # writes the constant values
+        for var in self.variables_list:
+            if var['Type'] == 'Constant':
+                # creates the subscription
+                subs_xml = ETree.SubElement(subscriptions_xml, 'id')
+                subs_xml.attrib['BrowseDirection'] = 'both'
+                subs_xml.attrib['type'] = 'Data'
+                subs_xml.attrib['VariableName'] = var['Name']
+                var_ref = self.ua_peer.get_node('ns=2;s={0}:Variables:{1}'.format(self.subs_id, var['Name']))
+                subs_xml.text = str(var_ref.get_value())
 
     def __create_instance(self):
         # create the ua method to call
@@ -84,6 +120,13 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
 
         self.ua_method.virtualize(self.methods_idx, self.methods_path, 'CallInstance')
 
+    def create_subscription(self, source_node, destination_variable):
+        # adds that subscription to the folder
+        var_ref = self.ua_peer.get_node('ns=2;s={0}'.format(source_node))
+        self.subscriptions_folder.add_reference(var_ref, ua.ObjectIds.Organizes)
+        # saves the subscription in the dictionary
+        self.subscriptions_dict[destination_variable] = var_ref
+
     def __parse_subscriptions(self, links_xml):
         # iterates over each subscription of the set
         for subscription in links_xml:
@@ -112,6 +155,12 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
                     # creates the connection between the fb
                     destination_event = '{0}.{1}'.format(self.subs_id, 'RUN')
                     self.ua_peer.config.create_connection(source=source_event, destination=destination_event)
+
+                    # adds that subscription to the folder
+                    var_ref = self.ua_peer.get_node('ns=2;s={0}'.format(subscription.text))
+                    self.subscriptions_folder.add_reference(var_ref, ua.ObjectIds.Organizes)
+                    # saves the subscription in the dictionary
+                    self.subscriptions_dict[subscription.attrib['VariableName']] = var_ref
 
                 # its a constant
                 elif subscription.attrib['BrowseDirection'] == 'both':
