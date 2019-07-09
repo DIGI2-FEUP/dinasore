@@ -7,7 +7,7 @@ class PROCESS_TIME:
 
     def schedule(self, event_name, event_value):
         if event_name == 'INIT':
-            return [event_value, event_value, None, self.process_time, False]
+            return [event_value, None, None, self.process_time, False]
 
         elif event_name == 'READ':
             self.process_time += 1

@@ -7,7 +7,7 @@ class TEMPERATURE_SENSOR:
 
     def schedule(self, event_name, event_value):
         if event_name == 'INIT':
-            return [event_value, event_value, None, self.temperature, False]
+            return [event_value, None, None, self.temperature, False]
 
         elif event_name == 'READ':
             self.temperature += 1

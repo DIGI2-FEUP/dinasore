@@ -150,14 +150,14 @@ class Service(utils.UaBaseStructure, utils.UaInterface):
             # adds the variables to the list
             var_dict = {'Name': var_xml.attrib['Name'],
                         'Type': var_type,
-                        'DataType': var_xml.attrib['Type'],
+                        'DataType': utils.XML_4DIAC[var_xml.attrib['Type']],
                         'ValueRank': '0'}
             self.variables_list.append(var_dict)
         elif var_xml.attrib['OpcUa'] == 'Constant':
             # adds the variables to the list
             var_dict = {'Name': var_xml.attrib['Name'],
                         'Type': 'Constant',
-                        'DataType': var_xml.attrib['Type'],
+                        'DataType': utils.XML_4DIAC[var_xml.attrib['Type']],
                         'ValueRank': '0'}
             self.variables_list.append(var_dict)
 

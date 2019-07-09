@@ -88,6 +88,12 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
     def __create_instance(self):
         # create the ua method to call
         fb = self.ua_peer.config.get_fb(self.fb_name)
+
+        # creates the connection to initialize the fb
+        self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
+                                              '{0}.{1}'.format(self.fb_name, 'INIT'))
+
+        # virtualize the method that allows the remote running
         self.ua_method = utils.Method2Call('RUN', fb, self.ua_peer)
 
         # create the linked variables

@@ -40,7 +40,7 @@ class ServiceSet(utils.UaInterface):
         service_id, service_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
                 utils.parse_fb_description(fb_xml)
         # checks if the service already exist in the service set
-        if service_id not in self.service_dict:
+        if fb_type not in self.service_dict:
             # otherwise it creates the service
             s = service.Service(self.__ua_peer, fb_type, None, fb_type)
             s.from_fb(input_vars_xml, output_vars_xml)

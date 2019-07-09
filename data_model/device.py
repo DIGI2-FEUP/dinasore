@@ -24,6 +24,9 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
         # create the id property
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
 
+        # the constants list with the names of the constants
+        self.__constants_list = []
+
     def from_xml(self, root_xml):
         # creates the fb inside the configuration
         self.ua_peer.config.create_virtualized_fb(self.fb_name, self.fb_type, self.update_variables)
@@ -61,7 +64,22 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
                     self.ua_methods[method_name] = method2call
 
             elif tag == 'subscriptions':
-                pass
+                # iterates over each subscription of the set
+                for subscription in item:
+                    # checks if is context subscription
+                    if subscription.attrib['type'] == 'Context':
+                        pass
+                    # checks if is data subscription
+                    elif subscription.attrib['type'] == 'Data':
+                        # its a constant
+                        if subscription.attrib['BrowseDirection'] == 'both':
+                            # gets the value to write
+                            source = subscription.text
+                            destination = '{0}.{1}'.format(self.subs_id, subscription.attrib['VariableName'])
+                            # adds the name of that constant to the list
+                            self.__constants_list.append(subscription.attrib['VariableName'])
+                            # write the value in the fb
+                            self.ua_peer.config.write_connection(source_value=source, destination=destination)
 
         # link variable to the start fb (sensor to init fb)
         if self.device_type == 'SENSOR':
@@ -99,6 +117,13 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
                     var_idx, var_object, var_path = self.create_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
+                elif 'Constant' in var_specs:
+                    # create the variable
+                    var_idx, var_object, var_path = self.create_fb_variable(entry)
+                    # adds the variable to the dictionary
+                    self.ua_variables[entry.attrib['Name']] = var_object
+                    # adds the constant to the list
+                    self.__constants_list.append(entry.attrib['Name'])
 
         # Iterates over the output_vars
         for entry in output_vars_xml:
@@ -162,12 +187,26 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
             # saves the method inside the xml
             ua_method.save_xml(method_xml)
 
+        # saves the subscriptions
+        subscriptions_xml = ETree.SubElement(device_xml, 'subscriptions')
+        # saves the constant values
+        for constant in self.__constants_list:
+            # creates the constant xml
+            subs_xml = ETree.SubElement(subscriptions_xml, 'id')
+            subs_xml.attrib['BrowseDirection'] = 'both'
+            subs_xml.attrib['type'] = 'Data'
+            subs_xml.attrib['VariableName'] = constant
+            var_ref = self.ua_peer.get_node('ns=2;s={0}:Variables:{1}'.format(self.subs_id, constant))
+            subs_xml.text = str(var_ref.get_value())
+
     def __create_sensor_extras(self):
         self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
                                               '{0}.{1}'.format(self.fb_name, 'INIT'))
         # creates the fb that runs the device in loop
         sleep_fb_name = str(uuid.uuid4())
         self.ua_peer.config.create_fb(sleep_fb_name, 'SLEEP')
+        self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'INIT_O'),
+                                              '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
         self.ua_peer.config.create_connection('{0}.{1}'.format(sleep_fb_name, 'SLEEP_O'),
                                               '{0}.{1}'.format(self.fb_name, 'READ'))
         self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'READ_O'),

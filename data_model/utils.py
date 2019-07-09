@@ -15,21 +15,36 @@ UA_TYPES = {'String': ua.VariantType.String,
             'BOOL': ua.VariantType.Boolean,
             'Boolean': ua.VariantType.Boolean}
 
+XML_4DIAC = {'String': 'String',
+             'STRING': 'String',
+             'Double': 'Double',
+             'Integer': 'Integer',
+             'INT': 'Integer',
+             'UINT': 'Integer',
+             'Float': 'Float',
+             'REAL': 'Float',
+             'LREAL': 'Float',
+             'BOOL': 'Boolean',
+             'Boolean': 'Boolean'}
+
 UA_NODE = {ua.VariantType.String: ua.NodeId(ua.ObjectIds.String),
            ua.VariantType.Double: ua.NodeId(ua.ObjectIds.Double),
            ua.VariantType.Int64: ua.NodeId(ua.ObjectIds.Int64),
+           ua.VariantType.UInt64: ua.NodeId(ua.ObjectIds.UInt64),
            ua.VariantType.Float: ua.NodeId(ua.ObjectIds.Float),
            ua.VariantType.Boolean: ua.NodeId(ua.ObjectIds.Boolean)}
 
 XML_TYPES = {ua.VariantType.String: 'String',
              ua.VariantType.Double: 'Double',
              ua.VariantType.Int64: 'Integer',
+             ua.VariantType.UInt64: 'Integer',
              ua.VariantType.Float: 'Float',
              ua.VariantType.Boolean: 'Boolean'}
 
 XML_NODE = {ua.ObjectIds.String: 'String',
             ua.ObjectIds.Double: 'Double',
             ua.ObjectIds.Int64: 'Integer',
+            ua.ObjectIds.UInt64: 'Integer',
             ua.ObjectIds.Float: 'Float',
             ua.ObjectIds.Boolean: 'Boolean'}
 
@@ -211,7 +226,10 @@ class Method2Call(UaInterface):
             v_type, value, is_watch = self.fb.read_attr(output_name)
             output_return.append(value)
 
-        return output_return
+        if len(output_return) == 0:
+            return None
+        else:
+            return output_return
 
     def from_xml(self, method_xml):
         # first parse the inputs and the outputs

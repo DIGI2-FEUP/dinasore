@@ -7,7 +7,7 @@ class PRESSURE_SENSOR:
 
     def schedule(self, event_name, event_value):
         if event_name == 'INIT':
-            return [event_value, event_value, None, self.pressure, False]
+            return [event_value, None, None, self.pressure, False]
 
         elif event_name == 'READ':
             self.pressure += 1
