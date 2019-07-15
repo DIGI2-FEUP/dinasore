@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
 <FBType Comment="Peroidic event generator" Name="INFLUX_SERVICE">
-    <SelfDiscription FBType="SERVICE" ID="f919f8da-90d5-11e8-9eb6-529269fb1459"/>
+    <SelfDescription FBType="SERVICE" ID="f919f8da-90d5-11e8-9eb6-529269fb1459"/>
     <Identification
             Description="Copyright (c) 2017 fortiss GmbH&#13;&#10; &#13;&#10;This program and the accompanying materials are made&#13;&#10;available under the terms of the Eclipse Public License 2.0&#13;&#10;which is available at https://www.eclipse.org/legal/epl-2.0/&#13;&#10;&#13;&#10;SPDX-License-Identifier: EPL-2.0"
             Standard="61499-1 Annex A"/>

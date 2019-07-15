@@ -80,7 +80,7 @@ def parse_fb_description(fb_xml):
     input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
     for item in fb_xml:
         # gets the id
-        if item.tag == 'SelfDiscription':
+        if item.tag == 'SelfDescription':
             fb_id = item.attrib['ID']
             ua_type = item.attrib['FBType']
         # gets the events and vars

@@ -82,7 +82,7 @@ class FBResources:
 
         # get the id and the type from the xml file
         for iterator in xml_root:
-            if iterator.tag == 'SelfDiscription':
+            if iterator.tag == 'SelfDescription':
                 dev_id = iterator.attrib['ID']
                 dev_type = iterator.attrib['FBType']
 

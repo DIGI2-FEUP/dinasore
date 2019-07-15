@@ -142,7 +142,7 @@ The difference between an event and a variable is that the event triggers the ex
 
 ##### Opc-Ua/Self-description file integration
 
-If you want to virtualize any fb using opc-ua you need to add the "SelfDiscription" tag to the function block xml.
+If you want to virtualize any fb using opc-ua you need to add the "SelfDescription" tag to the function block xml.
 This tag has as attributes the "FBType" witch could be a DEVICE.SENSOR, DEVICE.ACTUATOR, DEVICE.EQUIPMENT or a SERVICE.
 The other attribute that you need to specify is the unique ID of that function block.
 
