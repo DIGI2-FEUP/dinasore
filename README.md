@@ -22,8 +22,8 @@ so this way we're able to redistribute the data processing over all the dinasore
 - [x] Monitoring of all function blocks using the watch option at the 4DIAC-IDE
 - [x] Remote stop of a configuration that is running
 - [x] Docker integration
-- [ ] Opc-Ua integration
-- [ ] Self-description file usage
+- [x] Opc-Ua integration
+- [x] Self-description file usage
 
 ## Installation
 
@@ -51,18 +51,22 @@ If you want to install the DINASORE using docker, you must use the following com
 The first to pull the image from the docker hub and the second to run the container.
 
 ```bash
-docker pull systecfof/dinasore:<processor_architecture>-<_release>
+docker pull systecfof/dinasore-ua:<processor_architecture>-<_release>
 
-docker run --network="host" systecfof/dinasore:<processor_architecture>-<_release> -a <ip_address> -p <_port>
+docker run --network="host" \
+           --volume=/absolute_path_host/resources:/usr/src/dinasore-ua/resources \
+           systecfof/dinasore-ua:<processor_architecture>-<_release> -a <ip_address> -p <_port>
 ```
 
 You must replace the <processor_architecture>, <_release>, <ip_address> and <_port> by the respectively values.
 The processor_architecture cloud be amd64 or arm. The next example shows the commands with examples of replaced values:
 
 ```bash
-docker pull systecfof/dinasore:amd64-0.1
+docker pull systecfof/dinasore-ua:amd64-0.1
 
-docker run --network="host" systecfof/dinasore:amd64-0.1 -a 127.0.0.1 -p 61499
+docker run --network="host" \
+           --volume=/absolute_path_host/resources:/usr/src/dinasore-ua/resources \
+           systecfof/dinasore-ua:amd64-0.1 -a 127.0.0.1 -p 61499
 ```
 
 ### 4DIAC-IDE
@@ -88,7 +92,7 @@ The difference between an event and a variable is that the event triggers the ex
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType>
 <FBType Comment="" Name="SENSOR_EXAMPLE">
-  <SelfDiscription FBType="DEVICE.SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
+  <SelfDescription FBType="DEVICE.SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
   <InterfaceList>
     <EventInputs>
       <Event Comment="" Name="Init" Type="Event"/>
@@ -115,7 +119,7 @@ The difference between an event and a variable is that the event triggers the ex
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType>
 <FBType Comment="" Name="SENSOR_EXAMPLE">
-  <SelfDiscription FBType="DEVICE.SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
+  <SelfDescription FBType="DEVICE.SENSOR" ID="ab3d2a3a-135a-11e9-ab14-d663bd873d93"/>
   <InterfaceList>
     <EventInputs>
       <Event Comment="" Name="Init" Type="Event"/>

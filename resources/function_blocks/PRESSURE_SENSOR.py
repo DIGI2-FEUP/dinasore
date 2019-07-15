@@ -10,8 +10,8 @@ class PRESSURE_SENSOR:
             return [event_value, None, None, self.pressure, False]
 
         elif event_name == 'READ':
-            self.pressure += 1
+            # self.pressure += 1
             return [None, event_value, None, self.pressure, False]
 
         elif event_name == 'CALIBRATE':
-            return [None, None, event_value, self.pressure, True]
+            return [None, None, event_value, self.pressure, False]

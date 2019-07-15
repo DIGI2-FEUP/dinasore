@@ -1,0 +1,9 @@
+lxml==4.3.3
+pytz==2019.1
+cryptography==2.3
+opcua==0.98.7
+setuptools==40.8.0
+urllib3==1.24.1
+influxdb==5.2.2
+paho-mqtt==1.4.0
+

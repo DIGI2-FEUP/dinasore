@@ -16,7 +16,7 @@ class DataModelTests(unittest.TestCase):
         # creates the opc-ua manager
         config = configuration.Configuration(self.base_name, 'EMB_RES')
         self.manager_4diac.set_config(self.base_name, config)
-        self.manager_4diac.build_ua_manager(self.base_name, 'localhost', 4841, self.file_name)
+        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', 4841, self.file_name)
 
     def tearDown(self):
         self.manager_4diac.manager_ua.config.stop_work()
@@ -28,7 +28,7 @@ class DataModelTests(unittest.TestCase):
         self.assertEqual(n_fb, 8)
 
     def test_device_set(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://0.0.0.0:{0}'.format(self.port_server))
 
         path = c.generate_path(self.base_list + [(2, 'DeviceSet')])
         children = c.get_object(path).get_children()
@@ -37,7 +37,7 @@ class DataModelTests(unittest.TestCase):
         c.disconnect()
 
     def test_device_method(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://0.0.0.0:{0}'.format(self.port_server))
 
         method_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'PRESSURE_SENSOR_1'),
                                                         (2, 'Methods'), (2, 'CALIBRATE')])
@@ -46,35 +46,21 @@ class DataModelTests(unittest.TestCase):
 
         method_r = c.call_method(method_path.copy(), None)
         read_r = c.read(var_path)
-        self.assertEqual(method_r, [True])
+        self.assertEqual(method_r, [False])
         self.assertEqual(read_r, 0)
 
         method_r = c.call_method(method_path.copy(), None)
         read_r = c.read(var_path)
-        self.assertEqual(method_r, [True])
+        self.assertEqual(method_r, [False])
         self.assertEqual(read_r, 0)
 
         c.disconnect()
 
     def test_service_set(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://0.0.0.0:{0}'.format(self.port_server))
 
         path = c.generate_path(self.base_list + [(2, 'ServiceDescriptionSet')])
         children = c.get_object(path).get_children()
         self.assertEqual(len(children), 1)
 
         c.disconnect()
-
-    def test_instance_call(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
-
-        method_path = c.generate_path(self.base_list + [(2, 'ServiceInstanceSet'), (2, 'SERVICE_EXAMPLE_1'),
-                                                        (2, 'Methods'), (2, 'CallInstance')])
-        method_r = c.call_method(method_path.copy(), 2)
-        self.assertEqual(method_r, [3])
-
-        c.disconnect()
-
-    def test_fb_upload(self):
-        pass
-
