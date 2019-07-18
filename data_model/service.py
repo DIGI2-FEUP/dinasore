@@ -11,8 +11,6 @@ class Service(utils.UaBaseStructure, utils.UaInterface):
                                        fb_name=fb_name,
                                        fb_type=fb_type,
                                        browse_name=fb_type)
-        # key: constant_name, value: value to set (converted)
-        self.variables_list = []
         # all instances from this service
         # key: instance_id, value: instance_obj
         self.instances_dict = dict()
@@ -38,20 +36,14 @@ class Service(utils.UaBaseStructure, utils.UaInterface):
                     if folder_name == 'Arguments':
                         # iterates over each variable
                         for var in if_xml[0]:
-                            var_dict = dict()
                             # creates the variable
-                            var_idx, var_object, var_path = self.create_xml_variable(var)
+                            var_idx, var_object, var_path = self.virtualize_xml_variable(var)
                             # creates the type property
                             for ele in var[0]:
                                 if ele.attrib['id'] == 'Type':
-                                    var_dict['Type'] = ele.text
                                     utils.default_property(self.ua_peer, var_idx, var_path, 'Type', ele.text)
-
-                            # add the var to the list
-                            var_dict['Name'] = var.attrib['name']
-                            var_dict['DataType'] = var.attrib['DataType']
-                            var_dict['ValueRank'] = var.attrib['ValueRank']
-                            self.variables_list.append(var_dict)
+                                    # creates the dict variable
+                                    self.create_dict_variable_xml(var, ele.text)
 
             # parses the constant variables
             elif tag == 'recipeadjustments':
@@ -59,33 +51,28 @@ class Service(utils.UaBaseStructure, utils.UaInterface):
                 for rec_adj in item:
                     # iterates over each variable in the 'recipe adjustments'
                     for variable in rec_adj[0]:
-                        var_dict = dict()
-                        var_dict['Name'] = variable.attrib['name']
-                        var_dict['DataType'] = variable.attrib['DataType']
-                        var_dict['ValueRank'] = variable.attrib['ValueRank']
-                        var_dict['Type'] = 'Constant'
-                        self.variables_list.append(var_dict)
-
+                        # creates the dict variable
+                        self.create_dict_variable_xml(variable, 'Constant')
                         # creates the opc-ua variable
-                        var_idx, var_object, var_path = self.create_xml_variable(variable)
+                        var_idx, var_object, var_path = self.virtualize_xml_variable(variable)
                         # creates the respective property
-                        utils.default_property(self.ua_peer, var_idx, var_path, 'Type', var_dict['Type'])
+                        utils.default_property(self.ua_peer, var_idx, var_path, 'Type', 'Constant')
 
     def from_fb(self, input_vars_xml, output_vars_xml):
         # create the input variables interface
         for var_xml in input_vars_xml:
-            var_idx, var_object, var_path = self.create_fb_variable(var_xml)
+            var_idx, var_object, var_path = self.virtualize_fb_variable(var_xml)
             # also creates the property
             utils.default_property(self.ua_peer, var_idx, var_path, 'Type', 'Output')
             # adds the variables to the list
-            self.__create_var_entry('Input', var_xml)
+            self.create_dict_variable_fb('Input', var_xml)
         # create the output variables interface
         for var_xml in output_vars_xml:
-            var_idx, var_object, var_path = self.create_fb_variable(var_xml)
+            var_idx, var_object, var_path = self.virtualize_fb_variable(var_xml)
             # also creates the property
             utils.default_property(self.ua_peer, var_idx, var_path, 'Type', 'Output')
             # adds the variables to the list
-            self.__create_var_entry('Output', var_xml)
+            self.create_dict_variable_fb('Output', var_xml)
 
     def save_xml(self, service_xml):
         # sets the service xml attributes
@@ -144,22 +131,6 @@ class Service(utils.UaBaseStructure, utils.UaInterface):
         inst.from_fb(fb, fb_xml)
         # adds the method to the dict
         self.instances_dict[inst.subs_id] = inst
-
-    def __create_var_entry(self, var_type, var_xml):
-        if var_xml.attrib['OpcUa'] == 'Variable':
-            # adds the variables to the list
-            var_dict = {'Name': var_xml.attrib['Name'],
-                        'Type': var_type,
-                        'DataType': utils.XML_4DIAC[var_xml.attrib['Type']],
-                        'ValueRank': '0'}
-            self.variables_list.append(var_dict)
-        elif var_xml.attrib['OpcUa'] == 'Constant':
-            # adds the variables to the list
-            var_dict = {'Name': var_xml.attrib['Name'],
-                        'Type': 'Constant',
-                        'DataType': utils.XML_4DIAC[var_xml.attrib['Type']],
-                        'ValueRank': '0'}
-            self.variables_list.append(var_dict)
 
     def instance_from_ua(self, parent, *args):
         print('create instance')

@@ -1,5 +1,4 @@
 from data_model import utils
-from data_model import device
 import xml.etree.ElementTree as ETree
 from opcua import ua
 
@@ -24,13 +23,6 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'dID', self.subs_did)
 
-        # creates the subscriptions folder
-        subs_idx, subs_path, subs_list = utils.default_folder(self.ua_peer, self.base_idx, self.base_path,
-                                                              self.base_path_list, 'Subscriptions')
-        self.subscriptions_folder = self.ua_peer.get_object(subs_path)
-        # creates the dictionary where are stored teh connections
-        self.subscriptions_dict = dict()
-
     def from_xml(self, root_xml):
         # creates the fb for the instance
         self.ua_peer.config.create_virtualized_fb(self.subs_id, self.fb_type, self.update_variables)
@@ -41,8 +33,10 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
         for item in root_xml:
             # splits the tag in these 3 camps
             uri, ignore, tag = item.tag[1:].partition("}")
+
+            # parses the subscriptions
             if tag == 'subscriptions':
-                self.__parse_subscriptions(item)
+                self.parse_subscriptions(item)
 
     def from_fb(self, fb, fb_xml):
         # pass the method to update the variables
@@ -99,7 +93,7 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
         # create the linked variables
         for var_dict in self.variables_list:
             # creates the variable
-            var_idx, var_object, var_path = self.create_variable_by_dict(var_dict)
+            var_idx, var_object, var_path = self.virtualize_dict_variable(var_dict)
             # creates the type property
             utils.default_property(self.ua_peer, var_idx, var_path, 'Type', var_dict['Type'])
             # parse the variable in the ua method
@@ -125,60 +119,6 @@ class InstanceService(utils.UaBaseStructure, utils.UaInterface):
                                    input_args=[], output_args=[])
 
         self.ua_method.virtualize(self.methods_idx, self.methods_path, 'CallInstance')
-
-    def create_subscription(self, source_node, destination_variable):
-        # adds that subscription to the folder
-        var_ref = self.ua_peer.get_node('ns=2;s={0}'.format(source_node))
-        self.subscriptions_folder.add_reference(var_ref, ua.ObjectIds.Organizes)
-        # saves the subscription in the dictionary
-        self.subscriptions_dict[destination_variable] = var_ref
-
-    def __parse_subscriptions(self, links_xml):
-        # iterates over each subscription of the set
-        for subscription in links_xml:
-
-            # checks if is context subscription
-            if subscription.attrib['type'] == 'Context':
-                pass
-            # checks if is data subscription
-            elif subscription.attrib['type'] == 'Data':
-                # its an input variable
-                if subscription.attrib['BrowseDirection'] == 'forward':
-                    # parses the subscription
-                    sub_splitted = subscription.text.split(':')
-                    # gets the destination fb
-                    content = self.ua_peer.search_id(sub_splitted[0])
-                    # creates the connection between the fb
-                    source = '{0}.{1}'.format(content.fb_name, sub_splitted[2])
-                    destination = '{0}.{1}'.format(self.subs_id, subscription.attrib['VariableName'])
-                    self.ua_peer.config.create_connection(source=source, destination=destination)
-                    # connect the output event to input event
-                    if isinstance(content, device.Device):
-                        source_event = '{0}.{1}'.format(content.fb_name, 'READ_O')
-                    else:
-                        source_event = '{0}.{1}'.format(content.fb_name, 'RUN_O')
-
-                    # creates the connection between the fb
-                    destination_event = '{0}.{1}'.format(self.subs_id, 'RUN')
-                    self.ua_peer.config.create_connection(source=source_event, destination=destination_event)
-
-                    # adds that subscription to the folder
-                    var_ref = self.ua_peer.get_node('ns=2;s={0}'.format(subscription.text))
-                    self.subscriptions_folder.add_reference(var_ref, ua.ObjectIds.Organizes)
-                    # saves the subscription in the dictionary
-                    self.subscriptions_dict[subscription.attrib['VariableName']] = var_ref
-
-                # its a constant
-                elif subscription.attrib['BrowseDirection'] == 'both':
-                    # gets the value to write
-                    source = subscription.text
-                    destination = '{0}.{1}'.format(self.subs_id, subscription.attrib['VariableName'])
-                    # write the value in the fb
-                    self.ua_peer.config.write_connection(source_value=source, destination=destination)
-
-                # its an output variable
-                elif subscription.attrib['BrowseDirection'] == 'inverse':
-                    pass
 
     def add_ua_link(self, parent, *args):
         print('adding link')

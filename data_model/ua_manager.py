@@ -1,5 +1,8 @@
 from opc_ua import peer
-from data_model import device_set, service_set, utils
+from data_model import device_set
+from data_model import service_set
+from data_model import point_set
+from data_model import utils
 import xml.etree.ElementTree as ETree
 import os
 import sys
@@ -27,6 +30,7 @@ class UaManager(peer.UaPeer):
         # pointers to all the sets
         self.devices_set = device_set.DeviceSet(self)
         self.services_set = service_set.ServiceSet(self)
+        self.points_set = point_set.PointSet(self)
 
         # parse the xml
         logging.info('getting the xml self definition...')
@@ -63,7 +67,7 @@ class UaManager(peer.UaPeer):
                 self.services_set.create_instances_from_xml(base_element)
             # parses the point description
             elif tag == 'pointdescriptionset':
-                pass
+                self.points_set.from_xml(base_element)
 
         self.config.start_work()
 
@@ -75,11 +79,14 @@ class UaManager(peer.UaPeer):
         if item_type[0] == 'DEVICE':
             self.devices_set.from_fb(fb, fb_xml)
 
-        if item_type[0] == 'SERVICE':
+        elif item_type[0] == 'SERVICE':
             # first check if needs to create the service
             self.services_set.from_fb(fb.fb_type, fb_xml)
             # after create the instance
             self.services_set.create_instance_from_fb(fb, fb_xml)
+
+        elif item_type[0] == 'POINT':
+            self.points_set.from_fb(fb, fb_xml, point_type=item_type[1])
 
     def save_xml(self):
         root_xml = ETree.Element('smartobjectselfdescription',
@@ -110,6 +117,7 @@ class UaManager(peer.UaPeer):
         self.services_set.save_xml(service_set_xml, xml_instances=instance_set_xml)
         # saves the point set
         point_set_xml = ETree.SubElement(root_xml, 'pointdescriptionset')
+        self.points_set.save_xml(point_set_xml)
 
         # writes the xml to the respective file
         tree_xml.write(self.xml_path)
@@ -124,6 +132,21 @@ class UaManager(peer.UaPeer):
                     # adds the property to the opc-ua server
                     utils.default_property(self, self.base_idx, self.ROOT_PATH,
                                            property_name=item.attrib['id'], property_value=item.text)
+
+    def create_ua_connection(self, source, destination):
+        # splits both source and destination (fb, fb_variable)
+        destination_attr = destination.split(sep='.')
+
+        fb = self.config.get_fb(destination_attr[0])
+        # checks if the fb is in points dictionary
+        if fb.fb_type in self.points_set.points_dict:
+            # creates the point connection
+            self.points_set.create_ua_connection(source, destination, fb)
+
+        # checks if the fb is already a service
+        elif fb.fb_type in self.services_set.service_dict:
+            # creates the point connection
+            self.services_set.create_ua_connection(source, destination, fb)
 
     def stop_ua(self):
         # stops the configuration work

@@ -85,20 +85,17 @@ class ServiceSet(utils.UaInterface):
                 instance_id = instance_xml.attrib['id']
                 self.instances_map[instance_id] = service_id
 
-    def create_subscription(self, source, destination):
+    def create_ua_connection(self, source, destination, fb):
         # splits both source and destination (fb, fb_variable)
         source_attr = source.split(sep='.')
         destination_attr = destination.split(sep='.')
 
-        fb = self.__ua_peer.config.get_fb(destination_attr[0])
-        # checks if the fb is already a service
-        if fb.fb_type in self.service_dict:
-            s = self.service_dict.get(fb.fb_type)
-            # checks if the instance exists already
-            # checks if the destination is a variable (not event)
-            if (destination_attr[0] in s.instances_dict) and (destination_attr[1] in fb.input_vars):
-                # builds the node_id for the source
-                node_id = '{0}:Variables:{1}'.format(source_attr[0], source_attr[1])
-                # creates the subscription at the instance
-                s.instances_dict[destination_attr[0]].create_subscription(source_node=node_id,
-                                                                          destination_variable=destination_attr[1])
+        s = self.service_dict.get(fb.fb_type)
+        # checks if the instance exists already
+        # checks if the destination is a variable (not event)
+        if (destination_attr[0] in s.instances_dict) and (destination_attr[1] in fb.input_vars):
+            # builds the node_id for the source
+            node_id = '{0}:Variables:{1}'.format(source_attr[0], source_attr[1])
+            # creates the subscription at the instance
+            s.instances_dict[destination_attr[0]].create_ua_connection(source_node=node_id,
+                                                                       destination_variable=destination_attr[1])

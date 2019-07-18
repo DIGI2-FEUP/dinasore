@@ -145,7 +145,7 @@ class Manager:
                     # check the options for ua_integration
                     if self.ua_integration:
                         # parses from subscription
-                        self.manager_ua.services_set.create_subscription(connection_source, connection_destination)
+                        self.manager_ua.create_ua_connection(connection_source, connection_destination)
 
                 # Create watch
                 elif child.tag == 'Watch':

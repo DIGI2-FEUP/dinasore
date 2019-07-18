@@ -142,45 +142,15 @@
         </serviceinstance>
     </serviceinstanceset>
     <pointdescriptionset>
-        <endpointdescription dId="649b5374-90d6-11e8-bada-529269fb1459" name="HMI Device" version="1.0.0" type="EndPointService">
-            <interfaces>
-                <interface type="Publish">
-                    <variables>
-                        <variable name="OPC UA" DataType="String" ValueRank="-1">
-                            <elements>
-                                <element id="IP" DataType="String" ValueRank="-1">192.168.1.1</element>
-                                <element id="PORT" DataType="String" ValueRank="-1">4048</element>
-                            </elements>
-                        </variable>
-                        <variable name="HTTP" DataType="String" ValueRank="-1">
-                            <elements>
-                                <element id="IP" DataType="String" ValueRank="-1">192.168.1.1</element>
-                                <element id="PORT" DataType="String" ValueRank="-1">8080</element>
-                            </elements>
-                        </variable>
-                    </variables>
-                </interface>
-            </interfaces>
-        </endpointdescription>
-        <startpointdescription dId="649b5374-90d6-11e8-bada-529269fb1459" name="HMI Device" version="1.0.0" type="EndPointService">
-            <interfaces>
-                <interface type="Reply">
-                    <variables>
-                        <variable name="OPC UA" DataType="String" ValueRank="-1">
-                            <elements>
-                                <element id="IP" DataType="String" ValueRank="-1">192.168.1.1</element>
-                                <element id="PORT" DataType="String" ValueRank="-1">4048</element>
-                            </elements>
-                        </variable>
-                        <variable name="HTTP" DataType="String" ValueRank="-1">
-                            <elements>
-                                <element id="IP" DataType="String" ValueRank="-1">192.168.1.1</element>
-                                <element id="PORT" DataType="String" ValueRank="-1">8080</element>
-                            </elements>
-                        </variable>
-                    </variables>
-                </interface>
-            </interfaces>
+        <startpointdescription dId="MQTT_STARTPOINT_1" name="MQTT_STARTPOINT_1" version="1.0.0" type="MQTT_STARTPOINT">
+            <variables>
+                <variable name="VALUE" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <subscriptions>
+                <id BrowseDirection="both" type="Data" VariableName="IP">localhost</id>
+                <id BrowseDirection="both" type="Data" VariableName="PORT">1883</id>
+                <id BrowseDirection="both" type="Data" VariableName="TOPIC">/sensor_0</id>
+            </subscriptions>
         </startpointdescription>
     </pointdescriptionset>
 </smartobjectselfdescription>

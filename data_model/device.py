@@ -1,18 +1,17 @@
 from data_model import utils
 import xml.etree.ElementTree as ETree
-import uuid
 
 
 class Device(utils.UaBaseStructure, utils.UaInterface):
 
-    def __init__(self, ua_peer, subs_id, fb_name, fb_type, state):
-        utils.UaBaseStructure.__init__(self, ua_peer, 'DeviceSet',
+    def __init__(self, ua_peer, subs_id, fb_name, fb_type, state, root_folder):
+        utils.UaBaseStructure.__init__(self, ua_peer, root_folder,
                                        subs_id=subs_id,
                                        fb_name=fb_name,
                                        fb_type=fb_type,
                                        browse_name=fb_name)
         self.state = state
-        self.device_type = ''
+        self.fb_general_type = 'DEVICE'
         self.ua_methods = dict()
 
         # creates the fb_type property
@@ -24,14 +23,12 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
         # create the id property
         utils.default_property(self.ua_peer, self.base_idx, self.base_path, 'ID', self.subs_id)
 
-        # the constants list with the names of the constants
-        self.__constants_list = []
-
     def from_xml(self, root_xml):
         # creates the fb inside the configuration
         self.ua_peer.config.create_virtualized_fb(self.fb_name, self.fb_type, self.update_variables)
 
-        self.device_type = root_xml.attrib['type']
+        if self.fb_general_type == 'DEVICE':
+            self.fb_general_type = root_xml.attrib['type']
 
         for item in root_xml:
             # splits the tag in these 3 camps
@@ -43,7 +40,7 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
                 for var in item:
                     if var.attrib['name'] != 'Description':
                         # create the variable
-                        var_idx, var_object, var_path = self.create_xml_variable(var)
+                        var_idx, var_object, var_path = self.virtualize_xml_variable(var)
                         # adds the variable to the dictionary
                         self.ua_variables[var.attrib['name']] = var_object
 
@@ -64,33 +61,21 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
                     self.ua_methods[method_name] = method2call
 
             elif tag == 'subscriptions':
-                # iterates over each subscription of the set
-                for subscription in item:
-                    # checks if is context subscription
-                    if subscription.attrib['type'] == 'Context':
-                        pass
-                    # checks if is data subscription
-                    elif subscription.attrib['type'] == 'Data':
-                        # its a constant
-                        if subscription.attrib['BrowseDirection'] == 'both':
-                            # gets the value to write
-                            source = subscription.text
-                            destination = '{0}.{1}'.format(self.subs_id, subscription.attrib['VariableName'])
-                            # adds the name of that constant to the list
-                            self.__constants_list.append(subscription.attrib['VariableName'])
-                            # write the value in the fb
-                            self.ua_peer.config.write_connection(source_value=source, destination=destination)
+                # parse the subscriptions
+                self.parse_subscriptions(item)
 
         # link variable to the start fb (sensor to init fb)
-        if self.device_type == 'SENSOR':
-            self.__create_sensor_extras()
+        if self.fb_general_type == 'SENSOR' or self.fb_general_type == 'STARTPOINT':
+            self.create_extras()
 
     def from_fb(self, fb, fb_xml):
         # parses the fb description
         fb_id, ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
             utils.parse_fb_description(fb_xml)
-        # gets the type of device
-        self.device_type = ua_type.split('.')[1]
+
+        if self.fb_general_type == 'DEVICE':
+            # gets the type of device
+            self.fb_general_type = ua_type.split('.')[1]
 
         # Iterates over the input events
         for event in input_events_xml:
@@ -114,16 +99,16 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
                 var_specs = entry.attrib['OpcUa'].split('.')
                 if 'Variable' in var_specs:
                     # create the variable
-                    var_idx, var_object, var_path = self.create_fb_variable(entry)
+                    var_idx, var_object, var_path = self.virtualize_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
                 elif 'Constant' in var_specs:
                     # create the variable
-                    var_idx, var_object, var_path = self.create_fb_variable(entry)
+                    var_idx, var_object, var_path = self.virtualize_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
                     # adds the constant to the list
-                    self.__constants_list.append(entry.attrib['Name'])
+                    self.variables_list.append({'Name': entry.attrib['Name'], 'Type': 'Constant'})
 
         # Iterates over the output_vars
         for entry in output_vars_xml:
@@ -131,7 +116,7 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
                 var_specs = entry.attrib['OpcUa'].split('.')
                 if 'Variable' in var_specs:
                     # create the variable
-                    var_idx, var_object, var_path = self.create_fb_variable(entry)
+                    var_idx, var_object, var_path = self.virtualize_fb_variable(entry)
                     # adds the variable to the dictionary
                     self.ua_variables[entry.attrib['Name']] = var_object
 
@@ -139,13 +124,13 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
         fb.ua_variables_update = self.update_variables
 
         # link variable to the start fb (sensor to init fb)
-        if self.device_type == 'SENSOR':
-            self.__create_sensor_extras()
+        if self.fb_general_type == 'SENSOR' or self.fb_general_type == 'STARTPOINT':
+            self.create_extras()
 
     def save_xml(self, device_xml):
         # receives a device xml element
         device_xml.attrib['id'] = self.subs_id
-        device_xml.attrib['type'] = self.device_type
+        device_xml.attrib['type'] = self.fb_general_type
 
         # creates the variables xml
         variables_xml = ETree.SubElement(device_xml, 'variables')
@@ -190,24 +175,13 @@ class Device(utils.UaBaseStructure, utils.UaInterface):
         # saves the subscriptions
         subscriptions_xml = ETree.SubElement(device_xml, 'subscriptions')
         # saves the constant values
-        for constant in self.__constants_list:
-            # creates the constant xml
-            subs_xml = ETree.SubElement(subscriptions_xml, 'id')
-            subs_xml.attrib['BrowseDirection'] = 'both'
-            subs_xml.attrib['type'] = 'Data'
-            subs_xml.attrib['VariableName'] = constant
-            var_ref = self.ua_peer.get_node('ns=2;s={0}:Variables:{1}'.format(self.subs_id, constant))
-            subs_xml.text = str(var_ref.get_value())
-
-    def __create_sensor_extras(self):
-        self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
-                                              '{0}.{1}'.format(self.fb_name, 'INIT'))
-        # creates the fb that runs the device in loop
-        sleep_fb_name = str(uuid.uuid4())
-        self.ua_peer.config.create_fb(sleep_fb_name, 'SLEEP')
-        self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'INIT_O'),
-                                              '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
-        self.ua_peer.config.create_connection('{0}.{1}'.format(sleep_fb_name, 'SLEEP_O'),
-                                              '{0}.{1}'.format(self.fb_name, 'READ'))
-        self.ua_peer.config.create_connection('{0}.{1}'.format(self.fb_name, 'READ_O'),
-                                              '{0}.{1}'.format(sleep_fb_name, 'SLEEP'))
+        for variable_item in self.variables_list:
+            # checks if is a constant
+            if variable_item['Type'] == 'Constant':
+                # creates the constant xml
+                subs_xml = ETree.SubElement(subscriptions_xml, 'id')
+                subs_xml.attrib['BrowseDirection'] = 'both'
+                subs_xml.attrib['type'] = 'Data'
+                subs_xml.attrib['VariableName'] = variable_item['Name']
+                var_ref = self.ua_peer.get_node('ns=2;s={0}:Variables:{1}'.format(self.subs_id, variable_item['Name']))
+                subs_xml.text = str(var_ref.get_value())

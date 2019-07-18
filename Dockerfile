@@ -1,16 +1,19 @@
-FROM python:3.6
+FROM python:3.6-slim
 
 RUN mkdir -p usr/src/dinasore-ua
 
 WORKDIR /usr/src/dinasore-ua
 
-ADD communication ./communication
-ADD opc_ua ./opc_ua
-ADD core ./core
-ADD data_model ./data_model
-ADD tests ./tests
-ADD requirements.txt ./
+COPY communication ./communication
+COPY opc_ua ./opc_ua
+COPY core ./core
+COPY data_model ./data_model
+COPY tests ./tests
+COPY requirements.txt ./
+# COPY resources ./resources
 
 RUN pip install -r requirements.txt
+
+# RUN python tests/__init__.py
 
 ENTRYPOINT [ "python", "core/main.py" ]

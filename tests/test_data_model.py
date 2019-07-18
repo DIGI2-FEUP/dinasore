@@ -25,7 +25,7 @@ class DataModelTests(unittest.TestCase):
     def test_fb_created(self):
         # check the number of fb
         n_fb = len(self.manager_4diac.manager_ua.config.fb_dictionary)
-        self.assertEqual(n_fb, 8)
+        self.assertEqual(n_fb, 10)
 
     def test_device_set(self):
         c = client.UaClient('opc.tcp://0.0.0.0:{0}'.format(self.port_server))

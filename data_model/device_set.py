@@ -24,14 +24,14 @@ class DeviceSet(utils.UaInterface):
                 subs_id = dev_xml.attrib['id']
                 fb_name, fb_type, state = self.__parse_xml_header(dev_xml)
                 # creates the device
-                dev = device.Device(self.__ua_peer, subs_id, fb_name, fb_type, state)
+                dev = device.Device(self.__ua_peer, subs_id, fb_name, fb_type, state, 'DeviceSet')
                 dev.from_xml(dev_xml)
                 # use the fb_name as key
                 self.devices_dict[dev.subs_id] = dev
 
     def from_fb(self, fb, fb_xml):
         # creates the device
-        dev = device.Device(self.__ua_peer, fb.fb_name, fb.fb_name, fb.fb_type, 'RUNNING')
+        dev = device.Device(self.__ua_peer, fb.fb_name, fb.fb_name, fb.fb_type, 'RUNNING', 'DeviceSet')
         # links the fb to the device
         dev.from_fb(fb, fb_xml)
         # adds the device to the dictionary
