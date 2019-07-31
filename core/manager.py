@@ -122,7 +122,6 @@ class Manager:
         element = ETree.fromstring(xml_data)
         action = element.attrib['Action']
         request_id = element.attrib['ID']
-        xml = None
 
         if action == 'CREATE':
             # Iterate over the list of children
@@ -179,7 +178,7 @@ class Manager:
                     connection_destination = child.attrib['Destination']
                     self.get_config(config_id).write_connection(connection_source, connection_destination)
 
-        response = self.build_response(request_id, xml)
+        response = self.build_response(request_id, None)
         return response
 
     @staticmethod

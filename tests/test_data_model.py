@@ -64,3 +64,12 @@ class DataModelTests(unittest.TestCase):
         self.assertEqual(len(children), 1)
 
         c.disconnect()
+
+
+class ParseTests(unittest.TestCase):
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
