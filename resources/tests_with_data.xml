@@ -142,15 +142,5 @@
         </serviceinstance>
     </serviceinstanceset>
     <pointdescriptionset>
-        <startpointdescription dId="MQTT_STARTPOINT_1" name="MQTT_STARTPOINT_1" version="1.0.0" type="MQTT_STARTPOINT">
-            <variables>
-                <variable name="VALUE" DataType="Integer" ValueRank="-1"/>
-            </variables>
-            <subscriptions>
-                <id BrowseDirection="both" type="Data" VariableName="IP">localhost</id>
-                <id BrowseDirection="both" type="Data" VariableName="PORT">1883</id>
-                <id BrowseDirection="both" type="Data" VariableName="TOPIC">/sensor_0</id>
-            </subscriptions>
-        </startpointdescription>
     </pointdescriptionset>
 </smartobjectselfdescription>

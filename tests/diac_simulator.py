@@ -1,31 +1,25 @@
 import struct
 import socket
-import sys
-import os
 
 
 class DiacSimulator:
 
     def __init__(self, ip_address, bind_port):
-        pass
         # Create a TCP/IP socket
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # Connect the socket to the port where the server is listening
-        self.server_url = (ip_address, bind_port)
+        server_url = (ip_address, bind_port)
+        # connects tho the socket
+        self.sock.connect(server_url)
 
-    def upload_dinasore(self, file_name):
+    def upload_dinasore(self, file_path):
         # creates the first message
         first_message = self.__build_response(b'<Request ID="0" Action="QUERY"><FB Name="*" Type="*"/></Request>', b'')
         # creates the messages list
         messages_list = [first_message]
 
-        # connects tho the socket
-        self.sock.connect(self.server_url)
-
-        # Gets the file path to the fbt (xml) file
-        messages_path = os.path.join(sys.path[0], file_name)
         # reads the file
-        with open(messages_path) as f:
+        with open(file_path) as f:
             content = f.readlines()
         # iterates over the xml of messages
         for row in content:
@@ -42,6 +36,9 @@ class DiacSimulator:
                 data = self.sock.recv(2048)
             except socket.error as msg:
                 print(msg)
+
+    def disconnect(self):
+        self.sock.close()
 
     @staticmethod
     def __build_response(message_payload, configuration_name):

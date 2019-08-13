@@ -44,7 +44,9 @@ if __name__ == "__main__":
     hand = tcp_server.TcpServer(address, port, 10, m)
 
     try:
-        hand.handler()
+        # handles every client
+        while True:
+            hand.handle_client()
     except KeyboardInterrupt:
         logging.info('interrupted server')
         hand.stop_server()

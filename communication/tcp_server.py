@@ -29,14 +29,13 @@ class TcpServer:
         # Listen for incoming connections
         self.sock.listen(limit_connections)
 
-    def handler(self):
-        while True:
-            # Wait for a connection
-            logging.info('waiting for a connection...')
-            connection, client_address = self.sock.accept()
+    def handle_client(self):
+        # Wait for a connection
+        logging.info('waiting for a connection...')
+        connection, client_address = self.sock.accept()
 
-            thread = client_thread.ClientThread(connection, client_address, self.config_m)
-            thread.start()
+        thread = client_thread.ClientThread(connection, client_address, self.config_m)
+        thread.start()
 
     def stop_server(self):
         self.sock.close()
