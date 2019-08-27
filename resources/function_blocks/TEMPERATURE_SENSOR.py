@@ -11,7 +11,7 @@ class TEMPERATURE_SENSOR:
 
         elif event_name == 'READ':
             self.temperature += 1
-            return [None, event_value, None, self.temperature, False]
+            return [None, event_value, None, self.temperature, True]
 
         elif event_name == 'CALIBRATE':
             return [None, None, event_value, self.temperature, True]

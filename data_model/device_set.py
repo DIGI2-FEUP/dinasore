@@ -1,5 +1,5 @@
 from data_model import utils
-from data_model import device
+from data_model import ua_base
 import xml.etree.ElementTree as ETree
 
 
@@ -18,24 +18,23 @@ class DeviceSet(utils.UaInterface):
         for dev_xml in xml_set:
             # splits the tag in these 3 camps
             uri, ignore, tag = dev_xml.tag[1:].partition("}")
-
             if tag == 'device':
                 # parses the first attributes
-                subs_id = dev_xml.attrib['id']
-                fb_name, fb_type, state = self.__parse_xml_header(dev_xml)
+                fb_name = dev_xml.attrib['id']
+                fb_type = dev_xml.attrib['dId']
                 # creates the device
-                dev = device.Device(self.__ua_peer, subs_id, fb_name, fb_type, state, 'DeviceSet')
-                dev.from_xml(dev_xml)
+                dev = ua_base.UaBaseLayer2(self.__ua_peer, fb_name, fb_type, 'DeviceSet', 'Device')
+                dev.parse_loop_type_xml(dev_xml)
                 # use the fb_name as key
-                self.devices_dict[dev.subs_id] = dev
+                self.devices_dict[dev.fb_name] = dev
 
     def from_fb(self, fb, fb_xml):
         # creates the device
-        dev = device.Device(self.__ua_peer, fb.fb_name, fb.fb_name, fb.fb_type, 'RUNNING', 'DeviceSet')
+        dev = ua_base.UaBaseLayer2(self.__ua_peer, fb.fb_name, fb.fb_type, 'DeviceSet', 'Device')
         # links the fb to the device
-        dev.from_fb(fb, fb_xml)
+        dev.parse_loop_type_fb(fb, fb_xml)
         # adds the device to the dictionary
-        self.devices_dict[dev.subs_id] = dev
+        self.devices_dict[dev.fb_name] = dev
 
     def save_xml(self, xml_set):
         # iterates over the devices dictionary and creates each device
@@ -43,31 +42,4 @@ class DeviceSet(utils.UaInterface):
             # creates the device element
             device_xml = ETree.SubElement(xml_set, 'device')
             # creates the content off that device
-            device_item.save_xml(device_xml)
-
-    @staticmethod
-    def __parse_xml_header(header_xml):
-        fb_name, fb_type, state = None, None, None
-        # creates the device object
-        for variables in header_xml:
-            # splits the tag in these 3 camps
-            uri, ignore, tag = variables.tag[1:].partition("}")
-
-            if tag == 'variables':
-                for var in variables:
-                    if var.attrib['name'] == 'Description':
-                        # creates the device properties
-                        for element in var[0]:
-                            # creates the opc-ua object
-                            if element.attrib['id'] == 'Name':
-                                fb_name = element.text
-
-                            # creates the fb
-                            elif element.attrib['id'] == 'SourceType':
-                                fb_type = element.text
-
-                            # creates the state
-                            elif element.attrib['id'] == 'SourceState':
-                                state = element.text
-
-        return fb_name, fb_type, state
+            device_item.save_all_xml(device_xml)

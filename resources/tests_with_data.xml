@@ -9,16 +9,9 @@
         <data id="STATE" DataType="String" ValueRank="-1">RUNNING</data>
     </general>
     <deviceset>
-        <device id="TEMPERATURE_SENSOR_1" type="SENSOR" fb="false">
+        <device dId="TEMPERATURE_SENSOR" id="TEMPERATURE_SENSOR_1" type="SENSOR">
             <variables>
                 <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
-                <variable name="Description" DataType="String" ValueRank="-1">
-                    <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">TEMPERATURE_SENSOR_1</element>
-                        <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">TEMPERATURE_SENSOR</element>
-                    </elements>
-                </variable>
             </variables>
             <methods>
                 <method name="CALIBRATE">
@@ -30,16 +23,9 @@
             <subscriptions>
             </subscriptions>
         </device>
-        <device id="PRESSURE_SENSOR_1" type="SENSOR" fb="false">
+        <device dId="PRESSURE_SENSOR" id="PRESSURE_SENSOR_1" type="SENSOR">
             <variables>
                 <variable name="PRESSURE" DataType="Integer" ValueRank="-1"/>
-                <variable name="Description" DataType="String" ValueRank="-1">
-                    <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">PRESSURE_SENSOR_1</element>
-                        <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">PRESSURE_SENSOR</element>
-                    </elements>
-                </variable>
             </variables>
             <methods>
                 <method name="CALIBRATE">
@@ -51,16 +37,9 @@
             <subscriptions>
             </subscriptions>
         </device>
-        <device id="PROCESS_TIME_1" type="SENSOR" fb="false">
+        <device dId="PROCESS_TIME" id="PROCESS_TIME_1" type="SENSOR">
             <variables>
                 <variable name="TIME" DataType="Integer" ValueRank="-1"/>
-                <variable name="Description" DataType="String" ValueRank="-1">
-                    <elements>
-                        <element id="Name" DataType="String" ValueRank="-1">PROCESS_TIME_1</element>
-                        <element id="SourceState" DataType="String" ValueRank="-1">RUNNING</element>
-                        <element id="SourceType" DataType="String" ValueRank="-1">PROCESS_TIME</element>
-                    </elements>
-                </variable>
             </variables>
             <methods>
                 <method name="CALIBRATE">
@@ -74,73 +53,81 @@
         </device>
     </deviceset>
     <servicedescriptionset>
-        <servicedescription dId="S_EXAMPLE" name="S_EXAMPLE" namespace="fft" version="1.0.0" type="DiagnosticService">
-            <recipeadjustments>
-                <recipeadjustment name="RATE">
-                    <variables>
-                        <variable name="RATE" DataType="Integer" ValueRank="-1"/>
-                    </variables>
-                </recipeadjustment>
-            </recipeadjustments>
+        <servicedescription id="S_EXAMPLE" type="Service">
+            <variables>
+                <variable name="RATE" DataType="Integer" ValueRank="-1"/>
+                <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
+                <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1"/>
+            </variables>
             <methods>
-                <method name="CreateInstance">
-                    <arguments>
-                        <argument name="ServiceID" type="Output" DataType="Guid" ValueRank="-1"/>
-                    </arguments>
-                </method>
             </methods>
-            <interfaces>
-                <interface type="Arguments">
-                    <variables>
-                        <variable name="SIGNAL" DataType="Integer" ValueRank="-1">
-                            <elements>
-                                <element id="Type" DataType="String" ValueRank="-1">Input</element>
-                            </elements>
-                        </variable>
-                        <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1">
-                            <elements>
-                                <element id="Type" DataType="String" ValueRank="-1">Output</element>
-                            </elements>
-                        </variable>
-                    </variables>
-                </interface>
-            </interfaces>
         </servicedescription>
     </servicedescriptionset>
     <serviceinstanceset>
-        <serviceinstance id="SERVICE_EXAMPLE_1" type="DiagnosticService" dId="S_EXAMPLE">
+        <serviceinstance id="SERVICE_EXAMPLE_1" dId="S_EXAMPLE" type="Service">
+            <variables>
+                <variable name="RATE" DataType="Integer" ValueRank="-1"/>
+                <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
+                <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1"/>
+            </variables>
             <methods>
-                <method name="AddLink">
+                <method name="RUN">
                     <arguments>
-                        <argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1"/>
+                        <argument name="RATE" type="Input" DataType="Integer" ValueRank="-1"/>
+                        <argument name="SIGNAL" type="Input" DataType="Integer" ValueRank="-1"/>
+                        <argument name="FREQUENCIES" type="Output" DataType="Integer" ValueRank="-1"/>
                     </arguments>
                 </method>
-                <method name="RemoveLink">
+                <method name="CALIBRATE">
                     <arguments>
-                        <argument name="ServiceID" type="Input" DataType="Guid" ValueRank="-1"/>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
                     </arguments>
-                </method>
-                <method name="DeleteInstance">
-                    <arguments>
-                    </arguments>
-                </method>
-                <method name="CallInstance">
-                    <arguments>
-                    </arguments>
-                </method>
-            </methods>
+                </method>                
+            </methods>            
             <!-- subscription type: Data or Context (related hardware... sensor, equipment)
                    BrowseDirection: forward (means that subscription is an input),
                                     inverse (means that subscription is an output),
                                     both (means that the direction doesn't matter)
                       VariableName: name of the service variable that is linked to that subscription -->
             <subscriptions>
-                <id BrowseDirection="both" type="Context">PROCESS_TIME_1</id>
                 <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TIME</id>
                 <id BrowseDirection="both" type="Data" VariableName="RATE">500</id>
+                <id BrowseDirection="forward" type="Event" VariableName="RUN">PROCESS_TIME_1:Events:READ_O</id>
             </subscriptions>
         </serviceinstance>
     </serviceinstanceset>
     <pointdescriptionset>
+        <startpointdescription id="SP_EXAMPLE_1" dId="SP_EXAMPLE">
+            <variables>
+                <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+            </subscriptions>
+        </startpointdescription>
+        <endpointdescription id="EP_EXAMPLE_1" dId="EP_EXAMPLE">
+            <variables>
+                <variable name="RATE" DataType="Integer" ValueRank="-1"/>
+                <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TIME</id>
+                <id BrowseDirection="both" type="Data" VariableName="RATE">500</id>
+                <id BrowseDirection="forward" type="Event" VariableName="RUN">PROCESS_TIME_1:Events:READ_O</id>
+            </subscriptions>
+        </endpointdescription>
     </pointdescriptionset>
 </smartobjectselfdescription>

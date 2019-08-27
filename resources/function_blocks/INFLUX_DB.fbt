@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Comment="Peroidic event generator" Name="INFLUX_DB">
+    <SelfDescription FBType="POINT.ENDPOINT"/>
+    <Identification
+            Description="Copyright (c) 2017 fortiss GmbH&#13;&#10; &#13;&#10;This program and the accompanying materials are made&#13;&#10;available under the terms of the Eclipse Public License 2.0&#13;&#10;which is available at https://www.eclipse.org/legal/epl-2.0/&#13;&#10;&#13;&#10;SPDX-License-Identifier: EPL-2.0"
+            Standard="61499-1 Annex A"/>
+    <VersionInfo Author="Alois Zoitl" Date="2017-09-21" Organization="fortiss GmbH"
+                 Remarks="initial API and implementation and/or initial documentation" Version="1.0"/>
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event">
+                <With Var="VALUE"/>
+                <With Var="VALUE_MA"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event"/>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="VALUE" Type="REAL" OpcUa="Variable"/>
+            <VarDeclaration Name="VALUE_MA" Type="REAL" OpcUa="Variable"/>
+            <VarDeclaration Name="VALUE_NAME" Type="STRING" OpcUa="Constant"/>
+            <VarDeclaration Name="HOST" Type="STRING" OpcUa="Constant"/>
+            <VarDeclaration Name="PORT" Type="UINT" OpcUa="Constant"/>
+            <VarDeclaration Name="USER" Type="STRING" OpcUa="Constant"/>
+            <VarDeclaration Name="PASSW" Type="STRING" OpcUa="Constant"/>
+            <VarDeclaration Name="DBNAME" Type="STRING" OpcUa="Constant"/>
+        </InputVars>
+        <OutputVars/>
+    </InterfaceList>
+</FBType>
+

@@ -1,1 +1,83 @@
-<smartobjectselfdescription xmlns="http://systec-fof.fe.up.pt/sosd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><general><data DataType="String" ValueRank="-1" id="SMART_OBJECT_NAME">Smart Object Simulatior</data><data DataType="String" ValueRank="-1" id="DEVICE_TYPE">Industrial PC</data><data DataType="Guid" ValueRank="-1" id="SMART_OBJECT_ID">11ae7c0e-90b8-11e8-9eb6-529269fb1459</data><data DataType="String" ValueRank="-1" id="SMART_OBJECT_MAC">78-24-AF-A5-8B-63</data><data DataType="String" ValueRank="-1" id="STATE">RUNNING</data></general><deviceset><device id="TEMPERATURE_SENSOR_1" type="SENSOR"><variables><variable DataType="String" ValueRank="-1" name="Description"><elements><element DataType="String" ValueRank="-1" id="Name">TEMPERATURE_SENSOR_1</element><element DataType="String" ValueRank="-1" id="SourceState">RUNNING</element><element DataType="String" ValueRank="-1" id="SourceType">TEMPERATURE_SENSOR</element></elements></variable><variable DataType="Integer" ValueRank="0" name="TEMPERATURE" /></variables><methods><method name="CALIBRATE"><arguments><argument DataType="Boolean" ValueRank="-2" name="RESULT" type="Output" /></arguments></method></methods><subscriptions /></device><device id="PRESSURE_SENSOR_1" type="SENSOR"><variables><variable DataType="String" ValueRank="-1" name="Description"><elements><element DataType="String" ValueRank="-1" id="Name">PRESSURE_SENSOR_1</element><element DataType="String" ValueRank="-1" id="SourceState">RUNNING</element><element DataType="String" ValueRank="-1" id="SourceType">PRESSURE_SENSOR</element></elements></variable><variable DataType="Integer" ValueRank="0" name="PRESSURE" /></variables><methods><method name="CALIBRATE"><arguments><argument DataType="Boolean" ValueRank="-2" name="RESULT" type="Output" /></arguments></method></methods><subscriptions /></device><device id="PROCESS_TIME_1" type="SENSOR"><variables><variable DataType="String" ValueRank="-1" name="Description"><elements><element DataType="String" ValueRank="-1" id="Name">PROCESS_TIME_1</element><element DataType="String" ValueRank="-1" id="SourceState">RUNNING</element><element DataType="String" ValueRank="-1" id="SourceType">PROCESS_TIME</element></elements></variable><variable DataType="Integer" ValueRank="0" name="TIME" /></variables><methods><method name="CALIBRATE"><arguments><argument DataType="Boolean" ValueRank="-2" name="RESULT" type="Output" /></arguments></method></methods><subscriptions /></device></deviceset><servicedescriptionset><servicedescription dId="S_EXAMPLE" name="S_EXAMPLE"><recipeadjustments><recipeadjustment name="RATE"><variables><variable DataType="Integer" ValueRank="0" name="RATE" /></variables></recipeadjustment></recipeadjustments><interfaces><interface type="Arguments"><variables><variable DataType="Integer" ValueRank="0" name="SIGNAL"><elements><element DataType="String" ValueRank="-1" id="Type">Input</element></elements></variable><variable DataType="Integer" ValueRank="0" name="FREQUENCIES"><elements><element DataType="String" ValueRank="-1" id="Type">Output</element></elements></variable></variables></interface></interfaces></servicedescription></servicedescriptionset><serviceinstanceset><serviceinstance dId="S_EXAMPLE" id="SERVICE_EXAMPLE_1"><subscriptions><id BrowseDirection="forward" VariableName="SIGNAL" type="Data">PROCESS_TIME_1:Variables:TIME</id><id BrowseDirection="both" VariableName="RATE" type="Data">12</id></subscriptions></serviceinstance></serviceinstanceset><pointdescriptionset><startpointdescription dId="MQTT_STARTPOINT" name="MQTT_STARTPOINT" type="MQTT_STARTPOINT"><variables><variable DataType="String" ValueRank="0" name="TOPIC" /><variable DataType="String" ValueRank="0" name="HOST" /><variable DataType="Integer" ValueRank="0" name="PORT" /><variable DataType="Float" ValueRank="0" name="VALUE" /></variables><methods /><subscriptions><id BrowseDirection="both" VariableName="TOPIC" type="Data">/sensor_0</id><id BrowseDirection="both" VariableName="HOST" type="Data">localhost</id><id BrowseDirection="both" VariableName="PORT" type="Data">1883</id></subscriptions></startpointdescription></pointdescriptionset></smartobjectselfdescription>
+<smartobjectselfdescription xmlns="http://systec-fof.fe.up.pt/sosd"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <general>
+        <data DataType="String" ValueRank="-1" id="SMART_OBJECT_NAME">Smart Object Simulatior</data>
+        <data DataType="String" ValueRank="-1" id="DEVICE_TYPE">Industrial PC</data>
+        <data DataType="Guid" ValueRank="-1" id="SMART_OBJECT_ID">11ae7c0e-90b8-11e8-9eb6-529269fb1459</data>
+        <data DataType="String" ValueRank="-1" id="SMART_OBJECT_MAC">78-24-AF-A5-8B-63</data>
+        <data DataType="String" ValueRank="-1" id="STATE">RUNNING</data>
+    </general>
+    <deviceset/>
+    <pointdescriptionset>
+        <endpointdescription dId="INFLUX_DB" id="INFLUX_DB">
+            <variables>
+                <variable ArrayDimensions="0" DataType="Float" ValueRank="0" name="VALUE"/>
+                <variable ArrayDimensions="0" DataType="Float" ValueRank="0" name="VALUE_MA"/>
+                <variable ArrayDimensions="0" DataType="String" ValueRank="0" name="VALUE_NAME"/>
+                <variable ArrayDimensions="0" DataType="String" ValueRank="0" name="HOST"/>
+                <variable ArrayDimensions="0" DataType="Integer" ValueRank="0" name="PORT"/>
+                <variable ArrayDimensions="0" DataType="String" ValueRank="0" name="USER"/>
+                <variable ArrayDimensions="0" DataType="String" ValueRank="0" name="PASSW"/>
+                <variable ArrayDimensions="0" DataType="String" ValueRank="0" name="DBNAME"/>
+            </variables>
+            <methods/>
+            <subscriptions>
+                <id BrowseDirection="both" VariableName="VALUE_NAME" type="Data">value_0</id>
+                <id BrowseDirection="both" VariableName="HOST" type="Data">localhost</id>
+                <id BrowseDirection="both" VariableName="PORT" type="Data">8086</id>
+                <id BrowseDirection="both" VariableName="USER" type="Data">admin</id>
+                <id BrowseDirection="both" VariableName="PASSW" type="Data">admin</id>
+                <id BrowseDirection="both" VariableName="DBNAME" type="Data">temp_db</id>
+                <id BrowseDirection="forward" VariableName="RUN" type="Event">MOVING_AVERAGE_1:Events:RUN_O</id>
+                <id BrowseDirection="forward" VariableName="VALUE_MA" type="Data">MOVING_AVERAGE_1:Variables:VALUE_MA</id>
+                <id BrowseDirection="forward" VariableName="VALUE" type="Data">MQTT_STARTPOINT:Variables:VALUE</id>
+            </subscriptions>
+        </endpointdescription>
+        <startpointdescription dId="MQTT_STARTPOINT" id="MQTT_STARTPOINT">
+            <variables>
+                <variable ArrayDimensions="0" DataType="String" ValueRank="0" name="TOPIC"/>
+                <variable ArrayDimensions="0" DataType="String" ValueRank="0" name="HOST"/>
+                <variable ArrayDimensions="0" DataType="Integer" ValueRank="0" name="PORT"/>
+                <variable ArrayDimensions="0" DataType="Float" ValueRank="0" name="VALUE"/>
+            </variables>
+            <methods/>
+            <subscriptions>
+                <id BrowseDirection="both" VariableName="TOPIC" type="Data">/sensor_0</id>
+                <id BrowseDirection="both" VariableName="HOST" type="Data">localhost</id>
+                <id BrowseDirection="both" VariableName="PORT" type="Data">1883</id>
+            </subscriptions>
+        </startpointdescription>
+    </pointdescriptionset>
+    <servicedescriptionset>
+        <servicedescription id="MOVING_AVERAGE" type="service">
+            <variables>
+                <variable ArrayDimensions="0" DataType="Integer" ValueRank="0" name="WINDOW"/>
+                <variable ArrayDimensions="0" DataType="Float" ValueRank="0" name="VALUE"/>
+                <variable ArrayDimensions="0" DataType="Float" ValueRank="0" name="VALUE_MA"/>
+            </variables>
+        </servicedescription>
+    </servicedescriptionset>
+    <serviceinstanceset>
+        <serviceinstance dId="MOVING_AVERAGE" id="MOVING_AVERAGE_1">
+            <variables>
+                <variable ArrayDimensions="0" DataType="Integer" ValueRank="0" name="WINDOW"/>
+                <variable ArrayDimensions="0" DataType="Float" ValueRank="0" name="VALUE"/>
+                <variable ArrayDimensions="0" DataType="Float" ValueRank="0" name="VALUE_MA"/>
+            </variables>
+            <methods>
+                <method name="RUN">
+                    <arguments>
+                        <argument DataType="Integer" ValueRank="0" name="WINDOW" type="Input"/>
+                        <argument DataType="Float" ValueRank="0" name="VALUE" type="Input"/>
+                        <argument DataType="Float" ValueRank="0" name="VALUE_MA" type="Output"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+                <id BrowseDirection="both" VariableName="WINDOW" type="Data">10</id>
+                <id BrowseDirection="forward" VariableName="RUN" type="Event">MQTT_STARTPOINT:Events:READ_O</id>
+                <id BrowseDirection="forward" VariableName="VALUE" type="Data">MQTT_STARTPOINT:Variables:VALUE</id>
+            </subscriptions>
+        </serviceinstance>
+    </serviceinstanceset>
+</smartobjectselfdescription>
