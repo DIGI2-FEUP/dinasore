@@ -177,6 +177,10 @@ class Manager:
                     connection_source = child.attrib['Source']
                     connection_destination = child.attrib['Destination']
                     self.get_config(config_id).write_connection(connection_source, connection_destination)
+                    # check the options for ua_integration
+                    if self.ua_integration:
+                        # parses from subscription
+                        self.manager_ua.write_ua_connection(connection_source, connection_destination)
 
         response = self.build_response(request_id, None)
         return response

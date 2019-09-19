@@ -25,7 +25,7 @@ class SharedResources:
         self.client.loop_start()
 
 
-class MQTT_STARTPOINT:
+class MQTT_CLIENT:
     resources = SharedResources()
 
     def __init__(self):
@@ -48,7 +48,7 @@ class MQTT_STARTPOINT:
                     # process each message
                     msg = self.resources.message_payload.decode('utf-8')
                     payload_json = json.loads(msg)
-                    value = float(payload_json['value'])
+                    value = payload_json['temperature_value']
                     # otherwise clears the new message event
                     self.resources.new_message.clear()
                     return [None, event_value, None, value]

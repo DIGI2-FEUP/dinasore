@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Comment="Switching (demultiplexing) an event based on boolean input G" Name="S_EXAMPLE">
-    <SelfDescription FBType="SERVICE" ID="f919f8da-90d5-11e8-9eb6-529269fb1459"/>
+<FBType Comment="Switching (demultiplexing) an event based on boolean input G" Name="SP_EXAMPLE">
+    <SelfDescription FBType="POINT.STARTPOINT"/>
     <Identification
             Description="Copyright (c) 2017 fortiss GmbH&#13;&#10; &#13;&#10;This program and the accompanying materials are made&#13;&#10;available under the terms of the Eclipse Public License 2.0&#13;&#10;which is available at https://www.eclipse.org/legal/epl-2.0/&#13;&#10;&#13;&#10;SPDX-License-Identifier: EPL-2.0"
             Standard="61499-1 Annex A"/>
@@ -10,15 +10,12 @@
     <InterfaceList>
         <EventInputs>
             <Event Comment="" Name="INIT" Type="Event"/>
-            <Event Comment="" Name="RUN" Type="Event" OpcUa="Method">
-              <With Var="RATE"/>
-              <With Var="SIGNAL"/>
-            </Event>
+            <Event Comment="" Name="READ" Type="Event"/>
             <Event Comment="" Name="CALIBRATE" Type="Event" OpcUa="Method"/>
         </EventInputs>
         <EventOutputs>
             <Event Comment="" Name="INIT_O" Type="Event"/>
-            <Event Comment="" Name="RUN_O" Type="Event">
+            <Event Comment="" Name="READ_O" Type="Event">
               <With Var="FREQUENCIES"/>
             </Event>
             <Event Comment="" Name="CALIBRATE_O" Type="Event">
@@ -26,11 +23,9 @@
             </Event>
         </EventOutputs>
         <InputVars>
-            <VarDeclaration Name="RATE" Type="INT" OpcUa="Constant.RUN"/>
-            <VarDeclaration Name="SIGNAL" Type="INT" OpcUa="Variable.RUN"/>
         </InputVars>
         <OutputVars>
-            <VarDeclaration Name="FREQUENCIES" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="FREQUENCIES" Type="INT" OpcUa="Variable"/>
             <VarDeclaration Name="RESULT" Type="BOOL" OpcUa="CALIBRATE"/>
         </OutputVars>
     </InterfaceList>

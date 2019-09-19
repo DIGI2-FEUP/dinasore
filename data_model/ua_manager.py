@@ -31,6 +31,7 @@ class UaManager(peer.UaPeer):
         self.devices_set = device_set.DeviceSet(self)
         self.services_set = service_set.ServiceSet(self)
         self.points_set = point_set.PointSet(self)
+        self.instances_set = service_set.InstanceSet(self)
 
         # parse the xml
         logging.info('getting the xml self definition...')
@@ -52,27 +53,34 @@ class UaManager(peer.UaPeer):
         self.__create_properties()
 
     def from_xml(self):
+        device_xml, service_xml, instance_xml, point_xml = None, None, None, None
         for base_element in self.root_xml:
             # splits the tag in these 3 camps
             uri, ignore, tag = base_element.tag[1:].partition("}")
-
             # parses the device set
             if tag == 'deviceset':
-                self.devices_set.from_xml(base_element)
+                device_xml = base_element
             # parses the service description set
             elif tag == 'servicedescriptionset':
-                self.services_set.from_xml(base_element)
+                service_xml = base_element
             # parses the service instance set
             elif tag == 'serviceinstanceset':
-                self.services_set.create_instances_from_xml(base_element)
+                instance_xml = base_element
             # parses the point description
             elif tag == 'pointdescriptionset':
-                self.points_set.from_xml(base_element)
+                point_xml = base_element
+
+        # parses in a ordered way
+        self.devices_set.from_xml(device_xml)
+        self.points_set.parse_xml_startpoint(point_xml)
+        self.services_set.from_xml(service_xml)
+        self.instances_set.from_xml(instance_xml)
+        self.points_set.parse_xml_endpoint(point_xml)
 
         self.config.start_work()
 
     def from_fb(self, fb, fb_xml):
-        device_id, device_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+        device_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
             utils.parse_fb_description(fb_xml)
         item_type = device_type.split('.')
 
@@ -83,7 +91,7 @@ class UaManager(peer.UaPeer):
             # first check if needs to create the service
             self.services_set.from_fb(fb.fb_type, fb_xml)
             # after create the instance
-            self.services_set.create_instance_from_fb(fb, fb_xml)
+            self.instances_set.from_fb(fb, fb_xml)
 
         elif item_type[0] == 'POINT':
             self.points_set.from_fb(fb, fb_xml, point_type=item_type[1])
@@ -97,7 +105,6 @@ class UaManager(peer.UaPeer):
         for base_element in self.root_xml:
             # splits the tag in these 3 camps
             uri, ignore, tag = base_element.tag[1:].partition("}")
-
             if tag == 'general':
                 # creates the general tag
                 general_xml = ETree.SubElement(root_xml, 'general')
@@ -111,14 +118,14 @@ class UaManager(peer.UaPeer):
         # saves the device set
         device_set_xml = ETree.SubElement(root_xml, 'deviceset')
         self.devices_set.save_xml(device_set_xml)
-        # saves the service set and the respective instances
-        service_set_xml = ETree.SubElement(root_xml, 'servicedescriptionset')
-        instance_set_xml = ETree.SubElement(root_xml, 'serviceinstanceset')
-        self.services_set.save_xml(service_set_xml, xml_instances=instance_set_xml)
         # saves the point set
         point_set_xml = ETree.SubElement(root_xml, 'pointdescriptionset')
         self.points_set.save_xml(point_set_xml)
-
+        # saves the service set and the respective instances
+        service_set_xml = ETree.SubElement(root_xml, 'servicedescriptionset')
+        self.services_set.save_xml(service_set_xml)
+        instance_set_xml = ETree.SubElement(root_xml, 'serviceinstanceset')
+        self.instances_set.save_xml(instance_set_xml)
         # writes the xml to the respective file
         tree_xml.write(self.xml_path)
 
@@ -136,34 +143,31 @@ class UaManager(peer.UaPeer):
     def create_ua_connection(self, source, destination):
         # splits both source and destination (fb, fb_variable)
         destination_attr = destination.split(sep='.')
-
         fb = self.config.get_fb(destination_attr[0])
-        # checks if the fb is in points dictionary
-        if fb.fb_type in self.points_set.points_dict:
-            # creates the point connection
-            self.points_set.create_ua_connection(source, destination, fb)
 
-        # checks if the fb is already a service
-        elif fb.fb_type in self.services_set.service_dict:
-            # creates the point connection
-            self.services_set.create_ua_connection(source, destination, fb)
+        fb_dict = {**self.services_set.service_dict,
+                   **self.instances_set.instances_dict,
+                   **self.devices_set.devices_dict,
+                   **self.points_set.points_dict}
+
+        if destination_attr[0] in fb_dict:
+            fb_dict[destination_attr[0]].fb_connection_subscription(source, destination)
+
+    def write_ua_connection(self, source_value, destination):
+        # splits both source and destination (fb, fb_variable)
+        destination_attr = destination.split(sep='.')
+        fb = self.config.get_fb(destination_attr[0])
+
+        fb_dict = {**self.services_set.service_dict,
+                   **self.instances_set.instances_dict,
+                   **self.devices_set.devices_dict,
+                   **self.points_set.points_dict}
+
+        if destination_attr[0] in fb_dict:
+            fb_dict[destination_attr[0]].fb_write_subscription(source_value, destination)
 
     def stop_ua(self):
         # stops the configuration work
         self.config.stop_work()
         # stops the ua server
         self.stop()
-
-    def search_id(self, subs_id):
-        # first searches between the device
-        if subs_id in self.devices_set.devices_dict:
-            device = self.devices_set.devices_dict[subs_id]
-            return device
-        elif subs_id in self.services_set.instances_map:
-            # gets the service_id
-            service_id = self.services_set.instances_map[subs_id]
-            # then gets the instance
-            instance = self.services_set.service_dict[service_id].instances_dict[subs_id]
-            return instance
-        else:
-            return None
