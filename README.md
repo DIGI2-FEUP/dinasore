@@ -1,13 +1,10 @@
 ![logo](resources/images/logo.png)
 
 **D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that runs at the
-fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside function blocks.
+fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside modules (function blocks).
 
-The principal advantage of this platform is the redistribution of the running code over a distributed fog network. 
-So the user can develop their own code, in python, and them upload it to the different dinasore nodes in the network. 
-
-As you can see in the previous image, each dinasore node in the network is responsible of running one part of the configuration, 
-so this way we're able to redistribute the data processing over all the dinasore nodes.
+The principal advantage of this platform is the redistribution of the running modules across a distributed fog network. 
+So the user can develop their own code, in Python, and them upload it to the different DINASORE nodes in the network. 
 
 ## Features
 - [x] Communication between the DINASORE and the 4DIAC-IDE 
@@ -18,20 +15,20 @@ so this way we're able to redistribute the data processing over all the dinasore
 - [x] Remote stop of a configuration that is running
 - [x] Docker integration
 - [x] Opc-Ua integration
-- [x] Self-description file usage
+- [x] Configuration storage
 - [ ] Download function blocks from 4DIAC-IDE repository
 - [ ] Test with complex variables (lists, arrays, methods (strings))
 
 ## Installation
 
 ### Requirements
-* [Python 3.6/3.7](https://www.python.org/downloads/) or [Docker](https://docs.docker.com/toolbox/toolbox_install_windows/) - component needed to run the DINASORE image (Smart Component);
+* [Python 3.6/3.7](https://www.python.org/downloads/) or [Docker](https://docs.docker.com/toolbox/toolbox_install_windows/) - component needed to run the DINASORE image;
 * [4DIAC-IDE](https://www.eclipse.org/4diac/en_dow.php) - component needed to draw the graphic configuration, based in function blocks.
 
 ### Using Python 
-If you want to install the DINASORE image  using Python, you must use the following commands:
-1. Clone the repository this from the github.
-2. Move to the DINASORE folder and install the DINASORE requirements using pip.
+If you want to install the DINASORE image using Python, you must use the following commands:
+1. Clone the repository this from the github;
+2. Move to the DINASORE folder and install the DINASORE requirements using pip;
 4. Run the project, where the flag -a corresponds to the ip address and the flag -p corresponds to the port.
 
 ```bash
@@ -45,8 +42,8 @@ python core/main.py -a <ip_address> -p <port>
 
 ### Using Docker
 If you want to install the DINASORE image  using docker, you must use the following commands.
-1. Using docker pull the DINASORE image from the docker repository
-2. Run the docker container, replacing the <absolute_path_host> by the absolute path to the project folder and specifying the IP address and port
+1. Using docker pull the DINASORE image from the docker repository;
+2. Run the docker container, replacing the <absolute_path_host> by the absolute path to the project folder, the <ip_address> by the ip address and the <_port> by the port.
 
 ```bash
 docker pull systecfof/dinasore-ua:amd64-0.1
@@ -65,57 +62,57 @@ This image is to amd64 processors architectures, for arm architectures you must 
 To draw the function block distributed architecture you need to use the 4DIAC-IDE.
 
 #### Create the function blocks folder:
-1. Create a new folder (e.g. python_fb) in the this 4DIAC path **.../4diac-ide/typelibrary/**
-2. Copy the function blocks files (.fbt), from the **.../resources/function_blocks/** folder to the new folder.
+1. Create a new folder (e.g. python_fb) in the this 4DIAC path **.../4diac-ide/typelibrary/**;
+2. Copy the function blocks files (.fbt), from the **.../resources/function_blocks/** folder to the new folder;
 3. (OPTIONAL) If you have already start a new project you need also to put the function blocks files (.fbt) in the project folder **.../4diac-ide/workspace/(project_name)/(new_folder)** and reload the library.
 
 #### Graphical Interface:
-- System Perspective - perspective where you 1) draw your function block configuration and 2) construct your network map of devices.
+- System Perspective - perspective where you 1) draw your function block configuration and 2) construct your network map of devices;
 - Deployment Perspective - perspective where you 1) upload the function blocks to each device (you can select witch device you want) and 2) export the configuration file.
 
-**NOTE:** for more details check this [link](https://www.eclipse.org/4diac/en_help.php?helppage=html/4diacIDE/overview.html)
+**NOTE:** for more details about the 4DIAC-IDE check this [link](https://www.eclipse.org/4diac/en_help.php?helppage=html/4diacIDE/overview.html)
 
 #### Draw the configuration:
-1. Run the 4DIAC-IDE and create a new system (File->New->New System).
-2. Now open in the left bar open the system configuration, after that drag and drop an Ethernet segment and a FORTE_PC device.
-3. Then connect the device and the segment, and define the device IP address, port and change his name (e.g. SMART_COMPONENT), to look like in this image:
+1. Run the 4DIAC-IDE and create a new system (File->New->New System);
+2. Now open in the left bar open the system configuration, after that drag and drop an Ethernet segment and a FORTE_PC device;
+3. Then connect the device and the segment, and define the device IP address, port and change his name (e.g. SMART_COMPONENT);
 
 ![system_perspective](resources/images/system_perspective.png)
 
-4. Move to the application design perspective using the left bar.
-5. Check if exists any folder name that you give it (e.g. python_fb) and drag and drop each function block to look like the following image:
+4. Move to the application design perspective using the left bar;
+5. Check if exists any folder name that you give it (e.g. python_fb) and drag and drop each function block;
 
 ![configuration_perspective](resources/images/configuration_perspective.png)
 
-6. Now you need to associate each function block to one device, for that right click inside each function block and select Map to...->FORTE_PC->SMART_COMPONENT (automatically each function block changes his color).
-7. Change to the deploy perspective using the right corner gear icon.
+6. Now you need to associate each function block to one device, for that right click inside each function block and select Map to...->FORTE_PC->SMART_COMPONENT (automatically each function block changes his color);
+7. Change to the deploy perspective using the right corner gear icon;
 
 ![deploy_perspective](resources/images/deploy_perspective.png)
 
-8. Then select the devices that you want to reconfigure and finally click on the deploy button.
+8. Then select the devices that you want to reconfigure and finally click on the deploy button;
 9. (OPTIONAL) If you want to export this configuration to a .txt file go to Run->Create FORTE boot-files...
 
 #### Monitor the devices:
 
 
 ## Build new Function Blocks
-In this section we gonna show how you develop a new function block and after that how you develop a new configuration and integrating all using the 4DIAC-IDE.
-Each function block is composed by 2 different files a Python file and a XML file. 
+In this section we gonna show how you develop a new function block and after that how you develop a new configuration and upload it to the network using the 4DIAC-IDE.
+To create a function block you need to develop 2 different files a **Python file** (used to code the function block processing modules) and a **XML file** (used to define the function block interface). 
 
 ### Function Block Nomenclature
 To develop a new function block first we need to define the interface attributes that the function block uses. 
 That interface is composed by events and variables, both of them can be inputs or outputs. 
 The difference between an event and a variable is that the event triggers the execution of a certain functionality.
 
-Each function blocks has also a unique type that identifies it (FB type), and to organize the function blocks in categories, it was created a general FB type.
-If you want to virtualize, using OPC-UA, a fb you need to add the "SelfDescription" tag to the function block XML.
-You specify both of them inside the XML file. You must use the FB type as name of the Python file (FB_TYPE_EXAMPLE.py) and the XML file (FB_TYPE_EXAMPLE.fbt)
+Each function blocks has also a unique type that identifies it (FB type) (present in the tag <FBType Name="FB_TYPE_EXAMPLE">), to organize a group of function blocks, it was created general categories.
+You specify both of them inside the XML file. You must use also the FB type as name of the Python file (FB_TYPE_EXAMPLE.py) and the XML file (FB_TYPE_EXAMPLE.fbt)
 
-There are 4 different general types of FB 'DEVICE.SENSOR', 'SERVICE', 'POINT.STARTPOINT' and 'POINT.ENDPOINT'.
-* **DEVICE.SENSOR** - general type used to represent a sensor (e.g. temperature, voltage)
-* **SERVICE** - general type used to represent a processing module (e.g. moving average, normalization)
-* **POINT.STARTPOINT** - general type used to represent a protocol that receives data (e.g mqtt, http)
-* **POINT.ENDPOINT** - general type used to represent a protocol that sends data (e.g. mqtt, http)
+The category of the function block is present in the <SelfDescription FBType="CATEGORY_EXAMPLE"/> tag.
+There are 4 different general categories of function blocks 'DEVICE.SENSOR', 'SERVICE', 'POINT.STARTPOINT' and 'POINT.ENDPOINT'.
+* **DEVICE.SENSOR** - general category used to represent a sensor (e.g. temperature, voltage)
+* **SERVICE** - general category used to represent a processing module (e.g. moving average, normalization)
+* **POINT.STARTPOINT** - general category used to represent a protocol that receives data (e.g mqtt, http)
+* **POINT.ENDPOINT** - general category used to represent a protocol that sends data (e.g. mqtt, http)
 
 #### Loop Function Blocks
 The **DEVICE.SENSOR** and the **POINT.STARTPOINT** automatically execute in loop, because they need to get data continuously both from sensors or protocols. 
@@ -146,7 +143,7 @@ For that are used 2 default input events ('INIT' and 'READ') and 2 default outpu
 ```
 
 To virtualize some variables, it is needed in the var declaration to specify the type of the 'OpcUa' attribute (OpcUa="Variable", OpcUa="Constant").
-Is's also important to add in the events tag the variables that are related with them (e.g. READ_O event produces data related with the VAR_EXAMPLE (<With Var="VAR_EXAMPLE"/>)).
+It's also important to add in the events tag the variables that are related with them (e.g. READ_O event produces data related with the VAR_EXAMPLE (<With Var="VAR_EXAMPLE"/>)).
 
 #### Trigger Function Blocks
 
