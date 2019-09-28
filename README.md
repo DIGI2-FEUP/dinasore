@@ -22,8 +22,8 @@ So the user can develop their own code, in Python, and them upload it to the dif
 ## Installation
 
 ### Requirements
-* [Python 3.6/3.7](https://www.python.org/downloads/) or [Docker](https://docs.docker.com/toolbox/toolbox_install_windows/) - component needed to run the DINASORE image;
-* [4DIAC-IDE](https://www.eclipse.org/4diac/en_dow.php) - component needed to draw the graphic configuration, based in function blocks.
+* [[Python 3.6/3.7](https://www.python.org/downloads/)] or [[Docker](https://docs.docker.com/toolbox/toolbox_install_windows/)] - component needed to run the DINASORE image;
+* [[4DIAC-IDE](https://www.eclipse.org/4diac/en_dow.php)] - component needed to draw the graphic configuration, based in function blocks.
 
 ### Using Python 
 If you want to install the DINASORE image using Python, you must use the following commands:
@@ -41,7 +41,7 @@ python core/main.py -a <ip_address> -p <port>
 ```
 
 ### Using Docker
-If you want to install the DINASORE image  using docker, you must use the following commands.
+If you want to install the DINASORE image  using docker, you must use the following commands:
 1. Using docker pull the DINASORE image from the docker repository;
 2. Run the docker container, replacing the <absolute_path_host> by the absolute path to the project folder, the <ip_address> by the ip address and the <_port> by the port.
 
@@ -92,7 +92,7 @@ To draw the function block distributed architecture you need to use the 4DIAC-ID
 8. Then select the devices that you want to reconfigure and finally click on the deploy button;
 9. (OPTIONAL) If you want to export this configuration to a .txt file go to Run->Create FORTE boot-files...
 
-#### Monitor the devices:
+#### Monitor your system:
 
 
 ## Build new Function Blocks
@@ -104,15 +104,15 @@ To develop a new function block first we need to define the interface attributes
 That interface is composed by events and variables, both of them can be inputs or outputs. 
 The difference between an event and a variable is that the event triggers the execution of a certain functionality.
 
-Each function blocks has also a unique type that identifies it (FB type) (present in the tag <FBType Name="FB_TYPE_EXAMPLE">), to organize a group of function blocks, it was created general categories.
+Each function blocks has also a unique type that identifies it (FB type) (present in the 'FBType' tag), to organize a group of function blocks, it was created general categories.
 You specify both of them inside the XML file. You must use also the FB type as name of the Python file (FB_TYPE_EXAMPLE.py) and the XML file (FB_TYPE_EXAMPLE.fbt)
 
-The category of the function block is present in the <SelfDescription FBType="CATEGORY_EXAMPLE"/> tag.
-There are 4 different general categories of function blocks 'DEVICE.SENSOR', 'SERVICE', 'POINT.STARTPOINT' and 'POINT.ENDPOINT'.
-* **DEVICE.SENSOR** - general category used to represent a sensor (e.g. temperature, voltage)
-* **SERVICE** - general category used to represent a processing module (e.g. moving average, normalization)
-* **POINT.STARTPOINT** - general category used to represent a protocol that receives data (e.g mqtt, http)
-* **POINT.ENDPOINT** - general category used to represent a protocol that sends data (e.g. mqtt, http)
+The category of the function block is present in the 'SelfDescription' tag.
+There are 4 different general categories of function blocks:
+* **DEVICE.SENSOR** - general category used to represent a sensor (e.g. temperature, voltage);
+* **SERVICE** - general category used to represent a processing module (e.g. moving average, normalization);
+* **POINT.STARTPOINT** - general category used to represent a protocol that receives data (e.g mqtt, http);
+* **POINT.ENDPOINT** - general category used to represent a protocol that sends data (e.g. mqtt, http).
 
 #### Loop Function Blocks
 The **DEVICE.SENSOR** and the **POINT.STARTPOINT** automatically execute in loop, because they need to get data continuously both from sensors or protocols. 
@@ -143,11 +143,10 @@ For that are used 2 default input events ('INIT' and 'READ') and 2 default outpu
 ```
 
 To virtualize some variables, it is needed in the var declaration to specify the type of the 'OpcUa' attribute (OpcUa="Variable", OpcUa="Constant").
-It's also important to add in the events tag the variables that are related with them (e.g. READ_O event produces data related with the VAR_EXAMPLE (<With Var="VAR_EXAMPLE"/>)).
+It's also important to add in the events tag the variables that are related with them (e.g. READ_O event produces data related with the VAR_EXAMPLE ('With Var' tag)).
 
 #### Trigger Function Blocks
-
-The **SERVICE** and the **POINT.ENDPOINT** general FB types execute only when trigger by other function blocks. 
+The **SERVICE** and the **POINT.ENDPOINT** general categories execute only when trigger by other function blocks. 
 They use also 4 default events, but in this case the name of the READ/READ_O events are replaced by RUN/RUN_O.
 
 ```xml
@@ -181,23 +180,15 @@ In this case we have represented an OPC-UA method (check 'RUN' event attribute) 
 The variables used by each method must be reference the method, in the variables tag (e.g OpcUa="Constant.RUN").
 
 #### Python Code
-
-
-
-You can find some good examples in these links: 
-
-##### Opc-Ua/Self-description file integration
-
-You need also to add the attribute OpcUa="Variable" inside each variable you want to virtualize.
-
-If we upload the previous file to the 4DIAC-IDE, we will see the following image as result. 
-In that image we see the graphic representation of the function block, with all the interface attributes that characterise it. 
-
-#### Python file development
-
-The second step to make a function block is encapsulate the code that you develop, inside the following the class.
+The second step to make a function block is encapsulate the code that you develop, inside a Python class.
 1. First you must replace the class name (FB_NAME) by your new function block type.
 2. Implement the state machine (inside schedule method) that checks what event was received and them execute the respective method.
 3. Specify the returned attributes (output_events and output_variables) according to the order specified in the definition file.
 4. Integrate the developed methods (if the method is shared between the function block instances put it inside the shared resources class,
 otherwise put it inside the function block class).
+
+
+You can find some good of function blocks examples in these links: 
+- MQTT Subscriber [[XML](resources/function_blocks/MQTT_STARTPOINT.fbt)] [[Python](resources/function_blocks/MQTT_STARTPOINT.py)];
+- Influx DB Writer [[XML](resources/function_blocks/INFLUX_DB.fbt)] [[Python](resources/function_blocks/INFLUX_DB.py)];
+- Moving Average [[XML](resources/function_blocks/MOVING_AVERAGE.fbt)] [[Python](resources/function_blocks/MOVING_AVERAGE.py)].
