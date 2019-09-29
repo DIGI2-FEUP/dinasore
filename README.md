@@ -6,6 +6,12 @@ fog computing level, enabling the pre-processing of data using algorithms, that 
 The principal advantage of this platform is the redistribution of the running modules across a distributed fog network. 
 So the user can develop their own code, in Python, and them upload it to the different DINASORE nodes in the network. 
 
+Add some OPC-UA stuff.
+Configuration name update.
+Delete the current configuration, when upload from 4DIAC-IDE
+Function Block XML SelfDescription, POINT.STARTPOINT.
+Reset the data model from 4DIAC-IDE.
+
 ## Features
 - [x] Communication between the DINASORE and the 4DIAC-IDE 
 - [x] Encapsulation of a function block inside the DINASORE
@@ -29,13 +35,16 @@ So the user can develop their own code, in Python, and them upload it to the dif
 If you want to install the DINASORE image using Python, you must use the following commands:
 1. Clone the repository this from the github;
 2. Move to the DINASORE folder and install the DINASORE requirements using pip;
+3. (OPTIONAL) Run the unitary test to check if is everything ok (it could take a time);
 4. Run the project, where the flag -a corresponds to the ip address and the flag -p corresponds to the port.
 
 ```bash
-git clone https://github.com/eliseu31/dinasore-ua.git
+git clone https://github.com/SYSTEC-FoF-FEUP/dinasore-ua.git
 
 cd dinasore-ua
 pip install -r requirements.txt
+
+python tests/__init__.py
 
 python core/main.py -a <ip_address> -p <port>
 ```
@@ -98,6 +107,21 @@ To draw the function block distributed architecture you need to use the 4DIAC-ID
 ## Build new Function Blocks
 In this section we gonna show how you develop a new function block and after that how you develop a new configuration and upload it to the network using the 4DIAC-IDE.
 To create a function block you need to develop 2 different files a **Python file** (used to code the function block processing modules) and a **XML file** (used to define the function block interface). 
+
+### Project Structure
+
+* **communication** - files that allow the communication with the 4DIAC-IDE; 
+* **core** - files that run the function blocks pipeline (configuration);
+* **data_model** - files responsible to store the actual configuration and make the interface between the FB pipeline and the OPC-UA model;
+* **opc_ua** - files that implement some high level methods based in OPC-UA; 
+* **resources** - folder that stores all the resources in the project (YOU ONLY NEED TO USE THAT FOLDER);
+  * **function_blocks** - folder where are stored the function blocks (Python + XML);
+    * EMB_RES.* - function block used to start the pipeline;
+    * SLEEP.* - function block used to run in loop the DEVICE.SENSOR and POINT.STARTPOINT function blocks;
+    * TEST...* - function blocks used for the unitary tests. 
+  * data_model.xml - file where is stored the current configuration;
+  * error_list.log - file that stores all the execution errors.
+* **tests** - unitary test used to validate each package in the project.
 
 ### Function Block Nomenclature
 To develop a new function block first we need to define the interface attributes that the function block uses. 
@@ -179,6 +203,8 @@ They use also 4 default events, but in this case the name of the READ/READ_O eve
 In this case we have represented an OPC-UA method (check 'RUN' event attribute) for that it is need to use a OpcUa="Method" in the event tag. 
 The variables used by each method must be reference the method, in the variables tag (e.g OpcUa="Constant.RUN").
 
+For the **SERVICE** category you need to guarantee that the function block name (specified in the 4DIAC-IDE) is not the same as the function block type. 
+
 #### Python Code
 The second step to make a function block is encapsulate the code that you develop, inside a Python class.
 1. First you must replace the class name (FB_NAME) by your new function block type.
@@ -188,7 +214,7 @@ The second step to make a function block is encapsulate the code that you develo
 otherwise put it inside the function block class).
 
 
-You can find some good of function blocks examples in these links: 
+You can find some good examples of function blocks examples in these links: 
 - MQTT Subscriber [[XML](resources/function_blocks/MQTT_STARTPOINT.fbt)] [[Python](resources/function_blocks/MQTT_STARTPOINT.py)];
 - Influx DB Writer [[XML](resources/function_blocks/INFLUX_DB.fbt)] [[Python](resources/function_blocks/INFLUX_DB.py)];
 - Moving Average [[XML](resources/function_blocks/MOVING_AVERAGE.fbt)] [[Python](resources/function_blocks/MOVING_AVERAGE.py)].

@@ -83,7 +83,7 @@ class BaseTests(unittest.TestCase):
                                                          (2, 'Variables')])
         device3_vars = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'PROCESS_TIME_1'),
                                                          (2, 'Variables')])
-        service_vars = c.generate_path(self.base_list + [(2, 'ServiceDescriptionSet'), (2, 'S_EXAMPLE'),
+        service_vars = c.generate_path(self.base_list + [(2, 'ServiceDescriptionSet'), (2, 'TEST_SERVICE'),
                                                          (2, 'Variables')])
         instances_vars = c.generate_path(self.base_list + [(2, 'ServiceInstanceSet'), (2, 'SERVICE_EXAMPLE_1'),
                                                            (2, 'Variables')])
@@ -115,7 +115,7 @@ class BaseTests(unittest.TestCase):
                                                     (2, 'Subscriptions')])
         device2 = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'PRESSURE_SENSOR_1'), (2, 'Subscriptions')])
         device3 = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'PROCESS_TIME_1'), (2, 'Subscriptions')])
-        service = c.generate_path(self.base_list + [(2, 'ServiceDescriptionSet'), (2, 'S_EXAMPLE'),
+        service = c.generate_path(self.base_list + [(2, 'ServiceDescriptionSet'), (2, 'TEST_SERVICE'),
                                                     (2, 'Subscriptions')])
         instances = c.generate_path(self.base_list + [(2, 'ServiceInstanceSet'), (2, 'SERVICE_EXAMPLE_1'),
                                                       (2, 'Subscriptions')])
