@@ -9,7 +9,7 @@
         <data id="STATE" DataType="String" ValueRank="-1">RUNNING</data>
     </general>
     <deviceset>
-        <device dId="TEMPERATURE_SENSOR" id="TEMPERATURE_SENSOR_1" type="SENSOR">
+        <device dId="TEST_DEVICE_SENSOR" id="TEMPERATURE_SENSOR_1" type="SENSOR">
             <variables>
                 <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
             </variables>
@@ -23,9 +23,9 @@
             <subscriptions>
             </subscriptions>
         </device>
-        <device dId="PRESSURE_SENSOR" id="PRESSURE_SENSOR_1" type="SENSOR">
+        <device dId="TEST_DEVICE_SENSOR" id="PRESSURE_SENSOR_1" type="SENSOR">
             <variables>
-                <variable name="PRESSURE" DataType="Integer" ValueRank="-1"/>
+                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
             </variables>
             <methods>
                 <method name="CALIBRATE">
@@ -37,9 +37,9 @@
             <subscriptions>
             </subscriptions>
         </device>
-        <device dId="PROCESS_TIME" id="PROCESS_TIME_1" type="SENSOR">
+        <device dId="TEST_DEVICE_SENSOR" id="PROCESS_TIME_1" type="SENSOR">
             <variables>
-                <variable name="TIME" DataType="Integer" ValueRank="-1"/>
+                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
             </variables>
             <methods>
                 <method name="CALIBRATE">
@@ -53,7 +53,7 @@
         </device>
     </deviceset>
     <servicedescriptionset>
-        <servicedescription id="S_EXAMPLE" type="Service">
+        <servicedescription id="TEST_SERVICE" type="Service">
             <variables>
                 <variable name="RATE" DataType="Integer" ValueRank="-1"/>
                 <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
@@ -64,7 +64,7 @@
         </servicedescription>
     </servicedescriptionset>
     <serviceinstanceset>
-        <serviceinstance id="SERVICE_EXAMPLE_1" dId="S_EXAMPLE" type="Service">
+        <serviceinstance id="SERVICE_EXAMPLE_1" dId="TEST_SERVICE" type="Service">
             <variables>
                 <variable name="RATE" DataType="Integer" ValueRank="-1"/>
                 <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
@@ -90,14 +90,14 @@
                                     both (means that the direction doesn't matter)
                       VariableName: name of the service variable that is linked to that subscription -->
             <subscriptions>
-                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TIME</id>
+                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TEMPERATURE</id>
                 <id BrowseDirection="both" type="Data" VariableName="RATE">500</id>
                 <id BrowseDirection="forward" type="Event" VariableName="RUN">PROCESS_TIME_1:Events:READ_O</id>
             </subscriptions>
         </serviceinstance>
     </serviceinstanceset>
     <pointdescriptionset>
-        <startpointdescription id="SP_EXAMPLE_1" dId="SP_EXAMPLE">
+        <startpointdescription id="SP_EXAMPLE_1" dId="TEST_STARTPOINT">
             <variables>
                 <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1"/>
             </variables>
@@ -111,7 +111,7 @@
             <subscriptions>
             </subscriptions>
         </startpointdescription>
-        <endpointdescription id="EP_EXAMPLE_1" dId="EP_EXAMPLE">
+        <endpointdescription id="EP_EXAMPLE_1" dId="TEST_ENDPOINT">
             <variables>
                 <variable name="RATE" DataType="Integer" ValueRank="-1"/>
                 <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
@@ -124,7 +124,7 @@
                 </method>
             </methods>
             <subscriptions>
-                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TIME</id>
+                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TEMPERATURE</id>
                 <id BrowseDirection="both" type="Data" VariableName="RATE">500</id>
                 <id BrowseDirection="forward" type="Event" VariableName="RUN">PROCESS_TIME_1:Events:READ_O</id>
             </subscriptions>

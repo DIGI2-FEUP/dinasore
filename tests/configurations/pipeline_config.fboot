@@ -1,7 +1,7 @@
 ;<Request ID="1" Action="CREATE"><FB Name="SMART_COMPONENT" Type="EMB_RES" /></Request>
-SMART_COMPONENT;<Request ID="2" Action="CREATE"><FB Name="SERVICE_EXAMPLE_1" Type="S_EXAMPLE" /></Request>
-SMART_COMPONENT;<Request ID="3" Action="CREATE"><FB Name="SERVICE_EXAMPLE_2" Type="S_EXAMPLE" /></Request>
-SMART_COMPONENT;<Request ID="4" Action="CREATE"><FB Name="SERVICE_EXAMPLE_3" Type="S_EXAMPLE" /></Request>
+SMART_COMPONENT;<Request ID="2" Action="CREATE"><FB Name="SERVICE_EXAMPLE_1" Type="TEST_SERVICE" /></Request>
+SMART_COMPONENT;<Request ID="3" Action="CREATE"><FB Name="SERVICE_EXAMPLE_2" Type="TEST_SERVICE" /></Request>
+SMART_COMPONENT;<Request ID="4" Action="CREATE"><FB Name="SERVICE_EXAMPLE_3" Type="TEST_SERVICE" /></Request>
 SMART_COMPONENT;<Request ID="5" Action="WRITE"><Connection Source="2" Destination="SERVICE_EXAMPLE_1.RATE" /></Request>
 SMART_COMPONENT;<Request ID="6" Action="CREATE"><Connection Source="SERVICE_EXAMPLE_1.RUN_O" Destination="SERVICE_EXAMPLE_2.RUN" /></Request>
 SMART_COMPONENT;<Request ID="7" Action="CREATE"><Connection Source="SERVICE_EXAMPLE_1.FREQUENCIES" Destination="SERVICE_EXAMPLE_2.SIGNAL" /></Request>
