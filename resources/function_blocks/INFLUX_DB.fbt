@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Name="INFLUX_DB" OpcUA="POINT.ENDPOINT">
+<FBType Name="INFLUX_DB" OpcUa="POINT.ENDPOINT">
     <InterfaceList>
         <EventInputs>
             <Event Name="INIT" Type="Event"/>

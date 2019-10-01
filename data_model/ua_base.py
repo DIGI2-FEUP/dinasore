@@ -44,6 +44,10 @@ class UaBaseStructure:
         self.subscriptions_dict = dict()
 
     def virtualize_variable(self, var_xml):
+        """
+        Receives a variable in the XML format and creates it's OPC-UA representation.
+        :param var_xml: XML variable from the data_model.xml or the function block XML.
+        """
         # if is from a fb xml
         if 'name' and 'DataType' in var_xml.attrib:
             var_name = var_xml.attrib['name']
@@ -83,6 +87,10 @@ class UaBaseStructure:
         self.ua_variables[var_name] = var_object
 
     def save_variables(self, variables_xml):
+        """
+        Saves in the data_model.xml the variables stored in the variables_dict.
+        :param variables_xml: XML tag where are stored the the variables
+        """
         for variable_name, variable in self.variables_dict.items():
             # creates each variables
             var_xml = ETree.SubElement(variables_xml, 'variable')
@@ -92,6 +100,11 @@ class UaBaseStructure:
             var_xml.attrib['ArrayDimensions'] = str(variable['ArrayDimensions'])
 
     def __dm_method(self, method_xml):
+        """
+        Receives a method in the XML format and creates it's OPC-UA representation.
+        The XML representation comes from the data model XML.
+        :param method_xml: XML method from the data_model.xml.
+        """
         method_name = method_xml.attrib['name']
 
         # gets the created fb
@@ -106,6 +119,13 @@ class UaBaseStructure:
         self.methods_dict[method_name] = method2call
 
     def __fb_method(self, input_event, input_vars_xml, output_vars_xml):
+        """
+        Receives a method in the XML format and creates it's OPC-UA representation.
+        The XML representation comes from the function block XML.
+        :param input_event: event that represents the method name.
+        :param input_vars_xml: method input variables XML
+        :param output_vars_xml: method output variables XML
+        """
         # gets the method name
         method_name = input_event.attrib['Name']
         # gets the created fb
@@ -222,6 +242,9 @@ class UaBaseStructure:
                                                         'value': source_value}
 
     def create_extra_fb(self):
+        """
+
+        """
         self.ua_peer.config.create_connection('{0}.{1}'.format('START', 'COLD'),
                                               '{0}.{1}'.format(self.fb_name, 'INIT'))
         # creates the fb that runs the device in loop
