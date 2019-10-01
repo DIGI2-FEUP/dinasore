@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Name="TEST_STARTPOINT">
-    <SelfDescription FBType="POINT.STARTPOINT"/>
+<FBType Name="TEST_STARTPOINT" OpcUa="POINT.STARTPOINT">
     <InterfaceList>
         <EventInputs>
             <Event Name="INIT" Type="Event"/>

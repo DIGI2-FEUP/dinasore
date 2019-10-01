@@ -11,17 +11,43 @@ import logging
 
 class UaManager(peer.UaPeer):
 
-    def __init__(self, base_name, address, config, file_name):
+    def __init__(self, address, file_name):
         peer.UaPeer.__init__(self, address)
+        self.file_name = file_name
 
+        # parse the xml
+        logging.info('getting the xml self definition...')
+        try:
+            self.xml_path = os.path.join(os.path.dirname(sys.path[0]), 'resources')
+            # Reads the xml
+            tree = ETree.parse(os.path.join(self.xml_path, self.file_name))
+            # Gets the root element
+            self.root_xml = tree.getroot()
+            # parse the header
+            for base_element in self.root_xml:
+                # splits the tag in these 3 camps
+                uri, ignore, tag = base_element.tag[1:].partition("}")
+                if tag == 'general':
+                    for item in base_element:
+                        if item.attrib['id'] == 'SMART_OBJECT_NAME':
+                            self.base_name = item.text
+
+        except FileNotFoundError as error:
+            logging.error('can not find the self definition file')
+            logging.error(error)
+        else:
+            logging.info('self definition (xml) imported from: {0}'.format(os.path.join(self.xml_path,
+                                                                                        'data_model.xml')))
+
+    def __call__(self, config):
         # base idx for the opc-ua nodeId
-        self.base_idx = 'ns=2;s={0}'.format(base_name)
+        self.base_idx = 'ns=2;s={0}'.format(self.base_name)
 
         # creates the root object 'SmartObject'
-        self.create_object(2, base_name, path=self.generate_path([(0, 'Objects')]))
+        self.create_object(2, self.base_name, path=self.generate_path([(0, 'Objects')]))
 
         # creates the path to that object
-        self.ROOT_LIST = [(0, 'Objects'), (2, base_name)]
+        self.ROOT_LIST = [(0, 'Objects'), (2, self.base_name)]
         self.ROOT_PATH = self.generate_path(self.ROOT_LIST)
 
         # configuration (connection to 4diac code)
@@ -32,22 +58,6 @@ class UaManager(peer.UaPeer):
         self.services_set = service_set.ServiceSet(self)
         self.points_set = point_set.PointSet(self)
         self.instances_set = service_set.InstanceSet(self)
-
-        # parse the xml
-        logging.info('getting the xml self definition...')
-        try:
-            self.xml_path = os.path.join(os.path.dirname(sys.path[0]),
-                                         'resources', file_name)
-            # Reads the xml
-            tree = ETree.parse(self.xml_path)
-            # Gets the root element
-            self.root_xml = tree.getroot()
-
-        except FileNotFoundError as error:
-            logging.error('can not find the self definition file')
-            logging.error(error)
-        else:
-            logging.info('self definition (xml) imported from: {0}'.format(self.xml_path))
 
         # creates the properties
         self.__create_properties()
@@ -80,9 +90,7 @@ class UaManager(peer.UaPeer):
         self.config.start_work()
 
     def from_fb(self, fb, fb_xml):
-        device_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
-            utils.parse_fb_description(fb_xml)
-        item_type = device_type.split('.')
+        item_type = fb_xml.attrib['OpcUa'].split('.')
 
         if item_type[0] == 'DEVICE':
             self.devices_set.from_fb(fb, fb_xml)
@@ -113,21 +121,28 @@ class UaManager(peer.UaPeer):
                     data_xml.attrib['id'] = data_element.attrib['id']
                     data_xml.attrib['DataType'] = data_element.attrib['DataType']
                     data_xml.attrib['ValueRank'] = data_element.attrib['ValueRank']
-                    data_xml.text = data_element.text
+                    if data_xml.attrib['id'] == 'SMART_OBJECT_NAME':
+                        data_xml.text = self.base_name
+                    else:
+                        data_xml.text = data_element.text
+
+        device_set_xml = ETree.SubElement(root_xml, 'deviceset')
+        point_set_xml = ETree.SubElement(root_xml, 'pointdescriptionset')
+        service_set_xml = ETree.SubElement(root_xml, 'servicedescriptionset')
+        instance_set_xml = ETree.SubElement(root_xml, 'serviceinstanceset')
+
+        # write in the copy data model
+        tree_xml.write(os.path.join(self.xml_path, 'data_model_copy.xml'))
 
         # saves the device set
-        device_set_xml = ETree.SubElement(root_xml, 'deviceset')
         self.devices_set.save_xml(device_set_xml)
         # saves the point set
-        point_set_xml = ETree.SubElement(root_xml, 'pointdescriptionset')
         self.points_set.save_xml(point_set_xml)
         # saves the service set and the respective instances
-        service_set_xml = ETree.SubElement(root_xml, 'servicedescriptionset')
         self.services_set.save_xml(service_set_xml)
-        instance_set_xml = ETree.SubElement(root_xml, 'serviceinstanceset')
         self.instances_set.save_xml(instance_set_xml)
         # writes the xml to the respective file
-        tree_xml.write(self.xml_path)
+        tree_xml.write(os.path.join(self.xml_path, self.file_name))
 
     def __create_properties(self):
         for base_element in self.root_xml:

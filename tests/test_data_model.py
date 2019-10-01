@@ -15,7 +15,7 @@ class XMLTests(base_dm.BaseTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager('0.0.0.0', self.port_server, self.file_name)
 
     def tearDown(self):
         self.manager_4diac.manager_ua.config.stop_work()
@@ -30,7 +30,7 @@ class FBTests(base_dm.BaseTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager('0.0.0.0', self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
         self.handler = tcp_server.TcpServer('0.0.0.0', 61499, 10, self.manager_4diac)
@@ -39,10 +39,10 @@ class FBTests(base_dm.BaseTests):
         thread.start()
 
         # stop the manager
-        self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
 
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),
@@ -78,7 +78,7 @@ class PermanentDataTest(base_dm.BaseTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager('0.0.0.0', self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
         self.handler = tcp_server.TcpServer('0.0.0.0', 61499, 10, self.manager_4diac)
@@ -87,10 +87,10 @@ class PermanentDataTest(base_dm.BaseTests):
         thread.start()
 
         # stop the manager
-        self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
 
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),
@@ -111,7 +111,7 @@ class PermanentDataTest(base_dm.BaseTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager('0.0.0.0', self.port_server, self.file_name)
 
     def tearDown(self):
         # stops the work at the
@@ -135,7 +135,7 @@ class FBPipelineTest(base_dm.PipelineTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager('0.0.0.0', self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
         self.handler = tcp_server.TcpServer('0.0.0.0', 61499, 10, self.manager_4diac)
@@ -144,10 +144,10 @@ class FBPipelineTest(base_dm.PipelineTests):
         thread.start()
 
         # stop the manager
-        self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
 
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),
@@ -183,7 +183,7 @@ class PermanentPipelineTests(base_dm.PipelineTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager('0.0.0.0', self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
         self.handler = tcp_server.TcpServer('0.0.0.0', 61499, 10, self.manager_4diac)
@@ -192,10 +192,10 @@ class PermanentPipelineTests(base_dm.PipelineTests):
         thread.start()
 
         # stop the manager
-        self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-                                         '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
+        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
+        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
 
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),
@@ -216,7 +216,7 @@ class PermanentPipelineTests(base_dm.PipelineTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager(self.base_name, '0.0.0.0', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager('0.0.0.0', self.port_server, self.file_name)
 
     def tearDown(self):
         # stops the work at the

@@ -4,13 +4,10 @@
 fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside modules (function blocks).
 
 The principal advantage of this platform is the redistribution of the running modules across a distributed fog network. 
-So the user can develop their own code, in Python, and them upload it to the different DINASORE nodes in the network. 
+So the user can develop their own code, in Python, and them upload it to the different DINASORE nodes in the network.
+To draw the system it's used the 4DIAC-IDE witch is according the IEC61499 standards. 
 
-Add some OPC-UA stuff.
-Configuration name update.
-Delete the current configuration, when upload from 4DIAC-IDE
-Function Block XML SelfDescription, POINT.STARTPOINT.
-Reset the data model from 4DIAC-IDE.
+This version is targeted to the Industry4.0 applications, for that it was also used the UPC-UA protocol to allow the communication with the other industrial components.
 
 ## Features
 - [x] Communication between the DINASORE and the 4DIAC-IDE 
@@ -22,10 +19,13 @@ Reset the data model from 4DIAC-IDE.
 - [x] Docker integration
 - [x] Opc-Ua integration
 - [x] Configuration storage
+- [ ] Parallelize the function blocks (processing, joblib) 
 - [ ] Download function blocks from 4DIAC-IDE repository
+- [ ] Edit the function blocks in the 4DIAC-IDE and automatically update the code in the nodes
 - [ ] Test with complex variables (lists, arrays, methods (strings))
 
 ## Installation
+In this section it is explained witch requirements are needed to use the DINASORE, and how to use it to develop complex distributed systems.
 
 ### Requirements
 * [[Python 3.6/3.7](https://www.python.org/downloads/)] or [[Docker](https://docs.docker.com/toolbox/toolbox_install_windows/)] - component needed to run the DINASORE image;
@@ -35,8 +35,9 @@ Reset the data model from 4DIAC-IDE.
 If you want to install the DINASORE image using Python, you must use the following commands:
 1. Clone the repository this from the github;
 2. Move to the DINASORE folder and install the DINASORE requirements using pip;
-3. (OPTIONAL) Run the unitary test to check if is everything ok (it could take a time);
-4. Run the project, where the flag -a corresponds to the ip address and the flag -p corresponds to the port.
+3. (OPTIONAL) Run the unitary test to check if is everything ok (it could take a time (approximately 1 minute));
+4. Run the project, where the flag -a corresponds to the ip address, the flag -p corresponds to the 4DIAC-IDE port, the flag -u to the OPC-UA port
+and the flag -l to the logging level witch could be ERROR, WARN or INFO.
 
 ```bash
 git clone https://github.com/SYSTEC-FoF-FEUP/dinasore-ua.git
@@ -46,20 +47,23 @@ pip install -r requirements.txt
 
 python tests/__init__.py
 
-python core/main.py -a <ip_address> -p <port>
+# Default values: <ip_address>=localhost, <port_diac>=61499, <port_opc>=4840 and <log_level>=ERROR
+python core/main.py -a <ip_address> -p <port_diac> -u <port_opc> -l <log_level>
 ```
 
 ### Using Docker
 If you want to install the DINASORE image  using docker, you must use the following commands:
 1. Using docker pull the DINASORE image from the docker repository;
-2. Run the docker container, replacing the <absolute_path_host> by the absolute path to the project folder, the <ip_address> by the ip address and the <_port> by the port.
+2. Run the docker container, replacing the <absolute_path_host> by the absolute path to the project folder, the <ip_address> by the ip address, 
+the <_port_diac> by the 4DIAC-IDE communication port, the <port_opc> by the OPC_UA communication port and the <log_level> by to the logging 
+level witch could be ERROR, WARN or INFO.
 
 ```bash
 docker pull systecfof/dinasore-ua:amd64-0.1
 
 docker run --network="host" \
            --volume=/<absolute_path_host>/resources:/usr/src/dinasore-ua/resources \
-           systecfof/dinasore-ua:amd64-0.1 -a <ip_address> -p <_port>
+           systecfof/dinasore-ua:amd64-0.1 -a <ip_address> -p <_port_diac> -u <port_opc> -l <log_level>
 
 # (OPTIONAL) to rebuild the image, creating a new image
 docker build -t dinasore-ua-new-image-name .
@@ -131,7 +135,7 @@ The difference between an event and a variable is that the event triggers the ex
 Each function blocks has also a unique type that identifies it (FB type) (present in the 'FBType' tag), to organize a group of function blocks, it was created general categories.
 You specify both of them inside the XML file. You must use also the FB type as name of the Python file (FB_TYPE_EXAMPLE.py) and the XML file (FB_TYPE_EXAMPLE.fbt)
 
-The category of the function block is present in the 'SelfDescription' tag.
+The category of the function block is present in the 'FBType' tag in the 'OpcUa' attribute.
 There are 4 different general categories of function blocks:
 * **DEVICE.SENSOR** - general category used to represent a sensor (e.g. temperature, voltage);
 * **SERVICE** - general category used to represent a processing module (e.g. moving average, normalization);
@@ -143,8 +147,7 @@ The **DEVICE.SENSOR** and the **POINT.STARTPOINT** automatically execute in loop
 For that are used 2 default input events ('INIT' and 'READ') and 2 default output events ('INIT_O' and 'READ_O'), you only need to link connections in the 'READ_O' event because the others are trigger automatically by the DINASORE engine.
 
 ```xml
-<FBType Name="FB_TYPE_EXAMPLE">
-    <SelfDescription FBType="POINT.STARTPOINT"/>
+<FBType Name="FB_TYPE_EXAMPLE" OpcUa="POINT.STARTPOINT">
     <InterfaceList>
         <EventInputs>
             <Event Name="INIT" Type="Event"/>
@@ -174,8 +177,7 @@ The **SERVICE** and the **POINT.ENDPOINT** general categories execute only when 
 They use also 4 default events, but in this case the name of the READ/READ_O events are replaced by RUN/RUN_O.
 
 ```xml
-<FBType Name="FB_TYPE_EXAMPLE">
-    <SelfDescription FBType="SERVICE"/>
+<FBType Name="FB_TYPE_EXAMPLE" OpcUa="SERVICE">
     <InterfaceList>
         <EventInputs>
             <Event Name="INIT" Type="Event"/>
@@ -210,9 +212,28 @@ The second step to make a function block is encapsulate the code that you develo
 1. First you must replace the class name (FB_NAME) by your new function block type.
 2. Implement the state machine (inside schedule method) that checks what event was received and them execute the respective method.
 3. Specify the returned attributes (output_events and output_variables) according to the order specified in the definition file.
-4. Integrate the developed methods (if the method is shared between the function block instances put it inside the shared resources class,
-otherwise put it inside the function block class).
+4. Integrate the developed methods (if the method is shared between the function block instances use a static attribute in the class).
 
+```python
+class FB_TYPE_EXAMPLE:
+    VAR2_EXAMPLE = 0
+
+    def schedule(self, event_input_name, event_input_value, CONST_EXAMPLE, VAR1_EXAMPLE):
+        # Checks what events receive
+        if event_input_name == 'INIT':
+            # Example of code
+            self.VAR2_EXAMPLE = CONST_EXAMPLE
+            # Returns all the events values and all the variable values
+            # The order most be the same like the xml events/variables order
+            return [event_input_value, None, self.VAR2_EXAMPLE]
+            
+        elif event_input_name == 'RUN':
+            # Example of code
+            self.VAR2_EXAMPLE += VAR1_EXAMPLE
+            # Returns all the events values and all the variable values
+            # The order most be the same like the xml events/variables order
+            return [None, event_input_value, self.VAR2_EXAMPLE]
+```
 
 You can find some good examples of function blocks examples in these links: 
 - MQTT Subscriber [[XML](resources/function_blocks/MQTT_STARTPOINT.fbt)] [[Python](resources/function_blocks/MQTT_STARTPOINT.py)];

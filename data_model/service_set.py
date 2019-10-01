@@ -31,7 +31,7 @@ class ServiceSet(utils.UaInterface):
                 self.service_dict[s.fb_type] = s
 
     def from_fb(self, fb_type, fb_xml):
-        service_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+        input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
                 utils.parse_fb_description(fb_xml)
         # checks if the service already exist in the service set
         if fb_type not in self.service_dict:
