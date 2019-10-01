@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
-<FBType Name="MOVING_AVERAGE">
-    <SelfDescription FBType="SERVICE"/>
+<FBType Name="MOVING_AVERAGE" OpcUA="SERVICE">
     <InterfaceList>
         <EventInputs>
             <Event Name="INIT" Type="Event"/>

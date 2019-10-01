@@ -4,8 +4,7 @@ from opc_ua import client
 
 class BaseTests(unittest.TestCase):
     port_server = 4841
-    base_name = 'SMART_COMPONENT'
-    base_list = [(0, 'Objects'), (2, base_name)]
+    base_list = [(0, 'Objects'), (2, 'SMART_COMPONENT')]
     manager_4diac = None
 
     def test_fbs_creation(self):
@@ -143,8 +142,7 @@ class BaseTests(unittest.TestCase):
 
 class PipelineTests(unittest.TestCase):
     port_server = 4841
-    base_name = 'SMART_COMPONENT'
-    base_list = [(0, 'Objects'), (2, base_name)]
+    base_list = [(0, 'Objects'), (2, 'SMART_COMPONENT')]
     manager_4diac = None
 
     def test_workflow(self):

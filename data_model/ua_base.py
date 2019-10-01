@@ -271,7 +271,7 @@ class UaBaseStructure:
 
     def parse_all_fb(self, fb, fb_xml):
         # parses the fb description
-        ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
+        input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = \
             utils.parse_fb_description(fb_xml)
 
         # Iterates over the input events

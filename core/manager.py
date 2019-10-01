@@ -5,19 +5,22 @@ import time
 import struct
 import logging
 import gc
+import os
+import sys
+import shutil
 
 
 class Manager:
 
     def __init__(self):
-        self.start_time = time.time()*1000
+        self.start_time = time.time() * 1000
         self.config_dictionary = dict()
 
         # attributes responsible for the ua integration
         self.ua_integration = False
-        self.ua_url = 'opc.tcp://localhost:4048'
+        self.ua_url = 'opc.tcp://localhost:4041'
         self.manager_ua = None
-        self.description_file = None
+        self.file_name = None
 
     def get_config(self, config_id):
         fb_element = None
@@ -46,7 +49,10 @@ class Manager:
                 if child.tag == 'FB':
                     conf_name = child.attrib['Name']
                     conf_type = child.attrib['Type']
-                    # Checks if not exists the configuration
+                    # Stops the configuration
+                    for config_name, config in self.config_dictionary.items():
+                        config.stop_work()
+                    self.config_dictionary = dict()
                     if conf_name not in self.config_dictionary:
                         # Creates the configuration
                         config = configuration.Configuration(conf_name, conf_type)
@@ -54,11 +60,13 @@ class Manager:
                         # check the options for ua_integration
                         if self.ua_integration:
                             # add try catch OSError: [Errno 98] Address already in use
+                            # first stop the previous manager
+                            self.manager_ua.stop()
                             # creates the new ua_manager
-                            self.manager_ua = ua_manager.UaManager(conf_name,
-                                                                   self.ua_url,
-                                                                   config,
-                                                                   self.description_file)
+                            self.manager_ua = ua_manager.UaManager(self.ua_url, self.file_name)
+                            self.manager_ua.base_name = conf_name
+                            self.manager_ua(config)
+
         elif action == 'QUERY':
             pass
 
@@ -89,10 +97,14 @@ class Manager:
                     # Checks if exists the configuration
                     if fb_name in self.config_dictionary:
                         # Stops the configuration
-                        config = self.get_config(fb_name)
-                        config.stop_work()
+                        for config_name, config in self.config_dictionary.items():
+                            config.stop_work()
                         # Release memory
                         gc.collect()
+            # check the options for ua_integration
+            if self.ua_integration:
+                # first stop the previous manager
+                self.manager_ua.stop_ua()
             # If we want to kill the device
             if len(element) == 0:
                 pass
@@ -102,17 +114,26 @@ class Manager:
             for child in element:
                 # Deletes a configuration (could be a fb)
                 if child.tag == 'FB':
-                    conf_name = child.attrib['Name']
+                    # conf_name = child.attrib['Name']
                     # Checks if exists the configuration
-                    if conf_name in self.config_dictionary:
-                        # Deletes the configuration
-                        self.config_dictionary.pop(conf_name)
-                        # Release memory
-                        gc.collect()
+                    # if conf_name in self.config_dictionary:
+                    self.config_dictionary = dict()
+                    # Deletes the configuration
+                    # self.stop_all()
+                    # Release memory
+                    gc.collect()
             # check the options for ua_integration
             if self.ua_integration:
-                # first stop the previous manager
-                self.manager_ua.stop_ua()
+                # reset the program
+                resources_path = os.path.join(os.path.dirname(sys.path[0]), 'resources')
+                os.remove(os.path.join(resources_path, 'data_model.xml'))
+                shutil.copyfile(os.path.join(resources_path, 'data_model_copy.xml'),
+                                os.path.join(resources_path, 'data_model.xml'))
+
+                self.manager_ua = ua_manager.UaManager(self.ua_url, self.file_name)
+                config = configuration.Configuration(self.manager_ua.base_name, 'EMB_RES')
+                self.set_config(self.manager_ua.base_name, config)
+                self.manager_ua(config)
 
         response = self.build_response(request_id, xml)
         return response
@@ -202,14 +223,15 @@ class Manager:
         response = b''.join([response_header, response_xml])
         return response
 
-    def build_ua_manager(self, base_name, address, port, file_name):
-        # creates the opc-ua manager
-        config = configuration.Configuration(base_name, 'EMB_RES')
-        self.set_config(base_name, config)
-        self.description_file = file_name
+    def build_ua_manager(self, address, port, file_name):
+        self.file_name = file_name
         self.ua_url = 'opc.tcp://{0}:{1}'.format(address, port)
-        self.manager_ua = ua_manager.UaManager(base_name, self.ua_url, config, self.description_file)
+        self.manager_ua = ua_manager.UaManager(self.ua_url, self.file_name)
+        # creates the opc-ua manager
+        config = configuration.Configuration(self.manager_ua.base_name, 'EMB_RES')
+        self.set_config(self.manager_ua.base_name, config)
         # parses the description file
+        self.manager_ua(config)
         self.manager_ua.from_xml()
         # sets the option for ua_integration
         self.ua_integration = True

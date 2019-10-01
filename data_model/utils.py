@@ -73,14 +73,10 @@ def default_object(ua_peer, obj_idx, obj_path, path_list, obj_name):
 
 
 def parse_fb_description(fb_xml):
-    ua_type = None
     input_events_xml, output_events_xml, input_vars_xml, output_vars_xml = None, None, None, None
     for item in fb_xml:
-        # gets the id
-        if item.tag == 'SelfDescription':
-            ua_type = item.attrib['FBType']
         # gets the events and vars
-        elif item.tag == 'InterfaceList':
+        if item.tag == 'InterfaceList':
             # Iterates over the interface list
             # to find the inputs/outputs
             for interface in item:
@@ -97,7 +93,7 @@ def parse_fb_description(fb_xml):
                 elif interface.tag == 'OutputVars':
                     output_vars_xml = interface
 
-    return ua_type, input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
+    return input_events_xml, output_events_xml, input_vars_xml, output_vars_xml
 
 
 class UaInterface:
