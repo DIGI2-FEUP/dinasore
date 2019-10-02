@@ -239,6 +239,8 @@ class FB_TYPE_EXAMPLE:
 ```
 
 You can find some good examples of function blocks examples in these links: 
+- MQTT Publisher [[XML](resources/function_blocks/MQTT_PUBLISHER.fbt)] [[Python](resources/function_blocks/MQTT_PUBLISHER.py)];
 - MQTT Subscriber [[XML](resources/function_blocks/MQTT_SUBSCRIBER.fbt)] [[Python](resources/function_blocks/MQTT_SUBSCRIBER.py)];
 - Influx DB Writer [[XML](resources/function_blocks/INFLUX_DB.fbt)] [[Python](resources/function_blocks/INFLUX_DB.py)];
+- Sensor Simulator [[XML](resources/function_blocks/SENSOR_SIMULATOR.fbt)] [[Python](resources/function_blocks/SENSOR_SIMULATOR.py)];
 - Moving Average [[XML](resources/function_blocks/MOVING_AVERAGE.fbt)] [[Python](resources/function_blocks/MOVING_AVERAGE.py)].

@@ -36,7 +36,7 @@ class MQTT_SUBSCRIBER:
         if event_name == 'INIT':
             self.resources.connect(host, port)
             self.resources.client.subscribe(topic)
-            return [event_value, None, None, 0.0]
+            return [event_value, None, 0.0]
 
         elif event_name == 'READ':
             # wait for new messages
@@ -51,7 +51,7 @@ class MQTT_SUBSCRIBER:
                     value = float(payload_json[value_name])
                     # otherwise clears the new message event
                     self.resources.new_message.clear()
-                    return [None, event_value, None, value]
+                    return [None, event_value, value]
 
     def __del__(self):
         self.stop.set()
