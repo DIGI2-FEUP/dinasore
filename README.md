@@ -107,6 +107,9 @@ To draw the function block distributed architecture you need to use the 4DIAC-ID
 
 #### Monitor your system:
 
+* Reset the current configuration
+* monitor the function blocks using watch
+* monitor the function blocks using an opc-ua client
 
 ## Build new Function Blocks
 In this section we gonna show how you develop a new function block and after that how you develop a new configuration and upload it to the network using the 4DIAC-IDE.
@@ -236,6 +239,6 @@ class FB_TYPE_EXAMPLE:
 ```
 
 You can find some good examples of function blocks examples in these links: 
-- MQTT Subscriber [[XML](resources/function_blocks/MQTT_STARTPOINT.fbt)] [[Python](resources/function_blocks/MQTT_STARTPOINT.py)];
+- MQTT Subscriber [[XML](resources/function_blocks/MQTT_SUBSCRIBER.fbt)] [[Python](resources/function_blocks/MQTT_SUBSCRIBER.py)];
 - Influx DB Writer [[XML](resources/function_blocks/INFLUX_DB.fbt)] [[Python](resources/function_blocks/INFLUX_DB.py)];
 - Moving Average [[XML](resources/function_blocks/MOVING_AVERAGE.fbt)] [[Python](resources/function_blocks/MOVING_AVERAGE.py)].

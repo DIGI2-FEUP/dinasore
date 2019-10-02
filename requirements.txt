@@ -2,3 +2,4 @@ cryptography==2.3
 opcua==0.98.7
 paho-mqtt==1.4.0
 influxdb==5.2.2
+numpy
