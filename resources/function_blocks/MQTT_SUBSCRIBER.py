@@ -25,18 +25,18 @@ class SharedResources:
         self.client.loop_start()
 
 
-class MQTT_STARTPOINT:
+class MQTT_SUBSCRIBER:
     resources = SharedResources()
 
     def __init__(self):
         self.resources.new_message.clear()
         self.stop = Event()
 
-    def schedule(self, event_name, event_value, topic, host, port):
+    def schedule(self, event_name, event_value, topic, host, port, value_name):
         if event_name == 'INIT':
             self.resources.connect(host, port)
             self.resources.client.subscribe(topic)
-            return [event_value, None, None, 0.0]
+            return [event_value, None, 0.0]
 
         elif event_name == 'READ':
             # wait for new messages
@@ -48,19 +48,10 @@ class MQTT_STARTPOINT:
                     # process each message
                     msg = self.resources.message_payload.decode('utf-8')
                     payload_json = json.loads(msg)
-                    value = float(payload_json['value'])
+                    value = float(payload_json[value_name])
                     # otherwise clears the new message event
                     self.resources.new_message.clear()
-                    return [None, event_value, None, value]
-
-                # otherwise clears the new message event
-                # self.resources.new_message.clear()
-
-        elif event_name == 'STOP':
-            self.stop.set()
-            self.resources.new_message.clear()
-            self.resources.client.disconnect()
-            return [None, None, event_value, 0.0]
+                    return [None, event_value, value]
 
     def __del__(self):
         self.stop.set()
