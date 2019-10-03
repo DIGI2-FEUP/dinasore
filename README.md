@@ -241,6 +241,8 @@ class FB_TYPE_EXAMPLE:
 You can find some good examples of function blocks examples in these links: 
 - MQTT Publisher [[XML](resources/function_blocks/MQTT_PUBLISHER.fbt)] [[Python](resources/function_blocks/MQTT_PUBLISHER.py)];
 - MQTT Subscriber [[XML](resources/function_blocks/MQTT_SUBSCRIBER.fbt)] [[Python](resources/function_blocks/MQTT_SUBSCRIBER.py)];
-- Influx DB Writer [[XML](resources/function_blocks/INFLUX_DB.fbt)] [[Python](resources/function_blocks/INFLUX_DB.py)];
+- MQTT Publisher (2 Values) [[XML](resources/function_blocks/MQTT_PUBLISHER_2.fbt)] [[Python](resources/function_blocks/MQTT_PUBLISHER_2.py)];
+- MQTT Subscriber (2 Values) [[XML](resources/function_blocks/MQTT_SUBSCRIBER_2.fbt)] [[Python](resources/function_blocks/MQTT_SUBSCRIBER_2.py)];
+- Influx DB Writer (2 Values) [[XML](resources/function_blocks/INFLUX_DB_2.fbt)] [[Python](resources/function_blocks/INFLUX_DB_2.py)];
 - Sensor Simulator [[XML](resources/function_blocks/SENSOR_SIMULATOR.fbt)] [[Python](resources/function_blocks/SENSOR_SIMULATOR.py)];
 - Moving Average [[XML](resources/function_blocks/MOVING_AVERAGE.fbt)] [[Python](resources/function_blocks/MOVING_AVERAGE.py)].
