@@ -7,7 +7,7 @@ class Service(ua_base.UaBaseStructure, utils.UaInterface):
 
     def __init__(self, ua_peer, fb_type):
         ua_base.UaBaseStructure.__init__(self, ua_peer, 'ServiceDescriptionSet',
-                                         fb_name=fb_type,
+                                         fb_name='Service:' + fb_type,
                                          fb_type=fb_type,
                                          browse_name=fb_type)
 
