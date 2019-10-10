@@ -87,7 +87,7 @@ To draw the function block distributed architecture you need to use the 4DIAC-ID
 
 #### Draw the configuration:
 1. Run the 4DIAC-IDE and create a new system (File->New->New System);
-2. Now open in the left bar open the system configuration, after that drag and drop an Ethernet segment and a FORTE_PC device;
+2. Now open in the tree view (click in the little arrow) on the left, and double click on *System Configuration*. After that drag and drop from the right side an 1) *Ethernet* segment and 2) a *FORTE_PC device*;
 3. Then connect the device and the segment, and define the device IP address, port and change his name (e.g. SMART_COMPONENT);
 
 ![system_perspective](resources/images/system_perspective.png)
