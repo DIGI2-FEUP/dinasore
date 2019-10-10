@@ -158,7 +158,6 @@ class UaManager(peer.UaPeer):
     def create_ua_connection(self, source, destination):
         # splits both source and destination (fb, fb_variable)
         destination_attr = destination.split(sep='.')
-        fb = self.config.get_fb(destination_attr[0])
 
         fb_dict = {**self.services_set.service_dict,
                    **self.instances_set.instances_dict,
@@ -171,7 +170,6 @@ class UaManager(peer.UaPeer):
     def write_ua_connection(self, source_value, destination):
         # splits both source and destination (fb, fb_variable)
         destination_attr = destination.split(sep='.')
-        fb = self.config.get_fb(destination_attr[0])
 
         fb_dict = {**self.services_set.service_dict,
                    **self.instances_set.instances_dict,
