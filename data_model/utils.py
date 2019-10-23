@@ -31,19 +31,19 @@ UA_NODE = {ua.VariantType.String: ua.NodeId(ua.ObjectIds.String),
            ua.VariantType.Float: ua.NodeId(ua.ObjectIds.Float),
            ua.VariantType.Boolean: ua.NodeId(ua.ObjectIds.Boolean)}
 
-XML_TYPES = {ua.VariantType.String: 'String',
-             ua.VariantType.Double: 'Double',
-             ua.VariantType.Int64: 'Integer',
-             ua.VariantType.UInt64: 'Integer',
-             ua.VariantType.Float: 'Float',
-             ua.VariantType.Boolean: 'Boolean'}
-
 XML_NODE = {ua.ObjectIds.String: 'String',
             ua.ObjectIds.Double: 'Double',
             ua.ObjectIds.Int64: 'Integer',
             ua.ObjectIds.UInt64: 'Integer',
             ua.ObjectIds.Float: 'Float',
             ua.ObjectIds.Boolean: 'Boolean'}
+
+# XML_TYPES = {ua.VariantType.String: 'String',
+#              ua.VariantType.Double: 'Double',
+#              ua.VariantType.Int64: 'Integer',
+#              ua.VariantType.UInt64: 'Integer',
+#              ua.VariantType.Float: 'Float',
+#              ua.VariantType.Boolean: 'Boolean'}
 
 
 def default_folder(ua_peer, obj_idx, obj_path, path_list, folder_name):

@@ -9,6 +9,14 @@ import logging
 class UaBaseStructure:
 
     def __init__(self, ua_peer, folder_name, fb_name, fb_type, browse_name):
+        """
+
+        :param ua_peer:
+        :param folder_name:
+        :param fb_name:
+        :param fb_type:
+        :param browse_name:
+        """
         self.fb_name = fb_name
         self.fb_type = fb_type
         self.ua_peer = ua_peer
@@ -33,6 +41,16 @@ class UaBaseStructure:
         # creates the variables folder
         self.vars_idx, self.vars_path, vars_list = utils.default_folder(self.ua_peer, self.base_idx, self.base_path,
                                                                         base_path_list, 'Variables')
+        """
+        the ua_variables contains:
+        - variable_name: key
+        - opc-ua variable: value
+        the variables_dict contains:
+        - variable_name: key and value
+        - value_rank
+        - data_type
+        - array_dimensions
+        """
         self.ua_variables = dict()
         self.variables_dict = dict()
 
@@ -264,8 +282,20 @@ class UaBaseStructure:
         for var_name, var_ua in self.ua_variables.items():
             # reads the variable value
             v_type, value, is_watch = fb.read_attr(var_name)
-            # writes the value inside the opc-ua variable
-            var_ua.set_value(value)
+
+            try:
+                # writes the value inside the opc-ua variable
+                var_ua.set_value(value)
+
+            except Exception as error:
+                # reports the error
+                logging.warning('error writing the value in the opc-ua server.')
+                logging.warning(error)
+                if v_type == 'STRING':
+                    # writes the value as a string
+                    var_ua.set_value(str(value))
+                    # writes the solution
+                    logging.warning('error solved writing the variable as string.')
 
     def parse_all_xml(self, root_xml):
         # creates the fb inside the configuration
