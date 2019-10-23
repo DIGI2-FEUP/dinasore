@@ -12,9 +12,22 @@ class DiacSimulator:
         # connects tho the socket
         self.sock.connect(server_url)
 
+    def send_event(self, fb_name, event_name):
+        message = '<Request ID="2" Action="WRITE">' \
+                  '<Connection Source="$e" Destination="{0}:{1}" />' \
+                  '</Request>'.format(fb_name, event_name)
+        message2sent = self.__build_message(message.encode('utf-8'), b'')
+        try:
+            # Send data
+            self.sock.sendall(message2sent)
+            # Look for the response
+            data = self.sock.recv(2048)
+        except socket.error as msg:
+            print(msg)
+
     def upload_dinasore(self, file_path):
         # creates the first message
-        first_message = self.__build_response(b'<Request ID="0" Action="QUERY"><FB Name="*" Type="*"/></Request>', b'')
+        first_message = self.__build_message(b'<Request ID="0" Action="QUERY"><FB Name="*" Type="*"/></Request>', b'')
         # creates the messages list
         messages_list = [first_message]
 
@@ -24,7 +37,7 @@ class DiacSimulator:
         # iterates over the xml of messages
         for row in content:
             message = row.split(';')
-            message_text = self.__build_response(message[1].encode('utf-8'), message[0].encode('utf-8'))
+            message_text = self.__build_message(message[1].encode('utf-8'), message[0].encode('utf-8'))
             messages_list.append(message_text)
 
         # sends the configuration
@@ -41,7 +54,7 @@ class DiacSimulator:
         self.sock.close()
 
     @staticmethod
-    def __build_response(message_payload, configuration_name):
+    def __build_message(message_payload, configuration_name):
         # build the first part of the header
         hex_input = '{:04x}'.format(len(configuration_name))
         second_byte = int(hex_input[0:2], 16)

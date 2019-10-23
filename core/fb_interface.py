@@ -13,6 +13,12 @@ class FBInterface:
 
         self.event_queue = []
 
+        """
+        Each events and variables dictionary contains:
+        - name (str): event/variable name
+        - type (str): INT, REAL, STRING, BOOL
+        - watch (boolean): True, False
+        """
         self.input_events = OrderedDict()
         self.output_events = OrderedDict()
         self.input_vars = OrderedDict()

@@ -38,12 +38,6 @@ class FBTests(base_dm.BaseTests):
         thread = Thread(target=self.handler.handle_client)
         thread.start()
 
-        # stop the manager
-        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),
                                    'tests',
@@ -85,12 +79,6 @@ class PermanentDataTest(base_dm.BaseTests):
         # creates the handler
         thread = Thread(target=self.handler.handle_client)
         thread.start()
-
-        # stop the manager
-        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
 
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),
@@ -143,12 +131,6 @@ class FBPipelineTest(base_dm.PipelineTests):
         thread = Thread(target=self.handler.handle_client)
         thread.start()
 
-        # stop the manager
-        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),
                                    'tests',
@@ -190,12 +172,6 @@ class PermanentPipelineTests(base_dm.PipelineTests):
         # creates the handler
         thread = Thread(target=self.handler.handle_client)
         thread.start()
-
-        # stop the manager
-        # self.manager_4diac.parse_general('<Request ID="0" Action="KILL">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
-        # self.manager_4diac.parse_general('<Request ID="1" Action="DELETE">'
-        #                                  '<FB Name="SMART_COMPONENT" Type=""/></Request>')
 
         # get the path for the config
         config_path = os.path.join(os.path.dirname(sys.path[0]),

@@ -1,0 +1,7 @@
+;<Request ID="1" Action="CREATE"><FB Name="SMART_COMPONENT" Type="EMB_RES" /></Request>
+SMART_COMPONENT;<Request ID="2" Action="CREATE"><FB Name="LIST_INPUT" Type="TEST_SERVICE_LIST" /></Request>
+SMART_COMPONENT;<Request ID="3" Action="CREATE"><FB Name="LIST_OUTPUT" Type="TEST_SERVICE_LIST_R" /></Request>
+SMART_COMPONENT;<Request ID="4" Action="WRITE"><Connection Source="hello_world" Destination="LIST_INPUT.NO_OPC_STRING" /></Request>
+SMART_COMPONENT;<Request ID="5" Action="CREATE"><Connection Source="LIST_INPUT.RUN_O" Destination="LIST_OUTPUT.RUN" /></Request>
+SMART_COMPONENT;<Request ID="6" Action="CREATE"><Connection Source="LIST_INPUT.OUTPUT_LIST" Destination="LIST_OUTPUT.INPUT_LIST" /></Request>
+SMART_COMPONENT;<Request ID="7" Action="START"/>

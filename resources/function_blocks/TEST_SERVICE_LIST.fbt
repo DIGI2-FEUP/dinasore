@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="TEST_SERVICE_LIST" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event"/>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+              <With Var="OUTPUT_LIST"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="NO_OPC_STRING" Type="STRING"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="OUTPUT_LIST" Type="STRING" OpcUa="Variable"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>
