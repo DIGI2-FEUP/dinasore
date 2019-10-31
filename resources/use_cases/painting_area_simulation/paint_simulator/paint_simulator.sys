@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE System SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<System Comment="" Name="paint_simulator">
+  <VersionInfo Author="Author" Organization="Eclipse 4diac" Version="1.0"/>
+  <Application Comment="" Name="paint_simulatorApp">
+    <SubAppNetwork>
+      <FB Comment="" Name="TINA_0" Type="TINA_0" x="3500.0" y="400.0"/>
+      <FB Comment="" Name="TIME_CSE_PROCESS" Type="TIMER" x="2000.0" y="1600.0">
+        <Parameter Name="UA_NAME" Value="Time"/>
+        <Parameter Name="EVENT_ID" Value="CSE"/>
+        <Parameter Name="RANGE" Value="2-3"/>
+      </FB>
+      <FB Comment="" Name="TIME_POWER_WASH" Type="TIMER" x="2000.0" y="2500.0">
+        <Parameter Name="UA_NAME" Value="Time"/>
+        <Parameter Name="EVENT_ID" Value="WASH"/>
+        <Parameter Name="RANGE" Value="2-3"/>
+      </FB>
+      <FB Comment="" Name="TEMP_CSE_PROCESS" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="400.0">
+        <Parameter Name="UA_NAME" Value="Temperature"/>
+        <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+        <Parameter Name="RANGE" Value="53-58"/>
+        <Parameter Name="BATCH" Value="0"/>
+        <Parameter Name="RATE" Value="1"/>
+      </FB>
+      <FB Comment="" Name="DP_FILTER_AGI" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="1400.0">
+        <Parameter Name="UA_NAME" Value="Pressure"/>
+        <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+        <Parameter Name="RANGE" Value="0-1.5"/>
+        <Parameter Name="BATCH" Value="0"/>
+        <Parameter Name="RATE" Value="1"/>
+      </FB>
+      <FB Comment="" Name="CHASSIS_GENERATOR" Type="CHASSIS_GENERATOR" x="1800.0" y="800.0">
+        <Parameter Name="N_CONTAINERS" Value="10"/>
+        <Parameter Name="RATE" Value="15"/>
+      </FB>
+      <FB Comment="" Name="DP_FILTER_ASP" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="2400.0">
+        <Parameter Name="UA_NAME" Value="Pressure"/>
+        <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+        <Parameter Name="RANGE" Value="0-0.7"/>
+        <Parameter Name="BATCH" Value="0"/>
+        <Parameter Name="RATE" Value="1"/>
+      </FB>
+      <FB Comment="" Name="DP_FILTER_ASP_1" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="3400.0">
+        <Parameter Name="UA_NAME" Value="Pressure"/>
+        <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+        <Parameter Name="RANGE" Value="0-0.7"/>
+        <Parameter Name="BATCH" Value="0"/>
+        <Parameter Name="RATE" Value="1"/>
+      </FB>
+      <FB Comment="" Name="TINA_1" Type="TINA_1" x="5700.0" y="400.0"/>
+      <FB Comment="" Name="TEMP_CSE_PROCESS_1" Type="SENSOR_SIMULATOR_RANGE" x="4200.0" y="1800.0">
+        <Parameter Name="UA_NAME" Value="Temperature"/>
+        <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+        <Parameter Name="RANGE" Value="55-60"/>
+        <Parameter Name="BATCH" Value="0"/>
+        <Parameter Name="RATE" Value="1"/>
+      </FB>
+      <FB Comment="" Name="DP_FILTER_ASP_AGI" Type="SENSOR_SIMULATOR_RANGE" x="4200.0" y="2800.0">
+        <Parameter Name="UA_NAME" Value="Pressure"/>
+        <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+        <Parameter Name="RANGE" Value="0-0.8"/>
+        <Parameter Name="BATCH" Value="0"/>
+        <Parameter Name="RATE" Value="1"/>
+      </FB>
+      <FB Comment="" Name="TIME_IME_CSE" Type="TIMER" x="4500.0" y="3800.0">
+        <Parameter Name="UA_NAME" Value="Time"/>
+        <Parameter Name="EVENT_ID" Value="CSE"/>
+        <Parameter Name="RANGE" Value="2-3"/>
+      </FB>
+      <DataConnections>
+        <Connection Comment="" Destination="TINA_0.INPUT_MATERIAL" Source="CHASSIS_GENERATOR.MATERIAL_NAME" dx1="160.0"/>
+        <Connection Comment="" Destination="TINA_0.INPUT_CONTAINER" Source="CHASSIS_GENERATOR.CONTAINER_NAME" dx1="160.0"/>
+        <Connection Comment="" Destination="TINA_1.INPUT_MATERIAL" Source="TINA_0.MATERIAL_NAME"/>
+        <Connection Comment="" Destination="TINA_1.INPUT_CONTAINER" Source="TINA_0.CONTAINER_NAME"/>
+      </DataConnections>
+      <EventConnections>
+        <Connection Comment="" Destination="TIME_CSE_PROCESS.TRIGGER" Source="TINA_0.SENSORS_O" dx1="60.0" dx2="230.0" dy="835.0"/>
+        <Connection Comment="" Destination="TIME_POWER_WASH.TRIGGER" Source="TINA_0.SENSORS_O" dx1="60.0" dx2="230.0" dy="830.0"/>
+        <Connection Comment="" Destination="TINA_0.SENSORS" Source="TIME_CSE_PROCESS.TRIGGER_O" dx1="600.0"/>
+        <Connection Comment="" Destination="TINA_0.SENSORS" Source="TIME_POWER_WASH.TRIGGER_O" dx1="600.0"/>
+        <Connection Comment="" Destination="TINA_0.SENSORS" Source="TEMP_CSE_PROCESS.TRIGGER_O"/>
+        <Connection Comment="" Destination="TEMP_CSE_PROCESS.TRIGGER" Source="TINA_0.SENSORS_O" dx1="60.0" dx2="690.0" dy="-385.0"/>
+        <Connection Comment="" Destination="TINA_0.SENSORS" Source="DP_FILTER_AGI.TRIGGER_O" dx1="245.0"/>
+        <Connection Comment="" Destination="DP_FILTER_AGI.TRIGGER" Source="TINA_0.SENSORS_O" dx1="60.0" dx2="685.0" dy="-390.0"/>
+        <Connection Comment="" Destination="TINA_0.NEW_MATERIAL" Source="CHASSIS_GENERATOR.NEW_MATERIAL" dx1="160.0"/>
+        <Connection Comment="" Destination="TINA_0.SENSORS" Source="DP_FILTER_ASP.TRIGGER_O" dx1="245.0"/>
+        <Connection Comment="" Destination="DP_FILTER_ASP.TRIGGER" Source="TINA_0.SENSORS_O" dx1="60.0" dx2="690.0" dy="-390.0"/>
+        <Connection Comment="" Destination="TINA_0.SENSORS" Source="DP_FILTER_ASP_1.TRIGGER_O" dx1="240.0"/>
+        <Connection Comment="" Destination="DP_FILTER_ASP_1.TRIGGER" Source="TINA_0.SENSORS_O" dx1="60.0" dx2="685.0" dy="-380.0"/>
+        <Connection Comment="" Destination="TINA_1.NEW_MATERIAL" Source="TINA_0.NEW_MATERIAL_O"/>
+        <Connection Comment="" Destination="TEMP_CSE_PROCESS_1.TRIGGER" Source="TINA_1.SENSORS_O" dx1="60.0" dx2="655.0" dy="935.0"/>
+        <Connection Comment="" Destination="DP_FILTER_ASP_AGI.TRIGGER" Source="TINA_1.SENSORS_O" dx1="60.0" dx2="660.0" dy="930.0"/>
+        <Connection Comment="" Destination="TINA_1.SENSORS" Source="TEMP_CSE_PROCESS_1.TRIGGER_O" dx1="215.0"/>
+        <Connection Comment="" Destination="TINA_1.SENSORS" Source="DP_FILTER_ASP_AGI.TRIGGER_O" dx1="215.0"/>
+        <Connection Comment="" Destination="TIME_IME_CSE.TRIGGER" Source="TINA_1.SENSORS_O" dx1="60.0" dx2="965.0" dy="930.0"/>
+        <Connection Comment="" Destination="TINA_1.SENSORS" Source="TIME_IME_CSE.TRIGGER_O" dx1="190.0"/>
+      </EventConnections>
+    </SubAppNetwork>
+  </Application>
+  <Device Comment="" Name="FORTE_PC" Type="FORTE_PC" x="2625.0" y="1035.0">
+    <Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
+    <Attribute Comment="device profile" Name="Profile" Type="STRING" Value="HOLOBLOC"/>
+    <Attribute Comment="color" Name="Color" Type="STRING" Value="97,92,201"/>
+    <Resource Comment="" Name="SMART_COMPONENT" Type="EMB_RES" x="0.0" y="0.0">
+      <FBNetwork>
+        <FB Comment="" Name="TEMP_CSE_PROCESS" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="400.0">
+          <Parameter Name="UA_NAME" Value="Temperature"/>
+          <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+          <Parameter Name="RANGE" Value="53-58"/>
+          <Parameter Name="BATCH" Value="0"/>
+          <Parameter Name="RATE" Value="1"/>
+        </FB>
+        <FB Comment="" Name="DP_FILTER_AGI" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="1400.0">
+          <Parameter Name="UA_NAME" Value="Pressure"/>
+          <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+          <Parameter Name="RANGE" Value="0-1.5"/>
+          <Parameter Name="BATCH" Value="0"/>
+          <Parameter Name="RATE" Value="1"/>
+        </FB>
+        <FB Comment="" Name="DP_FILTER_ASP" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="2400.0">
+          <Parameter Name="UA_NAME" Value="Pressure"/>
+          <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+          <Parameter Name="RANGE" Value="0-0.7"/>
+          <Parameter Name="BATCH" Value="0"/>
+          <Parameter Name="RATE" Value="1"/>
+        </FB>
+        <FB Comment="" Name="DP_FILTER_ASP_1" Type="SENSOR_SIMULATOR_RANGE" x="300.0" y="3400.0">
+          <Parameter Name="UA_NAME" Value="Pressure"/>
+          <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+          <Parameter Name="RANGE" Value="0-0.7"/>
+          <Parameter Name="BATCH" Value="0"/>
+          <Parameter Name="RATE" Value="1"/>
+        </FB>
+        <FB Comment="" Name="TIME_POWER_WASH" Type="TIMER" x="2000.0" y="2500.0">
+          <Parameter Name="UA_NAME" Value="Time"/>
+          <Parameter Name="EVENT_ID" Value="WASH"/>
+          <Parameter Name="RANGE" Value="2-3"/>
+        </FB>
+        <FB Comment="" Name="TIME_CSE_PROCESS" Type="TIMER" x="2000.0" y="1600.0">
+          <Parameter Name="UA_NAME" Value="Time"/>
+          <Parameter Name="EVENT_ID" Value="CSE"/>
+          <Parameter Name="RANGE" Value="2-3"/>
+        </FB>
+        <FB Comment="" Name="CHASSIS_GENERATOR" Type="CHASSIS_GENERATOR" x="1800.0" y="800.0">
+          <Parameter Name="N_CONTAINERS" Value="10"/>
+          <Parameter Name="RATE" Value="15"/>
+        </FB>
+        <FB Comment="" Name="TINA_0" Type="TINA_0" x="3500.0" y="400.0"/>
+        <FB Comment="" Name="TINA_1" Type="TINA_1" x="5700.0" y="400.0"/>
+        <FB Comment="" Name="TEMP_CSE_PROCESS_1" Type="SENSOR_SIMULATOR_RANGE" x="4200.0" y="1800.0">
+          <Parameter Name="UA_NAME" Value="Temperature"/>
+          <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+          <Parameter Name="RANGE" Value="55-60"/>
+          <Parameter Name="BATCH" Value="0"/>
+          <Parameter Name="RATE" Value="1"/>
+        </FB>
+        <FB Comment="" Name="DP_FILTER_ASP_AGI" Type="SENSOR_SIMULATOR_RANGE" x="4200.0" y="2800.0">
+          <Parameter Name="UA_NAME" Value="Pressure"/>
+          <Parameter Name="EVENT_ID" Value="STOP_MEASURING"/>
+          <Parameter Name="RANGE" Value="0-0.8"/>
+          <Parameter Name="BATCH" Value="0"/>
+          <Parameter Name="RATE" Value="1"/>
+        </FB>
+        <FB Comment="" Name="TIME_IME_CSE" Type="TIMER" x="4500.0" y="3800.0">
+          <Parameter Name="UA_NAME" Value="Time"/>
+          <Parameter Name="EVENT_ID" Value="CSE"/>
+          <Parameter Name="RANGE" Value="2-3"/>
+        </FB>
+        <DataConnections>
+          <Connection Comment="" Destination="TINA_0.INPUT_MATERIAL" Source="CHASSIS_GENERATOR.MATERIAL_NAME"/>
+          <Connection Comment="" Destination="TINA_0.INPUT_CONTAINER" Source="CHASSIS_GENERATOR.CONTAINER_NAME"/>
+          <Connection Comment="" Destination="TINA_1.INPUT_MATERIAL" Source="TINA_0.MATERIAL_NAME"/>
+          <Connection Comment="" Destination="TINA_1.INPUT_CONTAINER" Source="TINA_0.CONTAINER_NAME"/>
+        </DataConnections>
+        <EventConnections>
+          <Connection Comment="" Destination="TINA_0.SENSORS" Source="TIME_CSE_PROCESS.TRIGGER_O"/>
+          <Connection Comment="" Destination="TINA_0.SENSORS" Source="TIME_POWER_WASH.TRIGGER_O"/>
+          <Connection Comment="" Destination="TINA_0.SENSORS" Source="TEMP_CSE_PROCESS.TRIGGER_O"/>
+          <Connection Comment="" Destination="TINA_0.SENSORS" Source="DP_FILTER_AGI.TRIGGER_O"/>
+          <Connection Comment="" Destination="TINA_0.SENSORS" Source="DP_FILTER_ASP.TRIGGER_O"/>
+          <Connection Comment="" Destination="TINA_0.SENSORS" Source="DP_FILTER_ASP_1.TRIGGER_O"/>
+          <Connection Comment="" Destination="TINA_0.NEW_MATERIAL" Source="CHASSIS_GENERATOR.NEW_MATERIAL"/>
+          <Connection Comment="" Destination="TIME_CSE_PROCESS.TRIGGER" Source="TINA_0.SENSORS_O"/>
+          <Connection Comment="" Destination="TIME_POWER_WASH.TRIGGER" Source="TINA_0.SENSORS_O"/>
+          <Connection Comment="" Destination="TEMP_CSE_PROCESS.TRIGGER" Source="TINA_0.SENSORS_O"/>
+          <Connection Comment="" Destination="DP_FILTER_AGI.TRIGGER" Source="TINA_0.SENSORS_O"/>
+          <Connection Comment="" Destination="DP_FILTER_ASP.TRIGGER" Source="TINA_0.SENSORS_O"/>
+          <Connection Comment="" Destination="DP_FILTER_ASP_1.TRIGGER" Source="TINA_0.SENSORS_O"/>
+          <Connection Comment="" Destination="TINA_1.NEW_MATERIAL" Source="TINA_0.NEW_MATERIAL_O"/>
+          <Connection Comment="" Destination="TEMP_CSE_PROCESS_1.TRIGGER" Source="TINA_1.SENSORS_O"/>
+          <Connection Comment="" Destination="TINA_1.SENSORS" Source="TEMP_CSE_PROCESS_1.TRIGGER_O"/>
+          <Connection Comment="" Destination="DP_FILTER_ASP_AGI.TRIGGER" Source="TINA_1.SENSORS_O"/>
+          <Connection Comment="" Destination="TINA_1.SENSORS" Source="DP_FILTER_ASP_AGI.TRIGGER_O"/>
+          <Connection Comment="" Destination="TIME_IME_CSE.TRIGGER" Source="TINA_1.SENSORS_O"/>
+          <Connection Comment="" Destination="TINA_1.SENSORS" Source="TIME_IME_CSE.TRIGGER_O"/>
+        </EventConnections>
+      </FBNetwork>
+    </Resource>
+  </Device>
+  <Mapping From="paint_simulatorApp.TEMP_CSE_PROCESS" To="FORTE_PC.SMART_COMPONENT.TEMP_CSE_PROCESS"/>
+  <Mapping From="paint_simulatorApp.DP_FILTER_AGI" To="FORTE_PC.SMART_COMPONENT.DP_FILTER_AGI"/>
+  <Mapping From="paint_simulatorApp.DP_FILTER_ASP" To="FORTE_PC.SMART_COMPONENT.DP_FILTER_ASP"/>
+  <Mapping From="paint_simulatorApp.DP_FILTER_ASP_1" To="FORTE_PC.SMART_COMPONENT.DP_FILTER_ASP_1"/>
+  <Mapping From="paint_simulatorApp.TIME_POWER_WASH" To="FORTE_PC.SMART_COMPONENT.TIME_POWER_WASH"/>
+  <Mapping From="paint_simulatorApp.TIME_CSE_PROCESS" To="FORTE_PC.SMART_COMPONENT.TIME_CSE_PROCESS"/>
+  <Mapping From="paint_simulatorApp.CHASSIS_GENERATOR" To="FORTE_PC.SMART_COMPONENT.CHASSIS_GENERATOR"/>
+  <Mapping From="paint_simulatorApp.TINA_0" To="FORTE_PC.SMART_COMPONENT.TINA_0"/>
+  <Mapping From="paint_simulatorApp.TINA_1" To="FORTE_PC.SMART_COMPONENT.TINA_1"/>
+  <Mapping From="paint_simulatorApp.TEMP_CSE_PROCESS_1" To="FORTE_PC.SMART_COMPONENT.TEMP_CSE_PROCESS_1"/>
+  <Mapping From="paint_simulatorApp.DP_FILTER_ASP_AGI" To="FORTE_PC.SMART_COMPONENT.DP_FILTER_ASP_AGI"/>
+  <Mapping From="paint_simulatorApp.TIME_IME_CSE" To="FORTE_PC.SMART_COMPONENT.TIME_IME_CSE"/>
+  <Segment Comment="" Name="Ethernet" Type="Ethernet" dx1="1500.0" x="2500.0" y="400.0">
+    <Attribute Comment="color" Name="Color" Type="STRING" Value="241,159,59"/>
+  </Segment>
+  <Link CommResource="FORTE_PC" Comment="" SegmentName="Ethernet"/>
+</System>

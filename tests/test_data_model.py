@@ -18,8 +18,7 @@ class XMLTests(base_dm.BaseTests):
         self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
 
     def tearDown(self):
-        self.manager_4diac.manager_ua.config.stop_work()
-        self.manager_4diac.manager_ua.stop()
+        self.manager_4diac.manager_ua.stop_ua()
 
 
 class FBTests(base_dm.BaseTests):
@@ -50,8 +49,7 @@ class FBTests(base_dm.BaseTests):
 
     def tearDown(self):
         # stops the work at the
-        self.manager_4diac.manager_ua.config.stop_work()
-        self.manager_4diac.manager_ua.stop()
+        self.manager_4diac.manager_ua.stop_ua()
         # stops the tcp server
         self.handler.stop_server()
 
@@ -91,8 +89,7 @@ class PermanentDataTest(base_dm.BaseTests):
         sender_simulator.disconnect()
 
         # stops the work at the
-        self.manager_4diac.manager_ua.config.stop_work()
-        self.manager_4diac.manager_ua.stop()
+        self.manager_4diac.manager_ua.stop_ua()
         # stops the tcp server
         self.handler.stop_server()
 
@@ -103,8 +100,7 @@ class PermanentDataTest(base_dm.BaseTests):
 
     def tearDown(self):
         # stops the work at the
-        self.manager_4diac.manager_ua.config.stop_work()
-        self.manager_4diac.manager_ua.stop()
+        self.manager_4diac.manager_ua.stop_ua()
 
         # gets  the path for the current data model and the clear copy
         original_file = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'tests_no_data.xml')
@@ -143,8 +139,7 @@ class FBPipelineTest(base_dm.PipelineTests):
 
     def tearDown(self):
         # stops the work at the
-        self.manager_4diac.manager_ua.config.stop_work()
-        self.manager_4diac.manager_ua.stop()
+        self.manager_4diac.manager_ua.stop_ua()
         # stops the tcp server
         self.handler.stop_server()
 
@@ -184,8 +179,7 @@ class PermanentPipelineTests(base_dm.PipelineTests):
         sender_simulator.disconnect()
 
         # stops the work at the
-        self.manager_4diac.manager_ua.config.stop_work()
-        self.manager_4diac.manager_ua.stop()
+        self.manager_4diac.manager_ua.stop_ua()
         # stops the tcp server
         self.handler.stop_server()
 
@@ -196,8 +190,7 @@ class PermanentPipelineTests(base_dm.PipelineTests):
 
     def tearDown(self):
         # stops the work at the
-        self.manager_4diac.manager_ua.config.stop_work()
-        self.manager_4diac.manager_ua.stop()
+        self.manager_4diac.manager_ua.stop_ua()
 
         # gets  the path for the current data model and the clear copy
         original_file = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'tests_no_data.xml')

@@ -7,18 +7,18 @@ import logging
 
 class UaPeer(Server, base.UaBase):
 
-    def __init__(self, address):
+    def __init__(self, address, server_name='systec_ua'):
         Server.__init__(self)
         base.UaBase.__init__(self)
 
         logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(levelname)s][%(threadName)-15s] %(message)s')
 
         self.set_endpoint(address)
-        self.set_server_name('systec_ua')
+        self.set_server_name(server_name)
 
         # setup our own namespace, not really necessary but should as spec
-        # self.uri = "http://systec.fe.up.pu"
-        # self.register_namespace(self.uri)
+        self.uri = "http://systec.fe.up.pu"
+        self.register_namespace(self.uri)
 
         self.root = self.get_root_node()
 

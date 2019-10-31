@@ -18,6 +18,11 @@ This version is targeted to the Industry4.0 applications, for that it was also u
   * [Sensorization - CPS](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.2.-Hands-On:-Sensorization)
   * [Optimization](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.3.-Hands-On:-Optimization)
 * [Build new Function Blocks](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/4.-Build-new-Function-Blocks)
+* Use Cases
+  * [Painting Area Simulation](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/5.1.-Painting-Area-Simulation)
+  * Industrial Sensorization using Modbus
+  * Universal Robots and 3D printed Gripper Control
+  * Anomaly Detection in a Servo Motor Robotic Arm
 
 ## Features
 - [x] Communication between the DINASORE and the 4DIAC-IDE 
