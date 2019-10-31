@@ -38,13 +38,6 @@ XML_NODE = {ua.ObjectIds.String: 'String',
             ua.ObjectIds.Float: 'Float',
             ua.ObjectIds.Boolean: 'Boolean'}
 
-# XML_TYPES = {ua.VariantType.String: 'String',
-#              ua.VariantType.Double: 'Double',
-#              ua.VariantType.Int64: 'Integer',
-#              ua.VariantType.UInt64: 'Integer',
-#              ua.VariantType.Float: 'Float',
-#              ua.VariantType.Boolean: 'Boolean'}
-
 
 def default_folder(ua_peer, obj_idx, obj_path, path_list, folder_name):
     # creates the methods folder

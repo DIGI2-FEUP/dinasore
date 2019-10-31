@@ -17,17 +17,27 @@ if __name__ == "__main__":
     port_diac = 61499
     port_opc = 4840
     log_level = log_levels['ERROR']
+    agent = False
+
+    help_message = "Usage: python core/main.py [ARGS]\n\n" \
+                   " -h, --help: display the help message\n" \
+                   " -a, --address: ip address to bind at (default: localhost)\n" \
+                   " -p, --port_diac: port for the 4diac communication (default: 61499)\n" \
+                   " -u, --port_opc: port for the opc-ua communication (default: 4840)\n" \
+                   " -l, --log_level: logging level at the file resources/error_list.log\n" \
+                   "                  INFO, WARN or ERROR (default: ERROR)\n" \
+                   " -g, --agent: sets on the self-organizing agent\n\n"
 
     try:
         opts, args = getopt.getopt(sys.argv[1:],
-                                   "ha:p:u:l:",
-                                   ["address=", "port_diac=", "port_opc=", "log_level"])
+                                   "h:a:p:u:l:g:",
+                                   ["help", "address", "port_diac", "port_opc", "log_level", "agent"])
     except getopt.GetoptError:
-        print('python core/main.py -a <address> -p <port_diac> -u <port_opc> -l <log_level>')
+        print(help_message)
         sys.exit(2)
     for opt, arg in opts:
-        if opt == '-h':
-            print('python core/main.py -a <address> -p <port_diac> -u <port_opc> -l <log_level>')
+        if opt in ("-h", "--help"):
+            print(help_message)
             sys.exit()
         elif opt in ("-a", "--address"):
             address = arg
@@ -37,6 +47,8 @@ if __name__ == "__main__":
             port_opc = int(arg)
         elif opt in ("-l", "--log_level"):
             log_level = log_levels[arg]
+        elif opt in ("-g", "--agent"):
+            agent = True
 
     # Configure the logging output
     log_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'error_list.log')
@@ -60,5 +72,6 @@ if __name__ == "__main__":
             hand.handle_client()
     except KeyboardInterrupt:
         logging.info('interrupted server')
+        m.manager_ua.stop_ua()
         hand.stop_server()
         sys.exit(0)

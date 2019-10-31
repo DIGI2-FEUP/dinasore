@@ -19,12 +19,14 @@ class UaBase:
             my_obj = self.root.get_child(path)
             my_obj.add_object(index, new_obj_name)
 
-    def create_variable(self, path, index, var_name, val, writable):
+    def create_variable(self, path, index, var_name, val, writable=False):
         my_obj = self.root.get_child(path)
         my_var = my_obj.add_variable(index, var_name, val)
 
         if writable:
             my_var.set_writable()
+
+        return my_var
 
     def create_typed_variable(self, path, index, var_name, var_type, value_rank, dimensions=0, writable=False):
         my_obj = self.root.get_child(path)

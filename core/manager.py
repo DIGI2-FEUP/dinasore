@@ -183,12 +183,14 @@ class Manager:
                     self.get_config(config_id).delete_watch(watch_source, watch_destination)
 
         elif action == 'START':
-            # Starts the configuration
-            self.get_config(config_id).start_work()
             # check the options for ua_integration
             if self.ua_integration:
+                # checks the ua model to change the ua names
+                self.manager_ua.check_ua_names()
                 # saves the actual configuration
                 self.manager_ua.save_xml()
+            # Starts the configuration
+            self.get_config(config_id).start_work()
 
         elif action == 'WRITE':
             # Iterate over the list of children
