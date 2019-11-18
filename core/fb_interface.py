@@ -187,8 +187,12 @@ class FBInterface:
             return self.event_queue.pop()
 
     def wait_event(self):
-        if len(self.input_events) != 0 and len(self.event_queue) == 0:
+        while len(self.event_queue) <= 0:
             self.new_event.wait()
+            # Clears new_event to wait for new events
+            self.new_event.clear()
+        # Clears new_event to wait for new events
+        self.new_event.clear()
 
     def read_inputs(self):
         logging.info('reading fb inputs...')
@@ -238,9 +242,6 @@ class FBInterface:
                 # Sends the event ot the new fb
                 for connection in self.output_connections[event_name]:
                     connection.send_event(value)
-
-        # Clears new_event to wait for new events
-        self.new_event.clear()
 
     def read_watches(self, start_time):
         # Creates the xml root element
