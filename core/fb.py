@@ -64,7 +64,7 @@ class FB(threading.Thread, fb_interface.FBInterface):
 
     def stop(self):
         self.kill_event.set()
-        self.new_event.set()
+        self.push_event('unblock', 1)
 
         try:
             self.fb_obj.__del__()

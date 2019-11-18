@@ -83,7 +83,12 @@ class Configuration:
         source_fb = self.get_fb(source_attr[0])
         source_name = source_attr[1]
 
-        source_fb.set_attr(source_name, set_watch=True)
+        try:
+            source_fb.set_attr(source_name, set_watch=True)
+        except AttributeError as error:
+            # check if the return if None
+            logging.error(error)
+            logging.error("don't forget to delete the watch when you delete a function block")
 
         logging.info('watch created between {0} and {1}'.format(source, destination))
 
@@ -94,7 +99,12 @@ class Configuration:
         source_fb = self.get_fb(source_attr[0])
         source_name = source_attr[1]
 
-        source_fb.set_attr(source_name, set_watch=False)
+        try:
+            source_fb.set_attr(source_name, set_watch=False)
+        except AttributeError as error:
+            # check if the return if None
+            logging.error(error)
+            logging.error("don't forget to delete the watch when you delete a function block")
 
         logging.info('watch deleted between {0} and {1}'.format(source, destination))
 
