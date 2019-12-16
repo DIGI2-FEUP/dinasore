@@ -4,4 +4,4 @@ This is an example of two different sensors - Temperature and Voltage - that can
 
 The file named IEEE1451.rar is the 4DIAC configuration and the function_blocks.rar are the required XML and Python code for each new function block used.
 
-![SensorActuatorConfiguration](https://github.com/SYSTEC-FoF-FEUP/dinasoreua/blob/master/resources/use_cases/sensor_actuator/normal_ieee.PNG)
+![SensorActuatorConfiguration](https://github.com/DIGI2-FEUP/dinasore-ua/blob/master/resources/use_cases/sensor_actuator/normal_ieee.PNG)
