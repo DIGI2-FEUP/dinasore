@@ -5,9 +5,14 @@ from xml.etree import ElementTree as ETree
 import logging
 
 
+
+
 class Configuration:
 
-    def __init__(self, config_id, config_type):
+    def __init__(self, config_id, config_type, monitor=None):
+
+        self.monitor = monitor
+
         self.fb_dictionary = dict()
 
         self.config_id = config_id
@@ -32,12 +37,13 @@ class Configuration:
 
     def create_virtualized_fb(self, fb_name, fb_type, ua_update):
         logging.info('creating a virtualized (opc-ua) fb {0}...'.format(fb_name))
-        self.create_fb(fb_name, fb_type)
+
+        self.create_fb(fb_name, fb_type, monitor=True)
         # sets the ua variables update method
         fb2update = self.get_fb(fb_name)
         fb2update.ua_variables_update = ua_update
 
-    def create_fb(self, fb_name, fb_type):
+    def create_fb(self, fb_name, fb_type, monitor=False):
         logging.info('creating a new fb...')
 
         fb_res = fb_resources.FBResources(fb_type)
@@ -52,7 +58,13 @@ class Configuration:
 
         # check if if happened any importing error
         if fb_definition is not None:
-            fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition)
+
+            ## if it is a real FB, not a hidden one
+            if monitor:
+                fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition, monitor=self.monitor)
+            else:
+                fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition)
+
             self.set_fb(fb_name, fb_element)
             logging.info('created fb type: {0}, instance: {1}'.format(fb_type, fb_name))
             # returns the both elements
@@ -158,6 +170,7 @@ class Configuration:
                     # updates the opc-ua variables
                     fb_element.ua_variables_update()
 
+
         outputs = self.get_fb('START').fb_obj.schedule()
         self.get_fb('START').update_outputs(outputs)
 
@@ -166,6 +179,7 @@ class Configuration:
         for fb_name, fb_element in self.fb_dictionary.items():
             if fb_name != 'START':
                 fb_element.stop()
+
 
     @staticmethod
     def convert_type(value, value_type):

@@ -8,13 +8,14 @@ import gc
 import os
 import sys
 import shutil
-
+import glob
 
 class Manager:
 
-    def __init__(self):
+    def __init__(self, monitor=None):
         self.start_time = time.time() * 1000
         self.config_dictionary = dict()
+        self.monitor = monitor
 
         # attributes responsible for the ua integration
         self.ua_integration = False
@@ -43,6 +44,15 @@ class Manager:
         xml = None
 
         if action == 'CREATE':
+
+            ##############################################################
+            ## remove all files in monitoring folder
+            monitoring_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'monitoring', '')
+            files = glob.glob("{0}*".format(monitoring_path))
+            for f in files:
+                os.remove(f)
+            ##############################################################
+
             # Iterate over the list of children
             for child in element:
                 # Create configuration (function block)
@@ -55,7 +65,7 @@ class Manager:
                     self.config_dictionary = dict()
                     if conf_name not in self.config_dictionary:
                         # Creates the configuration
-                        config = configuration.Configuration(conf_name, conf_type)
+                        config = configuration.Configuration(conf_name, conf_type, monitor=self.monitor)
                         self.set_config(conf_name, config)
                         # check the options for ua_integration
                         if self.ua_integration:
@@ -110,6 +120,15 @@ class Manager:
                 pass
 
         elif action == 'DELETE':
+
+            ##############################################################
+            ## remove all files in monitoring folder
+            monitoring_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'monitoring', '')
+            files = glob.glob("{0}*".format(monitoring_path))
+            for f in files:
+                os.remove(f)
+            ##############################################################
+
             # Iterate over the list of children
             for child in element:
                 # Deletes a configuration (could be a fb)
@@ -124,6 +143,7 @@ class Manager:
                     gc.collect()
             # check the options for ua_integration
             if self.ua_integration:
+
                 # reset the program
                 resources_path = os.path.join(os.path.dirname(sys.path[0]), 'resources')
                 os.remove(os.path.join(resources_path, 'data_model.xml'))
@@ -151,7 +171,7 @@ class Manager:
                 if child.tag == 'FB':
                     fb_name = child.attrib['Name']
                     fb_type = child.attrib['Type']
-                    fb, fb_xml = self.get_config(config_id).create_fb(fb_name, fb_type)
+                    fb, fb_xml = self.get_config(config_id).create_fb(fb_name, fb_type, monitor=True)
                     # check the options for ua_integration
                     if self.ua_integration:
                         # parses from fb
@@ -230,7 +250,8 @@ class Manager:
         self.ua_url = 'opc.tcp://{0}:{1}'.format(address, port)
         self.manager_ua = ua_manager.UaManager(self.ua_url, self.file_name)
         # creates the opc-ua manager
-        config = configuration.Configuration(self.manager_ua.base_name, 'EMB_RES')
+
+        config = configuration.Configuration(self.manager_ua.base_name, 'EMB_RES', monitor=self.monitor)
         self.set_config(self.manager_ua.base_name, config)
         # parses the description file
         self.manager_ua(config)

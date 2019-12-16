@@ -5,9 +5,9 @@ from core import fb_interface
 
 class FB(threading.Thread, fb_interface.FBInterface):
 
-    def __init__(self, fb_name, fb_type, fb_obj, fb_xml):
+    def __init__(self, fb_name, fb_type, fb_obj, fb_xml, monitor=None):
         threading.Thread.__init__(self, name=fb_name)
-        fb_interface.FBInterface.__init__(self, fb_name, fb_type, fb_xml)
+        fb_interface.FBInterface.__init__(self, fb_name, fb_type, fb_xml, monitor)
 
         self.fb_obj = fb_obj
         self.kill_event = threading.Event()
@@ -18,6 +18,7 @@ class FB(threading.Thread, fb_interface.FBInterface):
         logging.info('fb {0} started.'.format(self.fb_name))
 
         while not self.kill_event.is_set():
+
             # clears the event when starts the execution
             self.execution_end.clear()
 
@@ -63,6 +64,9 @@ class FB(threading.Thread, fb_interface.FBInterface):
                 self.execution_end.set()
 
     def stop(self):
+
+        self.stop_thread = True
+
         self.kill_event.set()
         self.push_event('unblock', 1)
 
