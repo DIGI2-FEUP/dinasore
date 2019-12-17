@@ -1,6 +1,7 @@
 psutil
 cryptography
 opcua
-paho-mqtt
-influxdb
 numpy
+argparse
+scikit-learn
+pandas
