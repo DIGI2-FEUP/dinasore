@@ -4,11 +4,15 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
 import time
+import os
+import sys
 
 from os import listdir
 from os.path import isfile, join
 
-mypath = "monitoring"
+#mypath = "monitoring"
+mypath = os.path.join('monitoring','')
+print(mypath)
 
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
@@ -58,7 +62,7 @@ def animate(i):
 
             if (alg_names[y] is name_events):
 
-                f = open(mypath + "\\{0}.txt".format(fb_names[x]), "r").read()
+                f = open(mypath + "{0}.txt".format(fb_names[x]), "r").read()
                 lines = f.split('\n')
                 events = np.array([])
 
@@ -102,7 +106,7 @@ def animate(i):
 
             elif (alg_names[y] is name_hist):
 
-                f = open(mypath + "\\{0}__{1}.txt".format(fb_names[x], alg_names[hist_alg]), "r").read()
+                f = open(mypath + "{0}__{1}.txt".format(fb_names[x], alg_names[hist_alg]), "r").read()
                 lines = f.split('\n')
                 label = []
 
@@ -143,7 +147,7 @@ def animate(i):
                         axs[y, x].set_ylabel(alg_names[y])
 
             else:
-                f = open(mypath + "\\{0}__{1}.txt".format(fb_names[x],alg_names[y]), "r").read()
+                f = open(mypath + "{0}__{1}.txt".format(fb_names[x],alg_names[y]), "r").read()
                 lines = f.split('\n')
                 xs = np.array([])
                 label = []
