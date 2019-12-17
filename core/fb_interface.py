@@ -314,6 +314,10 @@ class FBInterface:
             import numpy as np
             global pd
             import pandas as pd
+            global os
+            import os
+            global sys
+            import sys
 
             """
             Monitoring variables for Behavioral Anomaly Detection
@@ -336,7 +340,7 @@ class FBInterface:
             self.contamination = 1/self.training_samples
             self.anomaly_data = []
             self.first_event = False
-            self.monitoring_path = "..\\resources\\monitoring\\"
+            self.monitoring_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'monitoring','')
 
             ## Pre-processing Methods
             self.pca = PCA(n_components=2)
