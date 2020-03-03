@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="CHASSIS_GENERATOR" OpcUa="DEVICE.SENSOR">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="READ" Type="Event"/>
+      <Event Name="SYNC" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event"/>
+      <Event Name="NEW_MATERIAL" Type="Event">
+        <With Var="MATERIAL_NAME"/>
+        <With Var="CONTAINER_NAME"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="N_CONTAINERS" Type="INT" OpcUa="Constant"/>
+      <VarDeclaration Name="RATE" Type="INT" OpcUa="Constant"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="MATERIAL_NAME" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="CONTAINER_NAME" Type="STRING" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>

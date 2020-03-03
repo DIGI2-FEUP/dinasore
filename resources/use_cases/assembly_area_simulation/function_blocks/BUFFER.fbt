@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<!-- runs always in loop to check the actual state -->
+<FBType Name="BUFFER" OpcUa="DEVICE.EQUIPMENT">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="READ" Type="Event"/>
+      <Event Name="SYNC" Type="Event"/>
+      <Event Name="SENSORS" Type="Event"/>
+      <Event Name="ACTUATORS" Type="Event"/>
+      <Event Name="NEW_MATERIAL" Type="Event">
+        <With Var="INPUT_MATERIAL"/>
+        <With Var="INPUT_CONTAINER"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event"/>
+      <Event Name="SYNC_O" Type="Event"/>
+      <Event Name="SENSORS_O" Type="Event"/>
+      <Event Name="ACTUATORS_O" Type="Event"/>
+      <Event Name="NEW_MATERIAL_O" Type="Event">
+        <With Var="MATERIAL_NAME"/>
+        <With Var="CONTAINER_NAME"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="INPUT_MATERIAL" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="INPUT_CONTAINER" Type="STRING" OpcUa="Variable"/>
+	  <VarDeclaration Name="BUFFER_ID" Type="REAL" OpcUa="Constant"/>
+      <VarDeclaration Name="BUFFER_SIZE" Type="REAL" OpcUa="Constant"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="MATERIAL_NAME" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="CONTAINER_NAME" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="STATE" Type="STRING" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>
