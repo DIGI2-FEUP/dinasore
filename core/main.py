@@ -6,7 +6,7 @@ import glob
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
 
-from communication import tcp_server
+from communication import tcp_server,marketplace_bridge
 from core import manager
 
 if __name__ == "__main__":
@@ -23,6 +23,11 @@ if __name__ == "__main__":
     monitor = [n_samples,secs_sample]
     agent = False
 
+    mpHttpAddress = 'localhost'
+    mpHttpPort = 9002
+    mpFtpAddress = 'localhost'
+    mpFtpPort = 21
+
     help_message = "Usage: python core/main.py [ARGS]\n\n" \
                    " -h, --help: display the help message\n" \
                    " -a, --address: ip address to bind at (default: localhost)\n" \
@@ -36,6 +41,7 @@ if __name__ == "__main__":
                    "       for the initial training dataset and each sample with 20 seconds. \n" \
                    "       As an example, you can specify the monitoring parameters in the following way (-m 5 10) \n" \
                    "       meaning 10 samples for training dataset with 10 seconds of monitoring per sample. \n"
+                   
 
     ## build parser for application command line arguments
     parser = argparse.ArgumentParser()
@@ -45,6 +51,10 @@ if __name__ == "__main__":
     parser.add_argument('-l', metavar='log_level', nargs=1,  help="logging level at the file resources/error_list.log, e.g. INFO, WARN or ERROR (default: ERROR)")
     parser.add_argument('-g', action='store_true', help="sets on the self-organizing agent")
     parser.add_argument('-m', metavar='monitor', nargs='*', help="activates the behavioral anomaly detection feature. If no paramters are specified, the default values are 10 samples for initial training, each sample with 20 seconds (approximately 3m20s). As an example, you can specify paramters the following way (-m 5 10) meaning 10 samples for training with 10 seconds each sample.")
+    parser.add_argument('-mha', metavar='mpHttpAddress', nargs=1, help="marketplace http address")
+    parser.add_argument('-mhp', metavar='mpHttpPort', nargs=1, help="marketplace http port")
+    parser.add_argument('-mfa', metavar='mpFtpAddress', nargs=1, help="marketplace ftp address")
+    parser.add_argument('-mfp', metavar='mpFtpPort', nargs=1, help="marketplace ftp port")
     args = parser.parse_args()
 
     if args.a != None: address = args.a[0]
@@ -61,9 +71,23 @@ if __name__ == "__main__":
     else:
         monitor=None
 
+    if args.mha != None: mpHttpAddress = args.mha[0]
+    if args.mhp != None: mpHttpPort = args.mhp[0]
+    if args.mfa != None: mpFtpAddress = args.mfa[0]
+    if args.mfp != None: mpFtpPort = args.mfp[0]
+
+    print(mpHttpPort)
+
+    #########Initializing Marketplace requester#####
+    ################################################
+    marketplace_bridge.MarketplaceBridge.initializeGenericRequester(mpHttpAddress,mpHttpPort,mpFtpAddress,mpFtpPort)
+
+    ################################################
+
     ##############################################################
     ## remove all files in monitoring folder
     monitoring_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'monitoring','')
+    print(monitoring_path)
     files = glob.glob("{0}*".format(monitoring_path))
     for f in files:
         os.remove(f)

@@ -3,13 +3,14 @@ import os
 import sys
 import xml.etree.ElementTree as ETree
 import logging
+from communication import marketplace_bridge
 
 
 class FBResources:
 
     def __init__(self, fb_type):
         self.fb_type = fb_type
-
+        print('fbtype',fb_type)
         # Gets the file path to the python file
         self.py_path = os.path.join(os.path.dirname(sys.path[0]),
                                     'resources',
@@ -93,6 +94,8 @@ class FBResources:
         exists_py = os.path.isfile(self.py_path)
         # Verifies if exists the fbt file
         exists_fbt = os.path.isfile(self.fbt_path)
+
+        marketplace_bridge.MarketplaceBridge.getFbDetails(self.fb_type)
 
         if exists_py and exists_fbt:
             return True

@@ -1,0 +1,8 @@
+[2020-04-16 19:15:04,194][ERROR][172.18.0.1:45472] can not find that fb SENSOR_SIMULATOR
+[2020-04-16 19:15:04,195][ERROR][172.18.0.1:45472] 'SENSOR_SIMULATOR'
+[2020-04-16 19:15:04,196][ERROR][172.18.0.1:45472] 'NoneType' object has no attribute 'set_attr'
+[2020-04-16 19:15:04,197][ERROR][172.18.0.1:45472] don't forget to delete the watch when you delete a function block
+[2020-04-16 19:15:13,960][ERROR][172.18.0.1:45472] can not find that fb SENSOR_SIMULATOR
+[2020-04-16 19:15:13,961][ERROR][172.18.0.1:45472] 'SENSOR_SIMULATOR'
+[2020-04-16 19:15:13,962][ERROR][172.18.0.1:45472] 'NoneType' object has no attribute 'set_attr'
+[2020-04-16 19:15:13,963][ERROR][172.18.0.1:45472] don't forget to delete the watch when you delete a function block
