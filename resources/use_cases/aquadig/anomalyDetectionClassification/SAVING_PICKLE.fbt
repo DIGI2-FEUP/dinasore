@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="SAVING_PICKLE" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="data_in"/>
+                <With Var="path"/>
+                <With Var="name"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="status_o"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="data_in" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="path" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="name" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="status_o" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

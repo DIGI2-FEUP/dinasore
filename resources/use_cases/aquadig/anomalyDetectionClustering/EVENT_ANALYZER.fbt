@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="EVENT_ANALYZER" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="CLASSIF_1"/>
+                <With Var="N_SEQ"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="ANOMALY"/>
+                <With Var="BEHAVIOUR"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="CLASSIF_1" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="N_SEQ" Type="INT" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="ANOMALY" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="BEHAVIOUR" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

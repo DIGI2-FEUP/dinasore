@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="ELLIP_ENVELOPE" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="data_from_pickle"/>
+                <With Var="X_predict"/>
+                <With Var="X_train"/>
+                <With Var="y_train"/>
+                <With Var="store_precision"/>
+                <With Var="assume_centered"/>
+                <With Var="support_fraction"/>
+                <With Var="contamination"/>
+                <With Var="random_state"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="classifier"/>
+                <With Var="prediction"/>
+                <With Var="score_samples"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="data_from_pickle" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="X_predict" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="X_train" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="y_train" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="store_precision" Type="BOOL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="assume_centered" Type="BOOL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="support_fraction" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="contamination" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="random_state" Type="INT" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="classifier" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="prediction" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="score_samples" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

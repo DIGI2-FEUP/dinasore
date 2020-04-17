@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="NORMAL_BEHAVIOUR_SIM" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="MEAN"/>
+                <With Var="STD"/>
+                <With Var="SIZE"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="Column_out"/>
+                <With Var="size"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="MEAN" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="STD" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="SIZE" Type="INT" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="Column_out" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="size" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>
