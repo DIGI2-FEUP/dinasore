@@ -30,6 +30,7 @@ class FB(threading.Thread, fb_interface.FBInterface):
             inputs = self.read_inputs()
 
             logging.info('running fb...')
+            # print(logging.pathname)
 
             try:
                 outputs = self.fb_obj.schedule(*inputs)

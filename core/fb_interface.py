@@ -584,10 +584,6 @@ class FBInterface:
     ## Get the monitoring statistics for further processing
     def get_monitoring(self):
 
-        #print(self.fb_name , self.time_in)
-        #print(self.fb_name , self.time_out)
-
-
         time_now = datetime.datetime.now()
         full_delta = time_now - datetime.timedelta(seconds=self.time_per_sample)
         half_delta = time_now - datetime.timedelta(seconds=int(self.time_per_sample/2))

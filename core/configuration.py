@@ -48,11 +48,13 @@ class Configuration:
 
         fb_res = fb_resources.FBResources(fb_type)
 
-        exists_fb = fb_res.exists_fb()
-        if not exists_fb:
-            # Downloads the fb definition and python code
-            logging.info('fb doesnt exists, needs to be downloaded ...')
-            fb_res.download_fb()
+        fb_res.check_mp_fb()
+
+        # exists_fb = fb_res.exists_fb()
+        # if not exists_fb:
+        #     # Downloads the fb definition and python code
+        #     logging.info('fb doesnt exists, needs to be downloaded ...')
+        #     fb_res.download_fb()
 
         fb_definition, fb_obj = fb_res.import_fb()
 

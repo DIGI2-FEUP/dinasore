@@ -1,0 +1,6 @@
+**/.DS_STORE
+**/data_model.xml
+**/data_model_copy.xml
+__pycache__/
+resources/monitoring
+resources_*

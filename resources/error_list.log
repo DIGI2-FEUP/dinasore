@@ -1,0 +1,231 @@
+[2020-04-20 15:49:06,174][ERROR][172.22.0.1:38918] can not import the module (check fb_type.py nomenclature)
+[2020-04-20 15:49:06,176][ERROR][172.22.0.1:38918] No module named 'resources.function_blocks.SENSOR_SIMULATOR'
+[2020-04-20 15:49:06,177][ERROR][172.22.0.1:38918] No module named 'resources.function_blocks.SENSOR_SIMULATOR'
+Traceback (most recent call last):
+  File "/usr/src/dinasore-ua/core/fb_resources.py", line 38, in import_fb
+    py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
+  File "/usr/local/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'resources.function_blocks.SENSOR_SIMULATOR'
+[2020-04-20 15:49:06,194][ERROR][172.22.0.1:38918] can not create the fb type: SENSOR_SIMULATOR, instance: SENSOR_SIMULATOR
+[2020-04-20 15:49:06,252][ERROR][172.22.0.1:38930] can not find that fb INFLUX_DB_2
+[2020-04-20 15:49:06,257][ERROR][172.22.0.1:38930] 'INFLUX_DB_2'
+[2020-04-20 15:49:06,259][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:06,261][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:06,266][ERROR][172.22.0.1:38930] can not find that fb MOVING_AVERAGE
+[2020-04-20 15:49:06,268][ERROR][172.22.0.1:38930] 'MOVING_AVERAGE'
+[2020-04-20 15:49:06,269][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:06,270][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:06,322][ERROR][172.22.0.1:38930] can not find that fb SENSOR_SIMULATOR
+[2020-04-20 15:49:06,323][ERROR][172.22.0.1:38930] 'SENSOR_SIMULATOR'
+[2020-04-20 15:49:06,324][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:06,326][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:06,333][ERROR][172.22.0.1:38930] can not find that fb INFLUX_DB_2
+[2020-04-20 15:49:06,334][ERROR][172.22.0.1:38930] 'INFLUX_DB_2'
+[2020-04-20 15:49:06,336][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:06,339][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:22,218][ERROR][172.22.0.1:38930] can not find that fb INFLUX_DB_2
+[2020-04-20 15:49:22,219][ERROR][172.22.0.1:38930] 'INFLUX_DB_2'
+[2020-04-20 15:49:22,220][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:22,221][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:22,227][ERROR][172.22.0.1:38930] can not find that fb MOVING_AVERAGE
+[2020-04-20 15:49:22,228][ERROR][172.22.0.1:38930] 'MOVING_AVERAGE'
+[2020-04-20 15:49:22,229][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:22,230][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:22,236][ERROR][172.22.0.1:38930] can not find that fb SENSOR_SIMULATOR
+[2020-04-20 15:49:22,237][ERROR][172.22.0.1:38930] 'SENSOR_SIMULATOR'
+[2020-04-20 15:49:22,239][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:22,240][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:22,253][ERROR][172.22.0.1:38930] can not find that fb INFLUX_DB_2
+[2020-04-20 15:49:22,255][ERROR][172.22.0.1:38930] 'INFLUX_DB_2'
+[2020-04-20 15:49:22,257][ERROR][172.22.0.1:38930] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:22,259][ERROR][172.22.0.1:38930] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:24,377][ERROR][172.22.0.1:38934] can not import the module (check fb_type.py nomenclature)
+[2020-04-20 15:49:24,381][ERROR][172.22.0.1:38934] No module named 'resources.function_blocks.SENSOR_SIMULATOR'
+[2020-04-20 15:49:24,382][ERROR][172.22.0.1:38934] No module named 'resources.function_blocks.SENSOR_SIMULATOR'
+Traceback (most recent call last):
+  File "/usr/src/dinasore-ua/core/fb_resources.py", line 38, in import_fb
+    py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
+  File "/usr/local/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'resources.function_blocks.SENSOR_SIMULATOR'
+[2020-04-20 15:49:24,389][ERROR][172.22.0.1:38934] can not create the fb type: SENSOR_SIMULATOR, instance: SENSOR_SIMULATOR
+[2020-04-20 15:49:24,465][ERROR][172.22.0.1:38946] can not find that fb INFLUX_DB_2
+[2020-04-20 15:49:24,468][ERROR][172.22.0.1:38946] 'INFLUX_DB_2'
+[2020-04-20 15:49:24,470][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:24,472][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:24,482][ERROR][172.22.0.1:38946] can not find that fb MOVING_AVERAGE
+[2020-04-20 15:49:24,490][ERROR][172.22.0.1:38946] 'MOVING_AVERAGE'
+[2020-04-20 15:49:24,493][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:24,495][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:24,500][ERROR][172.22.0.1:38946] can not find that fb SENSOR_SIMULATOR
+[2020-04-20 15:49:24,502][ERROR][172.22.0.1:38946] 'SENSOR_SIMULATOR'
+[2020-04-20 15:49:24,504][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:24,506][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:49:24,513][ERROR][172.22.0.1:38946] can not find that fb INFLUX_DB_2
+[2020-04-20 15:49:24,532][ERROR][172.22.0.1:38946] 'INFLUX_DB_2'
+[2020-04-20 15:49:24,556][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:49:24,564][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:50:11,276][ERROR][172.22.0.1:38946] can not find that fb INFLUX_DB_2
+[2020-04-20 15:50:11,279][ERROR][172.22.0.1:38946] 'INFLUX_DB_2'
+[2020-04-20 15:50:11,281][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:50:11,282][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:50:11,287][ERROR][172.22.0.1:38946] can not find that fb MOVING_AVERAGE
+[2020-04-20 15:50:11,290][ERROR][172.22.0.1:38946] 'MOVING_AVERAGE'
+[2020-04-20 15:50:11,291][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:50:11,293][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:50:11,297][ERROR][172.22.0.1:38946] can not find that fb SENSOR_SIMULATOR
+[2020-04-20 15:50:11,297][ERROR][172.22.0.1:38946] 'SENSOR_SIMULATOR'
+[2020-04-20 15:50:11,298][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:50:11,299][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:50:11,304][ERROR][172.22.0.1:38946] can not find that fb INFLUX_DB_2
+[2020-04-20 15:50:11,307][ERROR][172.22.0.1:38946] 'INFLUX_DB_2'
+[2020-04-20 15:50:11,309][ERROR][172.22.0.1:38946] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:50:11,310][ERROR][172.22.0.1:38946] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:50:15,242][ERROR][172.22.0.1:38990] can not find that fb INFLUX_DB_2
+[2020-04-20 15:50:15,246][ERROR][172.22.0.1:38990] 'INFLUX_DB_2'
+[2020-04-20 15:50:15,247][ERROR][172.22.0.1:38990] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:50:15,248][ERROR][172.22.0.1:38990] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:50:15,253][ERROR][172.22.0.1:38990] can not find that fb MOVING_AVERAGE
+[2020-04-20 15:50:15,253][ERROR][172.22.0.1:38990] 'MOVING_AVERAGE'
+[2020-04-20 15:50:15,254][ERROR][172.22.0.1:38990] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:50:15,255][ERROR][172.22.0.1:38990] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:50:15,263][ERROR][172.22.0.1:38990] can not find that fb INFLUX_DB_2
+[2020-04-20 15:50:15,264][ERROR][172.22.0.1:38990] 'INFLUX_DB_2'
+[2020-04-20 15:50:15,265][ERROR][172.22.0.1:38990] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:50:15,265][ERROR][172.22.0.1:38990] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:51:23,609][ERROR][172.22.0.1:38990] can not find that fb INFLUX_DB_2
+[2020-04-20 15:51:23,613][ERROR][172.22.0.1:38990] 'INFLUX_DB_2'
+[2020-04-20 15:51:23,615][ERROR][172.22.0.1:38990] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:51:23,617][ERROR][172.22.0.1:38990] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:51:23,624][ERROR][172.22.0.1:38990] can not find that fb MOVING_AVERAGE
+[2020-04-20 15:51:23,626][ERROR][172.22.0.1:38990] 'MOVING_AVERAGE'
+[2020-04-20 15:51:23,631][ERROR][172.22.0.1:38990] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:51:23,633][ERROR][172.22.0.1:38990] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:51:23,642][ERROR][172.22.0.1:38990] can not find that fb INFLUX_DB_2
+[2020-04-20 15:51:23,644][ERROR][172.22.0.1:38990] 'INFLUX_DB_2'
+[2020-04-20 15:51:23,645][ERROR][172.22.0.1:38990] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:51:23,648][ERROR][172.22.0.1:38990] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:51:26,022][ERROR][172.22.0.1:39032] can not find that fb INFLUX_DB_2
+[2020-04-20 15:51:26,023][ERROR][172.22.0.1:39032] 'INFLUX_DB_2'
+[2020-04-20 15:51:26,026][ERROR][172.22.0.1:39032] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:51:26,027][ERROR][172.22.0.1:39032] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:51:26,038][ERROR][172.22.0.1:39032] can not find that fb INFLUX_DB_2
+[2020-04-20 15:51:26,039][ERROR][172.22.0.1:39032] 'INFLUX_DB_2'
+[2020-04-20 15:51:26,041][ERROR][172.22.0.1:39032] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:51:26,043][ERROR][172.22.0.1:39032] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:54:13,093][ERROR][172.22.0.1:39032] can not find that fb INFLUX_DB_2
+[2020-04-20 15:54:13,095][ERROR][172.22.0.1:39032] 'INFLUX_DB_2'
+[2020-04-20 15:54:13,098][ERROR][172.22.0.1:39032] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:54:13,100][ERROR][172.22.0.1:39032] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:54:13,114][ERROR][172.22.0.1:39032] can not find that fb INFLUX_DB_2
+[2020-04-20 15:54:13,116][ERROR][172.22.0.1:39032] 'INFLUX_DB_2'
+[2020-04-20 15:54:13,118][ERROR][172.22.0.1:39032] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:54:13,119][ERROR][172.22.0.1:39032] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:54:15,772][ERROR][172.22.0.1:39048] can not import the module (check fb_type.py nomenclature)
+[2020-04-20 15:54:15,773][ERROR][172.22.0.1:39048] No module named 'influxdb'
+[2020-04-20 15:54:15,775][ERROR][172.22.0.1:39048] No module named 'influxdb'
+Traceback (most recent call last):
+  File "/usr/src/dinasore-ua/core/fb_resources.py", line 38, in import_fb
+    py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
+  File "/usr/local/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 783, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/usr/src/dinasore-ua/resources/function_blocks/INFLUX_DB_2.py", line 1, in <module>
+    from influxdb import InfluxDBClient
+ModuleNotFoundError: No module named 'influxdb'
+[2020-04-20 15:54:15,789][ERROR][172.22.0.1:39048] can not create the fb type: INFLUX_DB_2, instance: INFLUX_DB_2
+[2020-04-20 15:54:15,913][ERROR][172.22.0.1:39078] can not find that fb INFLUX_DB_2
+[2020-04-20 15:54:15,923][ERROR][172.22.0.1:39078] 'INFLUX_DB_2'
+[2020-04-20 15:54:15,925][ERROR][172.22.0.1:39078] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:54:15,928][ERROR][172.22.0.1:39078] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:54:15,991][ERROR][172.22.0.1:39078] can not find that fb INFLUX_DB_2
+[2020-04-20 15:54:15,995][ERROR][172.22.0.1:39078] 'INFLUX_DB_2'
+[2020-04-20 15:54:15,997][ERROR][172.22.0.1:39078] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:54:15,999][ERROR][172.22.0.1:39078] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:54:44,050][ERROR][172.22.0.1:39078] can not find that fb INFLUX_DB_2
+[2020-04-20 15:54:44,053][ERROR][172.22.0.1:39078] 'INFLUX_DB_2'
+[2020-04-20 15:54:44,055][ERROR][172.22.0.1:39078] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:54:44,056][ERROR][172.22.0.1:39078] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:54:44,067][ERROR][172.22.0.1:39078] can not find that fb INFLUX_DB_2
+[2020-04-20 15:54:44,068][ERROR][172.22.0.1:39078] 'INFLUX_DB_2'
+[2020-04-20 15:54:44,068][ERROR][172.22.0.1:39078] 'NoneType' object has no attribute 'set_attr'
+[2020-04-20 15:54:44,069][ERROR][172.22.0.1:39078] don't forget to delete the watch when you delete a function block
+[2020-04-20 15:55:25,147][ERROR][INFLUX_DB_2] HTTPConnectionPool(host='d_influx', port=8086): Max retries exceeded with url: /write?db=dinasore_hands_on (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f429ac632e0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2020-04-20 15:55:25,149][ERROR][INFLUX_DB_2] HTTPConnectionPool(host='d_influx', port=8086): Max retries exceeded with url: /write?db=dinasore_hands_on (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f429ac632e0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/urllib3/connection.py", line 159, in _new_conn
+    conn = connection.create_connection(
+  File "/usr/local/lib/python3.8/site-packages/urllib3/util/connection.py", line 61, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 670, in urlopen
+    httplib_response = self._make_request(
+  File "/usr/local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 392, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/lib/python3.8/http/client.py", line 1230, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1276, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1225, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1004, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 944, in send
+    self.connect()
+  File "/usr/local/lib/python3.8/site-packages/urllib3/connection.py", line 187, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.8/site-packages/urllib3/connection.py", line 171, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f429ac632e0>: Failed to establish a new connection: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/usr/local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 724, in urlopen
+    retries = retries.increment(
+  File "/usr/local/lib/python3.8/site-packages/urllib3/util/retry.py", line 439, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='d_influx', port=8086): Max retries exceeded with url: /write?db=dinasore_hands_on (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f429ac632e0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/dinasore-ua/core/fb.py", line 36, in run
+    outputs = self.fb_obj.schedule(*inputs)
+  File "/usr/src/dinasore-ua/resources/function_blocks/INFLUX_DB_2.py", line 33, in schedule
+    self.client.write_points(json_body)
+  File "/usr/local/lib/python3.8/site-packages/influxdb/client.py", line 594, in write_points
+    return self._write_points(points=points,
+  File "/usr/local/lib/python3.8/site-packages/influxdb/client.py", line 672, in _write_points
+    self.write(
+  File "/usr/local/lib/python3.8/site-packages/influxdb/client.py", line 404, in write
+    self.request(
+  File "/usr/local/lib/python3.8/site-packages/influxdb/client.py", line 323, in request
+    response = self._session.request(
+  File "/usr/local/lib/python3.8/site-packages/requests/sessions.py", line 530, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.8/site-packages/requests/sessions.py", line 643, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python3.8/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='d_influx', port=8086): Max retries exceeded with url: /write?db=dinasore_hands_on (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f429ac632e0>: Failed to establish a new connection: [Errno -2] Name or service not known'))

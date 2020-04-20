@@ -3,13 +3,18 @@ import os
 import sys
 import xml.etree.ElementTree as ETree
 import logging
+from communication import marketplace_bridge
+import threading
+import time
+import datetime
+import subprocess
+
 
 
 class FBResources:
 
     def __init__(self, fb_type):
         self.fb_type = fb_type
-
         # Gets the file path to the python file
         self.py_path = os.path.join(os.path.dirname(sys.path[0]),
                                     'resources',
@@ -29,6 +34,7 @@ class FBResources:
 
         try:
             # Import method from python file
+            importlib.invalidate_caches()
             py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
             # Gets the running fb method
             fb_class = getattr(py_fb, self.fb_type)
@@ -42,6 +48,7 @@ class FBResources:
         except ModuleNotFoundError as error:
             logging.error('can not import the module (check fb_type.py nomenclature)')
             logging.error(error)
+            logging.exception(error)
 
         except AttributeError as error:
             logging.error('can not find the fb method declaration (check if fb_type.py = def fb_type(...):)')
@@ -88,25 +95,44 @@ class FBResources:
 
                 return dev_id, dev_type
 
-    def exists_fb(self):
-        # Verifies if exists the python file
-        exists_py = os.path.isfile(self.py_path)
-        # Verifies if exists the fbt file
-        exists_fbt = os.path.isfile(self.fbt_path)
+    def check_mp_fb(self):
 
-        if exists_py and exists_fbt:
-            return True
-        else:
-            return False
+        mp = marketplace_bridge.MarketplaceBridge
 
-    def download_fb(self):
-        pass
+        # mp.checkFunctionBlock(self.fb_type,self.py_path,self.fbt_path)
 
-    def exists_module(self, mod_id):
-        pass
+        fbDetails = mp.getFbDetails(self.fb_type)
+        if fbDetails['error'] == True:
+            print('{} not found on markteplace'.format(self.fb_type))
+            return
+        
+        self.fb_category = fbDetails['category']
+        self.fb_dependencies = fbDetails['externalDependencies']
+        self.installDependencies()
 
-    def download_module(self, mod_id):
-        pass
+        exists_py = os.path.isfile(self.py_path) and False # Pendente de implementar versões
+        exists_fbt = os.path.isfile(self.fbt_path) and False # Pendente de implementar versões
+
+        if not exists_py or not exists_fbt:
+            self.downloadFunctionBlocks()
+
+
+    def installDependencies(self):
+        for dependency in self.fb_dependencies:
+            try:
+                print('imported module {}',importlib.import_module(dependency['edName']))
+            except ImportError:
+                try:
+                    print('Dependency {} not found, trying to install'.format(dependency))
+                    # pipmain(['install',dependency['edName'],'--quiet','--user'])
+                    subprocess.call(["pip", "install", dependency['edName']])
+                except Exception:
+                    print(Exception)
+                    pass
+
+    def downloadFunctionBlocks(self):
+        mp = marketplace_bridge.MarketplaceBridge
+        mp.downloadFunctionBlockFiles(self.fb_type,self.fb_category,self.py_path,self.fbt_path)
 
 
 class GeneralResources:

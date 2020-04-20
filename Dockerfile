@@ -1,4 +1,4 @@
-FROM python:3.6-slim
+FROM python:latest
 
 RUN mkdir -p usr/src/dinasore-ua
 
@@ -10,10 +10,10 @@ COPY core ./core
 COPY data_model ./data_model
 COPY tests ./tests
 COPY requirements.txt ./
-# COPY resources ./resources
+COPY resources ./resources
 
 RUN pip install -r requirements.txt
 
 # RUN python tests/__init__.py
 
-ENTRYPOINT [ "python", "core/main.py" ]
+# ENTRYPOINT [ "python", "core/main.py" ]

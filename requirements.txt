@@ -5,3 +5,4 @@ numpy
 argparse
 scikit-learn
 pandas
+requests
