@@ -10,12 +10,14 @@ import sys
 
 class XMLTests(base_dm.BaseTests):
     file_name = 'tests_with_data.xml'
+    # address = 'localhost'
+    address = 'd_dinasore1'
 
     def setUp(self):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager(self.address, self.port_server, self.file_name)
 
     def tearDown(self):
         self.manager_4diac.manager_ua.stop_ua()
@@ -29,10 +31,10 @@ class FBTests(base_dm.BaseTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager(self.address, self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
-        self.handler = tcp_server.TcpServer('localhost', 61499, 10, self.manager_4diac)
+        self.handler = tcp_server.TcpServer(self.address, 61499, 10, self.manager_4diac)
         # creates the handler
         thread = Thread(target=self.handler.handle_client)
         thread.start()
@@ -43,7 +45,7 @@ class FBTests(base_dm.BaseTests):
                                    'configurations',
                                    self.config2upload)
         # sends the configuration to the
-        sender_simulator = diac_simulator.DiacSimulator('localhost', 61499)
+        sender_simulator = diac_simulator.DiacSimulator(self.address, 61499)
         sender_simulator.upload_dinasore(config_path)
         sender_simulator.disconnect()
 
@@ -70,10 +72,10 @@ class PermanentDataTest(base_dm.BaseTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager(self.address, self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
-        self.handler = tcp_server.TcpServer('localhost', 61499, 10, self.manager_4diac)
+        self.handler = tcp_server.TcpServer(self.address, 61499, 10, self.manager_4diac)
         # creates the handler
         thread = Thread(target=self.handler.handle_client)
         thread.start()
@@ -84,7 +86,7 @@ class PermanentDataTest(base_dm.BaseTests):
                                    'configurations',
                                    self.config2upload)
         # sends the configuration to the
-        sender_simulator = diac_simulator.DiacSimulator('localhost', 61499)
+        sender_simulator = diac_simulator.DiacSimulator(self.address, 61499)
         sender_simulator.upload_dinasore(config_path)
         sender_simulator.disconnect()
 
@@ -96,7 +98,7 @@ class PermanentDataTest(base_dm.BaseTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager(self.address, self.port_server, self.file_name)
 
     def tearDown(self):
         # stops the work at the
@@ -114,15 +116,16 @@ class PermanentDataTest(base_dm.BaseTests):
 class FBPipelineTest(base_dm.PipelineTests):
     file_name = 'tests_no_data.xml'
     config2upload = 'pipeline_config.fboot'
+    address = 'd_dinasore1'
 
     def setUp(self):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager(self.address, self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
-        self.handler = tcp_server.TcpServer('localhost', 61499, 10, self.manager_4diac)
+        self.handler = tcp_server.TcpServer(self.address, 61499, 10, self.manager_4diac)
         # creates the handler
         thread = Thread(target=self.handler.handle_client)
         thread.start()
@@ -133,7 +136,7 @@ class FBPipelineTest(base_dm.PipelineTests):
                                    'configurations',
                                    self.config2upload)
         # sends the configuration to the
-        sender_simulator = diac_simulator.DiacSimulator('localhost', 61499)
+        sender_simulator = diac_simulator.DiacSimulator(self.address, 61499)
         sender_simulator.upload_dinasore(config_path)
         sender_simulator.disconnect()
 
@@ -155,15 +158,16 @@ class FBPipelineTest(base_dm.PipelineTests):
 class PermanentPipelineTests(base_dm.PipelineTests):
     file_name = 'tests_no_data.xml'
     config2upload = 'pipeline_config.fboot'
+    address = 'd_dinasore1'
 
     def setUp(self):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager(self.address, self.port_server, self.file_name)
 
         # creates the tcp server to communicate with the 4diac
-        self.handler = tcp_server.TcpServer('localhost', 61499, 10, self.manager_4diac)
+        self.handler = tcp_server.TcpServer(self.address, 61499, 10, self.manager_4diac)
         # creates the handler
         thread = Thread(target=self.handler.handle_client)
         thread.start()
@@ -174,7 +178,7 @@ class PermanentPipelineTests(base_dm.PipelineTests):
                                    'configurations',
                                    self.config2upload)
         # sends the configuration to the
-        sender_simulator = diac_simulator.DiacSimulator('localhost', 61499)
+        sender_simulator = diac_simulator.DiacSimulator(self.address, 61499)
         sender_simulator.upload_dinasore(config_path)
         sender_simulator.disconnect()
 
@@ -186,7 +190,7 @@ class PermanentPipelineTests(base_dm.PipelineTests):
         # creates the 4diac manager
         self.manager_4diac = manager.Manager()
         # creates the opc-ua manager
-        self.manager_4diac.build_ua_manager('localhost', self.port_server, self.file_name)
+        self.manager_4diac.build_ua_manager(self.address, self.port_server, self.file_name)
 
     def tearDown(self):
         # stops the work at the

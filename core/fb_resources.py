@@ -110,8 +110,8 @@ class FBResources:
         self.fb_dependencies = fbDetails['externalDependencies']
         self.installDependencies()
 
-        exists_py = os.path.isfile(self.py_path) or False # Pendente de implementar versões
-        exists_fbt = os.path.isfile(self.fbt_path) or False # Pendente de implementar versões
+        exists_py = os.path.isfile(self.py_path) and False # Pendente de implementar versões
+        exists_fbt = os.path.isfile(self.fbt_path) and False # Pendente de implementar versões
 
         if not exists_py or not exists_fbt:
             self.downloadFunctionBlocks()

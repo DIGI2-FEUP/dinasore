@@ -3,11 +3,12 @@ import os
 import sys
 from xml.etree import ElementTree as ETree
 from core import manager
-
+from communication import marketplace_bridge
 
 class TestParse(unittest.TestCase):
 
     def setUp(self):
+        marketplace_bridge.MarketplaceBridge.initializeGenericRequester('d_api',3000,'d_ftp',21)
         # Gets the file path to the configuration request (xml) file
         path = os.path.join(os.path.dirname(sys.path[0]), 'tests', 'xml_data', 'configuration_request.xml')
         tree = ETree.parse(path)

@@ -8,14 +8,16 @@ from opc_ua.examples import methods_example
 
 
 class OpcUaTests(unittest.TestCase):
-    address = 'opc.tcp://localhost:4842'
+    # address = 'opc.tcp://localhost:4842'
+    address = 'opc.tcp://d_dinasore1:4842'
     object_name = 'ExampleObject'
     var_name = 'ExampleVar'
     folder_name = 'ExampleFolder'
     property_name = 'ExampleProperty'
     method_name = 'hello_word'
 
-    address_auxiliary = 'opc.tcp://localhost:4841'
+    # address_auxiliary = 'opc.tcp://localhost:4841'
+    address_auxiliary = 'opc.tcp://d_dinasore1:4841'
 
     def setUp(self):
         self.peer = peer.UaPeer(self.address)

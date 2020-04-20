@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<smartobjectselfdescription xmlns="http://systec-fof.fe.up.pt/sosd"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <general>
+        <data id="SMART_OBJECT_NAME" DataType="String" ValueRank="-1">SMART_COMPONENT</data>
+        <data id="DEVICE_TYPE" DataType="String" ValueRank="-1">Industrial PC</data>
+        <data id="SMART_OBJECT_ID" DataType="Guid" ValueRank="-1">11ae7c0e-90b8-11e8-9eb6-529269fb1459</data>
+        <data id="SMART_OBJECT_MAC" DataType="String" ValueRank="-1">78-24-AF-A5-8B-63</data>
+        <data id="STATE" DataType="String" ValueRank="-1">RUNNING</data>
+    </general>
+    <deviceset>
+        <device dId="TEST_DEVICE_SENSOR" id="TEMPERATURE_SENSOR_1" type="SENSOR">
+            <variables>
+                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+            </subscriptions>
+        </device>
+        <device dId="TEST_DEVICE_SENSOR" id="PRESSURE_SENSOR_1" type="SENSOR">
+            <variables>
+                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+            </subscriptions>
+        </device>
+        <device dId="TEST_DEVICE_SENSOR" id="PROCESS_TIME_1" type="SENSOR">
+            <variables>
+                <variable name="TEMPERATURE" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+            </subscriptions>
+        </device>
+    </deviceset>
+    <servicedescriptionset>
+        <servicedescription id="TEST_SERVICE" type="Service">
+            <variables>
+                <variable name="RATE" DataType="Integer" ValueRank="-1"/>
+                <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
+                <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+            </methods>
+        </servicedescription>
+    </servicedescriptionset>
+    <serviceinstanceset>
+        <serviceinstance id="SERVICE_EXAMPLE_1" dId="TEST_SERVICE" type="Service">
+            <variables>
+                <variable name="RATE" DataType="Integer" ValueRank="-1"/>
+                <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
+                <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="RUN">
+                    <arguments>
+                        <argument name="RATE" type="Input" DataType="Integer" ValueRank="-1"/>
+                        <argument name="SIGNAL" type="Input" DataType="Integer" ValueRank="-1"/>
+                        <argument name="FREQUENCIES" type="Output" DataType="Integer" ValueRank="-1"/>
+                    </arguments>
+                </method>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>                
+            </methods>            
+            <!-- subscription type: Data or Context (related hardware... sensor, equipment)
+                   BrowseDirection: forward (means that subscription is an input),
+                                    inverse (means that subscription is an output),
+                                    both (means that the direction doesn't matter)
+                      VariableName: name of the service variable that is linked to that subscription -->
+            <subscriptions>
+                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TEMPERATURE</id>
+                <id BrowseDirection="both" type="Data" VariableName="RATE">500</id>
+                <id BrowseDirection="forward" type="Event" VariableName="RUN">PROCESS_TIME_1:Events:READ_O</id>
+            </subscriptions>
+        </serviceinstance>
+    </serviceinstanceset>
+    <pointdescriptionset>
+        <startpointdescription id="SP_EXAMPLE_1" dId="TEST_STARTPOINT">
+            <variables>
+                <variable name="FREQUENCIES" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+            </subscriptions>
+        </startpointdescription>
+        <endpointdescription id="EP_EXAMPLE_1" dId="TEST_ENDPOINT">
+            <variables>
+                <variable name="RATE" DataType="Integer" ValueRank="-1"/>
+                <variable name="SIGNAL" DataType="Integer" ValueRank="-1"/>
+            </variables>
+            <methods>
+                <method name="CALIBRATE">
+                    <arguments>
+                        <argument name="RESULT" type="Output" DataType="Boolean" ValueRank="-1"/>
+                    </arguments>
+                </method>
+            </methods>
+            <subscriptions>
+                <id BrowseDirection="forward" type="Data" VariableName="SIGNAL">PROCESS_TIME_1:Variables:TEMPERATURE</id>
+                <id BrowseDirection="both" type="Data" VariableName="RATE">500</id>
+                <id BrowseDirection="forward" type="Event" VariableName="RUN">PROCESS_TIME_1:Events:READ_O</id>
+            </subscriptions>
+        </endpointdescription>
+    </pointdescriptionset>
+</smartobjectselfdescription>

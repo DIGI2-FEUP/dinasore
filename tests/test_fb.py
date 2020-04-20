@@ -11,7 +11,9 @@ class TestFB(unittest.TestCase):
         logging.basicConfig(level=logging.INFO,
                             format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
 
+        
         self.conf = configuration.Configuration('config_1', 'EMB_RES')
+
 
     def test_fb_creation(self):
         self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB')

@@ -7,13 +7,16 @@ class BaseTests(unittest.TestCase):
     base_list = [(0, 'Objects'), (2, 'SMART_COMPONENT')]
     manager_4diac = None
 
+    # address = 'localhost'
+    address = 'd_dinasore1'
+
     def test_fbs_creation(self):
         # check the number of fb
         n_fb = len(self.manager_4diac.manager_ua.config.fb_dictionary)
         # 1 start + 3*2 device + 1 service + 1 instance + 1*2 startpoint + 1 endpoint = 11
         self.assertEqual(n_fb, 11)
 
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://{1}:{0}'.format(self.port_server, self.address))
 
         path = c.generate_path(self.base_list + [(2, 'DeviceSet')])
         children = c.get_object(path).get_children()
@@ -34,7 +37,7 @@ class BaseTests(unittest.TestCase):
         c.disconnect()
 
     def test_methods(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://{1}:{0}'.format(self.port_server, self.address))
 
         method_path = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'TEMPERATURE_SENSOR_1'),
                                                         (2, 'Methods'), (2, 'CALIBRATE')])
@@ -74,7 +77,7 @@ class BaseTests(unittest.TestCase):
         c.disconnect()
 
     def test_variables(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://{1}:{0}'.format(self.port_server, self.address))
 
         device1_vars = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'TEMPERATURE_SENSOR_1'),
                                                          (2, 'Variables')])
@@ -108,7 +111,7 @@ class BaseTests(unittest.TestCase):
         c.disconnect()
 
     def test_subscriptions(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://{1}:{0}'.format(self.port_server, self.address))
 
         device1 = c.generate_path(self.base_list + [(2, 'DeviceSet'), (2, 'TEMPERATURE_SENSOR_1'),
                                                     (2, 'Subscriptions')])
@@ -144,9 +147,11 @@ class PipelineTests(unittest.TestCase):
     port_server = 4841
     base_list = [(0, 'Objects'), (2, 'SMART_COMPONENT')]
     manager_4diac = None
+     # address = 'localhost'
+    address = 'd_dinasore1'
 
     def test_workflow(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://{1}:{0}'.format(self.port_server, self.address))
 
         method_path = c.generate_path(self.base_list + [(2, 'ServiceInstanceSet'), (2, 'SERVICE_EXAMPLE_1'),
                                                         (2, 'Methods'), (2, 'RUN')])
@@ -166,7 +171,7 @@ class PipelineTests(unittest.TestCase):
         c.disconnect()
 
     def test_workflow_method(self):
-        c = client.UaClient('opc.tcp://localhost:{0}'.format(self.port_server))
+        c = client.UaClient('opc.tcp://{1}:{0}'.format(self.port_server, self.address))
 
         method_path = c.generate_path(self.base_list + [(2, 'ServiceInstanceSet'), (2, 'SERVICE_EXAMPLE_1'),
                                                         (2, 'Methods'), (2, 'RUN')])
