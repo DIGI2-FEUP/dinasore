@@ -13,16 +13,22 @@ This version is targeted to the Industry4.0 applications, for that it was also u
 
 * [Install](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/1.-Install)
 * [Function Blocks and 4DIAC-IDE](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/2.-Function-Blocks-and-4DIAC)
+* [Build new Function Blocks](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/4.-Build-new-Function-Blocks)
+* [OPC-UA Data Model](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/2.3.-OPC-UA-Data-Model)
+* [Behavioral Anomaly Detection](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/2.2.-Behavioral-Anomaly-Detection-functionality)
 * Tutorials
   * [Sensorization - "Hello World!"](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.1.-Hands-On:-Sensorization-%22Hello-World!%22)
-  * [Sensorization - CPS](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.2.-Hands-On:-Sensorization)
+  * [Sensorization - Distributed CPS](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.2.-Hands-On:-Sensorization)
   * [Optimization](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.3.-Hands-On:-Optimization)
-* [Build new Function Blocks](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/4.-Build-new-Function-Blocks)
 * Use Cases
   * [Painting Area Simulation](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/5.1.-Painting-Area-Simulation)
+  * [Assembly Area Simulation](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/4.2.-Assembly-Area-Simulation)
+  * [Sensor Actuator Control System](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/5.-Sensor-Actuator-Control-System)
   * Industrial Sensorization using Modbus
   * Universal Robots and 3D printed Gripper Control
   * Anomaly Detection in a Servo Motor Robotic Arm
+
+
 
 ## Features
 - [x] Communication between the DINASORE and the 4DIAC-IDE 
@@ -39,21 +45,5 @@ This version is targeted to the Industry4.0 applications, for that it was also u
 - [ ] Download function blocks from 4DIAC-IDE repository
 - [ ] Edit the function blocks in the 4DIAC-IDE and automatically update the code in the nodes
 - [ ] Test with complex variables (lists, arrays, methods (strings))
-
-## Project Structure
-
-* **communication** - files that allow the communication with the 4DIAC-IDE; 
-* **core** - files that run the function blocks pipeline (configuration);
-* **data_model** - files responsible to store the actual configuration and make the interface between the FB pipeline and the OPC-UA model;
-* **opc_ua** - files that implement some high level methods based in OPC-UA; 
-* **resources** - folder that stores all the resources in the project (YOU ONLY NEED TO USE THAT FOLDER);
-  * **function_blocks** - folder where are stored the function blocks (Python + XML);
-    * EMB_RES.* - function block used to start the pipeline;
-    * SLEEP.* - function block used to run in loop the DEVICE.SENSOR and POINT.STARTPOINT function blocks;
-    * TEST...* - function blocks used for the unitary tests. 
-  * data_model.xml - file where is stored the current configuration;
-  * error_list.log - file that stores all the execution errors.
-* **tests** - unitary test used to validate each package in the project.
-
 
 
