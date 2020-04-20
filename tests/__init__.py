@@ -18,10 +18,10 @@ loader = unittest.TestLoader()
 suite = unittest.TestSuite()
 
 # add tests to the test suite
-# suite.addTests(loader.loadTestsFromModule(test_resources))
-# suite.addTests(loader.loadTestsFromModule(test_fb))
-# suite.addTests(loader.loadTestsFromModule(test_xml))
-# suite.addTests(loader.loadTestsFromModule(test_opcua))
+suite.addTests(loader.loadTestsFromModule(test_resources))
+suite.addTests(loader.loadTestsFromModule(test_fb))
+suite.addTests(loader.loadTestsFromModule(test_xml))
+suite.addTests(loader.loadTestsFromModule(test_opcua))
 suite.addTests(loader.loadTestsFromModule(test_data_model))
 
 logging.disable(logging.CRITICAL)
