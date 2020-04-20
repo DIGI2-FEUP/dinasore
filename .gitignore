@@ -3,3 +3,4 @@
 **/data_model_copy.xml
 __pycache__/
 resources/monitoring
+resources_*

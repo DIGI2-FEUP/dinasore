@@ -76,8 +76,6 @@ if __name__ == "__main__":
     if args.mfa != None: mpFtpAddress = args.mfa[0]
     if args.mfp != None: mpFtpPort = args.mfp[0]
 
-    print(mpHttpPort)
-
     #########Initializing Marketplace requester#####
     ################################################
     marketplace_bridge.MarketplaceBridge.initializeGenericRequester(mpHttpAddress,mpHttpPort,mpFtpAddress,mpFtpPort)
@@ -87,7 +85,6 @@ if __name__ == "__main__":
     ##############################################################
     ## remove all files in monitoring folder
     monitoring_path = os.path.join(os.path.dirname(sys.path[0]), 'resources', 'monitoring','')
-    print(monitoring_path)
     files = glob.glob("{0}*".format(monitoring_path))
     for f in files:
         os.remove(f)
