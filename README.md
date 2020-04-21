@@ -11,19 +11,19 @@ This version is targeted to the Industry4.0 applications, for that it was also u
 
 ## Content
 
-* [Install](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/1.-Install)
-* [Function Blocks and 4DIAC-IDE](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/2.-Function-Blocks-and-4DIAC)
-* [Build new Function Blocks](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/4.-Build-new-Function-Blocks)
-* [OPC-UA Data Model](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/2.3.-OPC-UA-Data-Model)
-* [Behavioral Anomaly Detection](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/2.2.-Behavioral-Anomaly-Detection-functionality)
+* [Install](../../wiki/1.-Install)
+* [Function Blocks and 4DIAC-IDE](../../wiki/2.-Function-Blocks-and-4DIAC)
+* [Build new Function Blocks](../../wiki/4.-Build-new-Function-Blocks)
+* [OPC-UA Data Model](../../wiki/2.3.-OPC-UA-Data-Model)
+* [Behavioral Anomaly Detection](../../wiki/2.2.-Behavioral-Anomaly-Detection-functionality)
 * Tutorials
-  * [Sensorization - "Hello World!"](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.1.-Hands-On:-Sensorization-%22Hello-World!%22)
-  * [Sensorization - Distributed CPS](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.2.-Hands-On:-Sensorization)
-  * [Optimization](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/3.3.-Hands-On:-Optimization)
+  * [Sensorization - "Hello World!"](../../wiki/3.1.-Hands-On:-Sensorization-%22Hello-World!%22)
+  * [Sensorization - Distributed CPS](../../wiki/3.2.-Hands-On:-Sensorization)
+  * [Optimization](../../wiki/3.3.-Hands-On:-Optimization)
 * Use Cases
-  * [Painting Area Simulation](https://github.com/SYSTEC-FoF-FEUP/dinasore-ua/wiki/5.1.-Painting-Area-Simulation)
-  * [Assembly Area Simulation](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/4.2.-Assembly-Area-Simulation)
-  * [Sensor Actuator Control System](https://github.com/DIGI2-FEUP/dinasore-ua/wiki/5.-Sensor-Actuator-Control-System)
+  * [Painting Area Simulation](../../wiki/5.1.-Painting-Area-Simulation)
+  * [Assembly Area Simulation](../../wiki/4.2.-Assembly-Area-Simulation)
+  * [Sensor Actuator Control System](../../wiki/5.-Sensor-Actuator-Control-System)
   * Industrial Sensorization using Modbus
   * Universal Robots and 3D printed Gripper Control
   * Anomaly Detection in a Servo Motor Robotic Arm
