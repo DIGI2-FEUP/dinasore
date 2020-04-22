@@ -11,6 +11,7 @@ This version is targeted to the Industry4.0 applications, for that it was also u
 
 ## Content
 
+* [Home Wiki](../../wiki)
 * [Install](../../wiki/1.-Install)
 * [Function Blocks and 4DIAC-IDE](../../wiki/2.-Function-Blocks-and-4DIAC)
 * [Build new Function Blocks](../../wiki/4.-Build-new-Function-Blocks)
@@ -40,10 +41,6 @@ This version is targeted to the Industry4.0 applications, for that it was also u
 - [x] Docker integration
 - [x] Opc-Ua integration
 - [x] Configuration storage
-- [ ] Kill all process
-- [ ] Update automatically the python and xml file (use os.stat())
-- [ ] Download function blocks from 4DIAC-IDE repository
-- [ ] Edit the function blocks in the 4DIAC-IDE and automatically update the code in the nodes
-- [ ] Test with complex variables (lists, arrays, methods (strings))
+- [x] Test with complex variables (lists, arrays, methods (strings))
 
 
