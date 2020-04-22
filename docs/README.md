@@ -1,4 +1,4 @@
-![logo](logo.png)
+![logo](images/logo.png)
 
 **D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that runs at the
 fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside modules (function blocks).
