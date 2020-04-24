@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="ENERGY_COSTS" OpcUa="SERVICE">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="READ" Type="Event"/>
+      <Event Name="READ_DATA" Type="Event">
+		<With Var="PARAMS"/>
+	  </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event">
+	    <With Var="FUNCTION"/>
+	  </Event>
+      <Event Name="READ_DATA_O" Type="Event">
+        <With Var="COST"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+	  <VarDeclaration Name="PARAMS" Type="STRING" OpcUa="Variable"/>
+	</InputVars>
+    <OutputVars>
+      <VarDeclaration Name="FUNCTION" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="COST" Type="STRING" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>
+
