@@ -1,13 +1,8 @@
 ![logo](../../wiki/images/logo.png)
 
-**D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that runs at the
-fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside modules (function blocks).
+**D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that runs at the fog computing level, enabling the pre-processing of data using algorithms, that are encapsulated inside modules, i.e. Function Blocks (FBs).
 
-The principal advantage of this platform is the redistribution of the running modules across a distributed fog network. 
-So the user can develop their own code, in Python, and them upload it to the different DINASORE nodes in the network.
-To draw the system it's used the 4DIAC-IDE witch is according the IEC61499 standards. 
-
-This version is targeted to the Industry4.0 applications, for that it was also used the UPC-UA protocol to allow the communication with the other industrial components.
+The principal advantage of this platform is the redistribution of the running modules across a **Cyber-Physical System** (CPS). So the user can develop their own code, in Python, and then upload it to the different DINASORE nodes in the CPS. To draw the system it's used the **4DIAC-IDE** which is according the **IEC61499** standards. This version is targeted to the **Industry4.0** applications, for that, it also uses the **OPC-UA** protocol to allow communication with the other industrial components.
 
 ## Content
 
@@ -17,9 +12,9 @@ This version is targeted to the Industry4.0 applications, for that it was also u
 * [Build new Function Blocks](../../wiki/4.-Build-new-Function-Blocks)
 * [OPC-UA Data Model](../../wiki/2.3.-OPC-UA-Data-Model)
 * [Behavioral Anomaly Detection](../../wiki/2.2.-Behavioral-Anomaly-Detection-functionality)
-* Tutorials
-  * [Sensorization - "Hello World!"](../../wiki/3.1.-Hands-On:-Sensorization-%22Hello-World!%22)
-  * [Sensorization - Distributed CPS](../../wiki/3.2.-Hands-On:-Sensorization)
+* [Tutorials Resume](../../wiki/3.-Tutorials-Resume)
+  * [Sensorization - "Hello World!"](../../wiki/3.1.-Hands-On:-Sensorization-"Hello-World!")
+  * [Sensorization - Distributed CPS](../../wiki/3.2.-Hands-On:-Distributed-Sensorization)
   * [Optimization](../../wiki/3.3.-Hands-On:-Optimization)
 
 ## Features
