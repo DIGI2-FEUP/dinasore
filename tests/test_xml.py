@@ -104,7 +104,7 @@ class TestParse(unittest.TestCase):
         response = self.manager_instance.parse_general(self.watch_request)
 
         self.assertEqual(b'<Response ID="5"><Watches><Resource name="EMB_RES"><FB name="E_EX'
-                         b'AMPLE_1"><Port name="EO0"><Data time="',
+                         b'AMPLE_1"><Port name="EO0"><Data value=',
                          response[3:106])
 
     def test_hardcoded_connection(self):
