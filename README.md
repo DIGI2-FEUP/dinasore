@@ -10,7 +10,7 @@ The principal advantage of this platform is the redistribution of the running mo
 * [Home Wiki](https://github.com/DIGI2-FEUP/dinasore/wiki)
 * [Install](https://github.com/DIGI2-FEUP/dinasore/wiki/1.-Install)
 * [Function Blocks and 4DIAC-IDE](https://github.com/DIGI2-FEUP/dinasore/wiki/2.-Function-Blocks-and-4DIAC)
-* [Build new Function Blocks](https://github.com/DIGI2-FEUP/dinasore/wiki/4.-Build-new-Function-Blocks)
+* [Build new Function Blocks](https://github.com/DIGI2-FEUP/dinasore/wiki/2.1.-Build-new-Function-Blocks)
 * [OPC-UA Data Model](https://github.com/DIGI2-FEUP/dinasore/wiki/2.3.-OPC-UA-Data-Model)
 * [Behavioral Anomaly Detection](https://github.com/DIGI2-FEUP/dinasore/wiki/2.2.-Behavioral-Anomaly-Detection-functionality)
 * [Tutorials Resume](https://github.com/DIGI2-FEUP/dinasore/wiki/3.-Tutorials-Resume)
