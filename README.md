@@ -1,4 +1,3 @@
-![logo](../../wiki/images/logo.png)
 ![logo](https://github.com/DIGI2-FEUP/dinasore/wiki/images/logo.png)
 
 
@@ -8,7 +7,7 @@ The principal advantage of this platform is the redistribution of the running mo
 
 ## Content
 
-* [Home Wiki](../../wiki)
+* [Home Wiki](https://github.com/DIGI2-FEUP/dinasore/wiki)
 * [Install](../../wiki/1.-Install)
 * [Function Blocks and 4DIAC-IDE](../../wiki/2.-Function-Blocks-and-4DIAC)
 * [Build new Function Blocks](../../wiki/4.-Build-new-Function-Blocks)
