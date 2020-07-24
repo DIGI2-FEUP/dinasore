@@ -8,15 +8,15 @@ The principal advantage of this platform is the redistribution of the running mo
 ## Content
 
 * [Home Wiki](https://github.com/DIGI2-FEUP/dinasore/wiki)
-* [Install](../../wiki/1.-Install)
-* [Function Blocks and 4DIAC-IDE](../../wiki/2.-Function-Blocks-and-4DIAC)
-* [Build new Function Blocks](../../wiki/4.-Build-new-Function-Blocks)
-* [OPC-UA Data Model](../../wiki/2.3.-OPC-UA-Data-Model)
-* [Behavioral Anomaly Detection](../../wiki/2.2.-Behavioral-Anomaly-Detection-functionality)
-* [Tutorials Resume](../../wiki/3.-Tutorials-Resume)
-  * [Sensorization - "Hello World!"](../../wiki/3.1.-Hands-On:-Sensorization-"Hello-World!")
-  * [Sensorization - Distributed CPS](../../wiki/3.2.-Hands-On:-Distributed-Sensorization)
-  * [Optimization](../../wiki/3.3.-Hands-On:-Optimization)
+* [Install](https://github.com/DIGI2-FEUP/dinasore/wiki/1.-Install)
+* [Function Blocks and 4DIAC-IDE](https://github.com/DIGI2-FEUP/dinasore/wiki/2.-Function-Blocks-and-4DIAC)
+* [Build new Function Blocks](https://github.com/DIGI2-FEUP/dinasore/wiki/4.-Build-new-Function-Blocks)
+* [OPC-UA Data Model](https://github.com/DIGI2-FEUP/dinasore/wiki/2.3.-OPC-UA-Data-Model)
+* [Behavioral Anomaly Detection](https://github.com/DIGI2-FEUP/dinasore/wiki/2.2.-Behavioral-Anomaly-Detection-functionality)
+* [Tutorials Resume](https://github.com/DIGI2-FEUP/dinasore/wiki/3.-Tutorials-Resume)
+  * [Sensorization - "Hello World!"](https://github.com/DIGI2-FEUP/dinasore/wiki/3.1.-Hands-On:-Sensorization-"Hello-World!")
+  * [Sensorization - Distributed CPS](https://github.com/DIGI2-FEUP/dinasore/wiki/3.2.-Hands-On:-Distributed-Sensorization)
+  * [Optimization](https://github.com/DIGI2-FEUP/dinasore/wiki/3.3.-Hands-On:-Optimization)
 
 ## Features
 - [x] Communication between the DINASORE and the 4DIAC-IDE 
