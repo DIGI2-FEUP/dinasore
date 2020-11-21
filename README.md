@@ -31,6 +31,21 @@ The principal advantage of this platform is the redistribution of the running mo
 - [x] Test with complex variables (lists, arrays, methods (strings))
 
 
+## Citations
+
 For any publications or articles related with DINASORE, please use the following citation:
 
 - Pereira, Eliseu, Joao Reis, and Gil Gonçalves. "DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems."
+
+If you are using LaTex, the respective BibTex citation is the following entry: 
+
+```
+@inproceedings{PereiraEtAl:SAM IoT2020,
+    title = {DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems},
+    author = {Eliseu Moura Pereira and João Pedro Correia dos Reis and Gil Gonçalves},
+    pages = {63--71},
+    url = {http://ceur-ws.org/Vol-2739/#paper_9},
+    crossref = {SAM IoT2020},
+}
+```
+
