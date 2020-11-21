@@ -31,3 +31,6 @@ The principal advantage of this platform is the redistribution of the running mo
 - [x] Test with complex variables (lists, arrays, methods (strings))
 
 
+For any publications or articles related with DINASORE, please use the following citation:
+
+- Pereira, Eliseu, Joao Reis, and Gil Gonçalves. "DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems."
