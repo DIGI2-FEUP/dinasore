@@ -35,7 +35,7 @@ The principal advantage of this platform is the redistribution of the running mo
 
 For any publications or articles related with DINASORE, please use the following citation, or the BibTex entry (if you are using LaTex).
 
-Pereira, Eliseu, Joao Reis, and Gil Gonçalves. "DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems."
+- E. Pereira, J. Reis, and G. Gonçalves, “DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems,” in Eclipse Conference on Security, Artificial Intelligence, and Modeling for the Next Generation Internet of Things (Eclipse SAM IoT), 2020, pp. 63–71, [Online]. Available: http://ceur-ws.org/Vol-2739/#paper_9.
 
 ```
 @inproceedings{pereira2020dinasore,
