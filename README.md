@@ -33,19 +33,18 @@ The principal advantage of this platform is the redistribution of the running mo
 
 ## Citations
 
-For any publications or articles related with DINASORE, please use the following citation:
+For any publications or articles related with DINASORE, please use the following citation, or the BibTex entry (if you are using LaTex).
 
-- Pereira, Eliseu, Joao Reis, and Gil Gonçalves. "DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems."
-
-If you are using LaTex, the respective BibTex citation is the following entry: 
+Pereira, Eliseu, Joao Reis, and Gil Gonçalves. "DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems."
 
 ```
-@inproceedings{PereiraEtAl:SAM IoT2020,
+@inproceedings{pereira2020dinasore,
     title = {DINASORE: A Dynamic Intelligent Reconfiguration Tool for Cyber-Physical Production Systems},
-    author = {Eliseu Moura Pereira and João Pedro Correia dos Reis and Gil Gonçalves},
+    author={Pereira, Eliseu and Reis, Joao and Gon{\c{c}}alves, Gil},
+    booktitle={Eclipse Conference on Security, Artificial Intelligence, and Modeling for the Next Generation Internet of Things (Eclipse SAM IoT)},
+    year={2020},
     pages = {63--71},
-    url = {http://ceur-ws.org/Vol-2739/#paper_9},
-    crossref = {SAM IoT2020},
+    url = {http://ceur-ws.org/Vol-2739/#paper_9}
 }
 ```
 
