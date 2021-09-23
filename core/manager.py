@@ -194,6 +194,14 @@ class Manager:
                 self.manager_ua_fboot.save_fboot(self.requests)
                 self.requests = []
                 self.manager_ua_fboot.from_fboot()
+        
+        elif action == 'WRITE':
+            # Iterate over the list of children
+            for child in element:
+                # Write a connection with value
+                if child.tag == 'Connection' and child.attrib['Source'] == '$e':
+                    connection_destination = child.attrib['Destination']
+                    self.get_config(config_id).write_connection('$e', connection_destination)
 
         response = self.build_response(request_id, None)
         return response
