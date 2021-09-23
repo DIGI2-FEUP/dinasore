@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="ALPHA_LOOP" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="res"/>
+                <With Var="model1"/>
+                <With Var="model2"/>
+            </Event>
+            <Event Name="START" Type="Event" OpcUa="Method">
+                <With Var="alpha_step"/>
+            </Event>
+            <Event Name="DONE" Type="Event" OpcUa="Method"/>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event"/>
+            <Event Name="START_O" Type="Event">
+                <With Var="alpha"/>
+            </Event>
+            <Event Name="DONE_O" Type="Event">
+                <With Var="alpha"/>
+                <With Var="df_to_plot"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="alpha_step" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="res" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="model1" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="model2" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="alpha" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="df_to_plot" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

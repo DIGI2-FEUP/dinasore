@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="NORMALIZE" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="Data_in"/>
+                <With Var="Data_from_pickle"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="Scaled_data"/>
+                <With Var="Fit_function"/>
+                <With Var="Size"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="Data_in" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Data_from_pickle" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="Scaled_data" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Fit_function" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Size" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

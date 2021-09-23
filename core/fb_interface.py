@@ -245,33 +245,53 @@ class FBInterface:
                     if interface.tag == 'EventInputs':
                         # Iterates over the input events
                         for event in interface:
-                            event_name = event.attrib['Name']
-                            event_type = event.attrib['Type']
-                            self.input_events[event_name] = (event_type, None, False)
+                            try:
+                                event_name = event.attrib['Name']
+                                event_type = event.attrib['Type']
+                            except KeyError:
+                                logging.error('Could not find mandatory attributes "Name" and "Type"')
+                                logging.error('Please check {0}.fbt for mistakes'.format(fb_name))
+                            else:                           
+                                self.input_events[event_name] = (event_type, None, False)
 
                     # Output Events
                     elif interface.tag == 'EventOutputs':
                         # Iterates over the output events
                         for event in interface:
-                            event_name = event.attrib['Name']
-                            event_type = event.attrib['Type']
-                            self.output_events[event_name] = (event_type, None, False)
-
+                            try:
+                                event_name = event.attrib['Name']
+                                event_type = event.attrib['Type']
+                            except KeyError:
+                                logging.error('Could not find mandatory attributes "Name" and "Type"')
+                                logging.error('Please check {0}.fbt for mistakes'.format(fb_name))
+                            else:
+                                self.output_events[event_name] = (event_type, None, False)
+                            
                     # Input vars
                     elif interface.tag == 'InputVars':
                         # Iterates over the input vars
                         for var in interface:
-                            var_name = var.attrib['Name']
-                            var_type = var.attrib['Type']
-                            self.input_vars[var_name] = (var_type, None, False)
+                            try:
+                                var_name = var.attrib['Name']
+                                var_type = var.attrib['Type']
+                            except KeyError:
+                                logging.error('Could not find mandatory attributes "Name" and "Type"')
+                                logging.error('Please check {0}.fbt for mistakes'.format(fb_name))
+                            else:
+                                self.input_vars[var_name] = (var_type, None, False)
 
                     # Output vars
                     elif interface.tag == 'OutputVars':
                         # Iterates over the output vars
                         for var in interface:
-                            var_name = var.attrib['Name']
-                            var_type = var.attrib['Type']
-                            self.output_vars[var_name] = (var_type, None, False)
+                            try:
+                                var_name = var.attrib['Name']
+                                var_type = var.attrib['Type']
+                            except KeyError:
+                                logging.error('Could not find mandatory attributes "Name" and "Type"')
+                                logging.error('Please check {0}.fbt for mistakes'.format(fb_name))
+                            else:
+                                self.output_vars[var_name] = (var_type, None, False)
 
                     # Doesn't expected interface
                     else:

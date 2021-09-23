@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="TEST_MODEL" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="X"/>
+                <With Var="model"/>
+                <With Var="n_points"/>
+                <With Var="lw"/>
+                <With Var="lu"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="DataFrame"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="X" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="model" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="n_points" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="lw" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="lu" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="DataFrame" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="SENSOR_SIMULATOR_RANGE" OpcUa="DEVICE.SENSOR">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="READ" Type="Event"/>
+      <Event Name="TRIGGER" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event">
+        <With Var="VALUE"/>
+      </Event>
+      <Event Name="TRIGGER_O" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="UA_NAME" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="EVENT_ID" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="RANGE" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="BATCH" Type="INT" OpcUa="Constant"/>
+      <VarDeclaration Name="RATE" Type="INT" OpcUa="Constant"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="VALUE" Type="STRING" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>

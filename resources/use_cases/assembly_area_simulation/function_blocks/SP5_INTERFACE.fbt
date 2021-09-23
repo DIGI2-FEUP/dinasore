@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<!-- runs always in loop to check the actual state -->
+<FBType Name="SP5_INTERFACE" OpcUa="SERVICE">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="RUN" Type="Event"/>
+      <Event Name="TRIGGER" Type="Event">
+        <With Var="EVENT_ID"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="RUN_O" Type="Event"/>
+      <Event Name="TRIGGER_O" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="EVENT_ID" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="START_DATE" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="END_DATE" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="DATABASE_NAME" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="DATABASE_USER " Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="DATABASE_PASSWORD" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="DATABASE_HOST" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="DATABASE_PORT" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="OUTPUT_FILE_NAME" Type="STRING" OpcUa="Constant"/>
+    </InputVars>
+    <OutputVars>
+    </OutputVars>
+  </InterfaceList>
+</FBType>

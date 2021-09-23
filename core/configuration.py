@@ -3,7 +3,7 @@ from core import fb
 from core import fb_interface
 from xml.etree import ElementTree as ETree
 import logging
-
+import inspect
 
 
 
@@ -59,6 +59,26 @@ class Configuration:
         # check if if happened any importing error
         if fb_definition is not None:
 
+            # Checking order and number or arguments of schedule function
+            # Logs warning if order and number are not the same 
+            scheduleArgs = inspect.getargspec(fb_obj.schedule).args
+            if len(scheduleArgs) > 3:
+                scheduleArgs = scheduleArgs[3:]
+                scheduleArgs = [i.lower() for i in scheduleArgs]
+                xmlArgs = []
+                for child in fb_definition:
+                    inputvars = child.find('InputVars')
+                    varslist = inputvars.findall('VarDeclaration')
+                    for xmlVar in varslist:
+                        if xmlVar.get('Name') is not None:
+                            xmlArgs.append(xmlVar.get('Name').lower())
+                        else:
+                            logging.error('Could not find mandatory "Name" attribute for variable. Please check {0}.fbt'.format(fb_name))
+
+                if scheduleArgs != xmlArgs:
+                    logging.warning('Argument names for schedule function of {0} do not match definition in {0}.fbt'.format(fb_name))
+                    logging.warning('Ensure your variable arguments are the same as the input variables and in the same order')
+
             ## if it is a real FB, not a hidden one
             if monitor:
                 fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition, monitor=self.monitor)
@@ -71,6 +91,7 @@ class Configuration:
             return fb_element, fb_definition
         else:
             logging.error('can not create the fb type: {0}, instance: {1}'.format(fb_type, fb_name))
+            return None, None
 
     def create_connection(self, source, destination):
         logging.info('creating a new connection...')

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="ORCHESTRATOR" OpcUa="POINT.STARTPOINT">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="READ" Type="Event"/>
+	  <Event Name="REG" Type="Event">
+		<With Var="REGISTER"/>
+	  </Event>
+	  <Event Name="RESULT_I" Type="Event">
+		<With Var="RESULT"/>
+	  </Event>
+	  <Event Name="PARAMS_I" Type="Event">
+		<With Var="PARAMS"/>
+	  </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event"/>
+	  <Event Name="SIM_PARAMS_O" Type="Event">
+        <With Var="PARAMS_O"/>
+        <With Var="TOPIC_O"/>
+      </Event>
+	  <Event Name="SIM_RESULT_O" Type="Event">
+        <With Var="RESULT_O"/>
+        <With Var="PARAM_O"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="REGISTER" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="RESULT" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="PARAMS" Type="STRING" OpcUa="Variable"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="PARAMS_O" Type="STRING" OpcUa="Variable"/>
+	  <VarDeclaration Name="TOPIC_O" Type="STRING" OpcUa="Variable"/>
+	  <VarDeclaration Name="RESULT_O" Type="STRING" OpcUa="Variable"/>
+	  <VarDeclaration Name="PARAM_O" Type="STRING" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>

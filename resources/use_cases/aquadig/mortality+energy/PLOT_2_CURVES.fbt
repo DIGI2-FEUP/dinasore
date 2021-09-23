@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="PLOT_2_CURVES" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="df_to_plot"/>
+                <With Var="curve1_name"/>
+                <With Var="curve2_name"/>
+                <With Var="title"/>
+                <With Var="plot_path"/>
+                <With Var="plot_name"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="status"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="df_to_plot" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="curve1_name" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="curve2_name" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="title" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="plot_path" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="plot_name" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="status" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

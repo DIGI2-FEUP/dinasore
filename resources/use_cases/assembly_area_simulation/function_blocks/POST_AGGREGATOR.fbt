@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="POST_AGGREGATOR" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method"/>
+            <Event Name="NEW_MATERIAL" Type="Event">
+              <With Var="INPUT_MATERIAL1"/>
+              <With Var="INPUT_CONTAINER1"/>
+              <With Var="INPUT_MATERIAL2"/>
+              <With Var="INPUT_CONTAINER2"/>
+              <With Var="INPUT_MATERIAL3"/>
+              <With Var="INPUT_CONTAINER3"/>
+              <With Var="INPUT_MATERIAL4"/>
+              <With Var="INPUT_CONTAINER4"/>
+              <With Var="INPUT_MATERIAL5"/>
+              <With Var="INPUT_CONTAINER5"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event"/>
+            <Event Name="NEW_MATERIAL_O" Type="Event">
+              <With Var="MATERIAL_NAME"/>
+              <With Var="CONTAINER_NAME"/>
+              <With Var="RECEIVE_LIST_OUT"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="INPUT_MATERIAL1" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_CONTAINER1" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_MATERIAL2" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_CONTAINER2" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_MATERIAL3" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_CONTAINER3" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_MATERIAL4" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_CONTAINER4" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_MATERIAL5" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="INPUT_CONTAINER5" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="RECEIVE_LIST" Type="STRING" OpcUa="Constant.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="MATERIAL_NAME" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="CONTAINER_NAME" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="RECEIVE_LIST_OUT" Type="STRING" OpcUa="Constant.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

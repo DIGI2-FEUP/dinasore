@@ -1,5 +1,5 @@
 from core import configuration
-from data_model import ua_manager
+from data_model_fboot import ua_manager as ua_manager_fboot
 from xml.etree import ElementTree as ETree
 import time
 import struct
@@ -23,6 +23,9 @@ class Manager:
         self.manager_ua = None
         self.file_name = None
 
+        # new opc-ua model variables
+        self.requests = []
+
     def get_config(self, config_id):
         fb_element = None
         try:
@@ -44,6 +47,7 @@ class Manager:
         xml = None
 
         if action == 'CREATE':
+            self.requests.append(xml_data)
 
             ##############################################################
             ## remove all files in monitoring folder
@@ -71,11 +75,10 @@ class Manager:
                         if self.ua_integration:
                             # add try catch OSError: [Errno 98] Address already in use
                             # first stop the previous manager
-                            self.manager_ua.stop()
-                            # creates the new ua_manager
-                            self.manager_ua = ua_manager.UaManager(self.ua_url, self.file_name)
-                            self.manager_ua.base_name = conf_name
-                            self.manager_ua(config)
+                            self.manager_ua_fboot.stop()
+
+                            self.manager_ua_fboot = ua_manager_fboot.UaManagerFboot(self.manager_ua_fboot.address, self.manager_ua_fboot.port)
+                            self.manager_ua_fboot(config)
 
         elif action == 'QUERY':
             pass
@@ -146,14 +149,14 @@ class Manager:
 
                 # reset the program
                 resources_path = os.path.join(os.path.dirname(sys.path[0]), 'resources')
-                os.remove(os.path.join(resources_path, 'data_model.xml'))
-                shutil.copyfile(os.path.join(resources_path, 'data_model_copy.xml'),
-                                os.path.join(resources_path, 'data_model.xml'))
+                os.remove(os.path.join(resources_path, 'data_model.fboot'))
+                shutil.copyfile(os.path.join(resources_path, 'data_model_copy.fboot'),
+                                os.path.join(resources_path, 'data_model.fboot'))
 
-                self.manager_ua = ua_manager.UaManager(self.ua_url, self.file_name)
-                config = configuration.Configuration(self.manager_ua.base_name, 'EMB_RES')
-                self.set_config(self.manager_ua.base_name, config)
-                self.manager_ua(config)
+                self.ua_manager_fboot = ua_manager_fboot.UaManagerFboot(self.ua_manager_fboot.address, self.ua_manager_fboot.port)
+                config = configuration.Configuration('EMB_RES', 'EMB_RES')
+                self.set_config('EMB_RES', config)
+                self.ua_manager_fboot(config)
 
         response = self.build_response(request_id, xml)
         return response
@@ -164,31 +167,13 @@ class Manager:
         action = element.attrib['Action']
         request_id = element.attrib['ID']
 
+        self.requests.append(xml_data)
+
         if action == 'CREATE':
             # Iterate over the list of children
             for child in element:
-                # Create function block
-                if child.tag == 'FB':
-                    fb_name = child.attrib['Name']
-                    fb_type = child.attrib['Type']
-                    fb, fb_xml = self.get_config(config_id).create_fb(fb_name, fb_type, monitor=True)
-                    # check the options for ua_integration
-                    if self.ua_integration:
-                        # parses from fb
-                        self.manager_ua.from_fb(fb, fb_xml)
-
-                # Create connection
-                elif child.tag == 'Connection':
-                    connection_source = child.attrib['Source']
-                    connection_destination = child.attrib['Destination']
-                    self.get_config(config_id).create_connection(connection_source, connection_destination)
-                    # check the options for ua_integration
-                    if self.ua_integration:
-                        # parses from subscription
-                        self.manager_ua.create_ua_connection(connection_source, connection_destination)
-
                 # Create watch
-                elif child.tag == 'Watch':
+                if child.tag == 'Watch':
                     watch_source = child.attrib['Source']
                     watch_destination = child.attrib['Destination']
                     self.get_config(config_id).create_watch(watch_source, watch_destination)
@@ -205,25 +190,10 @@ class Manager:
         elif action == 'START':
             # check the options for ua_integration
             if self.ua_integration:
-                # checks the ua model to change the ua names
-                self.manager_ua.check_ua_names()
-                # saves the actual configuration
-                self.manager_ua.save_xml()
-            # Starts the configuration
-            self.get_config(config_id).start_work()
-
-        elif action == 'WRITE':
-            # Iterate over the list of children
-            for child in element:
-                # Write a connection with value
-                if child.tag == 'Connection':
-                    connection_source = child.attrib['Source']
-                    connection_destination = child.attrib['Destination']
-                    self.get_config(config_id).write_connection(connection_source, connection_destination)
-                    # check the options for ua_integration
-                    if self.ua_integration:
-                        # parses from subscription
-                        self.manager_ua.write_ua_connection(connection_source, connection_destination)
+                # saves the actual configuration on fboot file
+                self.manager_ua_fboot.save_fboot(self.requests)
+                self.requests = []
+                self.manager_ua_fboot.from_fboot()
 
         response = self.build_response(request_id, None)
         return response
@@ -245,16 +215,12 @@ class Manager:
         response = b''.join([response_header, response_xml])
         return response
 
-    def build_ua_manager(self, address, port, file_name):
-        self.file_name = file_name
-        self.ua_url = 'opc.tcp://{0}:{1}'.format(address, port)
-        self.manager_ua = ua_manager.UaManager(self.ua_url, self.file_name)
+    def build_ua_manager_fboot(self, address, port):
+        self.manager_ua_fboot = ua_manager_fboot.UaManagerFboot(address, port)
         # creates the opc-ua manager
-
-        config = configuration.Configuration(self.manager_ua.base_name, 'EMB_RES', monitor=self.monitor)
-        self.set_config(self.manager_ua.base_name, config)
+        config = configuration.Configuration('EMB_RES', 'EMB_RES', monitor=self.monitor)
+        self.set_config('EMB_RES', config)
         # parses the description file
-        self.manager_ua(config)
-        self.manager_ua.from_xml()
-        # sets the option for ua_integration
+        self.manager_ua_fboot(config)
+        self.manager_ua_fboot.from_fboot()
         self.ua_integration = True

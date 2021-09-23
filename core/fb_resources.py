@@ -3,6 +3,7 @@ import os
 import sys
 import xml.etree.ElementTree as ETree
 import logging
+from data_model_fboot import utils
 
 
 class FBResources:
@@ -10,17 +11,14 @@ class FBResources:
     def __init__(self, fb_type):
         self.fb_type = fb_type
 
+        # Gets the dir path to the py and fbt files
+        self.root_path = utils.get_fb_files_path(fb_type)
+
         # Gets the file path to the python file
-        self.py_path = os.path.join(os.path.dirname(sys.path[0]),
-                                    'resources',
-                                    'function_blocks',
-                                    fb_type + '.py')
+        self.py_path = os.path.join(self.root_path, fb_type + '.py')
 
         # Gets the file path to the fbt (xml) file
-        self.fbt_path = os.path.join(os.path.dirname(sys.path[0]),
-                                     'resources',
-                                     'function_blocks',
-                                     fb_type + '.fbt')
+        self.fbt_path = os.path.join(self.root_path, fb_type + '.fbt')
 
     def import_fb(self):
         logging.info('importing fb python file and definition file...')
@@ -28,8 +26,17 @@ class FBResources:
         fb_obj = None
 
         try:
+            concatenate = False
+            package = ''
+            for dir in self.root_path.split(os.sep):
+                if not concatenate:
+                    if dir == 'resources':
+                        concatenate = True
+                if concatenate:
+                    package += dir + '.'
+            package = package[:-1]
             # Import method from python file
-            py_fb = importlib.import_module('.' + self.fb_type, package='resources.function_blocks')
+            py_fb = importlib.import_module('.' + self.fb_type, package=package)
             # Gets the running fb method
             fb_class = getattr(py_fb, self.fb_type)
             # Instance the fb class
@@ -57,6 +64,20 @@ class FBResources:
         else:
             logging.info('fb definition (xml) imported from: {0}'.format(self.fbt_path))
             logging.info('python file imported from: {0}'.format(self.py_path))
+
+            # Checking specified data types
+            for event in tree.findall('.//Event'):
+                if event.get('Type') is not None and event.get('Type') != 'Event':
+                    logging.error('Wrong data type "{0}" specified for event {1}'.format(event.get('Type'), event.get('Name')))
+                    logging.error('Defaulting to Event')
+                    event.set('Type', 'Event')
+                
+            for varDec in tree.findall('.//VarDeclaration'):
+                if varDec.get('Type') is not None and varDec.get('Type') not in utils.UA_TYPES:
+                    logging.error('Unknown data type "{0}" assigned to variable {1}'.format(varDec.get('Type'), varDec.get('Name')))
+                    logging.error('Defaulting to String')
+                    varDec.set('Type', 'String')
+
 
         return root, fb_obj
 

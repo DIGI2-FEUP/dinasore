@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="SENSOR_DB_SIM" OpcUa="DEVICE.SENSOR">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="READ" Type="Event">
+                <With Var="MEAN"/>
+                <With Var="STD"/>
+                <With Var="SIZE"/>
+                <With Var="T_CYCLE"/>
+            </Event>
+            <Event Name="CAPTURE" Type="Event"/>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="READ_O" Type="Event">
+                <With Var="Measurement_o"/>
+                <With Var="index_o"/>
+                <With Var="over"/>
+            </Event>
+            <Event Name="CAPTURE_O" Type="Event"/>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="MEAN" Type="REAL" OpcUa="Variable"/>
+            <VarDeclaration Name="STD" Type="REAL" OpcUa="Variable"/>
+            <VarDeclaration Name="SIZE" Type="INT" OpcUa="Variable"/>
+            <VarDeclaration Name="T_CYCLE" Type="REAL" OpcUa="Variable"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="Measurement_o" Type="REAL" OpcUa="Variable"/>
+            <VarDeclaration Name="index_o" Type="INT" OpcUa="Variable"/>
+            <VarDeclaration Name="over" Type="BOOL" OpcUa="Variable"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

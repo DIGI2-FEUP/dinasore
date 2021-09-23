@@ -82,7 +82,7 @@ if __name__ == "__main__":
     # creates the 4diac manager
     m = manager.Manager(monitor=monitor)
     # sets the ua integration option
-    m.build_ua_manager(address, port_opc, 'data_model.xml')
+    m.build_ua_manager_fboot(address, port_opc)
 
     # creates the tcp server to communicate with the 4diac
     hand = tcp_server.TcpServer(address, port_diac, 10, m)

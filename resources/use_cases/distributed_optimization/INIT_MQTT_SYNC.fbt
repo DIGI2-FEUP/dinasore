@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="INIT_MQTT_SYNC" OpcUa="POINT.STARTPOINT">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="READ" Type="Event">
+		<With Var="ADDRESS"/>
+		<With Var="PORT"/>
+		<With Var="TIMEOUT"/>
+	  </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event"/>
+	  <Event Name="START_O" Type="Event">
+		<With Var="CLIENT"/>
+	  </Event>
+	  <Event Name="MESSAGE_O" Type="Event">
+		<With Var="MESSAGE"/>
+	  </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="ADDRESS" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="PORT" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="TIMEOUT" Type="STRING" OpcUa="Constant"/>
+    </InputVars>
+	<OutputVars>
+      <VarDeclaration Name="CLIENT" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="MESSAGE" Type="STRING" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="ACCESS_DB" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="Host"/>
+                <With Var="portGateway"/>
+                <With Var="Authorization"/>
+                <With Var="t_start"/>
+                <With Var="t_end"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="GET_request_o"/>
+                <With Var="Authorization_o"/>
+                <With Var="t_start_o"/>
+                <With Var="t_end_o"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="Host" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="portGateway" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Authorization" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="t_start" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="t_end" Type="REAL" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="GET_request_o" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Authorization_o" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="t_start_o" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="t_end_o" Type="REAL" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

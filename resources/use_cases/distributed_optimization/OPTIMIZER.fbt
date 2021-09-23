@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="OPTIMIZER" OpcUa="SERVICE">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="RUN" Type="Event">
+		<With Var="TARGET"/>
+		<With Var="INIT_POP"/>
+		<With Var="POP_SIZE"/>
+		<With Var="ELITE_SIZE"/>
+		<With Var="MUTATION"/>
+		<With Var="N_GENERATIONS"/>
+	  </Event>
+	  <Event Name="RESULT_I" Type="Event">
+		<With Var="RESULT"/>
+		<With Var="PARAM"/>		
+	  </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="RUN_O" Type="Event">
+        <With Var="PARAMS"/>
+      </Event>
+	  <Event Name="RESULT_O" Type="Event">
+        <With Var="FINAL_RESULT"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="TARGET" Type="STRING" OpcUa="Constant"/>
+      <VarDeclaration Name="RESULT" Type="STRING" OpcUa="Variable"/>
+      <VarDeclaration Name="PARAM" Type="STRING" OpcUa="Variable"/>
+	  <VarDeclaration Name="INIT_POP" Type="STRING" OpcUa="Constant"/>
+	  <VarDeclaration Name="POP_SIZE" Type="STRING" OpcUa="Constant"/>
+	  <VarDeclaration Name="ELITE_SIZE" Type="STRING" OpcUa="Constant"/>
+	  <VarDeclaration Name="MUTATION" Type="STRING" OpcUa="Constant"/>
+	  <VarDeclaration Name="N_GENERATIONS" Type="STRING" OpcUa="Constant"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="PARAMS" Type="STRING" OpcUa="Variable"/>
+	  <VarDeclaration Name="FINAL_RESULT" Type="STRING" OpcUa="Variable"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>

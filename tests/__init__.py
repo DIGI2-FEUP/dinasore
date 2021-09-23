@@ -2,6 +2,7 @@ import unittest
 import logging
 import sys
 import os
+import threading
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
 
@@ -25,5 +26,6 @@ suite.addTests(loader.loadTestsFromModule(test_data_model))
 logging.disable(logging.CRITICAL)
 
 # initialize a runner, pass it your suite and run it
-runner = unittest.TextTestRunner(verbosity=3)
-result = runner.run(suite)
+if __name__ == "__main__":
+    runner = unittest.TextTestRunner(verbosity=3)
+    result = runner.run(suite)

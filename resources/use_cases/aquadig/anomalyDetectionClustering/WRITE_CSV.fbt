@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="WRITE_CSV" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="Data"/>
+                <With Var="path"/>
+                <With Var="name"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="status"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="Data" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="path" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="name" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="status" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

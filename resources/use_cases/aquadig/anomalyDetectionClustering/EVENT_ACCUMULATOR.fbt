@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="EVENT_ACCUMULATOR" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="Measurement"/>
+                <With Var="Window_Width"/>
+            </Event>
+            <Event Name="VECTOR_READY" Type="Event"/>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event"/>
+            <Event Name="VECTOR_READY_O" Type="Event">
+                <With Var="Measurement_vector"/>
+                <With Var="Window_Width_o"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="Measurement" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Window_Width" Type="INT" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="Measurement_vector" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Window_Width_o" Type="INT" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

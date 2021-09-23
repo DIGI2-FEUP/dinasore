@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="KMEANS" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="Data_in"/>
+                <With Var="n_clusters"/>
+                <With Var="init"/>
+                <With Var="n_init"/>
+                <With Var="max_iter"/>
+                <With Var="tol"/>
+                <With Var="precompute_distances"/>
+                <With Var="verbose"/>
+                <With Var="random_state"/>
+                <With Var="copy_x"/>
+                <With Var="n_jobs"/>
+                <With Var="algorithm"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="Prediction"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="Data_in" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="n_clusters" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="init" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="n_init" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="max_iter" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="tol" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="precompute_distances" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="verbose" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="random_state" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="copy_x" Type="BOOL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="n_jobs" Type="INT" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="algorithm" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="Prediction" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

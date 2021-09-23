@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="PCA_TRANSF" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="features"/>
+                <With Var="Data_from_pickle"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="result"/>
+                <With Var="explained_data/component"/>
+                <With Var="explained_data_total"/>
+                <With Var="Fit_function"/>
+                <With Var="size"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="features" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Data_from_pickle" Type="STRING" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="result" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="explained_data/component" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="explained_data_total" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="Fit_function" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="size" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="OPTIMIZE_MODELS" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="RUN" Type="Event" OpcUa="Method">
+                <With Var="alpha"/>
+                <With Var="model1"/>
+                <With Var="model1_up"/>
+                <With Var="model2"/>
+                <With Var="model2_up"/>
+                <With Var="lw"/>
+                <With Var="up"/>
+                <With Var="verbose"/>
+                <With Var="temp"/>
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="RUN_O" Type="Event">
+                <With Var="res"/>
+                <With Var="call_back_matrix"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+            <VarDeclaration Name="alpha" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="model1" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="model1_up" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="model2" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="model2_up" Type="REAL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="lw" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="up" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="verbose" Type="BOOL" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="temp" Type="REAL" OpcUa="Variable.RUN"/>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="res" Type="STRING" OpcUa="Variable.RUN"/>
+            <VarDeclaration Name="call_back_matrix" Type="STRING" OpcUa="Variable.RUN"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>
