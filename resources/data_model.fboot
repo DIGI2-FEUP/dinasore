@@ -1,0 +1,17 @@
+;<Request ID="1" Action="CREATE"><FB Name="EMB_RES" Type="EMB_RES" /></Request>
+EMB_RES;<Request ID="2" Action="CREATE"><FB Name="WRITE_CSV" Type="WRITE_CSV" /></Request>
+EMB_RES;<Request ID="3" Action="WRITE"><Connection Source="C:\\Users\\Rafael\\Desktop\\tmp" Destination="WRITE_CSV.path" /></Request>
+EMB_RES;<Request ID="4" Action="WRITE"><Connection Source="wtv.csv" Destination="WRITE_CSV.name" /></Request>
+EMB_RES;<Request ID="5" Action="CREATE"><FB Name="SENSOR_SIMULATOR" Type="SENSOR_SIMULATOR" /></Request>
+EMB_RES;<Request ID="6" Action="WRITE"><Connection Source="12" Destination="SENSOR_SIMULATOR.OFFSET" /></Request>
+EMB_RES;<Request ID="7" Action="CREATE"><FB Name="MOVING_AVERAGE" Type="MOVING_AVERAGE" /></Request>
+EMB_RES;<Request ID="8" Action="WRITE"><Connection Source="5" Destination="MOVING_AVERAGE.WINDOW" /></Request>
+EMB_RES;<Request ID="9" Action="CREATE"><FB Name="CONCATENATE_REALS" Type="CONCATENATE_REALS" /></Request>
+EMB_RES;<Request ID="10" Action="CREATE"><Connection Source="CONCATENATE_REALS.RUN_O" Destination="WRITE_CSV.RUN" /></Request>
+EMB_RES;<Request ID="11" Action="CREATE"><Connection Source="SENSOR_SIMULATOR.READ_O" Destination="MOVING_AVERAGE.RUN" /></Request>
+EMB_RES;<Request ID="12" Action="CREATE"><Connection Source="MOVING_AVERAGE.RUN_O" Destination="CONCATENATE_REALS.RUN" /></Request>
+EMB_RES;<Request ID="13" Action="CREATE"><Connection Source="SENSOR_SIMULATOR.VALUE" Destination="MOVING_AVERAGE.VALUE" /></Request>
+EMB_RES;<Request ID="14" Action="CREATE"><Connection Source="MOVING_AVERAGE.VALUE_MA" Destination="CONCATENATE_REALS.VALUE2" /></Request>
+EMB_RES;<Request ID="15" Action="CREATE"><Connection Source="CONCATENATE_REALS.RESULT" Destination="WRITE_CSV.Data" /></Request>
+EMB_RES;<Request ID="16" Action="CREATE"><Connection Source="SENSOR_SIMULATOR.VALUE" Destination="CONCATENATE_REALS.VALUE1" /></Request>
+EMB_RES;<Request ID="17" Action="START"/>
