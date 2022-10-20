@@ -69,12 +69,12 @@ class UaManagerFboot(peer.UaPeer):
                 is_watch = False
                 continue
 
-            if start_fb is None:
+            '''if start_fb is None:
                 file.write(';')
                 for child in element:
                     start_fb = child.attrib['Name']
             else:
-                file.write('{0};'.format(start_fb))
+                file.write('{0};'.format(start_fb))'''
             file.write(request)
             file.write('\n')
         file.close()
@@ -110,10 +110,11 @@ class UaManagerFboot(peer.UaPeer):
     def generate_function_blocks(self, lines):
         for line in lines:
             # Remove start fb from line
-            chunks = line.split(';')
-            if len(chunks) != 2:
-                raise self.InvalidFbootState
-            xml_element = ETree.fromstring(chunks[1])
+            #chunks = line.split(';')
+            #if len(chunks) != 2:
+            #    raise self.InvalidFbootState
+            #xml_element = ETree.fromstring(chunks[1])
+            xml_element = ETree.fromstring(line)
             try:
                 if xml_element.get('Action') == 'CREATE':
                     for child in xml_element:
@@ -127,11 +128,14 @@ class UaManagerFboot(peer.UaPeer):
 
     def generate_connections(self, lines):
         for line in lines:
+            '''
             # Remove start fb from line
             chunks = line.split(';')
             if len(chunks) != 2:
                 raise self.InvalidFbootState
             xml_element = ETree.fromstring(chunks[1])
+            '''
+            xml_element = ETree.fromstring(line)
             try:
                 if xml_element.get('Action') == 'CREATE':
                     for child in xml_element:

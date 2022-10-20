@@ -9,6 +9,7 @@ import os
 import sys
 import shutil
 import glob
+import urllib
 
 class Manager:
 
@@ -166,8 +167,7 @@ class Manager:
         element = ETree.fromstring(xml_data)
         action = element.attrib['Action']
         request_id = element.attrib['ID']
-
-        self.requests.append(xml_data)
+        self.requests.append(xml_data.replace("&apos;", ""))
 
         if action == 'CREATE':
             # Iterate over the list of children

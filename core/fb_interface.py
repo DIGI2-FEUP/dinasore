@@ -571,7 +571,7 @@ class FBInterface:
             v_type, value, is_watch = self.read_attr(var_name)
             if is_watch and (value is not None):
                 port = ETree.Element('Port', {'name': var_name})
-                ETree.SubElement(port, 'Data', {'value': str(value),
+                ETree.SubElement(port, 'Data', {'value': str(value)[0:100],
                                                 'forced': 'false'})
                 fb_root.append(port)
 
@@ -582,7 +582,7 @@ class FBInterface:
             v_type, value, is_watch = self.read_attr(event_name)
             if is_watch and (value is not None):
                 port = ETree.Element('Port', {'name': event_name})
-                ETree.SubElement(port, 'Data', {'value': str(value),
+                ETree.SubElement(port, 'Data', {'value': str(value)[0:100],
                                                 'time': str(int((time.time() * 1000) - start_time))})
                 fb_root.append(port)
 
