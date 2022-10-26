@@ -17,6 +17,7 @@ if __name__ == "__main__":
                   'INFO': logging.INFO}
 
     address = 'localhost'
+    diac_address = None
     port_diac = 61499
     port_opc = 4840
     log_level = log_levels['ERROR']
@@ -49,6 +50,7 @@ if __name__ == "__main__":
     parser.add_argument('-g', action='store_true', help="sets on the self-organizing agent")
     parser.add_argument('-m', metavar='monitor', nargs='*', help="activates the behavioral anomaly detection feature. If no paramters are specified, the default values are 10 samples for initial training, each sample with 20 seconds (approximately 3m20s). As an example, you can specify paramters the following way (-m 5 10) meaning 10 samples for training with 10 seconds each sample.")
     parser.add_argument('-i', metavar='ieee1451', nargs='*', help="starts the IEEE1451 ncap service")
+    parser.add_argument('-d', metavar='diac_address', nargs=1, help="ip address to access 4diac IDE workspace")
     args = parser.parse_args()
 
     if args.a != None: address = args.a[0]
@@ -69,12 +71,12 @@ if __name__ == "__main__":
     # create NCAP service instance
     ncapService = None
 
+    if args.d != None: diac_address = args.d[0]
     if args.i != None and (platform == "linux" or platform == "linux2"):
         if(platform == "linux" or platform == "linux2"):
             from ieee1451.ncap import ncap
-            from ieee1451.diac_integration import diac        
         
-        ncapService = ncap.NCAP(address, port_diac)
+        ncapService = ncap.NCAP(address, diac_address, port_diac)
 
 
     ##############################################################
