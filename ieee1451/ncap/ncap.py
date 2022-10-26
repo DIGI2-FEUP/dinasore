@@ -13,14 +13,14 @@ from teds.teds import *
 
 class NCAP:
 
-    def __init__(self, ncap_address, diac_address, port_diac):
+    def __init__(self, ncap_address, port_diac, diac_address, project_name):
         
         self.transducerServices = TransducerServices(self)
 
         self.pnpManager = PnP_Manager(self)
 
-        if diac_address != None:
-            self.diacManager = DIAC_Manager(ncap_address, diac_address, port_diac)
+        if diac_address != None and project_name != None:
+            self.diacManager = DIAC_Manager(ncap_address, port_diac, diac_address, project_name)
             self.pnpManager.subscribe(self.diacManager)
 
         self.webServer = ThreadWebServer(self, '', 8000)

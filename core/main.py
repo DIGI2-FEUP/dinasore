@@ -18,6 +18,7 @@ if __name__ == "__main__":
 
     address = 'localhost'
     diac_address = None
+    project_name = None
     port_diac = 61499
     port_opc = 4840
     log_level = log_levels['ERROR']
@@ -39,7 +40,9 @@ if __name__ == "__main__":
                    "       for the initial training dataset and each sample with 20 seconds. \n" \
                    "       As an example, you can specify the monitoring parameters in the following way (-m 5 10) \n" \
                    "       meaning 10 samples for training dataset with 10 seconds of monitoring per sample. \n" \
-                   " -i, --ieee1451: starts the IEEE1451 ncap service"
+                   " -i, --ieee1451: starts the IEEE1451 ncap service" \
+                   " -d, --diac_address: ip address of 4diac IDE workspace shared folder ('/diac_workspace')" \
+                   " -n, --project_name: name of the 4diac IDE project"
 
     ## build parser for application command line arguments
     parser = argparse.ArgumentParser()
@@ -50,7 +53,8 @@ if __name__ == "__main__":
     parser.add_argument('-g', action='store_true', help="sets on the self-organizing agent")
     parser.add_argument('-m', metavar='monitor', nargs='*', help="activates the behavioral anomaly detection feature. If no paramters are specified, the default values are 10 samples for initial training, each sample with 20 seconds (approximately 3m20s). As an example, you can specify paramters the following way (-m 5 10) meaning 10 samples for training with 10 seconds each sample.")
     parser.add_argument('-i', metavar='ieee1451', nargs='*', help="starts the IEEE1451 ncap service")
-    parser.add_argument('-d', metavar='diac_address', nargs=1, help="ip address to access 4diac IDE workspace")
+    parser.add_argument('-d', metavar='diac_address', nargs=1, help="ip address to access 4diac IDE workspace folder")
+    parser.add_argument('-n', metavar='project_name', nargs=1, help="name of the 4diac IDE project")
     args = parser.parse_args()
 
     if args.a != None: address = args.a[0]
@@ -72,11 +76,12 @@ if __name__ == "__main__":
     ncapService = None
 
     if args.d != None: diac_address = args.d[0]
+    if args.n != None: project_name = args.n[0]
     if args.i != None and (platform == "linux" or platform == "linux2"):
         if(platform == "linux" or platform == "linux2"):
             from ieee1451.ncap import ncap
         
-        ncapService = ncap.NCAP(address, diac_address, port_diac)
+        ncapService = ncap.NCAP(address, port_diac, diac_address, project_name)
 
 
     ##############################################################

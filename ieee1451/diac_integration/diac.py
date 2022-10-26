@@ -7,7 +7,7 @@ import os
 
 class DIAC_Manager:
     
-    def __init__(self, ncap_address, diac_address, port_diac):
+    def __init__(self, ncap_address, port_diac, diac_address, project_name):
 
         self.ncap_address = ncap_address
         self.port_diac = port_diac
@@ -21,8 +21,8 @@ class DIAC_Manager:
             os.system(cmd)
             self.workspace = "/mnt/diac_workspace"
         
-        self.project = "DissApp"
-        self.system = "DissApp.sys"
+        self.project = project_name
+        self.system = project_name + ".sys"
 
         self.filepath = self.workspace + '/' + self.project + '/' + self.system
         self.subApp = None
