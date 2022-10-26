@@ -50,7 +50,7 @@ class Diac_Util:
                 fb.set('x', x)
                 fb.set('y', y)
 
-    def addFB2Application(root, fb, tim_uuid):
+    def addFB2Application(root, fb, tim_uuid, transducer_id):
 
         for sub in root.iter('SubAppNetwork'):
             subAppNetwork = sub
@@ -62,8 +62,11 @@ class Diac_Util:
                 for param in f.iter('Parameter'):
                     if(param.get('Name') == "TIM_UUID"):
                         if(param.get('Value') == tim_uuid):
+                            break
+                    if(param.get('Name') == "TRANSDUCER_ID"):
+                        if(param.get('Value') == transducer_id):
                             add = False
-
+                            
         if(add == True):
 
             count = 0
