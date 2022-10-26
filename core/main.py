@@ -9,6 +9,12 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
 from communication import tcp_server
 from core import manager
 
+
+# --- Diogo Oliveira ---
+#from sys import platform
+platform = "linux"
+# ----------------------
+
 if __name__ == "__main__":
     log_levels = {'ERROR': logging.ERROR,
                   'WARN': logging.WARN,
@@ -35,7 +41,8 @@ if __name__ == "__main__":
                    "       If no parameters are specified, the default values are 10 samples\n" \
                    "       for the initial training dataset and each sample with 20 seconds. \n" \
                    "       As an example, you can specify the monitoring parameters in the following way (-m 5 10) \n" \
-                   "       meaning 10 samples for training dataset with 10 seconds of monitoring per sample. \n"
+                   "       meaning 10 samples for training dataset with 10 seconds of monitoring per sample. \n" \
+                   " -i, --ieee1451: starts the IEEE1451 ncap service"
 
     ## build parser for application command line arguments
     parser = argparse.ArgumentParser()
@@ -45,6 +52,9 @@ if __name__ == "__main__":
     parser.add_argument('-l', metavar='log_level', nargs=1,  help="logging level at the file resources/error_list.log, e.g. INFO, WARN or ERROR (default: ERROR)")
     parser.add_argument('-g', action='store_true', help="sets on the self-organizing agent")
     parser.add_argument('-m', metavar='monitor', nargs='*', help="activates the behavioral anomaly detection feature. If no paramters are specified, the default values are 10 samples for initial training, each sample with 20 seconds (approximately 3m20s). As an example, you can specify paramters the following way (-m 5 10) meaning 10 samples for training with 10 seconds each sample.")
+    # --- Diogo Oliveira ---
+    parser.add_argument('-i', metavar='ieee1451', nargs='*', help="starts the IEEE1451 ncap service")
+    # ----------------------
     args = parser.parse_args()
 
     if args.a != None: address = args.a[0]
@@ -60,6 +70,19 @@ if __name__ == "__main__":
             exit(2)
     else:
         monitor=None
+
+
+    # --- Diogo Oliveira ---
+    ncapService = None
+
+    if args.i != None and (platform == "linux" or platform == "linux2"):
+        if(platform == "linux" or platform == "linux2"):
+            from ieee1451.ncap import ncap
+            from ieee1451.diac_integration import diac        
+        
+        ncapService = ncap.NCAP(address, port_diac)
+    # ----------------------
+
 
     ##############################################################
     ## remove all files in monitoring folder
@@ -78,15 +101,21 @@ if __name__ == "__main__":
     logging.basicConfig(filename=log_path,
                         level=log_level,
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
+    
+    
+    # --- Diogo Oliveira ---
+    if(ncapService != None):
+        ncapService.run()
+    # ----------------------
+
 
     # creates the 4diac manager
-    m = manager.Manager(monitor=monitor)
+    m = manager.Manager(ncap=ncapService, monitor=monitor)
     # sets the ua integration option
     m.build_ua_manager_fboot(address, port_opc)
 
     # creates the tcp server to communicate with the 4diac
     hand = tcp_server.TcpServer(address, port_diac, 10, m)
-
     try:
         # handles every client
         while True:
