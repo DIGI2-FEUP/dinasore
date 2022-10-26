@@ -267,10 +267,5 @@ if __name__ == '__main__':
     thread = ThreadWebServer('',8000)
     thread.start()
 
-    t1 = time.time()
-    while time.time() - t1 < 10:
-        time.sleep(1)
-        print("1 sec")
-
     while True:
         pass

@@ -35,7 +35,7 @@ class NetRegistration(Registration):
             msgId = mc.Message.getNextId()
             commModule.writeMsg(commId, -1, payload, True, msgId)
             
-            commModule.wait_events[msgId].wait(3)                                            # configure Timeout to not block reception of other register messages
+            commModule.wait_events[msgId].wait(3)
             
             if(commModule.wait_events[msgId].is_set()):
 

@@ -7,21 +7,19 @@ import os
 
 class DIAC_Manager:
     
-    def __init__(self, address, port_diac):
+    def __init__(self, ncap_address, diac_address, port_diac):
 
-        self.address = address
+        self.ncap_address = ncap_address
         self.port_diac = port_diac
 
         if(platform == "win32"):
-            self.workspace = "//192.168.1.74/diac_workspace/workspace"
+            self.workspace = "//" + diac_address + "/diac_workspace/workspace"
         elif(platform == "linux" or platform == "linux2"):
             cmd = "sudo umount /mnt/diac_workspace"
             os.system(cmd)
-            cmd = "sudo mount.cifs //192.168.1.74/diac_workspace /mnt/diac_workspace -o \"user=Raspberry,password=rasp\""
+            cmd = "sudo mount.cifs //" + diac_address + "/diac_workspace /mnt/diac_workspace " # if necessary add '-o \"user=User,password=Password\"'
             os.system(cmd)
             self.workspace = "/mnt/diac_workspace"
-            #cmd = "mkdir /mnt/diac_workspace/folder"
-            #os.system(cmd)
         
         self.project = "DissApp"
         self.system = "DissApp.sys"
@@ -43,13 +41,9 @@ class DIAC_Manager:
             tim_uuid = transducer.tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block.UUID      # Convert UUID to String here if necessary!!!
 
             if(chanTeds.ChanType == 0):
-                #print("New Transducer - SENSOR: " + chanTeds.PhyUnits.getName())
-                Diac_Util.addIEEE1451Block(self.address, self.port_diac, self.filepath, chanName, tim_uuid, transducer.id, geoLoc[0], geoLoc[1], chanName)
+                Diac_Util.addIEEE1451Block(self.ncap_address, self.port_diac, self.filepath, chanName, tim_uuid, transducer.id, geoLoc[0], geoLoc[1], chanName)
 
 
 if (__name__ == '__main__'):
 
     diac = DIAC_Manager()
-
-    #diac.addFunctionBlock("ACCESS_DB")
-    #diac.removeFunctionBlock("ACCESS_DB")

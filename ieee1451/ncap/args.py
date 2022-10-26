@@ -34,8 +34,6 @@ class ArgumentArray:
         self.arguments.insert(index, [None, value])
 
     def stringToIndex(self, name):
-
-        # pesquisar no vetor ou hardcoded com definição dos argumentos dos comandos?
         pass
 
     def getNames(self):

@@ -112,10 +112,6 @@ class NetComm(Comm):
         
         print("Starting TIM Discovery")
 
-        ### Discover Tests ###
-        # Meas_Times.start_discover.append(time.time_ns())
-        ### -------------- ###
-
         timeout = 5
 
         [maxPayloadLen, commId] = self.open(0, True)

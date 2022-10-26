@@ -418,9 +418,6 @@ class DotX_DIGI2(Command):
         return self.getMessage()
 
     def register_response(random, address):
-        #cmdArguments = ArgumentArray()
-        #cmdArguments.putByName('Random', Argument(TypeCode.UINT8_TC, random))
-        #cmdArguments.putByName('Address', Argument(TypeCode.UINT8_TC, address))
         return Command.getRegisterResponse(random, address)
     
     def discover(self):

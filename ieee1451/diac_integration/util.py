@@ -356,27 +356,8 @@ class Diac_Util:
         xml = (bytes('<?xml version="1.0" encoding="UTF-8"?>\n', encoding='utf-8') + ET.tostring(system))
         xml = xml.decode('utf-8')
 
-        ### Tests ###
-        # Meas_Times.before_file.append(time.time_ns())
-        ### ----- ###
-        
         with open(filepath, 'w+') as f:
             f.write(xml)
             f.close()
-            
-            
-            ### Register Tests            
-            # time1 = time.time_ns()
-            # #print("close: " + str(time1))
-            # Meas_Times.close_file_register.append(time1)
-            # print("Registered")
-            # if(len(Meas_Times.close_file_register) >= 80):
-            #     Meas_Times.showResults()
-
-            ### Discover Tests ###
-            # time1 = time.time_ns()
-            # Meas_Times.close_file.append(time1)
-            # if(len(Meas_Times.close_file) >= 4):
-            #     Meas_Times.saveResult()
 
             print("- FB inserted in 4diac IDE")

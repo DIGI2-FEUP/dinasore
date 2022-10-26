@@ -15,8 +15,6 @@ class CANBus:
         
         return msg.data
 
-        #notifier = can.Notifier(self.bus, [can.Printer()])
-
     def readCAN(self):
 
         while True:

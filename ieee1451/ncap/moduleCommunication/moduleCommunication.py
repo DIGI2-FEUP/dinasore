@@ -49,7 +49,6 @@ class CommModuleDot0(netRegistration.NetRegistration, netReceive.NetReceive): # 
 
         if(cmdClassId == 0x80 and cmdFunctionId == 0x01):
             random = inArgs.getByIndex(0).value
-            #print("random: " + str(random))
             destId = TIM.getNextId()
             payload = DotX_DIGI2.register_response(random, destId)
             commModule.writeRsp(commId, -1, payload, True)

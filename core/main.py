@@ -9,11 +9,7 @@ sys.path.append(os.path.join(os.path.dirname(sys.path[0])))
 from communication import tcp_server
 from core import manager
 
-
-# --- Diogo Oliveira ---
-#from sys import platform
 platform = "linux"
-# ----------------------
 
 if __name__ == "__main__":
     log_levels = {'ERROR': logging.ERROR,
@@ -52,9 +48,7 @@ if __name__ == "__main__":
     parser.add_argument('-l', metavar='log_level', nargs=1,  help="logging level at the file resources/error_list.log, e.g. INFO, WARN or ERROR (default: ERROR)")
     parser.add_argument('-g', action='store_true', help="sets on the self-organizing agent")
     parser.add_argument('-m', metavar='monitor', nargs='*', help="activates the behavioral anomaly detection feature. If no paramters are specified, the default values are 10 samples for initial training, each sample with 20 seconds (approximately 3m20s). As an example, you can specify paramters the following way (-m 5 10) meaning 10 samples for training with 10 seconds each sample.")
-    # --- Diogo Oliveira ---
     parser.add_argument('-i', metavar='ieee1451', nargs='*', help="starts the IEEE1451 ncap service")
-    # ----------------------
     args = parser.parse_args()
 
     if args.a != None: address = args.a[0]
@@ -72,7 +66,7 @@ if __name__ == "__main__":
         monitor=None
 
 
-    # --- Diogo Oliveira ---
+    # create NCAP service instance
     ncapService = None
 
     if args.i != None and (platform == "linux" or platform == "linux2"):
@@ -81,7 +75,6 @@ if __name__ == "__main__":
             from ieee1451.diac_integration import diac        
         
         ncapService = ncap.NCAP(address, port_diac)
-    # ----------------------
 
 
     ##############################################################
@@ -103,10 +96,9 @@ if __name__ == "__main__":
                         format='[%(asctime)s][%(levelname)s][%(threadName)s] %(message)s')
     
     
-    # --- Diogo Oliveira ---
+    # run NCAP service instance
     if(ncapService != None):
         ncapService.run()
-    # ----------------------
 
 
     # creates the 4diac manager

@@ -1,5 +1,4 @@
 import threading
-import time
 
 from can_bus.can_isotp import *
 
@@ -59,13 +58,3 @@ class CAN_DOTX:
             commModuleDotX.commModuleDot0.notifyRsp(commChannel.commId, msgId, length, length, length)
 
             #print("Received payload on %d %d: %s" % (source, target, payload))
-        
-
-if __name__ == '__main__':
-
-    CAN_DOTX.rcvMessage(0x01, 0x02)
-    CAN_DOTX.rcvMessage(0x01, 0x03)
-    CAN_DOTX.rcvMessage(0x01, 0x04)
-
-    while True:
-        pass

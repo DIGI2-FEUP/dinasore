@@ -50,21 +50,8 @@ class CAN_ISOTP:
         pass
 
     def sendMessage(message, source, target):
-
-        ### Read Tests ###
-        # if(message.find(b'\x00\x01\x03\x01\x00\x07\x03\x00\x04\x00\x00\x00\x00') != -1):
-        #     #print("here")
-        #     Meas_Times.before_send_msg.append(time.time_ns())
-        ### ---------- ###
-
         CAN_ISOTP.stack.send(target, message)
                 
-        # ### Discover Tests ###
-        # if(message.find(b'\x00\x01\x00\x00\x80\x02') != -1):
-        #     Meas_Times.send_discover.append(time.time_ns())
-        # ### -------------- ###
-
-        
 
     def rcvMessage(exit_request, callback, source, target, commModuleDotX):
 
@@ -75,26 +62,8 @@ class CAN_ISOTP:
         while exit_request == False:
             if CAN_ISOTP.stack.available():
                 [remote, payload] = CAN_ISOTP.stack.recv()
-                
-                ### Register Tests ###
-                # if(payload.find(b'\x10\x01\x00\x00\x80\x01') != -1):
-                #     Meas_Times.message_register.append(time.time_ns())
-                ### -------------- ###
-                ### Discover Tests ###
-                # if(payload.find(b'\x00\x01\x01\x00\x04\x01') == 0):
-                #     Meas_Times.discover_response_msg.append(time.time_ns())
-                ### -------------- ###
-                ### Read Tests ###
-                # if(Meas_Times.ff == True):
-                #     Meas_Times.after_rcv_msg.append(time.time_ns())
-                ### ---------- ###
 
                 thread = threading.Thread(target = callback, args =(commModuleDotX, source, remote, payload))
                 thread.start()
 
         reception.shutdown()
-
-if __name__ == '__main__':
-
-    CAN_ISOTP.sendMessage("Hello World!", 0xAA, 0x55)
-    CAN_ISOTP.rcvMessage(0x55, 0xAA)

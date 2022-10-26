@@ -8,8 +8,7 @@ class TIM:
     def __init__(self, destId):
         self.destId = destId
 
-        self.address = destId           # Quando for registado, ganha o endereço igual ao destId
-                                        # Deve ser chamada uma função que atualize o endereço no TIM 
+        self.address = destId           
         
         self.transducers = []
         self.teds = {}
