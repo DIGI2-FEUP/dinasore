@@ -38,7 +38,7 @@ class DIAC_Manager:
             geoLocTeds = transducer.tim.getTEDS(TEDS_ACCESS_CODES.GeoLocTEDS).data_block
             geoLoc = GeoLoc_Util.xmlText2PosXY(geoLocTeds.XMLText)
             
-            tim_uuid = transducer.tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block.UUID      # Convert UUID to String here if necessary!!!
+            tim_uuid = transducer.tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block.UUID
             tim_uuid_string='\'' + ''.join('{:02x}'.format(x) for x in tim_uuid) + '\''
             
             if(chanTeds.ChanType == 0):

@@ -61,10 +61,10 @@ class Diac_Util:
                 for param in f.iter('Parameter'):
                     if(param.get('Name') == "TIM_UUID"):
                         if(param.get('Value') == tim_uuid):
-                            break
-                    if(param.get('Name') == "TRANSDUCER_ID"):
-                        if(param.get('Value') == transducer_id):
                             add = False
+                    if(param.get('Name') == "TRANSDUCER_ID"):
+                        if(param.get('Value') != transducer_id):
+                            add = True
                             
         if(add == True):
 

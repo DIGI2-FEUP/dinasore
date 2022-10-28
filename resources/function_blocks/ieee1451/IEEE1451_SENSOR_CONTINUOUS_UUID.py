@@ -27,7 +27,7 @@ class IEEE1451_SENSOR_CONTINUOUS_UUID:
                 
                 tim_uuid = bytearray.fromhex(tim_uuid)
 
-                timId = self.ncap.transducerServices.getTimIdByUUID(tim_uuid)    # Convert UUID to Bytes here if necessary!!!
+                timId = self.ncap.transducerServices.getTimIdByUUID(tim_uuid)
 
                 channelId = transducer_id
                 timeout = 10
@@ -40,6 +40,6 @@ class IEEE1451_SENSOR_CONTINUOUS_UUID:
                 value = transducerData.getByIndex(0).value
                 self.previous_time = current_time
 
-                return [None, event_value, value]
+                return [None, event_value, value[0]]
 
             return [None, None, None]
