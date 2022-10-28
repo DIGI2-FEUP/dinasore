@@ -39,9 +39,10 @@ class DIAC_Manager:
             geoLoc = GeoLoc_Util.xmlText2PosXY(geoLocTeds.XMLText)
             
             tim_uuid = transducer.tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block.UUID      # Convert UUID to String here if necessary!!!
-
+            tim_uuid_string='\'' + ''.join('{:02x}'.format(x) for x in tim_uuid) + '\''
+            
             if(chanTeds.ChanType == 0):
-                Diac_Util.addIEEE1451Block(self.ncap_address, self.port_diac, self.filepath, chanName, tim_uuid, transducer.id, geoLoc[0], geoLoc[1], chanName)
+                Diac_Util.addIEEE1451Block(self.ncap_address, self.port_diac, self.filepath, chanName, tim_uuid_string, transducer.id, geoLoc[0], geoLoc[1], chanName)
 
 
 if (__name__ == '__main__'):

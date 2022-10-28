@@ -24,6 +24,8 @@ class IEEE1451_SENSOR_CONTINUOUS_UUID:
             current_time = time.time_ns()
 
             if(current_time - self.previous_time > self.samp_int * 1000000):
+                
+                tim_uuid = bytearray.fromhex(tim_uuid)
 
                 timId = self.ncap.transducerServices.getTimIdByUUID(tim_uuid)    # Convert UUID to Bytes here if necessary!!!
 
