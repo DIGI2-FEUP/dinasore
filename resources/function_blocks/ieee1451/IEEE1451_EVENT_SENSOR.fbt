@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="IEEE1451_EVENT_SENSOR" OpcUa="SERVICE">
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="INIT" Type="Event" Comment="FB Initialization"/>
+			<Event Name="READ" Type="Event" Comment="Read Sensor Request">
+				<With Var="TIM_ID"/>
+				<With Var="TRANSDUCER_ID"/>
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="INIT_O" Type="Event" Comment="Initialization Confirm"/>
+			<Event Name="READ_O" Type="Event" Comment="Read Request Confirm"/>
+			<Event Name="RIS_EDGE" Type="Event" Comment="Event Rising Edge"/>
+			<Event Name="FAL_EDGE" Type="Event" Comment="Event Falling Edge"/>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="TIM_ID" Type="INT" Comment="TIM Identification"/>
+			<VarDeclaration Name="TRANSDUCER_ID" Type="INT" Comment="Transducer Identification"/>
+		</InputVars>
+        <OutputVars/>
+	</InterfaceList>
+</FBType>
