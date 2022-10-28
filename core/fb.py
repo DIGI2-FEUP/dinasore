@@ -8,7 +8,7 @@ import queue
 
 class FB(threading.Thread, fb_interface.FBInterface):
 
-    def __init__(self, fb_name, fb_type, fb_obj, fb_xml, monitor=None):
+    def __init__(self, ncap, fb_name, fb_type, fb_obj, fb_xml, monitor=None):
         threading.Thread.__init__(self, name=fb_name)
         fb_interface.FBInterface.__init__(self, fb_name, fb_type, fb_xml, monitor)
 
@@ -26,7 +26,7 @@ class FB(threading.Thread, fb_interface.FBInterface):
             py_path = os.path.join(root_path, fb_type + '.py')
             message_queue = queue.Queue()
             self.message_queue = message_queue
-            self.sniffer_thread = sniffer.Sniffer(fb_type, py_path, message_queue)
+            self.sniffer_thread = sniffer.Sniffer(ncap, fb_type, py_path, message_queue)
             self.sniffer_thread.start()  
 
     def run(self):

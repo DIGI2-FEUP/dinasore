@@ -20,7 +20,7 @@ class FBResources:
         # Gets the file path to the fbt (xml) file
         self.fbt_path = os.path.join(self.root_path, fb_type + '.fbt')
 
-    def import_fb(self):
+    def import_fb(self, ncap=None):
         logging.info('importing fb python file and definition file...')
         root = None
         fb_obj = None
@@ -40,7 +40,12 @@ class FBResources:
             # Gets the running fb method
             fb_class = getattr(py_fb, self.fb_type)
             # Instance the fb class
-            fb_obj = fb_class()
+ 
+            if(self.fb_type.find("IEEE1451") == 0):
+                fb_obj = fb_class(ncap)
+            else:
+                fb_obj = fb_class()
+    
             # Reads the xml
             tree = ETree.parse(self.fbt_path)
             # Gets the root element

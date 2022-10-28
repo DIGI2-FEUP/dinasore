@@ -9,14 +9,15 @@ import os
 import sys
 import shutil
 import glob
-import urllib
 
 class Manager:
 
-    def __init__(self, monitor=None):
+    def __init__(self, monitor=None, ncap=None):
         self.start_time = time.time() * 1000
         self.config_dictionary = dict()
         self.monitor = monitor
+
+        self.ncap = ncap
 
         # attributes responsible for the ua integration
         self.ua_integration = False
@@ -70,7 +71,7 @@ class Manager:
                     self.config_dictionary = dict()
                     if conf_name not in self.config_dictionary:
                         # Creates the configuration
-                        config = configuration.Configuration(conf_name, conf_type, monitor=self.monitor)
+                        config = configuration.Configuration(conf_name, conf_type, monitor=self.monitor, ncap = self.ncap)
                         self.set_config(conf_name, config)
                         # check the options for ua_integration
                         if self.ua_integration:
@@ -155,7 +156,7 @@ class Manager:
                                 os.path.join(resources_path, 'data_model.fboot'))
 
                 self.ua_manager_fboot = ua_manager_fboot.UaManagerFboot(self.ua_manager_fboot.address, self.ua_manager_fboot.port)
-                config = configuration.Configuration('EMB_RES', 'EMB_RES')
+                config = configuration.Configuration('EMB_RES', 'EMB_RES', ncap=self.ncap)
                 self.set_config('EMB_RES', config)
                 self.ua_manager_fboot(config)
 
@@ -226,7 +227,7 @@ class Manager:
     def build_ua_manager_fboot(self, address, port):
         self.manager_ua_fboot = ua_manager_fboot.UaManagerFboot(address, port)
         # creates the opc-ua manager
-        config = configuration.Configuration('EMB_RES', 'EMB_RES', monitor=self.monitor)
+        config = configuration.Configuration('EMB_RES', 'EMB_RES', monitor=self.monitor, ncap=self.ncap)
         self.set_config('EMB_RES', config)
         # parses the description file
         self.manager_ua_fboot(config)

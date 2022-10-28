@@ -9,9 +9,11 @@ import inspect
 
 class Configuration:
 
-    def __init__(self, config_id, config_type, monitor=None):
+    def __init__(self, config_id, config_type, monitor=None, ncap=None):
 
         self.monitor = monitor
+
+        self.ncap = ncap
 
         self.fb_dictionary = dict()
 
@@ -54,8 +56,8 @@ class Configuration:
             logging.info('fb doesnt exists, needs to be downloaded ...')
             fb_res.download_fb()
 
-        fb_definition, fb_obj = fb_res.import_fb()
-
+        fb_definition, fb_obj = fb_res.import_fb(ncap=self.ncap)
+        
         # check if if happened any importing error
         if fb_definition is not None:
 
@@ -80,10 +82,11 @@ class Configuration:
                     logging.warning('Ensure your variable arguments are the same as the input variables and in the same order')
 
             ## if it is a real FB, not a hidden one
+
             if monitor:
-                fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition, monitor=self.monitor)
+                fb_element = fb.FB(self.ncap, fb_name, fb_type, fb_obj, fb_definition, monitor=self.monitor)
             else:
-                fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition)
+                fb_element = fb.FB(self.ncap, fb_name, fb_type, fb_obj, fb_definition)
 
             self.set_fb(fb_name, fb_element)
             logging.info('created fb type: {0}, instance: {1}'.format(fb_type, fb_name))

@@ -7,7 +7,7 @@ import sys, os
 
 class Sniffer(threading.Thread):
 
-    def __init__(self, fb_type, py_path, message_queue):
+    def __init__(self, ncap, fb_type, py_path, message_queue):
         threading.Thread.__init__(self, name=fb_type)
         self.alive = True
         self.fb_type = fb_type
@@ -35,7 +35,11 @@ class Sniffer(threading.Thread):
             # Gets the running fb method
             fb_class = getattr(self.py_fb, self.fb_type)
             # Instantiate the fb class
-            self.fb_obj = fb_class()
+
+            if(self.fb_type.find("IEEE1451") == 0):
+                self.fb_obj = fb_class(ncap)
+            else:
+                self.fb_obj = fb_class()
 
     def run(self):        
         logging.info('Sniffer for {0} has been activated'.format(self.fb_type))
