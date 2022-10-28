@@ -1,6 +1,6 @@
 import time
 
-class IEEE1451_SENSOR_CONTINUOUS:
+class IEEE1451_SENSOR_CONTINUOUS_UUID:
 
     def __init__(self, ncap):
         self.ncap = ncap

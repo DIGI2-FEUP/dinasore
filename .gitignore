@@ -1,4 +1,5 @@
 __pycache__
 resources
+!resources/function_blocks/ieee1451
 /resources/data_model.fboot
 dinasore.bat
