@@ -1,7 +1,6 @@
 from os import device_encoding
 from pickle import NONE
 import xml.etree.ElementTree as ET
-from ieee1451.ncap.meas_times import *
 
 class Diac_Util:
 

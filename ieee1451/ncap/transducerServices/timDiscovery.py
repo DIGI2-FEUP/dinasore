@@ -52,12 +52,13 @@ class TimDiscovery:
 
         for commModule in self.commModuleDot0.commModules:
             for tim in commModule.tims:
-                meta_teds = tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block
-                uuid = meta_teds.UUID
+                if(tim.destId > 2):
+                    meta_teds = tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block
+                    uuid = meta_teds.UUID
 
-                if(uuid == tim_uuid):
-                    tim_id = tim.destId
-                    break
+                    if(uuid == tim_uuid):
+                        tim_id = tim.destId
+                        break
             
             if(tim_id != None):
                 break
