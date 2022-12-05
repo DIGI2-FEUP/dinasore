@@ -24,27 +24,21 @@ class IEEE1451_SENSOR_CONTINUOUS_UUID:
             current_time = time.time_ns()
 
             if(current_time - self.previous_time > self.samp_int * 1000000):
-
-                    
                 tim_uuid = bytearray.fromhex(tim_uuid)
 
-                timId = self.ncap.transducerServices.getTimIdByUUID(tim_uuid)
-
+                timId = self.ncap.transducerServices.getTimIdByUUID(tim_uuid)    # Convert UUID to Bytes here if necessary!!!
 
                 channelId = transducer_id
                 timeout = 10
                 samplingMode = 5
-                
 
                 transCommId = self.ncap.transducerServices.open(timId, channelId)
-                #print('Trying to read timID '+str(timId) +' channel' + str(channelId))
                 transducerData = self.ncap.transducerServices.readData(transCommId, timeout, samplingMode)
-                #print('Read timID '+ str(timId) +' channel' + str(channelId))
                 self.ncap.transducerServices.close(transCommId)
 
                 value = transducerData.getByIndex(0).value
                 self.previous_time = current_time
 
-                return [None, event_value, value[0]]
+                return [None, event_value, value]
 
             return [None, None, None]

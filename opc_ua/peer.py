@@ -8,7 +8,7 @@ import logging
 class UaPeer(Server, base.UaBase):
 
     def __init__(self, address, server_name='systec_ua'):
-        Server.__init__(self)
+        Server.__init__(self,shelffile="cache")
         base.UaBase.__init__(self)
 
         logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(levelname)s][%(threadName)-15s] %(message)s')

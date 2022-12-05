@@ -2,6 +2,7 @@ from os import device_encoding
 from pickle import NONE
 import xml.etree.ElementTree as ET
 
+
 class Diac_Util:
 
     def addIEEE1451Block(address, port_diac, filepath, name, tim_uuid, transducer_id, geoloc_x, geoloc_y, units):
@@ -37,7 +38,6 @@ class Diac_Util:
                 index = int(str_list[1])
                 if(index > max):
                     max = index
-        
         return name + "_" + str(max+1)
 
     def updateFBxy(root, fb_name, x, y):
@@ -54,27 +54,37 @@ class Diac_Util:
         for sub in root.iter('SubAppNetwork'):
             subAppNetwork = sub
 
-        add = True
-
+        
+        add_FB = True
         for f in subAppNetwork.iter('FB'):
+            add_FB = True 
             if(f.get('Type') == "IEEE1451_SENSOR_CONTINUOUS_UUID"):
+                add=2
                 for param in f.iter('Parameter'):
                     if(param.get('Name') == "TIM_UUID"):
+                        #print('TIM_UUID: '+ param.get('Value') +'+'+ tim_uuid )
                         if(param.get('Value') == tim_uuid):
-                            add = False
+                            add = add - 1
                     if(param.get('Name') == "TRANSDUCER_ID"):
-                        if(param.get('Value') != transducer_id):
-                            add = True
+                        #print('TRANSD_ID: '+ param.get('Value') +'+'+ str(transducer_id) )
+                        if(int(param.get('Value')) == transducer_id):
+                            add = add -1
+                
+                if(add==0):
+                    add_FB = False
+                    #print('No add')
+                    break
+                        
                             
-        if(add == True):
+        if(add_FB == True ):
 
             count = 0
             for f in subAppNetwork.iter('FB'):
                 count = count + 1
-
             subAppNetwork.insert(count, fb)
-
-        return root, add
+        #else:
+            #print('FB not added')
+        return root, add_FB
     
     def addFB2Device(address, port_diac, root, fb):
         device = None
@@ -276,10 +286,11 @@ class Diac_Util:
         root = Diac_Util.getRoot(filepath)
 
         fb_name = Diac_Util.getFBName(root, name)
+        print(fb_name)
         fb_comment = "GeoLoc: [" + str(geoloc_x) + "," + str(geoloc_y) + "]"
         
         fb = Diac_Util.getFB(type, fb_name, fb_comment, x, y, tim_uuid, transducer_id)
-        root, add = Diac_Util.addFB2Application(root, fb, tim_uuid)
+        root, add = Diac_Util.addFB2Application(root, fb, tim_uuid,transducer_id)
 
         if(add == True):
             [root, device_name] = Diac_Util.addFB2Device(address, port_diac, root, fb)

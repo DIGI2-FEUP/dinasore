@@ -17,7 +17,9 @@ class DIAC_Manager:
         elif(platform == "linux" or platform == "linux2"):
             cmd = "sudo umount /mnt/diac_workspace"
             os.system(cmd)
-            cmd = "sudo mount.cifs //" + diac_address + "/diac_workspace /mnt/diac_workspace " # if necessary add '-o \"user=User,password=Password\"'
+            cmd = "sudo chown -R pi /mnt/diac_workspace"
+            os.system(cmd)
+            cmd = "sudo mount -t cifs //" + diac_address + "/diac_workspace /mnt/diac_workspace -o \"guest,user=user\"" # if necessary add '-o \"user=User,password=Password\"'
             os.system(cmd)
             self.workspace = "/mnt/diac_workspace"
         
@@ -38,9 +40,10 @@ class DIAC_Manager:
             geoLocTeds = transducer.tim.getTEDS(TEDS_ACCESS_CODES.GeoLocTEDS).data_block
             geoLoc = GeoLoc_Util.xmlText2PosXY(geoLocTeds.XMLText)
             
-            tim_uuid = transducer.tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block.UUID
+
+            tim_uuid = (transducer.tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block.UUID)   # Convert UUID to String here if necessary!!!
             tim_uuid_string='\'' + ''.join('{:02x}'.format(x) for x in tim_uuid) + '\''
-            
+
             if(chanTeds.ChanType == 0):
                 Diac_Util.addIEEE1451Block(self.ncap_address, self.port_diac, self.filepath, chanName, tim_uuid_string, transducer.id, geoLoc[0], geoLoc[1], chanName)
 

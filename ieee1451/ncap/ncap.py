@@ -1,5 +1,6 @@
 import sys
 import os
+from multiprocessing import Process
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'ieee1451/ncap'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'ieee1451/diac_integration'))
@@ -35,9 +36,16 @@ class NCAP:
 
         self.transducerServices.commModuleDot0.registerModule(InterfaceType.Network, 255, "CAN_ISOTP")
         
-        self.pnpManager.run()
-        self.transducerServices.run()
-        self.webServer.run()      
+        #self.pnpManager.run()
+        p1 = Process(target=  self.pnpManager.run(), args=(1,))
+        p1.start()
+        #self.transducerServices.run()
+        p2 = Process(target= self.transducerServices.run(), args=(1,))
+        p2.start()
+
+        p3 = Process(target= self.webServer.run(), args=(1,))
+        p3.start()
+        #self.webServer.run()      
 
 if __name__ == '__main__':
 

@@ -53,6 +53,7 @@ class TimDiscovery:
         for commModule in self.commModuleDot0.commModules:
             for tim in commModule.tims:
                 if(tim.destId > 2):
+
                     meta_teds = tim.getTEDS(TEDS_ACCESS_CODES.MetaTEDS).data_block
                     uuid = meta_teds.UUID
 

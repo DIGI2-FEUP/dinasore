@@ -7,7 +7,7 @@ from can_bus.isotp.protocol import *
 from can_bus.isotp.address import *
 from can_bus.isotp.errors import *
 
-from ieee1451.ncap.meas_times import *
+#from ieee1451.ncap.meas_times import *
 
 logger = logging.getLogger('isotp')
 

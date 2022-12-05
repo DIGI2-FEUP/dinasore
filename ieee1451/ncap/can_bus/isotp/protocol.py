@@ -11,7 +11,7 @@ import enum
 
 from collections import defaultdict
 from can_bus.isotp.address import *
-from ieee1451.ncap.meas_times import *
+#from ieee1451.ncap.meas_times import *
 
 class CanMessage:
     """

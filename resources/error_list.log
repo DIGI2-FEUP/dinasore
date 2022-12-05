@@ -1,0 +1,40 @@
+[2022-12-05 11:18:54,321][ERROR][TEMPERATURE_0] 'NoneType' object has no attribute 'open'
+[2022-12-05 11:18:54,327][ERROR][TEMPERATURE_2] 'NoneType' object has no attribute 'open'
+[2022-12-05 11:18:54,329][ERROR][TEMPERATURE_0] 'NoneType' object has no attribute 'open'
+Traceback (most recent call last):
+  File "/home/pi/Desktop/dinasore2/dinasore/core/fb.py", line 59, in run
+    outputs = self.fb_obj.schedule(*inputs)
+  File "/home/pi/Desktop/dinasore2/dinasore/resources/function_blocks/ieee1451/IEEE1451_SENSOR_CONTINUOUS_UUID.py", line 41, in schedule
+    transducerData = self.ncap.transducerServices.readData(transCommId, timeout, samplingMode)
+  File "/home/pi/Desktop/dinasore2/dinasore/ieee1451/ncap/transducerServices/transducerAccess.py", line 62, in readData
+    [maxPayloadLen, commId] = commModule.open(timId, True)
+AttributeError: 'NoneType' object has no attribute 'open'
+[2022-12-05 11:18:54,334][ERROR][TEMPERATURE_1] 'NoneType' object has no attribute 'open'
+[2022-12-05 11:18:54,340][ERROR][TEMPERATURE_3] 'NoneType' object has no attribute 'open'
+[2022-12-05 11:18:54,375][ERROR][TEMPERATURE_2] 'NoneType' object has no attribute 'open'
+Traceback (most recent call last):
+  File "/home/pi/Desktop/dinasore2/dinasore/core/fb.py", line 59, in run
+    outputs = self.fb_obj.schedule(*inputs)
+  File "/home/pi/Desktop/dinasore2/dinasore/resources/function_blocks/ieee1451/IEEE1451_SENSOR_CONTINUOUS_UUID.py", line 41, in schedule
+    transducerData = self.ncap.transducerServices.readData(transCommId, timeout, samplingMode)
+  File "/home/pi/Desktop/dinasore2/dinasore/ieee1451/ncap/transducerServices/transducerAccess.py", line 62, in readData
+    [maxPayloadLen, commId] = commModule.open(timId, True)
+AttributeError: 'NoneType' object has no attribute 'open'
+[2022-12-05 11:18:54,456][ERROR][TEMPERATURE_1] 'NoneType' object has no attribute 'open'
+Traceback (most recent call last):
+  File "/home/pi/Desktop/dinasore2/dinasore/core/fb.py", line 59, in run
+    outputs = self.fb_obj.schedule(*inputs)
+  File "/home/pi/Desktop/dinasore2/dinasore/resources/function_blocks/ieee1451/IEEE1451_SENSOR_CONTINUOUS_UUID.py", line 41, in schedule
+    transducerData = self.ncap.transducerServices.readData(transCommId, timeout, samplingMode)
+  File "/home/pi/Desktop/dinasore2/dinasore/ieee1451/ncap/transducerServices/transducerAccess.py", line 62, in readData
+    [maxPayloadLen, commId] = commModule.open(timId, True)
+AttributeError: 'NoneType' object has no attribute 'open'
+[2022-12-05 11:18:54,464][ERROR][TEMPERATURE_3] 'NoneType' object has no attribute 'open'
+Traceback (most recent call last):
+  File "/home/pi/Desktop/dinasore2/dinasore/core/fb.py", line 59, in run
+    outputs = self.fb_obj.schedule(*inputs)
+  File "/home/pi/Desktop/dinasore2/dinasore/resources/function_blocks/ieee1451/IEEE1451_SENSOR_CONTINUOUS_UUID.py", line 41, in schedule
+    transducerData = self.ncap.transducerServices.readData(transCommId, timeout, samplingMode)
+  File "/home/pi/Desktop/dinasore2/dinasore/ieee1451/ncap/transducerServices/transducerAccess.py", line 62, in readData
+    [maxPayloadLen, commId] = commModule.open(timId, True)
+AttributeError: 'NoneType' object has no attribute 'open'

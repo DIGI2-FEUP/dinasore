@@ -3,6 +3,7 @@ from urllib.parse import *
 import threading
 import time
 import base64
+from multiprocessing import Process
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from util import *
@@ -246,7 +247,7 @@ class ThreadWebServer:
     
     def run(self):
         self.exit_request = False
-        self.thread = threading.Thread(target = self.thread_task, daemon = True)
+        self.thread = Process(target = self.thread_task, daemon = True)
         self.thread.start()
 
     def stop(self):

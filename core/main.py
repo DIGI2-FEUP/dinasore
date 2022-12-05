@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
 
     # creates the 4diac manager
-    m = manager.Manager(ncap=ncapService, monitor=monitor)
+    m = manager.Manager( ncap=ncapService,monitor=monitor)
     # sets the ua integration option
     m.build_ua_manager_fboot(address, port_opc)
 
