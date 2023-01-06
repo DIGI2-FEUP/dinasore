@@ -1,4 +1,4 @@
-from opcua import ua
+from asyncua import ua
 
 
 class UaBase:

@@ -17,7 +17,7 @@ class UaManagerFboot(peer.UaPeer):
         self.base_name = 'DINASORE OPC-UA'
         self.endpoint = 'opc.tcp://{0}:{1}'.format(address, port)
 
-        peer.UaPeer.__init__(self, address=self.endpoint)
+        super().__init__(address=self.endpoint)
 
         self.folders = dict()
         self.ua_objects = dict()

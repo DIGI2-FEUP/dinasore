@@ -1,4 +1,4 @@
-from opcua import ua
+from asyncua import ua
 import os
 import sys
 
@@ -98,14 +98,43 @@ def any_element_in_string(array, string):
 
     return False
 
+
+fb_dirs = {}
+
 def get_fb_files_path(fb_name):
-    root_fbs_path = os.path.join(os.path.dirname(sys.path[0]),
+
+    if fb_dirs == {}:
+        get_fb_dirs(os.path.join(os.path.dirname(sys.path[0]),
                                  'resources',
-                                 'function_blocks')
+                                 'function_blocks'))
+    if fb_name in fb_dirs.keys():
+        return fb_dirs[fb_name]
+    else:
+        get_fb_dirs(os.path.join(os.path.dirname(sys.path[0]),
+                                 'resources',
+                                 'function_blocks'))
+        if fb_name in fb_dirs.keys():
+            return fb_dirs[fb_name]
+        else:
+            return None
+    '''root_fbs_path = os.path.join(os.path.dirname(sys.path[0]),
+                                 'resources',
+                                'function_blocks')
 
     path = next(scan_match(fb_name, root_fbs_path))
 
+    print(path)
     return path
+    '''
+
+
+def get_fb_dirs(dir):
+   
+    for root, dirs, files in os.walk(dir):
+        for name in files:
+            fb_name = name.split('.')[0]
+            if fb_name not in fb_dirs.keys():
+                fb_dirs[fb_name] = root
 
 def scan_match(fb_name, dir):
     for entry in os.scandir(dir):
