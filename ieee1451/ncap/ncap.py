@@ -4,13 +4,17 @@ from multiprocessing import Process
 
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'ieee1451/ncap'))
 sys.path.append(os.path.join(os.path.dirname(sys.path[0]), 'ieee1451/diac_integration'))
+sys.path.append("../../ieee1451/diac_integration")
+sys.path.append("ieee1451/")
+
 
 from applications.webServer import *
 from applications.pnpManager import *
 from transducerServices.transducerServices import *
 from moduleCommunication.moduleCommunication import *
-from ieee1451.diac_integration.diac import *
+from diac import *
 from teds.teds import *
+import time
 
 class NCAP:
 
@@ -45,9 +49,20 @@ class NCAP:
 
         p3 = Process(target= self.webServer.run(), args=(1,))
         p3.start()
-        #self.webServer.run()      
+        #self.webServer.run()
+
+        i=0
+        for i in range(1,100,1):
+            
+            transCommId = self.transducerServices.open(3,1)
+            time1=time.time_ns()
+            self.transducerServices.readData(transCommId,None,5)
+            print((time.time_ns()-time1)/1000000)
+            self.transducerServices.close(transCommId)
+            
 
 if __name__ == '__main__':
 
-    ncapService = NCAP(None, None)
+    ncapService = NCAP("ncap.local",8000,None,None)
     ncapService.run()
+

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from ieee1451.ncap.teds.teds import TEDS, TEDS_ACCESS_CODES
+from teds.teds import TEDS, TEDS_ACCESS_CODES
 import moduleCommunication.moduleCommunication as mc
 from moduleCommunication.registration import *
 
@@ -15,7 +15,6 @@ class NetRegistration(Registration):
         return moduleId
     
     def registerDestination(self, destId, moduleId):
-
         tim = TIM(destId)
         
         commModule = mc.CommModuleDotX.getCommModule(self.commModules, moduleId)
@@ -126,7 +125,7 @@ class NetRegistration(Registration):
                 else:
                     commModule.removeTim(tim)
                     return -1
-
+        
         return destId
 
     def unRegisterDestination(self, moduleId, destId):

@@ -90,7 +90,10 @@ class socket:
             return self._socket.recv(n)
         except socket_module.timeout:
             return None
+        except TimeoutError:
+            return None
         except:
+            print("Error")
             raise
 
     def set_ll_opts(self, *args, **kwargs):
@@ -160,12 +163,15 @@ class socket:
         else:
             txid = txid & socket_module.CAN_SFF_MASK
 
+        print("Addresses", txid, rxid)
+
         if self.address.requires_extension_byte():
             o = self.get_opts()
             o.optflag |= self.flags.EXTEND_ADDR | self.flags.RX_EXT_ADDR
             self.set_opts(optflag = o.optflag, ext_address = self.address.get_tx_extension_byte(), rx_ext_address=self.address.get_rx_extension_byte())
 
         self._socket.bind((interface, rxid, txid))
+
         self.bound=True
 
     def fileno(self):

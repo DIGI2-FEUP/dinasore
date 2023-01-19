@@ -29,7 +29,7 @@ class CanMessage:
     :param extended_id: When True, the arbitration ID stands on 29 bits. 11 bits when False
     :type extended_id: bool
 
-    :param is_fd: When True, message has to be transmitted or has been received in a CAN FD frame. CAN frame when set to False
+    :param is_fd: When CTrue, message has to be transmitted or has been received in a CAN FD frame. CAN frame when set to False
     :type extended_id: bool
     """
     __slots__ = 'arbitration_id', 'dlc', 'data', 'is_extended_id', 'is_fd', 'bitrate_switch'
@@ -846,7 +846,7 @@ class TransportLayer:
                                 else:
                                     msg_data 	= self.address.tx_payload_prefix + bytearray([0x0, len(self.tx_buffer[remote_address])]) + self.tx_buffer[remote_address]
 
-                                arbitration_id  = self.address.get_tx_arbitraton_id(remote_address, popped_object['target_address_type'])
+                                arbitration_id  = self.address.get_tx_arbitraton_id( popped_object['target_address_type'])
                                 msg_temp = self.make_tx_msg(arbitration_id, msg_data)
                                 if len(msg_data) > allowed_bytes:
                                     self.tx_standby_msg[remote_address] = msg_temp

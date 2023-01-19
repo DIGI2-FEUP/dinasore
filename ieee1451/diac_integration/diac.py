@@ -1,6 +1,13 @@
-from ieee1451.diac_integration.util import Diac_Util
-from ieee1451.ncap.teds.teds import TEDS_ACCESS_CODES
-from ieee1451.ncap.teds.geo_teds import *
+import sys
+
+
+
+sys.path.append("../../ieee1451/ncap")
+sys.path.append("../../ieee1451/")
+
+from diac_integration.util import Diac_Util
+from teds.teds import TEDS_ACCESS_CODES
+from teds.geo_teds import *
 
 from sys import platform
 import os

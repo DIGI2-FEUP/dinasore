@@ -6,22 +6,101 @@ import moduleCommunication.moduleCommunication as mc
 
 class CAN_DOTX:
 
-    def __init__(self):
-        pass
+    exit_request = False
+    commModuleDotX = None
+    receptionStarted = False
+    def __init__(self,commModuleDotX, source, target):
+        CAN_DOTX.commModuleDotX = commModuleDotX
+        self.commModuleDotX = commModuleDotX
+        CAN_DOTX.startSocketlessReception()
+        self.socket = isotp.socket()
+        # Configuring the sockets.
+        self.busy = False
+        
+        #self.socket.set_fc_opts(stmin=1, bs=10)
+        self.target= target
+        self.thread_exit_request = False
 
-    def sendMessage(message, source, target):
+        #print(source, target)
+        addr = Address(AddressingMode.NormalFixed_29bits, source_address=source, target_address=target)
+        #print(hex(addr.rx_arbitration_id_physical))
+        if(target != 0) and (target!=2):
+            CAN_ISOTP.filter_out_destination(target)
 
+        #print(hex(addr.get_tx_arbitraton_id()))
+        
+        #print(hex(addr.get_rx_arbitraton_id()))
+        self.socket.bind("can0", address = addr)
+        #print("Open CommChannel between", source, "and ", target)
+        #print(self.socket._socket.rxid)
+        #print("Timeout", self.socket._socket.gettimeout())
+    
+    def sendMessage(self,message):    
+        #print(" Sending ISOTP Message with address ", self.socket.address, message)
+        self.socket.send(message)
+    
+    
+    def close(self):
+        self.thread_exit_request = True
+        while(self.thread.is_alive()):
+            pass
+        if(self.target != 0) and (self.target!=2):
+            CAN_ISOTP.add_destination(self.target)
+        self.socket.close()
+        
+    def rcvMessage(self):
+        self.thread = threading.Thread(target = CAN_DOTX.ISOTPMessageReception, args=(self,))
+        self.thread.start()
+
+    def ISOTPMessageReception(self):
+        payload = None
+        while(payload == None):
+            if(self.thread_exit_request):
+                return
+            else:
+                payload = self.socket.recv()
+            
+        thread = threading.Thread(target = CAN_DOTX.handleMessage, args =(self.commModuleDotX, self.target, payload))
+        thread.start()
+
+
+    def sendCANMessage(self,message, source, target):
+        #print('SendingCanMessage')
         CAN_ISOTP.sendMessage(message, source, target)
 
-    def rcvMessage(commModuleDotX, source, target):
+    def socketlessReception():
+        CAN_DOTX.reception = ThreadedCANReception()
+        CAN_DOTX.reception.start()
 
-        thread = threading.Thread(target = CAN_ISOTP.rcvMessage, args=(False, CAN_DOTX.handleMessage, source, target, commModuleDotX))
-        thread.start()
+                
+        payload = []
+        while CAN_DOTX.exit_request == False:
+            if CAN_ISOTP.stack.available():
+                #print('Received')
+                [remote, payload] = CAN_ISOTP.stack.recv()
+                thread = threading.Thread(target = CAN_DOTX.handleMessage, args =(CAN_DOTX.commModuleDotX, remote, payload))
+                thread.start()
+
+        CAN_DOTX.reception.shutdown()
+
+
+    def startSocketlessReception():
+        CAN_DOTX.exit_request=False
+        if(not CAN_DOTX.receptionStarted):
+            #print('Starting Reception')
+            thread = threading.Thread(target = CAN_DOTX.socketlessReception)
+            thread.start()
+            CAN_DOTX.receptionStarted = True
     
-    def handleMessage(commModuleDotX, source, target, payload):
+    def stopSocketlessReception():
+        CAN_DOTX.exit_request=True
+        CAN_DOTX.receptionStarted = False
+
+
+    def handleMessage(commModuleDotX, target, payload):
 
         msgId = int.from_bytes(payload[:2], 'big')
-
+        #print('Handling message from', target)
         if(msgId == 0):
             pass
             # TIM Initiated Message (no reply expected)
@@ -29,7 +108,8 @@ class CAN_DOTX:
             #print("Received payload on %d %d: %s" % (source, target, payload))
     
         if(msgId > 0x1000 and commModuleDotX.discovery_done == True):
-
+            
+            #print("Received TIM initiated Message")
             # TIM Initiated Message (reply Expected)
 
             [maxPayloadLen, commId] = commModuleDotX.open(target, True)

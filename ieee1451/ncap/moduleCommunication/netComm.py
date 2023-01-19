@@ -5,35 +5,25 @@ import moduleCommunication.moduleCommunication as mc
 class NetComm(Comm):
 
     def open(self, destId, twoWay):
-    
-        commId = mc.CommChannel.getNextId()
-        
-        while True:
-            count =0
-            if(self.commChannels!=None):
-                for commChannel in self.commChannels:
-                    if(commChannel.destId!=0):
-                        count=count+1
-                    #print('Found, waiting')
-            if(count==0):
-                break
-        
-        
+        pass
 
-        self.commChannels.append(mc.CommChannel(self, commId, destId, twoWay))
-        #print('Opened Channel for '+str(destId))
-        return [mc.CommChannel.maxPayloadLen, commId]
-
+        
+        
     def openQoS(self, destId, twoWay, maxPayloadLn, commId, qosParams):
         pass
 
-    def close(self, commId):
+    def close(self, commId):        
+        #print("Closing a Comm Channel to destId ", self.commChannels[commId].destId)    
+
 
         commChannel = mc.CommChannel.getCommChannel(self.commChannels, commId)
 
         commChannel.close()
 
-        self.commChannels.remove(commChannel)
+        if(commId in self.commChannels.keys()):
+            self.commChannels.pop(commId)
+
+        
 
     def readMsg(self, commId, time_out, length):
 

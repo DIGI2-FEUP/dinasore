@@ -1,5 +1,5 @@
 from moduleCommunication.moduleCommunication import *
-from ieee1451.ncap.teds.teds import TEDS_ACCESS_CODES
+from teds.teds import TEDS_ACCESS_CODES
 
 class TimDiscovery:
 

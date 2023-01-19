@@ -1,12 +1,12 @@
 from moduleCommunication.moduleCommunication import *
 from util import *
 
-import transducerServices.tedsManager as tedsManager
-import transducerServices.timDiscovery as timDiscovery 
-import transducerServices.transducerAccess as transducerAccess
-import transducerServices.transducerManager as transducerManager
-import transducerServices.commManager as commManager
-import transducerServices.appCallback as appCallback
+from . import tedsManager
+from . import timDiscovery 
+from . import transducerAccess
+from . import transducerManager
+from . import commManager
+from . import appCallback
 
 class TransducerServices(timDiscovery.TimDiscovery, transducerAccess.TransducerAccess, 
     transducerManager.TransducerManager, tedsManager.TedsManager, 

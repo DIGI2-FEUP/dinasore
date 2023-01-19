@@ -3,9 +3,10 @@ import threading
 import logging
 
 from can.interfaces.socketcan.socketcan import *
-from can_bus.isotp.protocol import *
-from can_bus.isotp.address import *
+from can_bus.protocol_socketless import *
+from can_bus.address_socketless import *
 from can_bus.isotp.errors import *
+
 
 #from ieee1451.ncap.meas_times import *
 
@@ -13,7 +14,7 @@ logger = logging.getLogger('isotp')
 
 class ThreadedCANReception:
 
-    def __init__(self, source, target):
+    def __init__(self):
         self.exit_requested = False
 
     def start(self):
@@ -32,7 +33,7 @@ class ThreadedCANReception:
     def thread_task(self):
         while self.exit_requested == False:
             CAN_ISOTP.stack.process()                # Non-blocking
-            time.sleep(0.00001) # Variable sleep time based on state machine state
+            time.sleep(0.010)
 
     def shutdown(self):
         self.stop()
@@ -42,28 +43,46 @@ class ThreadedCANReception:
 class CAN_ISOTP:
 
     bus = SocketcanBus(channel='can0')
-    addr = Address(AddressingMode.NormalFixed_29bits, source_address=0x01, target_address=0x00)
+    addr = Address_Socketless(AddressingMode.NormalFixed_29bits, source_address=0x01, target_address=0x00)
 
     stack = CanStack(bus, address=addr)
-
-    def __init__(self):
-        pass
+    i=0
+    filters = []
+    for i in range(0,255,1):
+        filters.append({"can_id": 0x18DA0100 | i, "can_mask": 0x1FFFFFFF, "extended": True})
+    bus.set_filters(filters = filters)
 
     def sendMessage(message, source, target):
-        CAN_ISOTP.stack.send(target, message)
-                
+        CAN_ISOTP.stack.send(target, message)             
 
-    def rcvMessage(exit_request, callback, source, target, commModuleDotX):
+    def filter_out_destination(source):
+        #print("Excluded ", source, "from CAN socketless Reception")
+        CAN_ISOTP.filters.remove({"can_id": (0x18DA0100 | source), "can_mask": 0x1FFFFFFF, "extended": True})
+        CAN_ISOTP.bus.set_filters(CAN_ISOTP.filters)
 
-        reception = ThreadedCANReception(source, target)
-        reception.start()
+    def add_destination(source): 
+        CAN_ISOTP.filters.append({"can_id": (0x18DA0100 | source), "can_mask": 0x1FFFFFFF, "extended": True})
+        CAN_ISOTP.bus.set_filters(CAN_ISOTP.filters)
+'''
+    def rcvIsoTPMessage(commModuleDotX, source, target):
         
-        payload = []
-        while exit_request == False:
-            if CAN_ISOTP.stack.available():
-                [remote, payload] = CAN_ISOTP.stack.recv()
+        s = isotp.socket()
+        # Configuring the sockets.
+        s.set_fc_opts(stmin=5, bs=10)
 
-                thread = threading.Thread(target = callback, args =(commModuleDotX, source, remote, payload))
-                thread.start()
+        message = None
+        #print(source, target)
+        addr = Address(AddressingMode.NormalFixed_29bits, source_address=target, target_address=source)
 
-        reception.shutdown()
+        #print(addr.get_rx_arbitraton_id())
+        s.bind("can0", address = addr)
+
+        message = s.recv()
+        while( message==None ):
+           message=s.recv()
+        #print('Sent new', s.address.target_address)
+        s.close()
+        return message
+        
+
+    '''

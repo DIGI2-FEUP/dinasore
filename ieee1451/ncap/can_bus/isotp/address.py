@@ -33,26 +33,18 @@ class TargetAddressType:
 class Address:
     """
     Represents the addressing information (N_AI) of the IsoTP layer. Will define what messages will be received and how to craft transmitted message to reach a specific party.
-
     Parameters must be given according to the addressing mode. When not needed, a parameter may be left unset or set to ``None``.
-
     Both the :class:`TransportLayer<isotp.TransportLayer>` and the :class:`isotp.socket<isotp.socket>` expects this address object
-
     :param addressing_mode: The addressing mode. Valid values are defined by the :class:`AddressingMode<isotp.AddressingMode>` class
     :type addressing_mode: int
-
     :param txid: The CAN ID for transmission. Used for these addressing mode: ``Normal_11bits``, ``Normal_29bits``, ``Extended_11bits``, ``Extended_29bits``, ``Mixed_11bits``
     :type txid: int or None
-
     :param rxid: The CAN ID for reception. Used for these addressing mode: ``Normal_11bits``, ``Normal_29bits``, ``Extended_11bits``, ``Extended_29bits``, ``Mixed_11bits``
     :type rxid: int or None
-
     :param target_address: Target address (N_TA) used in ``NormalFixed_29bits`` and ``Mixed_29bits`` addressing mode.
     :type target_address: int or None
-
     :param source_address: Source address (N_SA) used in ``NormalFixed_29bits`` and ``Mixed_29bits`` addressing mode.
     :type source_address: int or None
-
     :param address_extension: Address extension (N_AE) used in ``Mixed_11bits``, ``Mixed_29bits`` addressing mode
     :type address_extension: int or None
     """
@@ -70,8 +62,8 @@ class Address:
         self.validate()
 
         # From here, input is good. Do some precomputing for speed optimization without bothering about types or values
-        self.tx_arbitration_id_physical     = self._get_tx_arbitraton_id(self.source_address,TargetAddressType.Physical)
-        self.tx_arbitration_id_functional   = self._get_tx_arbitraton_id(self.source_address,TargetAddressType.Functional)
+        self.tx_arbitration_id_physical     = self._get_tx_arbitraton_id(TargetAddressType.Physical)
+        self.tx_arbitration_id_functional   = self._get_tx_arbitraton_id(TargetAddressType.Functional)
 
         self.rx_arbitration_id_physical     = self._get_rx_arbitration_id(TargetAddressType.Physical)
         self.rx_arbitration_id_functional   = self._get_rx_arbitration_id(TargetAddressType.Functional)
@@ -169,13 +161,11 @@ class Address:
                 if self.rxid > 0x7FF:
                     raise ValueError('rxid must be smaller than 0x7FF for 11 bits identifier')
 
-    def get_tx_arbitraton_id(self, source_address=0, address_type=TargetAddressType.Physical):
+    def get_tx_arbitraton_id(self, address_type=TargetAddressType.Physical):
         if address_type == TargetAddressType.Physical:
-            return self._get_tx_arbitraton_id(source_address, address_type)
-            #return self.tx_arbitration_id_physical
+            return self.tx_arbitration_id_physical
         else:
-            return self._get_tx_arbitraton_id(source_address, TargetAddressType.Functional)
-            #return self.tx_arbitration_id_functional
+            return self.tx_arbitration_id_functional
 
     def get_rx_arbitraton_id(self, address_type=TargetAddressType.Physical):
         if address_type == TargetAddressType.Physical:
@@ -183,14 +173,14 @@ class Address:
         else:
             return self.rx_arbitration_id_functional
 
-    def _get_tx_arbitraton_id(self, remote_address, address_type):
+    def _get_tx_arbitraton_id(self, address_type):
         if self.addressing_mode == AddressingMode.Normal_11bits:
             return self.txid
         elif self.addressing_mode == AddressingMode.Normal_29bits:
             return self.txid
         elif self.addressing_mode == AddressingMode.NormalFixed_29bits:
             bits23_16 = 0xDA0000 if address_type==TargetAddressType.Physical else 0xDB0000
-            return 0x18000000 | bits23_16 | (remote_address << 8) | self.source_address
+            return 0x18000000 | bits23_16 | (self.target_address << 8) | self.source_address
         elif self.addressing_mode == AddressingMode.Extended_11bits:
             return self.txid
         elif self.addressing_mode == AddressingMode.Extended_29bits:
@@ -232,8 +222,7 @@ class Address:
 
     def _is_for_me_normalfixed(self, msg):
         if self.is_29bits == msg.is_extended_id:
-            return ((msg.arbitration_id >> 16) & 0xFF) in [218,219] and (msg.arbitration_id & 0xFF00) >> 8 == self.source_address
-            #return ((msg.arbitration_id >> 16) & 0xFF) in [218,219] and (msg.arbitration_id & 0xFF00) >> 8 == self.source_address and msg.arbitration_id & 0xFF == self.target_address
+            return ((msg.arbitration_id >> 16) & 0xFF) in [218,219] and (msg.arbitration_id & 0xFF00) >> 8 == self.source_address and msg.arbitration_id & 0xFF == self.target_address
         return False
 
     def _is_for_me_mixed_11bits(self, msg):

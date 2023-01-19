@@ -55,6 +55,7 @@ class CommModuleDot0(netRegistration.NetRegistration, netReceive.NetReceive): # 
             commModule.close(commId) 
 
             self.registerDestination(destId, commModule.id)
+
             
 class CommModuleDotX(netComm.NetComm): # Provided by IEEE 1451.X, called by IEEE 1451.0
 
@@ -71,14 +72,59 @@ class CommModuleDotX(netComm.NetComm): # Provided by IEEE 1451.X, called by IEEE
 
         self.tims = []
         self.groups = []
-        self.commChannels = []  #commId
+        self.commChannels = {}  #commId
 
         self.wait_events = {}
         self.discovery_done = False
 
+        self.communication_handlers = {}
+
+    def open(self, destId, twoWay):
+        commId = CommChannel.getNextId()
+        if(destId in self.communication_handlers.keys()):
+            communication_handler = self.communication_handlers[destId]
+        else: 
+            communication_handler = self.openCommunicationHandler(destId)
+        while(communication_handler.busy):
+            pass
+        communication_handler.busy = True
+        commChannel = CommChannel(self, communication_handler, destId, commId, twoWay)
+        
+        self.commChannels[commId] = commChannel
+
+        return [self.commChannels[commId].maxPayloadLen, commId]
+
+    def close(self, commId):        
+    #print("Closing a Comm Channel to destId ", self.commChannels[commId].destId)    
+
+
+        commChannel = self.commChannels[commId]
+
+        commChannel.close()
+
+        commChannel.communication_handler.busy=False
+
+        
+
+        if(commId in self.commChannels.keys()):
+            self.commChannels.pop(commId)
+
+    
+
+
+    def openCommunicationHandler(self,destId):       
+        communication_handler = CAN_DOTX(self,1,destId)
+        communication_handler.rcvMessage()
+        self.communication_handlers[destId] = communication_handler
+        return communication_handler
+
+    def closeCommunicationHandler(communication_handler):
+        communication_handler.close()
+
+
     def run(self):  
 
-        CAN_DOTX.rcvMessage(self, 1, 0)
+        #CAN_DOTX.startSocketlessReception()
 
         TIM.setNextId(0)
         destId = TIM.getNextId()
@@ -96,7 +142,7 @@ class CommModuleDotX(netComm.NetComm): # Provided by IEEE 1451.X, called by IEEE
         self.discovery_done = True
 
     def getNextId():
-
+        print(CommModuleDotX.nextId)
         CommModuleDotX.nextId = CommModuleDotX.nextId + 1
         
         return CommModuleDotX.nextId - 1
@@ -121,7 +167,7 @@ class CommModuleDotX(netComm.NetComm): # Provided by IEEE 1451.X, called by IEEE
     def getCommModuleByCommChannel(commModules, commId):
 
         for x in commModules:
-            for commChannel in x.commChannels:
+            for commChannel in x.commChannels.values():
                 if(commChannel.commId == commId):
                     return x
         
@@ -150,7 +196,7 @@ class CommChannel:
     nextId = 1
     maxPayloadLen = 4095 - 2 # payload = msgId + msgPayload || len(msgId) = 2
 
-    def __init__(self, commModuleDotX, commId, destId, twoWay):
+    def __init__(self, commModuleDotX, communication_handler, destId, commId, twoWay):
 
         self.commModuleDotX = commModuleDotX
 
@@ -163,6 +209,10 @@ class CommChannel:
 
         self.commStatus = Status.Idle
 
+        self.communication_handler = communication_handler
+
+
+    
     def getNextId():
 
         CommChannel.nextId = CommChannel.nextId + 1
@@ -171,17 +221,11 @@ class CommChannel:
 
     def getCommChannel(commChannels, commId):
 
-        channel = None
-
-        for x in commChannels:
-            if(x.commId == commId):
-                channel = x
-        
-        return channel
+        return commChannels[commId]
 
     def getCommChannelByOutMsg(commChannels, msgId):
 
-        for x in commChannels:
+        for x in commChannels.values():
             for msg in x.outMessages:
                 if(msg.msgId == msgId):
                     return x
@@ -191,14 +235,18 @@ class CommChannel:
     def sendMessage(self, message):
 
         payload = message.msgId.to_bytes(2, 'big') + message.payload
-        source = 1         # NCAP Address
-        target = TIM.getTim(self.commModuleDotX.tims, self.destId).address
+        #source = 1         # NCAP Address
+        #target = TIM.getTim(self.commModuleDotX.tims, self.destId).address
 
         if(self.twoWay == True):
+            self.communication_handler.rcvMessage()
             self.commModuleDotX.wait_events[message.msgId] = threading.Event()
 
-        CAN_DOTX.sendMessage(payload, source, target)
-
+        #print('Sending Message to ', self.destId)
+        if(self.destId == 0) or(self.destId == 2):
+            self.communication_handler.sendCANMessage(payload,1,self.destId)
+        else:
+            self.communication_handler.sendMessage(payload)
     def close(self):
         pass
 

@@ -1,4 +1,4 @@
-import transducerServices.transducerServices as ts
+from . import transducerServices as ts
 from moduleCommunication.moduleCommunication import *
 
 class TransducerManager:
