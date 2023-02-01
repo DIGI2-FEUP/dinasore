@@ -26,7 +26,7 @@ class DIAC_Manager:
             os.system(cmd)
             cmd = "sudo chown -R pi /mnt/diac_workspace"
             os.system(cmd)
-            cmd = "sudo mount -t cifs //" + diac_address + "/diac_workspace /mnt/diac_workspace -o \"guest,user=user\"" # if necessary add '-o \"user=User,password=Password\"'
+            cmd = "sudo mount -t cifs //" + diac_address + "/diac_workspace /mnt/diac_workspace -o \"user=user,password=password\"" # if necessary add '-o \"user=User,password=Password\"'
             os.system(cmd)
             self.workspace = "/mnt/diac_workspace"
         

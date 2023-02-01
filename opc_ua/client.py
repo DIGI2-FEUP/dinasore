@@ -1,4 +1,4 @@
-from opcua import Client
+from asyncua import Client
 from opc_ua import base
 import logging
 
