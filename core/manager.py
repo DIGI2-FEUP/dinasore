@@ -9,6 +9,7 @@ import os
 import sys
 import shutil
 import glob
+import re
 
 class Manager:
 
@@ -168,7 +169,10 @@ class Manager:
         element = ETree.fromstring(xml_data)
         action = element.attrib['Action']
         request_id = element.attrib['ID']
-        self.requests.append(xml_data.replace("&apos;", ""))
+        #replace all ['] except the ones preceded by a $ --> [&apos;] -> " ", [$&apos;] --> " ' "
+        treated_xml = re.sub("[$]{1}'{1}","'",re.sub("(?<![$])'","",xml_data.replace("&apos;", "'")))
+        self.requests.append(treated_xml)
+
 
         if action == 'CREATE':
             # Iterate over the list of children
