@@ -105,7 +105,8 @@ class FB(threading.Thread, fb_interface.FBInterface):
         self.push_event('unblock', 1)
 
         try:
-            self.fb_obj.__del__()
+            if(self.fb_obj != None):
+                self.fb_obj.__del__()
         except AttributeError as exc:
             logging.warning('can not delete the fb object.')
             logging.warning(exc)
