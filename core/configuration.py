@@ -6,17 +6,11 @@ import logging
 import inspect
 
 
-
 class Configuration:
 
-    def __init__(self, config_id, config_type, monitor=None):
-
-        self.monitor = monitor
-
+    def __init__(self, config_id, config_type):
         self.fb_dictionary = dict()
-
         self.config_id = config_id
-
         self.create_fb('START', config_type)
 
     def get_fb(self, fb_name):
@@ -35,15 +29,7 @@ class Configuration:
     def exists_fb(self, fb_name):
         return fb_name in self.fb_dictionary
 
-    def create_virtualized_fb(self, fb_name, fb_type, ua_update):
-        logging.info('creating a virtualized (opc-ua) fb {0}...'.format(fb_name))
-
-        self.create_fb(fb_name, fb_type, monitor=True)
-        # sets the ua variables update method
-        fb2update = self.get_fb(fb_name)
-        fb2update.ua_variables_update = ua_update
-
-    def create_fb(self, fb_name, fb_type, monitor=False):
+    def create_fb(self, fb_name, fb_type, init=True):
         logging.info('creating a new fb...')
 
         fb_res = fb_resources.FBResources(fb_type)
@@ -52,41 +38,49 @@ class Configuration:
         if not exists_fb:
             # Downloads the fb definition and python code
             logging.info('fb doesnt exists, needs to be downloaded ...')
-            fb_res.download_fb()
 
         fb_definition, fb_obj = fb_res.import_fb()
-
+        
         # check if if happened any importing error
         if fb_definition is not None:
-
             # Checking order and number or arguments of schedule function
             # Logs warning if order and number are not the same 
-            scheduleArgs = inspect.getargspec(fb_obj.schedule).args
-            if len(scheduleArgs) > 3:
-                scheduleArgs = scheduleArgs[3:]
-                scheduleArgs = [i.lower() for i in scheduleArgs]
-                xmlArgs = []
+            schedule_args = inspect.getargspec(fb_obj.schedule).args
+            if len(schedule_args) > 3:
+                schedule_args = schedule_args[3:]
+                schedule_args = [i.lower() for i in schedule_args]
+                xml_args = []
                 for child in fb_definition:
-                    inputvars = child.find('InputVars')
-                    varslist = inputvars.findall('VarDeclaration')
-                    for xmlVar in varslist:
-                        if xmlVar.get('Name') is not None:
-                            xmlArgs.append(xmlVar.get('Name').lower())
+                    input_vars = child.find('InputVars')
+                    vars_list = input_vars.findall('VarDeclaration')
+                    for xml_var in vars_list:
+                        if xml_var.get('Name') is not None:
+                            xml_args.append(xml_var.get('Name').lower())
                         else:
-                            logging.error('Could not find mandatory "Name" attribute for variable. Please check {0}.fbt'.format(fb_name))
+                            logging.error('Could not find mandatory "Name" attribute for variable. '
+                                          'Please check {0}.fbt'.format(fb_name))
+                if schedule_args != xml_args:
+                    logging.warning('Argument names for schedule function of {0} '
+                                    'do not match definition in {0}.fbt'.format(fb_name))
+                    logging.warning('Ensure your variable arguments are the '
+                                    'same as the input variables and in the same order')
 
-                if scheduleArgs != xmlArgs:
-                    logging.warning('Argument names for schedule function of {0} do not match definition in {0}.fbt'.format(fb_name))
-                    logging.warning('Ensure your variable arguments are the same as the input variables and in the same order')
-
-            ## if it is a real FB, not a hidden one
-            if monitor:
-                fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition, monitor=self.monitor)
-            else:
-                fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition)
+            fb_element = fb.FB(fb_name, fb_type, fb_obj, fb_definition)
 
             self.set_fb(fb_name, fb_element)
             logging.info('created fb type: {0}, instance: {1}'.format(fb_type, fb_name))
+
+            # activates the initialization
+            if init:
+                self.create_connection('START.COLD', '{0}.INIT'.format(fb_name))
+
+            # creates the loop if is a loop fb
+            if fb_element.loop_fb:
+                loop_fb_name = '{0}_LOOP1'.format(fb_name)
+                self.create_fb(loop_fb_name, 'SLEEP', init=False)
+                self.create_connection('{0}.READ_O'.format(fb_name), '{0}.SLEEP'.format(loop_fb_name))
+                self.create_connection('{0}.SLEEP_O'.format(loop_fb_name), '{0}.READ'.format(fb_name))
+
             # returns the both elements
             return fb_element, fb_definition
         else:
@@ -186,11 +180,6 @@ class Configuration:
         for fb_name, fb_element in self.fb_dictionary.items():
             if fb_name != 'START':
                 fb_element.start()
-                # check if the update_variables service is null
-                if fb_element.ua_variables_update is not None:
-                    # updates the opc-ua variables
-                    fb_element.ua_variables_update()
-
 
         outputs = self.get_fb('START').fb_obj.schedule()
         self.get_fb('START').update_outputs(outputs)
@@ -200,7 +189,6 @@ class Configuration:
         for fb_name, fb_element in self.fb_dictionary.items():
             if fb_name != 'START':
                 fb_element.stop()
-
 
     @staticmethod
     def convert_type(value, value_type):

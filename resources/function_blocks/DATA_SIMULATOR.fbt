@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="DATA_SIMULATOR" OpcUa="DEVICE.SENSOR">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="INIT" Type="Event"/>
+      <Event Name="READ" Type="Event"/>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="INIT_O" Type="Event"/>
+      <Event Name="READ_O" Type="Event">
+        <With Var="DATA"/>
+      </Event>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="PARAMS" Type="STRING"/>
+      <VarDeclaration Name="RATIO" Type="REAL"/>
+      <VarDeclaration Name="DELAY" Type="INT"/>
+    </InputVars>
+    <OutputVars>
+      <VarDeclaration Name="DATA" Type="STRING"/>
+    </OutputVars>
+  </InterfaceList>
+</FBType>

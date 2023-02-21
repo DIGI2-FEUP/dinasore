@@ -14,7 +14,7 @@ class TestFB(unittest.TestCase):
         self.conf = configuration.Configuration('config_1', 'EMB_RES')
 
     def test_fb_creation(self):
-        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB')
+        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB', init=False)
 
         self.assertEqual(2, len(self.conf.fb_dictionary))
 
@@ -27,8 +27,8 @@ class TestFB(unittest.TestCase):
         self.assertEqual(1, len(fb.input_events))
 
     def test_fb_connection(self):
-        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB')
-        self.conf.create_fb('E_EXAMPLE_2', 'TEST_FB')
+        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB', init=False)
+        self.conf.create_fb('E_EXAMPLE_2', 'TEST_FB', init=False)
 
         self.assertEqual(3, len(self.conf.fb_dictionary))
 
@@ -45,7 +45,7 @@ class TestFB(unittest.TestCase):
         self.assertEqual(fb_2, connection.destination_fb)
 
     def test_fb_running(self):
-        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB')
+        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB', init=False)
         self.conf.start_work()
 
         fb = self.conf.get_fb('E_EXAMPLE_1')
@@ -72,8 +72,8 @@ class TestFB(unittest.TestCase):
         self.conf.stop_work()
 
     def test_fb_flow(self):
-        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB')
-        self.conf.create_fb('E_EXAMPLE_2', 'TEST_FB')
+        self.conf.create_fb('E_EXAMPLE_1', 'TEST_FB', init=False)
+        self.conf.create_fb('E_EXAMPLE_2', 'TEST_FB', init=False)
         self.conf.create_connection('E_EXAMPLE_1.EO0', 'E_EXAMPLE_2.EI')
         self.conf.start_work()
 

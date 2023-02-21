@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="TEST_FB">
+  <InterfaceList>
+    <EventInputs>
+      <Event Name="EI" Type="Event">
+        <With Var="G"/>
+      </Event>
+    </EventInputs>
+    <EventOutputs>
+      <Event Name="EO0" Type="Event"/>
+      <Event Name="EO1" Type="Event"/>
+    </EventOutputs>
+    <InputVars>
+      <VarDeclaration Name="G" Type="BOOL"/>
+    </InputVars>
+    <OutputVars/>
+  </InterfaceList>
+</FBType>

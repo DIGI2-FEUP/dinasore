@@ -1,0 +1,10 @@
+;<Request ID="1" Action="CREATE"><FB Name="DIN1" Type="EMB_RES" /></Request>
+DIN1;<Request ID="2" Action="CREATE"><FB Name="WRITE_CSV" Type="WRITE_CSV" /></Request>
+DIN1;<Request ID="3" Action="WRITE"><Connection Source="/home/eliseu/PycharmProjects/db.csv" Destination="WRITE_CSV.PATH" /></Request>
+DIN1;<Request ID="4" Action="CREATE"><FB Name="DATA_SIMULATOR" Type="DATA_SIMULATOR" /></Request>
+DIN1;<Request ID="5" Action="WRITE"><Connection Source="[((15, 0.4), (10, 0.4)), ((19, 0.1), (16, 0.1))]" Destination="DATA_SIMULATOR.PARAMS" /></Request>
+DIN1;<Request ID="6" Action="WRITE"><Connection Source="1" Destination="DATA_SIMULATOR.RATIO" /></Request>
+DIN1;<Request ID="7" Action="WRITE"><Connection Source="1" Destination="DATA_SIMULATOR.DELAY" /></Request>
+DIN1;<Request ID="8" Action="CREATE"><Connection Source="DATA_SIMULATOR.READ_O" Destination="WRITE_CSV.RUN" /></Request>
+DIN1;<Request ID="9" Action="CREATE"><Connection Source="DATA_SIMULATOR.DATA" Destination="WRITE_CSV.DATA" /></Request>
+DIN1;<Request ID="10" Action="START"/>
