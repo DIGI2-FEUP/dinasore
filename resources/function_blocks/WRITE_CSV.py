@@ -18,7 +18,7 @@ class WRITE_CSV:
             if data is None:
                 return [None, event_input_value, "No data received"]
 
-            print("Data on write CSV:", data)
+            # print("Data on write CSV:", data)
 
             with open(path, "a+") as f:
                 f.write(data)

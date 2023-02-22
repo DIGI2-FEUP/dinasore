@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE FBType SYSTEM "http://www.holobloc.com/xml/LibraryElement.dtd">
+<FBType Name="PROD_MAN" OpcUa="SERVICE">
+    <InterfaceList>
+        <EventInputs>
+            <Event Name="INIT" Type="Event"/>
+            <Event Name="ON-OFF" Type="Event">
+            </Event>
+        </EventInputs>
+        <EventOutputs>
+            <Event Name="INIT_O" Type="Event"/>
+            <Event Name="ON-OFF_O" Type="Event">
+                <With Var="STATE"/>
+            </Event>
+        </EventOutputs>
+        <InputVars>
+        </InputVars>
+        <OutputVars>
+            <VarDeclaration Name="STATE" Type="STRING"/>
+        </OutputVars>
+    </InterfaceList>
+</FBType>
