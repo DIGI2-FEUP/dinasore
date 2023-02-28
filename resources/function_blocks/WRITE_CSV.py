@@ -1,3 +1,4 @@
+import datetime
 
 
 class WRITE_CSV:
@@ -21,6 +22,6 @@ class WRITE_CSV:
             # print("Data on write CSV:", data)
 
             with open(path, "a+") as f:
-                f.write(data)
+                f.write(str(datetime.datetime.now()) + ': ' + data + '\n')
 
             return [None, event_input_value, "OK"]
