@@ -13,16 +13,11 @@ class DATA_ACUM:
             return [event_input_value, None, []]
 
         elif event_input_name == 'RUN':
-            # checks if msg contains a sample
-            if data == '':
-                # if is not full returns an empty list
-                return [None, None, []]
             # parses the data
-            data_parsed = [datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")]
-            for v in data.split(','):
-                data_parsed.append(v)
+            data2append = data.copy()
+            data2append.insert(0, datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
             # appends the data to the buffer
-            self.buffer.append(data_parsed)
+            self.buffer.append(data2append)
             # checks if the buffer is complete
             if len(self.buffer) < buffer_len:
                 # if is not full returns an empty list
