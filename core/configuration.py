@@ -180,6 +180,7 @@ class Configuration:
         for fb_name, fb_element in self.fb_dictionary.items():
             if fb_name != 'START':
                 fb_element.start()
+                logging.info('started fb: {0}, pid: {1}'.format(fb_name, fb_element.pid))
 
         outputs = self.get_fb('START').fb_obj.schedule()
         self.get_fb('START').update_outputs(outputs)
@@ -188,7 +189,7 @@ class Configuration:
         logging.info('stopping the fb flow...')
         for fb_name, fb_element in self.fb_dictionary.items():
             if fb_name != 'START':
-                fb_element.stop()
+                fb_element.terminate()
 
     @staticmethod
     def convert_type(value, value_type):

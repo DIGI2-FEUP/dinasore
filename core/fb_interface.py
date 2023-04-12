@@ -1,5 +1,4 @@
-import threading
-from collections import OrderedDict
+import multiprocessing
 from xml.etree import ElementTree as ETree
 import logging
 import time
@@ -13,7 +12,7 @@ class FBInterface:
         self.fb_type = fb_type
         self.stop_thread = False
 
-        self.event_queue = []
+        self.event_queue = multiprocessing.Queue()
 
         """
         Each events and variables dictionary contains:
@@ -21,10 +20,12 @@ class FBInterface:
         - type (str): INT, REAL, STRING, BOOL
         - watch (boolean): True, False
         """
-        self.input_events = OrderedDict()
-        self.output_events = OrderedDict()
-        self.input_vars = OrderedDict()
-        self.output_vars = OrderedDict()
+        manager = multiprocessing.Manager()
+
+        self.input_events = manager.dict()
+        self.output_events = manager.dict()
+        self.input_vars = manager.dict()
+        self.output_vars = manager.dict()
 
         # checks if is a loop fb
         self.loop_fb = False
@@ -83,8 +84,8 @@ class FBInterface:
         logging.info('output vars: {0}'.format(self.output_vars))
 
         self.output_connections = dict()
-        self.new_event = threading.Event()
-        self.lock = threading.Lock()
+        self.new_event = multiprocessing.Event()
+        self.lock = multiprocessing.Lock()
 
     def set_attr(self, name, new_value=None, set_watch=None):
         # Locks the dictionary usage
@@ -181,20 +182,20 @@ class FBInterface:
 
     def push_event(self, event_name, event_value):
         if event_value is not None:
-            self.event_queue.append((event_name, event_value))
+            self.event_queue.put((event_name, event_value))
             # Updates the event value
             self.set_attr(event_name, new_value=event_value)
             # Sets the new event
             self.new_event.set()
 
     def pop_event(self):
-        if len(self.event_queue) > 0:
+        if self.event_queue.qsize() > 0:
             # pop event
-            event_name, event_value = self.event_queue.pop()
+            event_name, event_value = self.event_queue.get()
             return event_name, event_value
 
     def wait_event(self):
-        while len(self.event_queue) <= 0:
+        while self.event_queue.qsize() <= 0:
             self.new_event.wait()
             # Clears new_event to wait for new events
             self.new_event.clear()
@@ -215,7 +216,7 @@ class FBInterface:
         vars_list = []
         logging.info('input vars: {0}'.format(self.input_vars))
         # Get all the vars
-        for index, var_name in enumerate(self.input_vars):
+        for index, var_name in enumerate(self.input_vars.keys()):
             v_type, value, is_watch = self.read_attr(var_name)
             vars_list.append(value)
 
@@ -226,7 +227,7 @@ class FBInterface:
         logging.info('updating the outputs...')
 
         # Converts the second part of the list to variables
-        for index, var_name in enumerate(self.output_vars):
+        for index, var_name in enumerate(self.output_vars.keys()):
             # Second part of the list delimited by the events dictionary len
             new_value = outputs[index + len(self.output_events)]
 
@@ -240,7 +241,7 @@ class FBInterface:
                     connection.update_var(new_value)
 
         # Converts the first part of the list to events
-        for index, event_name in enumerate(self.output_events):
+        for index, event_name in enumerate(self.output_events.keys()):
             value = outputs[index]
             self.set_attr(event_name, new_value=value)
             # Verifies if exist any connection

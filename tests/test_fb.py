@@ -51,7 +51,7 @@ class TestFB(unittest.TestCase):
         fb = self.conf.get_fb('E_EXAMPLE_1')
         fb.push_event('EI', 1)
 
-        time.sleep(0.01)
+        time.sleep(0.05)
 
         # Validate the inputs
         event_type, value, is_watch = fb.input_events['EI']
@@ -80,7 +80,7 @@ class TestFB(unittest.TestCase):
         fb = self.conf.get_fb('E_EXAMPLE_1')
         fb.push_event('EI', 1)
 
-        time.sleep(0.01)
+        time.sleep(0.05)
 
         fb_2 = self.conf.get_fb('E_EXAMPLE_2')
 
