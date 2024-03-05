@@ -45,7 +45,7 @@ class Configuration:
         if fb_definition is not None:
             # Checking order and number or arguments of schedule function
             # Logs warning if order and number are not the same 
-            schedule_args = inspect.getargspec(fb_obj.schedule).args
+            schedule_args = inspect.getfullargspec(fb_obj.schedule).args
             if len(schedule_args) > 3:
                 schedule_args = schedule_args[3:]
                 schedule_args = [i.lower() for i in schedule_args]
