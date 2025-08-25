@@ -1,13 +1,13 @@
 ![logo](https://github.com/DIGI2-FEUP/dinasore/wiki/images/logo.png)
 
 
-**D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that enables reconfiguration of **Cyber-Physical System** (CPS). The DINASORE platform allows the implementation of Function Block (FB) based pipelines for sensor integration, data processing, and systems control. The FBs are implemented in Python and can be redistributed across the DINASORE nodes. The DINASORE uses the **4DIAC-IDE** as graphical user interface (GUI) implementing the **IEC61499** standards. This version is targeted to the **Industry 4.0** applications, for that, it also uses the **OPC-UA** protocol to allow communication with the other industrial components.
+**D**ynamic **IN**telligent **A**rchitecture for **S**oftware and M**O**dular **RE**configuration - **DINASORE** - is a distributed platform that enables reconfiguration of **Cyber-Physical System** (CPS). The DINASORE platform allows the implementation of Function Block (FB) based pipelines for sensor integration, data processing, and systems control. The FBs are implemented in Python and can be redistributed across the DINASORE nodes. The DINASORE uses the **[4diac IDE](https://eclipse.dev/4diac/4diac_ide)** as graphical user interface (GUI) implementing the **IEC61499** standards. This version is targeted to the **Industry 4.0** applications, for that, it also uses the **OPC-UA** protocol to allow communication with the other industrial components.
 
 ## Contents
 
 * [Home Wiki](https://github.com/DIGI2-FEUP/dinasore/wiki)
 * [Install](https://github.com/DIGI2-FEUP/dinasore/wiki/1.-Install)
-* [Function Blocks and 4DIAC-IDE](https://github.com/DIGI2-FEUP/dinasore/wiki/2.-Function-Blocks-and-4DIAC)
+* [Function Blocks and 4diac IDE](https://github.com/DIGI2-FEUP/dinasore/wiki/2.-Function-Blocks-and-4DIAC)
 * [Build new Function Blocks](https://github.com/DIGI2-FEUP/dinasore/wiki/2.1.-Build-new-Function-Blocks)
 * [Function Blocks Repository](https://github.com/DIGI2-FEUP/dinasore_function_blocks)
 * [OPC-UA Data Model](https://github.com/DIGI2-FEUP/dinasore/wiki/2.3.-OPC-UA-Data-Model)
@@ -20,11 +20,11 @@
 
 <!---
 ## Features
-- [x] Communication between the DINASORE and the 4DIAC-IDE 
+- [x] Communication between the DINASORE and the 4diac IDE
 - [x] Encapsulation of a function block inside the DINASORE
 - [x] Execution of multiple function blocks inside the DINASORE
 - [x] Distributed execution of a configuration across the network
-- [x] Monitoring of all function blocks using the watch option at the 4DIAC-IDE
+- [x] Monitoring of all function blocks using the watch option at the 4diac IDE
 - [x] Remote stop of a configuration that is running
 - [x] Docker integration
 - [x] Opc-Ua integration
