@@ -1,0 +1,35 @@
+<FBType Name="BMP180" Comment="BMP180 I2C sensor readout">
+	<Identification Standard="61499-1">
+	</Identification>
+	<VersionInfo Version="1.0" Author="1" Date="2026-05-18">
+	</VersionInfo>
+	<CompilerInfo>
+	</CompilerInfo>
+	<InterfaceList>
+		<EventInputs>
+			<Event Name="REQ" Type="Event" Comment="Request measurement">
+			</Event>
+		</EventInputs>
+		<EventOutputs>
+			<Event Name="CNF" Type="Event" Comment="Measurement complete">
+				<With Var="TEMP"/>
+				<With Var="PRESS"/>
+				<With Var="ALT"/>
+				<With Var="STATUS"/>
+			</Event>
+		</EventOutputs>
+		<InputVars>
+			<VarDeclaration Name="I2C_ID" Type="INT" Comment="I2C bus id"/>
+			<VarDeclaration Name="SCL" Type="INT" Comment="SCL pin number"/>
+			<VarDeclaration Name="SDA" Type="INT" Comment="SDA pin number"/>
+			<VarDeclaration Name="OSS" Type="INT" Comment="Oversampling setting 0..3"/>
+			<VarDeclaration Name="ADDR" Type="INT" Comment="I2C address (0x77 default)"/>
+		</InputVars>
+		<OutputVars>
+			<VarDeclaration Name="TEMP" Type="REAL" Comment="Temperature Celsius"/>
+			<VarDeclaration Name="PRESS" Type="REAL" Comment="Pressure Pa"/>
+			<VarDeclaration Name="ALT" Type="REAL" Comment="Altitude meters"/>
+			<VarDeclaration Name="STATUS" Type="STRING" Comment="Result status"/>
+		</OutputVars>
+	</InterfaceList>
+</FBType>
